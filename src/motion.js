@@ -300,7 +300,7 @@ export function initMotion() {
                 start: () => `top ${headerHeight()}px`,
                 end: () => `+=${Math.round(window.innerHeight * 0.9)}`,
                 scrub: 0.35,
-                anticipatePin: 1,
+                anticipatePin: 0,
                 invalidateOnRefresh: true,
               },
             });

@@ -598,7 +598,7 @@ body.intro #app {
 .loop-head {
   position: absolute;
   z-index: 4;
-  top: 7vh;
+  top: calc(76px + 24px);
   left: 0;
   width: 100%;
   display: flex;
@@ -715,7 +715,9 @@ body.intro #app {
 
 .event-inner {
   position: relative;
-  height: 660px;
+  height: calc(100vh - 76px);
+  min-height: 660px;
+  max-height: 820px;
   overflow: hidden;
   background: var(--bg);
 }
