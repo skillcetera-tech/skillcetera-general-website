@@ -84,6 +84,8 @@ export const ESC_SEASONS = ${JSON.stringify(content.escSeasons || {}, null, 2)};
 
 export const OTHER_PROJECTS = ${JSON.stringify(content.otherProjects, null, 2)};
 
+export const HQ_GALLERY = ${JSON.stringify(content.hqGallery || [], null, 2)};
+
 export const FULL_CONTENT = {
   siteMeta: SITE_META,
   missions: MISSIONS,
@@ -91,6 +93,7 @@ export const FULL_CONTENT = {
   tedxSeasons: TEDX_SEASONS,
   escSeasons: ESC_SEASONS,
   otherProjects: OTHER_PROJECTS,
+  hqGallery: HQ_GALLERY,
 };
 `;
 }
@@ -106,7 +109,28 @@ const server = http.createServer(async (req, res) => {
       const contentPath = path.join(project, 'public/data/content.json');
       const manifestPath = path.join(project, 'docs/content/asset-manifest.json');
       const content = JSON.parse(await readFile(contentPath, 'utf8'));
-      const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+      let manifest = { assets: [] };
+      try {
+        manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+      } catch {}
+
+      content.hqGallery = Array.isArray(content.hqGallery) ? content.hqGallery : [];
+      if (Array.isArray(manifest.assets)) {
+        manifest.assets.forEach((asset) => {
+          if (asset.webpPath && !content.hqGallery.some((item) => item.webpUrl === asset.webpPath || item.originalUrl === asset.originalUrl)) {
+            content.hqGallery.push({
+              id: `hq-${asset.slug || path.basename(asset.webpPath, '.webp')}`,
+              title: asset.description || asset.file || 'Ảnh tư liệu chất lượng cao',
+              alt: asset.description || 'Ảnh tư liệu Skillcetera',
+              caption: `${asset.width || ''} × ${asset.height || ''} px · Đã lưu trên máy chủ`,
+              webpUrl: asset.webpPath,
+              originalUrl: asset.originalUrl || asset.path || asset.webpPath,
+              dimensions: asset.width && asset.height ? `${asset.width} × ${asset.height} px` : 'Full-Res'
+            });
+          }
+        });
+      }
+
       sendJson(res, 200, { ok: true, content, manifest });
       return;
     }
@@ -264,6 +288,29 @@ const server = http.createServer(async (req, res) => {
         await writeFile(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
       } catch {
         // ignore manifest write error
+      }
+
+      // Auto-persist new asset to public/data/content.json's hqGallery
+      try {
+        const contentPath = path.join(project, 'public/data/content.json');
+        const content = JSON.parse(await readFile(contentPath, 'utf8'));
+        content.hqGallery = Array.isArray(content.hqGallery) ? content.hqGallery : [];
+        content.hqGallery.unshift({
+          id: `hq-${slug}`,
+          title: description || `Ảnh tư liệu tải lên (${filename})`,
+          alt: description || 'Ảnh tư liệu Skillcetera',
+          caption: `${meta.width} × ${meta.height} px · Đã lưu trên máy chủ`,
+          webpUrl: `/${webpRel}`,
+          originalUrl: `/${origRel}`,
+          dimensions: meta.width && meta.height ? `${meta.width} × ${meta.height} px` : 'Full-Res'
+        });
+        await writeFile(contentPath, JSON.stringify(content, null, 2), 'utf8');
+
+        // Also update src/content/site-data.js
+        const moduleCode = buildSiteDataModule(content);
+        await writeFile(path.join(project, 'src/content/site-data.js'), moduleCode, 'utf8');
+      } catch (err) {
+        console.error('Error auto-syncing hqGallery:', err);
       }
 
       const assetPayload = {

@@ -1,8 +1,3 @@
-/**
- * Dữ liệu có cấu trúc của hệ thống website Skillcetera (Trang chủ + 6 Subpage + Content Studio).
- * Đồng bộ tự động từ public/data/content.json.
- */
-
 export const SITE_META = {
   "clubName": "Skillcetera",
   "fullName": "Skills and Languages Club",
@@ -415,6 +410,90 @@ export const TEDX_SEASONS = {
   }
 };
 
+export const ESC_SEASONS = {
+  "2023": {
+    "year": "2023",
+    "theme": "THE NEXT CHAPTER",
+    "editionLabel": "Mùa 2023 · Khẳng định tiếng nói",
+    "description": "Đặt nền móng cho cấu trúc 3 vòng thi học thuật chuẩn mực và khẳng định bản lĩnh tiếng Anh sinh viên.",
+    "statusNote": "Tư liệu lưu trữ mùa giải 2023.",
+    "image": "/assets/esc.webp",
+    "originalImage": "/assets/esc.png",
+    "metrics": [
+      {
+        "label": "Thí sinh tham dự",
+        "value": "150+"
+      },
+      {
+        "label": "Trường ĐH, CĐ",
+        "value": "15+"
+      },
+      {
+        "label": "Tổng giải thưởng",
+        "value": "35+ triệu"
+      },
+      {
+        "label": "Dấu ấn mùa giải",
+        "value": "Chung kết cơ sở"
+      }
+    ]
+  },
+  "2024": {
+    "year": "2024",
+    "theme": "VOICE OF TOMORROW",
+    "editionLabel": "Mùa 2024 · Tiếng nói của tương lai",
+    "description": "Mùa thi đánh dấu sự mở rộng quy mô hợp tác với các trường đại học đối tác trên toàn quốc.",
+    "statusNote": "Tư liệu lưu trữ mùa giải 2024.",
+    "image": "/assets/esc.webp",
+    "originalImage": "/assets/esc.png",
+    "metrics": [
+      {
+        "label": "Thí sinh tham dự",
+        "value": "180+"
+      },
+      {
+        "label": "Trường ĐH, CĐ",
+        "value": "18+"
+      },
+      {
+        "label": "Tổng giải thưởng",
+        "value": "40+ triệu"
+      },
+      {
+        "label": "Dấu ấn mùa giải",
+        "value": "Chung kết miền Nam"
+      }
+    ]
+  },
+  "2025": {
+    "year": "2025",
+    "theme": "BREAK THE NORM",
+    "editionLabel": "Mùa 2025 · Phá vỡ khuôn mẫu (Grand Final)",
+    "description": "Sân chơi học thuật quy tụ thí sinh tài năng từ hơn 20 trường đại học, khẳng định tiếng nói bản lĩnh và tư duy phản biện sắc bén bằng tiếng Anh.",
+    "statusNote": "Mùa gần nhất được ghi nhận trong hồ sơ CLB; chưa có thông báo về mùa tiếp theo.",
+    "image": "/assets/esc.webp",
+    "originalImage": "/assets/esc.png",
+    "metrics": [
+      {
+        "label": "Thí sinh tham dự",
+        "value": "200+"
+      },
+      {
+        "label": "Trường đại học, CĐ",
+        "value": "20+"
+      },
+      {
+        "label": "Tổng giải thưởng",
+        "value": "50+ triệu"
+      },
+      {
+        "label": "Dấu ấn mùa giải",
+        "value": "BREAK THE NORM"
+      }
+    ]
+  }
+};
+
 export const OTHER_PROJECTS = {
   "discussion": {
     "id": "discussion",
@@ -493,10 +572,24 @@ export const OTHER_PROJECTS = {
   }
 };
 
+export const HQ_GALLERY = [
+  {
+    "id": "hq-615707596_1406518118150927_8099910856454498230_n-mvmf0nkw",
+    "title": "Ảnh tư liệu đã tải lên (615707596_1406518118150927_8099910856454498230_n.jpg)",
+    "alt": "Ảnh tư liệu Skillcetera",
+    "caption": "2048 × 1282 px · Đã lưu trên máy chủ",
+    "webpUrl": "/assets/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.webp",
+    "originalUrl": "/assets/originals/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.jpg",
+    "dimensions": "2048 × 1282 px"
+  }
+];
+
 export const FULL_CONTENT = {
   siteMeta: SITE_META,
   missions: MISSIONS,
   annualEvents: ANNUAL_EVENTS,
   tedxSeasons: TEDX_SEASONS,
+  escSeasons: ESC_SEASONS,
   otherProjects: OTHER_PROJECTS,
+  hqGallery: HQ_GALLERY,
 };

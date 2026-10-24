@@ -111,22 +111,29 @@ function updateStatsStrip() {
 }
 
 async function fetchInitialContent() {
+  let loadedContent = null;
+  let manifestAssets = [];
+
   try {
     const res = await fetch('/api/content', { cache: 'no-store' });
     if (res.ok) {
       const serverData = await res.json();
-      state = { ...structuredClone(FULL_CONTENT), ...serverData };
+      loadedContent = serverData.content || serverData;
+      manifestAssets = serverData.manifest?.assets || [];
     }
   } catch {
     try {
       const res = await fetch('/data/content.json', { cache: 'no-store' });
       if (res.ok) {
-        const staticData = await res.json();
-        state = { ...structuredClone(FULL_CONTENT), ...staticData };
+        loadedContent = await res.json();
       }
     } catch {
       // Keep FULL_CONTENT
     }
+  }
+
+  if (loadedContent) {
+    state = { ...structuredClone(FULL_CONTENT), ...loadedContent };
   }
 
   try {
@@ -142,6 +149,28 @@ async function fetchInitialContent() {
 
   if (!Array.isArray(state.hqGallery)) {
     state.hqGallery = [];
+  }
+
+  // Luôn nạp toàn bộ ảnh đã upload từ manifest vào hqGallery để không bao giờ bị mất khi refresh!
+  if (Array.isArray(manifestAssets)) {
+    manifestAssets.forEach((asset) => {
+      if (asset.webpPath) {
+        const alreadyExists = state.hqGallery.some(
+          (item) => item.webpUrl === asset.webpPath || item.originalUrl === asset.originalUrl
+        );
+        if (!alreadyExists) {
+          state.hqGallery.push({
+            id: `hq-${asset.slug || Math.random().toString(36).slice(2)}`,
+            title: asset.description || asset.file || 'Ảnh tư liệu chất lượng cao',
+            alt: asset.description || 'Ảnh tư liệu Skillcetera',
+            caption: `${asset.width || ''} × ${asset.height || ''} px · Đã lưu trên máy chủ`,
+            webpUrl: asset.webpPath,
+            originalUrl: asset.originalUrl || asset.path || asset.webpPath,
+            dimensions: asset.width && asset.height ? `${asset.width} × ${asset.height} px` : 'Full-Res'
+          });
+        }
+      }
+    });
   }
 }
 
@@ -595,10 +624,31 @@ function bindSeasonInputs(container, eventType) {
           obj[key].image = data.webpUrl || data.originalUrl;
           obj[key].originalImage = data.originalUrl;
         }
+
+        // Tự động đồng bộ vào kho hqGallery của Studio
+        const photoId = `hq-${data.slug || Date.now()}`;
+        if (!state.hqGallery.some((item) => item.webpUrl === data.webpUrl || item.originalUrl === data.originalUrl)) {
+          state.hqGallery.unshift({
+            id: photoId,
+            title: `Ảnh mùa ${key} (${eventType.toUpperCase()})`,
+            alt: `Ảnh tư liệu mùa ${key} ${eventType.toUpperCase()}`,
+            caption: `${data.dimensions || 'Full-Res'} · Mùa ${key}`,
+            webpUrl: data.webpUrl,
+            originalUrl: data.originalUrl,
+            dimensions: data.dimensions || 'Full-Res'
+          });
+        }
+
+        // Tự động lưu trực tiếp lên máy chủ ngay sau khi upload để refresh không bao giờ bị mất!
+        await saveToServer(false);
+
         if (eventType === 'tedx') renderTedxEditor();
         else renderEscEditor();
-        showToast(`Đã tải ảnh lên và gán vào mùa ${key}! Bấm Ctrl + S để lưu.`);
-        setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
+        renderMediaLibrary();
+        updateStatsStrip();
+
+        showToast(`Đã tải ảnh lên, gán vào mùa ${key} và lưu lên máy chủ thành công!`);
+        setStatus('Đã tự động lưu ảnh mới vào máy chủ!', '#16a34a', false);
       } catch (err) {
         showToast(`Lỗi upload ảnh: ${err.message}`);
       }
@@ -606,16 +656,17 @@ function bindSeasonInputs(container, eventType) {
   });
 
   container.querySelectorAll('[data-remove-season]').forEach((btn) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
       const key = btn.dataset.removeSeason;
       const obj = getObj();
       const theme = obj?.[key]?.theme || key;
       if (confirm(`Bạn có chắc muốn xóa mùa: "${theme}"?`)) {
         if (obj) delete obj[key];
+        await saveToServer(false);
         if (eventType === 'tedx') renderTedxEditor();
         else renderEscEditor();
         updateStatsStrip();
-        setStatus('Đã xóa mùa sự kiện — Nhấn Lưu để áp dụng', '#d97706', true);
+        setStatus('Đã xóa mùa sự kiện và lưu lên máy chủ', '#16a34a', false);
       }
     });
   });
@@ -1027,7 +1078,7 @@ function setupToolbarActions() {
     setStatus(`Đã thêm ban chuyên môn mới (Tổng: ${arr.length}) — Bấm Ctrl + S để lưu`, '#d97706', true);
   });
 
-  document.getElementById('btn-add-tedx-season')?.addEventListener('click', () => {
+  document.getElementById('btn-add-tedx-season')?.addEventListener('click', async () => {
     state.tedxSeasons = state.tedxSeasons || {};
     const keys = Object.keys(state.tedxSeasons);
     const maxYear = keys.reduce((acc, k) => Math.max(acc, Number(k) || 2025), 2025);
@@ -1050,10 +1101,11 @@ function setupToolbarActions() {
     };
     renderTedxEditor();
     updateStatsStrip();
-    setStatus(`Đã thêm mùa TEDx ${nextYear} — Bấm Ctrl + S để lưu`, '#10b981', true);
+    await saveToServer(false);
+    setStatus(`Đã thêm mùa TEDx ${nextYear} và lưu lên máy chủ`, '#10b981', false);
   });
 
-  document.getElementById('btn-add-esc-season')?.addEventListener('click', () => {
+  document.getElementById('btn-add-esc-season')?.addEventListener('click', async () => {
     state.escSeasons = state.escSeasons || {};
     const keys = Object.keys(state.escSeasons);
     const maxYear = keys.reduce((acc, k) => Math.max(acc, Number(k) || 2025), 2025);
@@ -1075,7 +1127,8 @@ function setupToolbarActions() {
     };
     renderEscEditor();
     updateStatsStrip();
-    setStatus(`Đã thêm mùa ESC ${nextYear} — Bấm Ctrl + S để lưu`, '#10b981', true);
+    await saveToServer(false);
+    setStatus(`Đã thêm mùa ESC ${nextYear} và lưu lên máy chủ`, '#10b981', false);
   });
 }
 

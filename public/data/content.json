@@ -566,5 +566,16 @@
       "externalUrl": "https://www.facebook.com/skillcetera",
       "linkLabel": "Chi tiết The MoneyVerse →"
     }
-  }
+  },
+  "hqGallery": [
+    {
+      "id": "hq-615707596_1406518118150927_8099910856454498230_n-mvmf0nkw",
+      "title": "Ảnh tư liệu đã tải lên (615707596_1406518118150927_8099910856454498230_n.jpg)",
+      "alt": "Ảnh tư liệu Skillcetera",
+      "caption": "2048 × 1282 px · Đã lưu trên máy chủ",
+      "webpUrl": "/assets/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.webp",
+      "originalUrl": "/assets/originals/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.jpg",
+      "dimensions": "2048 × 1282 px"
+    }
+  ]
 }
