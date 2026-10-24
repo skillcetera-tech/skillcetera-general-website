@@ -136,6 +136,28 @@ if (location.hash) {
   requestAnimationFrame(() => motion.scrollToSection(location.hash.slice(1), { behavior: 'auto', focus: false }));
 }
 
+const hydrateHeroFromContent = async () => {
+  try {
+    let content = null;
+    const local = localStorage.getItem('skillcetera_studio_draft');
+    if (local) {
+      content = JSON.parse(local);
+    } else {
+      const res = await fetch('/data/content.json');
+      if (res.ok) content = await res.json();
+    }
+    if (content?.meta?.heroImage) {
+      const heroImg = document.querySelector('.hero-media img');
+      const heroSource = document.querySelector('.hero-media source');
+      if (heroImg && heroImg.getAttribute('src') !== content.meta.heroImage) {
+        if (heroSource) heroSource.srcset = content.meta.heroImage;
+        heroImg.src = content.meta.heroOriginalImage || content.meta.heroImage;
+      }
+    }
+  } catch (_) {}
+};
+hydrateHeroFromContent();
+
 const warmDeferredImages = () => {
   document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
     img.loading = 'eager';

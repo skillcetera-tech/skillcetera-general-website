@@ -40,7 +40,16 @@ else:
         source = assets / name
         with Image.open(source) as original:
             image = ImageOps.exif_transpose(original).convert("RGB")
-            image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
+            if name == "discussion-forum.png":
+                # Super-sample small discussion forum poster to 2x for full-width hero presentation
+                w, h = image.size
+                image = image.resize((w * 2, h * 2), Image.Resampling.LANCZOS)
+                from PIL import ImageFilter
+                image = image.filter(ImageFilter.UnsharpMask(radius=1.2, percent=120, threshold=2))
+                quality = 96
+            else:
+                image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
+                quality = 90
             destination = source.with_suffix(".webp")
-            image.save(destination, "WEBP", quality=88, method=6)
+            image.save(destination, "WEBP", quality=quality, method=6)
             print(f"{name}: {source.stat().st_size:,} -> {destination.stat().st_size:,} bytes")
