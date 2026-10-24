@@ -319,16 +319,17 @@ function setupHQUploader() {
       }
 
       const result = await res.json();
+      const asset = result.asset || result;
       const dimLabel =
-        result.width && result.height ? `${result.width} × ${result.height} px` : selectedDimensions || 'Full-Res';
+        (asset.width && asset.height) ? `${asset.width} × ${asset.height} px` : selectedDimensions || 'Full-Res';
 
       const newPhoto = {
         id: `hq-${Date.now()}`,
         title,
         alt,
         caption,
-        webpUrl: result.webpUrl || result.originalUrl,
-        originalUrl: result.originalUrl,
+        webpUrl: asset.webpUrl || asset.originalUrl || result.webpUrl || result.originalUrl,
+        originalUrl: asset.originalUrl || result.originalUrl,
         dimensions: dimLabel
       };
 

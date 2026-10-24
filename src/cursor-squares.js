@@ -116,3 +116,4 @@ export function initCursorSquares() {
     if (container && container.parentNode) container.parentNode.removeChild(container);
   };
 }
+

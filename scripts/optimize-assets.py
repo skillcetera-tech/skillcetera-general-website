@@ -1,4 +1,4 @@
-    """Create delivery-sized WebP derivatives without changing original documentary assets."""
+"""Create delivery-sized WebP derivatives without changing original documentary assets."""
 import json
 import sys
 from pathlib import Path

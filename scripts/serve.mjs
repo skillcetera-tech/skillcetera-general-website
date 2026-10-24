@@ -36,7 +36,7 @@ const cleanRoutes = {
   '/studio': 'pages/studio.html',
 };
 
-function readBody(req, maxBytes = 60 * 1024 * 1024) {
+function readRawBuffer(req, maxBytes = 60 * 1024 * 1024) {
   return new Promise((resolve, reject) => {
     const chunks = [];
     let size = 0;
@@ -49,9 +49,13 @@ function readBody(req, maxBytes = 60 * 1024 * 1024) {
       }
       chunks.push(chunk);
     });
-    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('end', () => resolve(Buffer.concat(chunks)));
     req.on('error', reject);
   });
+}
+
+function readBody(req, maxBytes = 60 * 1024 * 1024) {
+  return readRawBuffer(req, maxBytes).then((buf) => buf.toString('utf8'));
 }
 
 function sendJson(res, status, payload) {
@@ -137,10 +141,49 @@ const server = http.createServer(async (req, res) => {
 
     // CMS API: POST /api/upload (High-Quality Image Upload + WebP Derivative)
     if (pathname === '/api/upload' && req.method === 'POST') {
-      const raw = await readBody(req);
-      const { filename, dataBase64, section = 'gallery', description = '' } = JSON.parse(raw);
-      if (!filename || !dataBase64) {
-        sendJson(res, 400, { ok: false, error: 'Missing filename or image data' });
+      const rawBuffer = await readRawBuffer(req);
+      if (!rawBuffer || rawBuffer.length === 0) {
+        sendJson(res, 400, { ok: false, error: 'Empty upload body' });
+        return;
+      }
+
+      let filename = '';
+      let buffer = null;
+      let section = 'gallery';
+      let description = '';
+
+      const contentType = req.headers['content-type'] || '';
+      if (contentType.includes('application/json')) {
+        try {
+          const parsed = JSON.parse(rawBuffer.toString('utf8'));
+          filename = parsed.filename || 'upload.png';
+          section = parsed.section || 'gallery';
+          description = parsed.description || '';
+          if (parsed.dataBase64) {
+            const cleanBase64 = parsed.dataBase64.replace(/^data:[^;]+;base64,/, '');
+            buffer = Buffer.from(cleanBase64, 'base64');
+          }
+        } catch {
+          sendJson(res, 400, { ok: false, error: 'Malformed JSON payload' });
+          return;
+        }
+      } else {
+        buffer = rawBuffer;
+        const rawFileNameHeader = req.headers['x-file-name'] || '';
+        try {
+          filename = decodeURIComponent(rawFileNameHeader);
+        } catch {
+          filename = rawFileNameHeader;
+        }
+        if (!filename) {
+          filename = urlObj.searchParams.get('filename') || 'upload.png';
+        }
+        section = urlObj.searchParams.get('section') || 'gallery';
+        description = urlObj.searchParams.get('description') || '';
+      }
+
+      if (!buffer || buffer.length === 0) {
+        sendJson(res, 400, { ok: false, error: 'Missing image data' });
         return;
       }
 
@@ -163,9 +206,6 @@ const server = http.createServer(async (req, res) => {
       const origFullPath = path.join(project, 'public', origRel);
       const webpFullPath = path.join(project, 'public', webpRel);
       await mkdir(path.dirname(origFullPath), { recursive: true });
-
-      const cleanBase64 = dataBase64.replace(/^data:[^;]+;base64,/, '');
-      const buffer = Buffer.from(cleanBase64, 'base64');
       await writeFile(origFullPath, buffer);
 
       let meta = {
@@ -223,19 +263,28 @@ const server = http.createServer(async (req, res) => {
         // ignore manifest write error
       }
 
+      const assetPayload = {
+        slug,
+        webpUrl: `/${webpRel}`,
+        originalUrl: `/${origRel}`,
+        width: meta.width,
+        height: meta.height,
+        originalBytes: meta.originalBytes,
+        webpBytes: meta.webpBytes,
+        section,
+        description,
+      };
+
       sendJson(res, 200, {
         ok: true,
-        asset: {
-          slug,
-          webpUrl: `/${webpRel}`,
-          originalUrl: `/${origRel}`,
-          width: meta.width,
-          height: meta.height,
-          originalBytes: meta.originalBytes,
-          webpBytes: meta.webpBytes,
-          section,
-          description,
-        },
+        slug,
+        webpUrl: `/${webpRel}`,
+        originalUrl: `/${origRel}`,
+        width: meta.width,
+        height: meta.height,
+        originalBytes: meta.originalBytes,
+        webpBytes: meta.webpBytes,
+        asset: assetPayload,
       });
       return;
     }
