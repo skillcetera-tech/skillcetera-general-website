@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Content Studio &amp; Upload Ảnh Chất lượng cao | Quản trị Skillcetera</title>
+  <meta name="description" content="Trình quản trị nội dung trực quan và upload ảnh tư liệu gốc chất lượng cao (Full-Res + WebP q=92) cho toàn bộ trang chủ và các subpage của Skillcetera." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" type="image/png" href="/assets/skillcetera-logo.png" />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/src/tokens.css" />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <link rel="stylesheet" href="/src/subpage.css" />
+  <link rel="stylesheet" href="/src/studio.css" />
+</head>
+<body class="subpage">
+  <a href="#main-content" class="skip-link">Đến nội dung chính</a>
+
+  <header class="site-header nav">
+    <a class="brand" href="/" aria-label="Skillcetera, về trang chủ">
+      <img class="brand-icon" src="/assets/skillcetera-logo.png" width="32" height="32" alt="" />
+      <span>skillcetera<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Điều hướng chính">
+      <a href="/about">Về chúng mình</a>
+      <a class="nav-esc" href="/esc">ESC</a>
+      <a class="nav-tedx" href="/tedx">TEDx</a>
+      <a href="/projects">Dự án</a>
+      <a href="/join">Tuyển thành viên</a>
+      <a href="/contact">Liên hệ</a>
+    </nav>
+    <a class="header-connect btn" href="/studio" aria-current="page">Studio</a>
+    <button type="button" class="menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span></button>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Điều hướng điện thoại" hidden>
+      <a href="/">Trang chủ</a>
+      <a href="/about">Về chúng mình</a>
+      <a href="/esc">ESC — English Speaking Competition</a>
+      <a href="/tedx">TEDxFPTUniversityHCMC</a>
+      <a href="/projects">5 Dự án &amp; Hoạt động</a>
+      <a href="/join">Tuyển thành viên</a>
+      <a href="/contact">Liên hệ</a>
+      <a href="/studio">Quản trị nội dung (Studio)</a>
+    </nav>
+  </header>
+
+  <main id="main-content" class="studio-shell">
+    <div class="studio-topbar">
+      <div class="studio-title-group">
+        <div class="studio-status-line">
+          <span class="status-dot" id="studio-status-dot"></span>
+          <span id="studio-status-text">Đã đồng bộ dữ liệu từ /data/content.json</span>
+        </div>
+        <h1>
+          <span>Content Studio &amp; HQ Media Manager</span>
+          <span class="pill">v1.2 · Live CMS</span>
+        </h1>
+      </div>
+
+      <div class="studio-toolbar-actions">
+        <button type="button" class="btn btn-esc" id="btn-save-server" title="Phím tắt: Ctrl + S">
+          Lưu lên máy chủ <span class="btn-shortcut-hint">Ctrl+S</span>
+        </button>
+        <button type="button" class="btn" id="btn-save-draft">
+          Lưu nháp trình duyệt
+        </button>
+        <button type="button" class="btn-icon-action" id="btn-export-json">
+          Xuất JSON
+        </button>
+        <label class="btn-icon-action" style="cursor:pointer">
+          Nhập JSON
+          <input type="file" id="input-import-json" accept="application/json" hidden />
+        </label>
+        <button type="button" class="btn-icon-action danger" id="btn-reset-default">
+          Khôi phục gốc
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Stats KPI Strip -->
+    <div class="studio-stats-strip" id="studio-stats-strip">
+      <div class="studio-stat-widget" data-jump-tab="media">
+        <div class="studio-stat-widget-top">
+          <span>Kho Tư Liệu HQ</span>
+          <span>📸</span>
+        </div>
+        <div class="studio-stat-widget-val"><span id="stat-hq-val">7</span> <small style="font-size:12px;font-weight:400;color:var(--ink-muted)">ảnh gốc</small></div>
+        <div class="studio-stat-widget-sub">Tự động nén WebP q=92</div>
+      </div>
+
+      <div class="studio-stat-widget" data-jump-tab="about">
+        <div class="studio-stat-widget-top">
+          <span>Triết Lý Vận Hành</span>
+          <span>🎯</span>
+        </div>
+        <div class="studio-stat-widget-val"><span id="stat-mission-val">3</span> <small style="font-size:12px;font-weight:400;color:var(--ink-muted)">sứ mệnh</small></div>
+        <div class="studio-stat-widget-sub">Consistency &amp; Excellence</div>
+      </div>
+
+      <div class="studio-stat-widget" data-jump-tab="esc">
+        <div class="studio-stat-widget-top">
+          <span>Sự Kiện Thường Niên</span>
+          <span style="color:var(--esc)">●</span>
+        </div>
+        <div class="studio-stat-widget-val"><span>ESC &amp; TEDx</span></div>
+        <div class="studio-stat-widget-sub">ESC 2025 · 5 Mùa TEDx</div>
+      </div>
+
+      <div class="studio-stat-widget" data-jump-tab="projects">
+        <div class="studio-stat-widget-top">
+          <span>Dự Án Trải Nghiệm</span>
+          <span>🚀</span>
+        </div>
+        <div class="studio-stat-widget-val"><span id="stat-proj-val">5</span> <small style="font-size:12px;font-weight:400;color:var(--ink-muted)">dự án</small></div>
+        <div class="studio-stat-widget-sub">Forum, Hunt, Retreat, Store, MV</div>
+      </div>
+
+      <div class="studio-stat-widget" data-jump-tab="contact">
+        <div class="studio-stat-widget-top">
+          <span>Ban Chuyên Môn</span>
+          <span>👥</span>
+        </div>
+        <div class="studio-stat-widget-val"><span id="stat-dept-val">4</span> <small style="font-size:12px;font-weight:400;color:var(--ink-muted)">ban hoạt động</small></div>
+        <div class="studio-stat-widget-sub" id="stat-rec-status">Tuyển quân: Đang đóng</div>
+      </div>
+    </div>
+
+    <div class="studio-grid">
+      <aside class="studio-tabs" role="tablist" aria-label="Các phân mục quản trị nội dung">
+        <div class="studio-tabs-heading">Phân Mục Quản Trị</div>
+        <button type="button" class="studio-tab-btn active" role="tab" aria-selected="true" data-tab="media">
+          <span>📸 01. Upload Ảnh HQ</span>
+          <span class="pill" id="badge-media-count">50MB</span>
+        </button>
+        <button type="button" class="studio-tab-btn" role="tab" aria-selected="false" data-tab="about">
+          <span>🌱 02. Giới thiệu &amp; Sứ mệnh</span>
+          <span class="pill">/about</span>
+        </button>
+        <button type="button" class="studio-tab-btn" role="tab" aria-selected="false" data-tab="esc" data-accent="esc">
+          <span>🎙️ 03. Sự kiện ESC</span>
+          <span class="pill pill-esc">/esc</span>
+        </button>
+        <button type="button" class="studio-tab-btn" role="tab" aria-selected="false" data-tab="tedx" data-accent="tedx">
+          <span>🔴 04. Sự kiện TEDx</span>
+          <span class="pill pill-tedx">/tedx</span>
+        </button>
+        <button type="button" class="studio-tab-btn" role="tab" aria-selected="false" data-tab="projects">
+          <span>🧭 05. 5 Dự án CLB</span>
+          <span class="pill">/projects</span>
+        </button>
+        <button type="button" class="studio-tab-btn" role="tab" aria-selected="false" data-tab="contact">
+          <span>👥 06. Phòng ban &amp; Tuyển quân</span>
+          <span class="pill" id="badge-dept-count">4 ban</span>
+        </button>
+
+        <div class="studio-quick-links">
+          <span>Xem Nhanh Các Trang</span>
+          <a href="/" target="_blank" rel="noopener"><span>Trang chủ</span> <span>↗</span></a>
+          <a href="/about" target="_blank" rel="noopener"><span>Giới thiệu (/about)</span> <span>↗</span></a>
+          <a href="/esc" target="_blank" rel="noopener"><span>Sự kiện ESC (/esc)</span> <span>↗</span></a>
+          <a href="/tedx" target="_blank" rel="noopener"><span>Sự kiện TEDx (/tedx)</span> <span>↗</span></a>
+          <a href="/projects" target="_blank" rel="noopener"><span>5 Dự án (/projects)</span> <span>↗</span></a>
+          <a href="/join" target="_blank" rel="noopener"><span>Tuyển quân (/join)</span> <span>↗</span></a>
+          <a href="/contact" target="_blank" rel="noopener"><span>Liên hệ (/contact)</span> <span>↗</span></a>
+        </div>
+
+        <div class="studio-shortcut-badge">
+          <span>💡</span>
+          <span>Bấm <kbd>Ctrl + S</kbd> bất kỳ lúc nào để lưu ngay lên máy chủ.</span>
+        </div>
+      </aside>
+
+      <div class="studio-panels">
+        <section class="studio-panel" id="panel-media" role="tabpanel">
+          <div class="studio-panel-head">
+            <div>
+              <h2>Upload &amp; Quản lý Ảnh Tư liệu Chất lượng cao (HQ Media)</h2>
+              <p>
+                Hệ thống lưu nguyên vẹn tệp gốc (Full-Resolution PNG/JPG/WebP tới 50MB) tại <code>/assets/originals/</code> và tự động sinh bản WebP chất lượng cao (quality=92, cạnh dài tới 2400px) để vừa hiển thị sắc nét vừa tải nhanh.
+              </p>
+            </div>
+          </div>
+
+          <div class="hq-upload-zone" id="hq-dropzone" tabindex="0" role="button" aria-label="Chọn hoặc kéo thả ảnh chất lượng cao vào đây">
+            <h3>Kéo thả ảnh chất lượng cao vào đây hoặc bấm để chọn tệp</h3>
+            <p>Hỗ trợ PNG, JPG, JPEG, WebP (Tối đa 50MB · Khuyến nghị độ phân giải từ 1920×1080px trở lên)</p>
+            <input type="file" id="hq-file-input" accept="image/png,image/jpeg,image/webp" hidden />
+          </div>
+
+          <div class="hq-inspector" id="hq-inspector" hidden>
+            <div class="hq-inspector-preview">
+              <img id="hq-preview-img" src="" alt="Xem trước ảnh tải lên" />
+            </div>
+            <div>
+              <div class="hq-inspector-specs">
+                <span class="metric-badge" id="hq-spec-dim">0 × 0 px</span>
+                <span class="metric-badge" id="hq-spec-size">0 MB</span>
+                <span class="metric-badge" id="hq-spec-tier">HQ Check</span>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="hq-input-title">Tiêu đề ảnh tư liệu</label>
+                  <input type="text" id="hq-input-title" class="form-input" placeholder="VD: Đêm chung kết ESC 2025" />
+                </div>
+                <div class="form-group">
+                  <label for="hq-input-target">Vị trí áp dụng trên website</label>
+                  <select id="hq-input-target" class="form-select">
+                    <option value="gallery">Thêm vào Thư viện Ảnh HQ (/about &amp; Studio)</option>
+                    <option value="esc">Cập nhật ảnh sân khấu chính ESC (#esc &amp; /esc)</option>
+                    <option value="tedx">Cập nhật ảnh sân khấu chính TEDx (#tedx &amp; /tedx)</option>
+                    <option value="project:discussion">Cập nhật ảnh dự án Discussion Forum</option>
+                    <option value="project:scavenger">Cập nhật ảnh dự án Scavenger Hunt</option>
+                    <option value="project:retreat">Cập nhật ảnh dự án Meditation Retreat</option>
+                    <option value="project:store">Cập nhật ảnh dự án S-Store</option>
+                    <option value="project:moneyverse">Cập nhật ảnh dự án The MoneyVerse</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="hq-input-alt">Mô tả trợ năng tiếng Việt (Alt text bắt buộc)</label>
+                <input type="text" id="hq-input-alt" class="form-input" placeholder="Mô tả rõ bối cảnh thực tế trong ảnh cho trình đọc màn hình..." />
+              </div>
+
+              <div class="form-group">
+                <label for="hq-input-caption">Chú thích hiển thị trong Full-Res Lightbox</label>
+                <input type="text" id="hq-input-caption" class="form-input" placeholder="VD: Nhiếp ảnh: Ban Truyền thông Skillcetera · Độ phân giải gốc" />
+              </div>
+
+              <button type="button" class="btn btn-esc" id="btn-upload-hq">
+                Tải lên &amp; Xử lý Ảnh Chất lượng cao (POST /api/upload)
+              </button>
+            </div>
+          </div>
+
+          <div style="margin-top:32px">
+            <h3 style="font-size:17px;margin-bottom:14px">Kho ảnh gốc độ phân giải cao hiện có</h3>
+            <div class="hq-gallery-grid" id="studio-media-library"></div>
+          </div>
+        </section>
+
+        <section class="studio-panel" id="panel-about" role="tabpanel" hidden>
+          <div class="studio-panel-head">
+            <div>
+              <h2>Chỉnh sửa Trang chủ &amp; Giới thiệu (/about)</h2>
+              <p>Quản lý thông điệp định vị CLB và nội dung chi tiết của 3 sứ mệnh cốt lõi.</p>
+            </div>
+          </div>
+          <div id="about-editor-fields"></div>
+        </section>
+
+        <section class="studio-panel" id="panel-esc" role="tabpanel" hidden>
+          <div class="studio-panel-head">
+            <div>
+              <h2>Chỉnh sửa Sự kiện Thường niên 01 — ESC (/esc)</h2>
+              <p>Cập nhật chủ đề mùa giải, trạng thái đăng ký và đường dẫn ảnh sân khấu.</p>
+            </div>
+          </div>
+          <div id="esc-editor-fields"></div>
+        </section>
+
+        <section class="studio-panel" id="panel-tedx" role="tabpanel" hidden>
+          <div class="studio-panel-head">
+            <div>
+              <h2>Chỉnh sửa Sự kiện Thường niên 02 — TEDxFPTUniversityHCMC (/tedx)</h2>
+              <p>Cập nhật biên niên sử các mùa TEDx (2021–2025 hoặc thêm mùa mới).</p>
+            </div>
+            <button type="button" class="btn btn-tedx" id="btn-add-tedx-season">+ Thêm mùa TEDx mới</button>
+          </div>
+          <div id="tedx-editor-fields"></div>
+        </section>
+
+        <section class="studio-panel" id="panel-projects" role="tabpanel" hidden>
+          <div class="studio-panel-head">
+            <div>
+              <h2>Chỉnh sửa 5 Dự án &amp; Hoạt động (/projects)</h2>
+              <p>Quản lý nội dung chi tiết, số liệu và đường dẫn ảnh cho Discussion Forum, Scavenger Hunt, Meditation Retreat, S-Store và The MoneyVerse.</p>
+            </div>
+          </div>
+          <div id="projects-editor-fields"></div>
+        </section>
+
+        <section class="studio-panel" id="panel-contact" role="tabpanel" hidden>
+          <div class="studio-panel-head">
+            <div>
+              <h2>Chỉnh sửa Tuyển thành viên (/join), Ban chuyên môn &amp; Liên hệ (/contact)</h2>
+              <p>Quản lý trạng thái mở/đóng đơn tuyển quân, thêm/sửa/xóa (CRUD) các phòng ban đang hoạt động và danh sách Ban Chủ nhiệm.</p>
+            </div>
+            <button type="button" class="btn btn-esc" id="btn-add-department">+ Thêm ban chuyên môn mới</button>
+          </div>
+          <div id="contact-editor-fields"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="studio-toast" id="studio-toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/src/subpage.js"></script>
+  <script type="module" src="/src/studio.js"></script>
+</body>
+</html>
+

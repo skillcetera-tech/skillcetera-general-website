@@ -1,0 +1,199 @@
+{
+  "retrievedInSession": "2026-10-24",
+  "source": "https://skillcetera.notion.site/2025",
+  "assets": [
+    {
+      "path": "/public/assets/skillcetera-logo.png",
+      "section": "brand",
+      "sourcePage": "https://skillcetera.notion.site/2025",
+      "sourceBlock": "10c45c41-2622-8088-bb92-f78a8586ba54",
+      "originalUrl": "https://prod-files-secure.s3.us-west-2.amazonaws.com/e0a6700a-8c6f-4e36-bf6d-a3324c86d397/513f2c98-4e84-402e-924e-b162eab7fa88/Artboard_1.png",
+      "width": 600,
+      "height": 600,
+      "bytes": 40443,
+      "verified": "Downloaded and decoded as an image; content period not inferred.",
+      "file": "public/assets/skillcetera-logo.png",
+      "description": "Original red circular Skillcetera S/snake emblem on white."
+    },
+    {
+      "path": "/public/assets/skillcetera-mark.jpg",
+      "section": "brand",
+      "sourcePage": "https://skillcetera.notion.site/2025",
+      "sourceBlock": "10c45c41-2622-80b4-b711-c64f2068da49",
+      "originalUrl": "https://prod-files-secure.s3.us-west-2.amazonaws.com/e0a6700a-8c6f-4e36-bf6d-a3324c86d397/ce134c47-f506-4021-841e-daab8a85c1a1/skill.jpg",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 2664353,
+      "verified": "Downloaded and decoded as an image; content period not inferred.",
+      "file": "public/assets/skillcetera-mark.jpg",
+      "description": "Original Skillcetera emblem and wordmark artwork on a red and purple geometric background."
+    },
+    {
+      "path": "/public/assets/discussion-forum.png",
+      "section": "discussion-forum",
+      "sourcePage": "https://skillcetera.notion.site/2025",
+      "sourceBlock": "10d45c41-2622-8017-9b8c-c69e5b6db737",
+      "originalUrl": "https://prod-files-secure.s3.us-west-2.amazonaws.com/e0a6700a-8c6f-4e36-bf6d-a3324c86d397/977566b4-da84-484f-9bd2-30829da09b27/image.png",
+      "width": 940,
+      "height": 788,
+      "bytes": 701035,
+      "verified": "Downloaded and decoded as an image; content period not inferred.",
+      "file": "public/assets/discussion-forum.png",
+      "description": "Collage of original Discussion Forum promotional posters."
+    },
+    {
+      "path": "/public/assets/scavenger-hunt.png",
+      "section": "scavenger-hunt",
+      "sourcePage": "https://skillcetera.notion.site/2025",
+      "sourceBlock": "27945c41-2622-80ea-be76-fcb8576429e4",
+      "originalUrl": "attachment:1b04ac8d-9b4b-4ca6-ada4-6f6b02780e67:image.png",
+      "width": 1637,
+      "height": 1091,
+      "bytes": 3323449,
+      "verified": "Downloaded and decoded as an image; content period not inferred.",
+      "file": "public/assets/scavenger-hunt.png",
+      "description": "Group holding the Skillcetera Scavenger Hunt banner in an outdoor courtyard."
+    },
+    {
+      "path": "/public/assets/esc.png",
+      "section": "esc",
+      "sourcePage": "https://skillcetera.notion.site/2025",
+      "sourceBlock": "27945c41-2622-8067-a639-f4ac07f688c4",
+      "originalUrl": "attachment:d4a32ad3-b57b-4c43-9fec-9c253906c441:image.png",
+      "width": 2048,
+      "height": 1538,
+      "bytes": 5004005,
+      "verified": "Downloaded and decoded as an image; content period not inferred.",
+      "file": "public/assets/esc.png",
+      "description": "Group at English Speaking Competition 2025 with BREAK THE NORM and GRAND FINAL SHOW stage backdrop."
+    },
+    {
+      "path": "/public/assets/s-store.jpg",
+      "section": "s-store",
+      "sourcePage": "https://skillcetera.notion.site/2025",
+      "sourceBlock": "10d45c41-2622-8011-a3cc-fd2d09caf63a",
+      "originalUrl": "https://prod-files-secure.s3.us-west-2.amazonaws.com/e0a6700a-8c6f-4e36-bf6d-a3324c86d397/489bf36c-2189-463e-b1ea-2abadb6149a9/325853543_720349072857635_8090496620713110852_n.jpg",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 80746,
+      "verified": "Downloaded and decoded as an image; content period not inferred.",
+      "file": "public/assets/s-store.jpg",
+      "description": "Original S-Store and Coolmate collaboration artwork."
+    },
+    {
+      "path": "/public/assets/meditation-retreat.jpg",
+      "section": "meditation-retreat",
+      "sourcePage": "https://skillcetera.notion.site/2025",
+      "sourceBlock": "10d45c41-2622-804f-9f6f-f9d085aa4cd4",
+      "originalUrl": "https://prod-files-secure.s3.us-west-2.amazonaws.com/e0a6700a-8c6f-4e36-bf6d-a3324c86d397/81f96e61-511b-4c72-a89b-5c52e737b45a/413023527_338280055823147_1496246335151868580_n.jpg",
+      "width": 2048,
+      "height": 1536,
+      "bytes": 517395,
+      "verified": "Downloaded and decoded as an image; content period not inferred.",
+      "file": "public/assets/meditation-retreat.jpg",
+      "description": "Participants seated during a meditation retreat in an open pavilion."
+    },
+    {
+      "path": "/public/assets/tedx.jpg",
+      "section": "tedx",
+      "sourcePage": "https://skillcetera.notion.site/2025",
+      "sourceBlock": "10d45c41-2622-80eb-9c9c-fcd697f9cadf",
+      "originalUrl": "https://prod-files-secure.s3.us-west-2.amazonaws.com/e0a6700a-8c6f-4e36-bf6d-a3324c86d397/da66c3c1-e080-4701-be5e-ab8411ee5eb9/442501735_1248400333587937_3792304650514726042_n.jpg",
+      "width": 2048,
+      "height": 1638,
+      "bytes": 448992,
+      "verified": "Downloaded and decoded as an image; content period not inferred.",
+      "file": "public/assets/tedx.jpg",
+      "description": "Original TEDxFPTUniversityHCMC Season 04 START SMALL thank-you artwork; associated with 2024, not 2025."
+    },
+    {
+      "path": "/public/assets/moneyverse.png",
+      "section": "moneyverse",
+      "sourcePage": "https://skillcetera.notion.site/2025",
+      "sourceBlock": "10d45c41-2622-80de-80a8-f425a0b20502",
+      "originalUrl": "https://prod-files-secure.s3.us-west-2.amazonaws.com/e0a6700a-8c6f-4e36-bf6d-a3324c86d397/8b33a3ca-a1fa-4cfe-ad47-4a9a8d9d7c55/image.png",
+      "width": 2048,
+      "height": 1365,
+      "bytes": 4532583,
+      "verified": "Downloaded and decoded as an image; content period not inferred.",
+      "file": "public/assets/moneyverse.png",
+      "description": "Group on the MoneyVerse stage, VTV Times branding visible."
+    }
+  ],
+  "childPages": [
+    {
+      "name": "About Skillcetera",
+      "id": "fff45c41-2622-81b5-b9ff-fedbf29b79d2",
+      "sourceUrl": "https://skillcetera.notion.site/fff45c41262281b5b9fffedbf29b79d2",
+      "text": [
+        "Consistency is Flexibility",
+        "At Skillcetera, we are a catalyst for personal growth and community empowerment. Our mission is to build a vibrant community of \"Ideas worth spreading - Knowledge worth sharing\", where ideas are celebrated, knowledge is shared, and consistency is the key to unlocking flexibility .",
+        "Professional Event Organizing Excellence",
+        "Our club takes pride in its professional event organizing skills, which have earned us recognition far beyond the boundaries of FPT University. We are committed to delivering exceptional experiences that engage, educate, and inspire our members and the wider community.",
+        "An Open and Inclusive Environment",
+        "At Skillcetera, we value diversity, respect, and open communication. Our club is an open environment that welcomes all members and embraces their opinions, ideas, and perspectives. We are dedicated to fostering a culture of understanding and responsiveness, ensuring that every member feels heard, supported, and empowered.",
+        "More content coming soon! Stay tuned for updates."
+      ],
+      "observedLinks": [],
+      "destinationChecks": "Checked 2026-10-24: HTTP 200."
+    },
+    {
+      "name": "Projects",
+      "id": "fff45c41-2622-8113-ab71-d8a6f4625c04",
+      "sourceUrl": "https://skillcetera.notion.site/fff45c4126228113ab71d8a6f4625c04",
+      "text": [
+        "Database",
+        "More content coming soon! Stay tuned for updates."
+      ],
+      "observedLinks": [],
+      "destinationChecks": "Checked 2026-10-24: HTTP 200."
+    },
+    {
+      "name": "Contact",
+      "id": "fff45c41-2622-8114-95dc-f4e782387e42",
+      "sourceUrl": "https://skillcetera.notion.site/fff45c412622811495dcf4e782387e42",
+      "text": [
+        "Contact us",
+        "‣ Our email:  skillcetera@gmail.com",
+        "‣ Mr. Loc: locnt.skillcetera@gmail.com",
+        "Projects",
+        "Skillcetera",
+        "‣ Ms. Hoan My:  mynth.skillcetera@gmail.com",
+        "Skillcetera 2020",
+        "About Skillcetera",
+        "qrcode.png",
+        "Our official public sites",
+        "Join us",
+        "Address: FPT University Ho Chi Minh City - Block E2a-7, D1 Street, Saigon Hi-tech Park, Long Thanh My Ward, Thu Duc City, Ho Chi Minh City.",
+        "‣ Ms. Chinh:  chinhk.skillcetera@gmail.com",
+        "Contact",
+        "What do you want to share with Skillcetera?"
+      ],
+      "observedLinks": [
+        "https://www.facebook.com/skillcetera",
+        "https://www.instagram.com/skillcetera/",
+        "https://www.youtube.com/@skillcetera",
+        "mailto:skillcetera@gmail.com"
+      ],
+      "destinationChecks": "Checked 2026-10-24: HTTP 200 for page and official social channels."
+    },
+    {
+      "name": "Join us",
+      "id": "fff45c41-2622-8161-befb-d4fe464f6329",
+      "sourceUrl": "https://skillcetera.notion.site/fff45c4126228161befbd4fe464f6329",
+      "text": [
+        "Skillcetera 2020",
+        "Applications are now closed for the 2024-2025 cohort! ",
+        "About Skillcetera",
+        "qrcode.png",
+        "Join us",
+        "Contact",
+        "Projects",
+        "Skillcetera"
+      ],
+      "observedLinks": [],
+      "destinationChecks": "Checked 2026-10-24: HTTP 200; 2024-2025 cohort closed, current cohort status unknown."
+    }
+  ],
+  "notes": "Original public Notion assets only. Retrieval date is not a reporting or event date. Signed download URLs are not persisted."
+}
