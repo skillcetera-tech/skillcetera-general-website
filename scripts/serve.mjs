@@ -176,7 +176,8 @@ const server = http.createServer(async (req, res) => {
       };
 
       try {
-        const { stdout } = await execFileAsync('python', [
+        const pythonBin = process.env.PYTHON_BIN || (process.platform === 'win32' ? 'python' : 'python3');
+        const { stdout } = await execFileAsync(pythonBin, [
           path.join(project, 'scripts/optimize-assets.py'),
           origFullPath,
           webpFullPath,
@@ -274,8 +275,9 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(port, '127.0.0.1', () =>
-  console.log(`Skillcetera preview & Content Studio\nLocal: http://localhost:${port}\nStudio: http://localhost:${port}/studio`),
+const host = process.env.HOST || '0.0.0.0';
+server.listen(port, host, () =>
+  console.log(`Skillcetera preview & Content Studio\nLocal: http://${host === '0.0.0.0' ? 'localhost' : host}:${port}\nStudio: http://${host === '0.0.0.0' ? 'localhost' : host}:${port}/studio`),
 );
 for (const signal of ['SIGTERM', 'SIGINT']) {
   process.on(signal, () => server.close(() => process.exit(0)));
