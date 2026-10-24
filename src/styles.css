@@ -1373,69 +1373,42 @@ body.intro #app {
 }
 
 .f-logo {
-  width: 64px;
-  height: 64px;
-  display: inline-block;
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   position: relative;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
+  border-radius: 50%;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
 .f-logo:hover {
-  transform: scale(1.08);
+  transform: scale(1.08) rotate(4deg);
+  filter: drop-shadow(0 6px 16px rgba(191, 30, 46, 0.28));
 }
-.f-logo svg {
+.f-logo-img {
   width: 100%;
   height: 100%;
-  overflow: visible;
+  object-fit: contain;
   display: block;
+  border-radius: 50%;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.f-logo #fMark,
-.f-logo .f-mark {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
-  transform-origin: 40px 40px;
+.f-logo.f-logo-revealed {
+  animation: fLogoPop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
-.f-logo:hover #fMark,
-.f-logo:hover .f-mark {
-  transform: scale(1.05) rotate(6deg);
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.12));
-}
-.f-logo:hover #fRing {
-  stroke: var(--accent-esc, #2457ff);
-  transition: stroke 0.3s ease;
-}
-.f-logo .fdot {
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-origin: center;
-}
-.f-logo.f-logo-revealed #fMark,
-.f-logo.f-logo-revealed .f-mark {
-  animation: fMarkPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-.f-logo.f-logo-revealed .fdot {
-  animation: fDotBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-.f-logo.f-logo-revealed .fdot:nth-of-type(2) { animation-delay: 0.08s; }
-.f-logo.f-logo-revealed .fdot:nth-of-type(3) { animation-delay: 0.16s; }
-.f-logo.f-logo-revealed .fdot:nth-of-type(4) { animation-delay: 0.24s; }
 
-@keyframes fMarkPop {
-  0% { transform: scale(0.3) rotate(-20deg); opacity: 0; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
-}
-@keyframes fDotBounce {
-  0% { transform: scale(0) translateY(8px); opacity: 0; }
-  70% { transform: scale(1.2) translateY(-3px); opacity: 1; }
-  100% { transform: scale(1) translateY(0); opacity: 1; }
-}
-.f-logo:hover .fdot:nth-of-type(2) {
-  transform: translateY(-2.5px);
-}
-.f-logo:hover .fdot:nth-of-type(3) {
-  transform: translateY(-3.5px);
-}
-.f-logo:hover .fdot:nth-of-type(4) {
-  transform: translateY(-2.5px);
+@keyframes fLogoPop {
+  0% {
+    transform: scale(0.6) rotate(-15deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 .footer-brand {
@@ -1679,8 +1652,5 @@ body.intro #app {
   .drift-b,
   .petal {
     animation: none !important;
-  }
-  #fRing {
-    stroke-dashoffset: 0 !important;
   }
 }

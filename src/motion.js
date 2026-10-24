@@ -434,32 +434,25 @@ export function initMotion() {
           );
         }
 
-        // Footer animated SVG logo (Petalyx style)
-        const dots = [...document.querySelectorAll('#footer .fdot')];
-        if (dots.length === 3) {
-          const footerTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: '#footer',
-              start: 'top 95%',
-              once: true,
-            },
-          });
-          footerTl
-            .to(dots, {
-              y: -5,
-              duration: 0.22,
-              stagger: 0.07,
-              yoyo: true,
-              repeat: 3,
-              ease: 'sine.inOut',
-            })
-            .to('#fRing', { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 0)
-            .fromTo(
-              '#fMark',
-              { scale: 0.2, opacity: 0, rotate: -25, transformOrigin: '40px 40px' },
-              { scale: 1, opacity: 1, rotate: 0, duration: 0.7, ease: 'back.out(1.8)' },
-              '-=0.5',
-            );
+        // Footer animated logo (Skillcetera club emblem)
+        const footerLogo = document.querySelector('#footer .f-logo');
+        if (footerLogo) {
+          gsap.fromTo(
+            footerLogo,
+            { scale: 0.5, opacity: 0, rotate: -15 },
+            {
+              scale: 1,
+              opacity: 1,
+              rotate: 0,
+              duration: 0.8,
+              ease: 'back.out(1.7)',
+              scrollTrigger: {
+                trigger: '#footer',
+                start: 'top 95%',
+                once: true,
+              },
+            }
+          );
         }
       }
 
