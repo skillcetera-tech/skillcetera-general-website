@@ -294,11 +294,31 @@ function applyContentOverrides(content) {
   }
 }
 
+function setupFooterMotion() {
+  const logo = document.querySelector('.footer .f-logo');
+  if (!logo || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          logo.classList.add('f-logo-revealed');
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  observer.observe(logo);
+}
+
 async function initSubpage() {
   setupMobileDrawer();
   setupSqFields();
   setupHQLightbox();
   setupProjectFilters();
+  setupFooterMotion();
   const content = await loadLatestContent();
   applyContentOverrides(content);
 }

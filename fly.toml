@@ -15,3 +15,7 @@ primary_region = 'sin'
   memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
+
+[mounts]
+  source = "skillcetera_storage"
+  destination = "/app/public/assets/originals"

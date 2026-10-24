@@ -446,23 +446,20 @@ export function initMotion() {
           });
           footerTl
             .to(dots, {
-              y: -7,
+              y: -5,
               duration: 0.22,
               stagger: 0.07,
               yoyo: true,
               repeat: 3,
               ease: 'sine.inOut',
             })
-            .to(dots, {
-              attr: { cx: 27, cy: 50 },
-              y: 0,
-              duration: 0.4,
-              ease: 'power3.inOut',
-            })
-            .to([dots[1], dots[2]], { opacity: 0, duration: 0.1 })
-            .to('#fMark', { strokeDashoffset: 0, duration: 0.55, ease: 'power3.out' }, '-=0.05')
-            .to(dots[0], { attr: { r: 5.5 }, duration: 0.35, ease: 'back.out(3)' }, '<')
-            .to('#fRing', { strokeDashoffset: 0, duration: 0.85, ease: 'power2.inOut' }, '-=0.3');
+            .to('#fRing', { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 0)
+            .fromTo(
+              '#fMark',
+              { scale: 0.2, opacity: 0, rotate: -25, transformOrigin: '40px 40px' },
+              { scale: 1, opacity: 1, rotate: 0, duration: 0.7, ease: 'back.out(1.8)' },
+              '-=0.5',
+            );
         }
       }
 
