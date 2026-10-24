@@ -1,0 +1,14 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/about", "destination": "/pages/about.html" },
+    { "source": "/esc", "destination": "/pages/esc.html" },
+    { "source": "/tedx", "destination": "/pages/tedx.html" },
+    { "source": "/projects", "destination": "/pages/projects.html" },
+    { "source": "/join", "destination": "/pages/join.html" },
+    { "source": "/contact", "destination": "/pages/contact.html" },
+    { "source": "/studio", "destination": "/pages/studio.html" }
+  ]
+}
