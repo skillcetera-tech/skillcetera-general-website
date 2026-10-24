@@ -1,7 +1,9 @@
 import { initMotion } from './motion.js';
 import { TEDX_SEASONS, OTHER_PROJECTS } from './content/site-data.js';
+import { initCursorSquares } from './cursor-squares.js';
 
 const motion = initMotion();
+initCursorSquares();
 const menuButton = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#mobile-nav');
 const closeMenu = () => {

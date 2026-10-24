@@ -224,6 +224,66 @@ body.intro #app {
   pointer-events: none;
 }
 
+/* Interactive cursor frosted squares motion */
+#cursor-squares-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  overflow: hidden;
+}
+
+.cursor-sq {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1.2px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2);
+  backdrop-filter: blur(6px) saturate(1.2);
+  will-change: transform, opacity;
+  transform-origin: center center;
+  animation: cursorSqPopFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cursor-sq.accent-esc {
+  background: rgba(36, 87, 255, 0.16);
+  border-color: rgba(36, 87, 255, 0.7);
+  box-shadow: 0 4px 16px rgba(36, 87, 255, 0.25), inset 0 0 0 1px rgba(36, 87, 255, 0.35);
+}
+
+.cursor-sq.accent-tedx {
+  background: rgba(235, 0, 40, 0.15);
+  border-color: rgba(235, 0, 40, 0.7);
+  box-shadow: 0 4px 16px rgba(235, 0, 40, 0.22), inset 0 0 0 1px rgba(235, 0, 40, 0.35);
+}
+
+@keyframes cursorSqPopFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.25) rotate(var(--rot-start, -12deg));
+  }
+  18% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1.05) rotate(var(--rot-mid, 0deg));
+  }
+  38% {
+    opacity: 0.82;
+    transform: translate(-50%, calc(-50% - 6px)) scale(1) rotate(var(--rot-mid, 0deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% - 22px)) scale(0.6) rotate(var(--rot-end, 18deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  #cursor-squares-layer {
+    display: none !important;
+  }
+}
+
 @keyframes driftA {
   to {
     transform: translateX(26px) translateY(5px);

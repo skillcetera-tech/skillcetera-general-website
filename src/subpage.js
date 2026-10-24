@@ -1,4 +1,5 @@
 import { FULL_CONTENT } from './content/site-data.js';
+import { initCursorSquares } from './cursor-squares.js';
 
 const DRAFT_STORAGE_KEY = 'skillcetera_studio_draft';
 
@@ -319,6 +320,7 @@ async function initSubpage() {
   setupHQLightbox();
   setupProjectFilters();
   setupFooterMotion();
+  initCursorSquares();
   const content = await loadLatestContent();
   applyContentOverrides(content);
 }
