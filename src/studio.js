@@ -435,109 +435,255 @@ function renderAboutEditor() {
   };
 }
 
+function renderSeasonsListHtml(eventType, seasonsObj) {
+  const entries = Object.entries(seasonsObj || {});
+  entries.sort(([k1, s1], [k2, s2]) => Number(s2.year || k2 || 0) - Number(s1.year || k1 || 0));
+
+  if (entries.length === 0) {
+    return `<div style="padding:24px;text-align:center;color:var(--gray)">Chưa có mùa nào. Bấm nút "+ Thêm mùa mới" ở trên để tạo.</div>`;
+  }
+
+  return entries.map(([key, s], idx) => {
+    const isNewest = idx === 0;
+    const metrics = Array.isArray(s.metrics) && s.metrics.length === 4
+      ? s.metrics
+      : [
+          { label: 'Số liệu 01', value: '100+' },
+          { label: 'Số liệu 02', value: '1M+' },
+          { label: 'Số liệu 03', value: '19' },
+          { label: 'Số liệu 04', value: '50+' }
+        ];
+
+    return `
+      <div class="editor-repeater-item" data-season-box="${key}">
+        <div class="editor-repeater-head">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="pill ${eventType === 'tedx' ? 'pill-tedx' : 'pill-esc'}">${s.year || key} ${isNewest ? '★ Mới nhất (Mặc định)' : ''}</span>
+            <strong>${s.editionLabel || `Mùa ${s.year}`} — ${s.theme || 'Chưa đặt chủ đề'}</strong>
+          </div>
+          <button type="button" class="hq-trigger-light" data-remove-season="${key}" data-season-event="${eventType}">Xóa mùa này</button>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Năm tổ chức</label>
+            <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-season-field="year" value="${s.year || key}" />
+          </div>
+          <div class="form-group">
+            <label>Tên chủ đề (Theme)</label>
+            <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-season-field="theme" value="${s.theme || ''}" />
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Nhãn phiên bản (Edition label)</label>
+            <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-season-field="editionLabel" value="${s.editionLabel || ''}" />
+          </div>
+          <div class="form-group">
+            <label>Ghi chú trạng thái / lưu trữ</label>
+            <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-season-field="statusNote" value="${s.statusNote || ''}" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mô tả chi tiết mùa sự kiện</label>
+          <textarea class="form-textarea" data-season-event="${eventType}" data-season-key="${key}" data-season-field="description">${s.description || ''}</textarea>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Đường dẫn ảnh hiển thị WebP</label>
+            <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-season-field="image" value="${s.image || ''}" />
+          </div>
+          <div class="form-group">
+            <label>Đường dẫn ảnh gốc Full-Res</label>
+            <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-season-field="originalImage" value="${s.originalImage || ''}" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Tải ảnh tư liệu mới cho mùa ${s.year} (Tự động nén WebP &amp; lưu bản gốc HQ):</label>
+          <input type="file" accept="image/*" class="season-file-upload form-input" data-season-event="${eventType}" data-season-key="${key}" />
+        </div>
+
+        <div style="margin-top:16px;padding:14px;background:var(--soft);border-radius:12px;border:1px dashed var(--line)">
+          <strong style="display:block;font-size:13px;margin-bottom:10px">4 Số liệu quy mô tương ứng của mùa ${s.year} (hiển thị trên thẻ Notched Ticket):</strong>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label>Số liệu 01 (Nhãn)</label>
+              <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-metric-idx="0" data-metric-prop="label" value="${metrics[0]?.label || ''}" />
+              <label style="margin-top:6px">Số liệu 01 (Giá trị)</label>
+              <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-metric-idx="0" data-metric-prop="value" value="${metrics[0]?.value || ''}" />
+            </div>
+            <div class="form-group">
+              <label>Số liệu 02 (Nhãn)</label>
+              <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-metric-idx="1" data-metric-prop="label" value="${metrics[1]?.label || ''}" />
+              <label style="margin-top:6px">Số liệu 02 (Giá trị)</label>
+              <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-metric-idx="1" data-metric-prop="value" value="${metrics[1]?.value || ''}" />
+            </div>
+            <div class="form-group">
+              <label>Số liệu 03 (Nhãn)</label>
+              <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-metric-idx="2" data-metric-prop="label" value="${metrics[2]?.label || ''}" />
+              <label style="margin-top:6px">Số liệu 03 (Giá trị)</label>
+              <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-metric-idx="2" data-metric-prop="value" value="${metrics[2]?.value || ''}" />
+            </div>
+            <div class="form-group">
+              <label>Số liệu 04 (Nhãn)</label>
+              <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-metric-idx="3" data-metric-prop="label" value="${metrics[3]?.label || ''}" />
+              <label style="margin-top:6px">Số liệu 04 (Giá trị)</label>
+              <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-metric-idx="3" data-metric-prop="value" value="${metrics[3]?.value || ''}" />
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function bindSeasonInputs(container, eventType) {
+  const getObj = () => (eventType === 'tedx' ? state.tedxSeasons : state.escSeasons);
+
+  container.querySelectorAll('[data-season-field]').forEach((input) => {
+    input.addEventListener('input', (e) => {
+      const key = e.target.dataset.seasonKey;
+      const field = e.target.dataset.seasonField;
+      const obj = getObj();
+      if (obj && obj[key]) {
+        obj[key][field] = e.target.value;
+        setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
+      }
+    });
+  });
+
+  container.querySelectorAll('[data-metric-prop]').forEach((input) => {
+    input.addEventListener('input', (e) => {
+      const key = e.target.dataset.seasonKey;
+      const idx = Number(e.target.dataset.metricIdx);
+      const prop = e.target.dataset.metricProp;
+      const obj = getObj();
+      if (obj && obj[key]) {
+        if (!Array.isArray(obj[key].metrics)) {
+          obj[key].metrics = [
+            { label: 'Số liệu 01', value: '100+' },
+            { label: 'Số liệu 02', value: '1M+' },
+            { label: 'Số liệu 03', value: '19' },
+            { label: 'Số liệu 04', value: '50+' }
+          ];
+        }
+        if (!obj[key].metrics[idx]) obj[key].metrics[idx] = { label: '', value: '' };
+        obj[key].metrics[idx][prop] = e.target.value;
+        setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
+      }
+    });
+  });
+
+  container.querySelectorAll('.season-file-upload').forEach((input) => {
+    input.addEventListener('change', async (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const key = e.target.dataset.seasonKey;
+      showToast(`Đang tải ảnh tư liệu cho mùa ${key}...`);
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': file.type || 'application/octet-stream',
+            'X-File-Name': encodeURIComponent(file.name)
+          },
+          body: file
+        });
+        if (!res.ok) throw new Error(`Lỗi tải (${res.status})`);
+        const data = await res.json();
+        const obj = getObj();
+        if (obj && obj[key]) {
+          obj[key].image = data.webpUrl || data.originalUrl;
+          obj[key].originalImage = data.originalUrl;
+        }
+        if (eventType === 'tedx') renderTedxEditor();
+        else renderEscEditor();
+        showToast(`Đã tải ảnh lên và gán vào mùa ${key}! Bấm Ctrl + S để lưu.`);
+        setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
+      } catch (err) {
+        showToast(`Lỗi upload ảnh: ${err.message}`);
+      }
+    });
+  });
+
+  container.querySelectorAll('[data-remove-season]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.removeSeason;
+      const obj = getObj();
+      const theme = obj?.[key]?.theme || key;
+      if (confirm(`Bạn có chắc muốn xóa mùa: "${theme}"?`)) {
+        if (obj) delete obj[key];
+        if (eventType === 'tedx') renderTedxEditor();
+        else renderEscEditor();
+        updateStatsStrip();
+        setStatus('Đã xóa mùa sự kiện — Nhấn Lưu để áp dụng', '#d97706', true);
+      }
+    });
+  });
+}
+
 function renderEscEditor() {
   const container = document.getElementById('esc-editor-fields');
   if (!container || !state.annualEvents?.esc) return;
   const esc = state.annualEvents.esc;
+  state.escSeasons = state.escSeasons || {};
 
   container.innerHTML = `
-    <div class="form-grid-2">
-      <div class="form-group">
-        <label>Nhãn mùa giải gần nhất</label>
-        <input type="text" class="form-input" id="esc-season" value="${esc.latestObservedEdition || ''}" />
+    <div style="margin-bottom:24px;padding:20px;background:var(--soft);border-radius:16px;border:1px solid var(--line)">
+      <strong style="display:block;font-size:15px;margin-bottom:12px">Thông tin chung &amp; Trạng thái cuộc thi ESC</strong>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Nhãn mùa giải gần nhất</label>
+          <input type="text" class="form-input" id="esc-season" value="${esc.latestObservedEdition || ''}" />
+        </div>
+        <div class="form-group">
+          <label>Trạng thái đăng ký (past / closed / open)</label>
+          <select class="form-select" id="esc-status">
+            <option value="past" ${esc.status === 'past' ? 'selected' : ''}>past — Mùa thi đã diễn ra (Hiển thị tư liệu)</option>
+            <option value="closed" ${esc.status === 'closed' ? 'selected' : ''}>closed — Đã đóng đơn đăng ký</option>
+            <option value="open" ${esc.status === 'open' ? 'selected' : ''}>open — Đang mở đăng ký chính thức</option>
+          </select>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Trạng thái đăng ký (past / closed / open)</label>
-        <select class="form-select" id="esc-status">
-          <option value="past" ${esc.status === 'past' ? 'selected' : ''}>past — Mùa thi đã diễn ra (Hiển thị tư liệu)</option>
-          <option value="closed" ${esc.status === 'closed' ? 'selected' : ''}>closed — Đã đóng đơn đăng ký</option>
-          <option value="open" ${esc.status === 'open' ? 'selected' : ''}>open — Đang mở đăng ký chính thức</option>
-        </select>
+      <div class="form-group" style="margin-top:12px">
+        <label>Mô tả tổng quan cuộc thi ESC</label>
+        <textarea class="form-textarea" id="esc-summary">${esc.detailOverview || esc.description || ''}</textarea>
       </div>
     </div>
-    <div class="form-group">
-      <label>Mô tả tổng quan cuộc thi ESC</label>
-      <textarea class="form-textarea" id="esc-summary">${esc.detailOverview || esc.description || ''}</textarea>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <h3 style="font-size:16px">Danh sách các mùa giải ESC (Mặc định hiển thị năm mới nhất)</h3>
+      <span class="pill pill-esc">${Object.keys(state.escSeasons).length} mùa trong hồ sơ</span>
     </div>
-    <div class="form-grid-2">
-      <div class="form-group">
-        <label>Đường dẫn ảnh hiển thị WebP</label>
-        <input type="text" class="form-input" id="esc-image" value="${esc.image || ''}" />
-      </div>
-      <div class="form-group">
-        <label>Đường dẫn ảnh gốc Full-Res</label>
-        <input type="text" class="form-input" id="esc-orig-image" value="${esc.originalImage || ''}" />
-      </div>
+    <div id="esc-seasons-list">
+      ${renderSeasonsListHtml('esc', state.escSeasons)}
     </div>
   `;
 
-  container.oninput = (e) => {
-    const t = e.target;
-    if (t.id === 'esc-season') esc.latestObservedEdition = t.value;
-    if (t.id === 'esc-status') esc.status = t.value;
-    if (t.id === 'esc-summary') esc.detailOverview = t.value;
-    if (t.id === 'esc-image') esc.image = t.value;
-    if (t.id === 'esc-orig-image') esc.originalImage = t.value;
-    setStatus('Có thay đổi chưa lưu — Nhấn Lưu lên máy chủ hoặc Lưu nháp', '#d97706');
-  };
+  const seasonInput = container.querySelector('#esc-season');
+  const statusInput = container.querySelector('#esc-status');
+  const summaryInput = container.querySelector('#esc-summary');
+  if (seasonInput) seasonInput.oninput = (e) => { esc.latestObservedEdition = e.target.value; setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu', '#d97706', true); };
+  if (statusInput) statusInput.onchange = (e) => { esc.status = e.target.value; setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu', '#d97706', true); };
+  if (summaryInput) summaryInput.oninput = (e) => { esc.detailOverview = e.target.value; setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu', '#d97706', true); };
+
+  bindSeasonInputs(container, 'esc');
 }
 
 function renderTedxEditor() {
   const container = document.getElementById('tedx-editor-fields');
   if (!container || !state.tedxSeasons) return;
 
-  const entries = Object.entries(state.tedxSeasons);
-  container.innerHTML = entries
-    .map(
-      ([key, s]) => `
-      <div class="editor-repeater-item">
-        <div class="editor-repeater-head">
-          <strong>${s.editionLabel || s.year} — ${s.theme}</strong>
-          <button type="button" class="hq-trigger-light" data-remove-season="${key}">Xóa mùa này</button>
-        </div>
-        <div class="form-grid-2">
-          <div class="form-group">
-            <label>Năm tổ chức</label>
-            <input type="text" class="form-input" data-tedx-key="${key}" data-field="year" value="${s.year || ''}" />
-          </div>
-          <div class="form-group">
-            <label>Tên chủ đề (Theme)</label>
-            <input type="text" class="form-input" data-tedx-key="${key}" data-field="theme" value="${s.theme || ''}" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Mô tả chủ đề mùa sự kiện</label>
-          <textarea class="form-textarea" data-tedx-key="${key}" data-field="description">${s.description || ''}</textarea>
-        </div>
-      </div>
-    `
-    )
-    .join('');
+  container.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <h3 style="font-size:16px">Danh sách các mùa TEDxFPTUniversityHCMC (Mặc định hiển thị năm mới nhất)</h3>
+      <span class="pill pill-tedx">${Object.keys(state.tedxSeasons).length} mùa trong hồ sơ</span>
+    </div>
+    <div id="tedx-seasons-list">
+      ${renderSeasonsListHtml('tedx', state.tedxSeasons)}
+    </div>
+  `;
 
-  container.querySelectorAll('[data-remove-season]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const key = btn.getAttribute('data-remove-season');
-      const theme = state.tedxSeasons[key]?.theme || key;
-      if (confirm(`Bạn có chắc muốn xóa mùa TEDx: "${theme}"?`)) {
-        delete state.tedxSeasons[key];
-        renderTedxEditor();
-        updateStatsStrip();
-        setStatus('Đã xóa mùa TEDx — Nhấn Lưu để áp dụng', '#d97706', true);
-      }
-    });
-  });
-
-  container.oninput = (e) => {
-    const t = e.target;
-    if (t.dataset.tedxKey) {
-      const key = t.dataset.tedxKey;
-      const field = t.dataset.field;
-      if (state.tedxSeasons[key]) {
-        state.tedxSeasons[key][field] = t.value;
-      }
-      setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
-    }
-  };
+  bindSeasonInputs(container, 'tedx');
 }
 
 function renderProjectsEditor() {
@@ -882,7 +1028,8 @@ function setupToolbarActions() {
   });
 
   document.getElementById('btn-add-tedx-season')?.addEventListener('click', () => {
-    const keys = Object.keys(state.tedxSeasons || {});
+    state.tedxSeasons = state.tedxSeasons || {};
+    const keys = Object.keys(state.tedxSeasons);
     const maxYear = keys.reduce((acc, k) => Math.max(acc, Number(k) || 2025), 2025);
     const nextYear = String(maxYear + 1);
     const nextNum = keys.length + 1;
@@ -893,11 +1040,42 @@ function setupToolbarActions() {
       description: 'Nhập mô tả chủ đề mùa sự kiện TEDxFPTUniversityHCMC mới tại đây.',
       statusNote: 'Dự kiến / Mới cập nhật từ Studio.',
       image: '/assets/tedx.webp',
-      originalImage: '/assets/tedx.jpg'
+      originalImage: '/assets/tedx.jpg',
+      metrics: [
+        { label: 'Vé phát hành', value: '100+' },
+        { label: 'Lượt xem YouTube', value: '1M+' },
+        { label: 'Diễn giả', value: '18' },
+        { label: 'Đối tác tài trợ', value: '50+' }
+      ]
     };
     renderTedxEditor();
     updateStatsStrip();
-    setStatus(`Đã thêm mùa TEDx ${nextYear} — Bấm Ctrl + S để lưu`, '#d97706', true);
+    setStatus(`Đã thêm mùa TEDx ${nextYear} — Bấm Ctrl + S để lưu`, '#10b981', true);
+  });
+
+  document.getElementById('btn-add-esc-season')?.addEventListener('click', () => {
+    state.escSeasons = state.escSeasons || {};
+    const keys = Object.keys(state.escSeasons);
+    const maxYear = keys.reduce((acc, k) => Math.max(acc, Number(k) || 2025), 2025);
+    const nextYear = String(maxYear + 1);
+    state.escSeasons[nextYear] = {
+      year: nextYear,
+      theme: 'CHỦ ĐỀ MÙA THI MỚI',
+      editionLabel: `ESC ${nextYear} · Grand Final`,
+      description: 'Nhập mô tả cho mùa thi English Speaking Competition mới tại đây.',
+      statusNote: 'Dự kiến / Mới cập nhật từ Studio.',
+      image: '/assets/esc.webp',
+      originalImage: '/assets/esc.png',
+      metrics: [
+        { label: 'Thí sinh tham dự', value: '200+' },
+        { label: 'Trường ĐH, CĐ', value: '25+' },
+        { label: 'Tổng giải thưởng', value: '60+ triệu' },
+        { label: 'Dấu ấn mùa giải', value: 'CHỦ ĐỀ MỚI' }
+      ]
+    };
+    renderEscEditor();
+    updateStatsStrip();
+    setStatus(`Đã thêm mùa ESC ${nextYear} — Bấm Ctrl + S để lưu`, '#10b981', true);
   });
 }
 

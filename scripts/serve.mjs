@@ -80,6 +80,8 @@ export const ANNUAL_EVENTS = ${JSON.stringify(content.annualEvents, null, 2)};
 
 export const TEDX_SEASONS = ${JSON.stringify(content.tedxSeasons, null, 2)};
 
+export const ESC_SEASONS = ${JSON.stringify(content.escSeasons || {}, null, 2)};
+
 export const OTHER_PROJECTS = ${JSON.stringify(content.otherProjects, null, 2)};
 
 export const FULL_CONTENT = {
@@ -87,6 +89,7 @@ export const FULL_CONTENT = {
   missions: MISSIONS,
   annualEvents: ANNUAL_EVENTS,
   tedxSeasons: TEDX_SEASONS,
+  escSeasons: ESC_SEASONS,
   otherProjects: OTHER_PROJECTS,
 };
 `;

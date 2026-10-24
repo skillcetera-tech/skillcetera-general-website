@@ -195,8 +195,108 @@ async function loadLatestContent() {
   return base;
 }
 
+function setupSeasonShowcase(tabsId, spotlightId, seasonsData, accent) {
+  const tabsContainer = document.getElementById(tabsId);
+  const spotlightContainer = document.getElementById(spotlightId);
+  if (!tabsContainer || !spotlightContainer || !seasonsData) return;
+
+  const entries = typeof seasonsData === 'object' && !Array.isArray(seasonsData)
+    ? Object.values(seasonsData)
+    : (Array.isArray(seasonsData) ? seasonsData : []);
+
+  if (entries.length === 0) return;
+
+  // Sắp xếp năm mới nhất lên đầu làm mặc định
+  entries.sort((a, b) => Number(b.year || 0) - Number(a.year || 0));
+
+  let activeYear = entries[0].year;
+
+  const renderSpotlight = (year) => {
+    const s = entries.find((item) => String(item.year) === String(year)) || entries[0];
+    const metrics = Array.isArray(s.metrics) && s.metrics.length === 4
+      ? s.metrics
+      : [
+          { label: 'Chỉ số 01', value: '100+' },
+          { label: 'Chỉ số 02', value: '1M+' },
+          { label: 'Chỉ số 03', value: '19' },
+          { label: 'Chỉ số 04', value: '50+' }
+        ];
+
+    const fallbackImg = accent === 'tedx' ? '/assets/tedx.webp' : '/assets/esc.webp';
+    const fallbackOrig = accent === 'tedx' ? '/assets/tedx.jpg' : '/assets/esc.png';
+    const displayImg = s.webpUrl || s.image || fallbackImg;
+    const displayOrig = s.originalUrl || s.originalImage || s.image || fallbackOrig;
+
+    spotlightContainer.innerHTML = `
+      <div class="season-spotlight-photo">
+        <img
+          src="${displayImg}"
+          alt="Tư liệu ${s.editionLabel || `Mùa ${s.year}`}"
+          data-hq-src="${displayOrig}"
+          data-hq-title="${s.editionLabel || `Mùa ${s.year} — ${s.theme}`}"
+          data-hq-caption="Tư liệu gốc chất lượng cao mùa ${s.year}."
+        />
+        <button
+          type="button"
+          class="hq-trigger"
+          data-hq-src="${displayOrig}"
+          data-hq-title="${s.editionLabel || `Mùa ${s.year} — ${s.theme}`}"
+          data-hq-caption="Tư liệu gốc chất lượng cao mùa ${s.year}."
+        >
+          Xem ảnh Full-Res ↗
+        </button>
+      </div>
+      <div class="season-spotlight-info">
+        <div>
+          <span class="pill ${accent === 'tedx' ? 'pill-tedx' : 'pill-esc'}">MÙA ${s.year} · ${s.editionLabel || `Season ${s.year}`}</span>
+          <h3 style="margin-top:10px">${s.theme || 'ALL THE WAY'}</h3>
+          <p style="margin-top:8px">${s.description || ''}</p>
+          ${s.statusNote ? `<small style="display:block;margin-top:6px;color:var(--gray)">${s.statusNote}</small>` : ''}
+        </div>
+        <div class="season-metrics-grid">
+          ${metrics.map((m) => `
+            <div class="season-metric-box" data-accent="${accent}">
+              <small>${m.label}</small>
+              <strong>${m.value}</strong>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  };
+
+  tabsContainer.innerHTML = entries.map((s, idx) => `
+    <button
+      type="button"
+      class="season-tab-btn ${idx === 0 ? 'is-active' : ''}"
+      data-accent="${accent}"
+      data-season-year="${s.year}"
+      aria-pressed="${idx === 0 ? 'true' : 'false'}"
+    >
+      ${s.year} ${idx === 0 ? '★ Mới nhất' : ''}
+    </button>
+  `).join('');
+
+  tabsContainer.querySelectorAll('[data-season-year]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeYear = btn.dataset.seasonYear;
+      tabsContainer.querySelectorAll('[data-season-year]').forEach((b) => {
+        const isCurrent = b === btn;
+        b.classList.toggle('is-active', isCurrent);
+        b.setAttribute('aria-pressed', String(isCurrent));
+      });
+      renderSpotlight(activeYear);
+    });
+  });
+
+  renderSpotlight(activeYear);
+}
+
 function applyContentOverrides(content) {
   if (!content) return;
+
+  setupSeasonShowcase('tedx-season-tabs', 'tedx-season-spotlight', content.tedxSeasons, 'tedx');
+  setupSeasonShowcase('esc-season-tabs', 'esc-season-spotlight', content.escSeasons, 'esc');
 
   // Render dynamic TEDx seasons on /tedx if container exists
   const tedxContainer = document.getElementById('tedx-seasons-grid');

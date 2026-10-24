@@ -285,7 +285,25 @@ export const TEDX_SEASONS = {
     "description": "Mùa mở đầu trong danh sách TEDxFPTUniversityHCMC của Skillcetera, đặt dấu chân đầu tiên cho không gian lan tỏa ý tưởng tại Đại học FPT TP.HCM.",
     "statusNote": "Tư liệu lịch sử trong hồ sơ câu lạc bộ (2021).",
     "image": "/assets/tedx.webp",
-    "originalImage": "/assets/tedx.jpg"
+    "originalImage": "/assets/tedx.jpg",
+    "metrics": [
+      {
+        "label": "Vé phát hành",
+        "value": "100+"
+      },
+      {
+        "label": "Lượt xem YouTube",
+        "value": "200K+"
+      },
+      {
+        "label": "Diễn giả đồng hành",
+        "value": "10"
+      },
+      {
+        "label": "Đối tác tài trợ",
+        "value": "20+"
+      }
+    ]
   },
   "2022": {
     "year": "2022",
@@ -294,7 +312,25 @@ export const TEDX_SEASONS = {
     "description": "Những cuộc đối thoại về sự thay đổi trong góc nhìn, giá trị cá nhân và cách người trẻ thích ứng trước những chuyển dịch mới.",
     "statusNote": "Tư liệu lịch sử trong hồ sơ câu lạc bộ (2022).",
     "image": "/assets/tedx.webp",
-    "originalImage": "/assets/tedx.jpg"
+    "originalImage": "/assets/tedx.jpg",
+    "metrics": [
+      {
+        "label": "Vé phát hành",
+        "value": "100+"
+      },
+      {
+        "label": "Lượt xem YouTube",
+        "value": "350K+"
+      },
+      {
+        "label": "Diễn giả đồng hành",
+        "value": "12"
+      },
+      {
+        "label": "Đối tác tài trợ",
+        "value": "25+"
+      }
+    ]
   },
   "2023": {
     "year": "2023",
@@ -303,7 +339,25 @@ export const TEDX_SEASONS = {
     "description": "Khám phá những lằn ranh giữa có và không, giữa giữ lại và bước tiếp để định hình con đường riêng của mỗi cá nhân.",
     "statusNote": "Tư liệu lịch sử trong hồ sơ câu lạc bộ (2023).",
     "image": "/assets/tedx.webp",
-    "originalImage": "/assets/tedx.jpg"
+    "originalImage": "/assets/tedx.jpg",
+    "metrics": [
+      {
+        "label": "Vé phát hành",
+        "value": "100+"
+      },
+      {
+        "label": "Lượt xem YouTube",
+        "value": "500K+"
+      },
+      {
+        "label": "Diễn giả đồng hành",
+        "value": "14"
+      },
+      {
+        "label": "Đối tác tài trợ",
+        "value": "35+"
+      }
+    ]
   },
   "2024": {
     "year": "2024",
@@ -312,7 +366,25 @@ export const TEDX_SEASONS = {
     "description": "Mọi thay đổi lớn đều khởi nguồn từ những bước đi nhỏ nhưng bền bỉ — mùa sự kiện gắn với bộ nhận diện tư liệu Season 04: Big Things Start Small.",
     "statusNote": "Tư liệu lịch sử kèm hình ảnh Season 04 trong hồ sơ câu lạc bộ (2024).",
     "image": "/assets/tedx.webp",
-    "originalImage": "/assets/tedx.jpg"
+    "originalImage": "/assets/tedx.jpg",
+    "metrics": [
+      {
+        "label": "Vé phát hành",
+        "value": "100+"
+      },
+      {
+        "label": "Lượt xem YouTube",
+        "value": "750K+"
+      },
+      {
+        "label": "Diễn giả đồng hành",
+        "value": "16"
+      },
+      {
+        "label": "Đối tác tài trợ",
+        "value": "40+"
+      }
+    ]
   },
   "2025": {
     "year": "2025",
@@ -321,7 +393,25 @@ export const TEDX_SEASONS = {
     "description": "Chủ đề mùa TEDxFPTUniversityHCMC 2025 trong hồ sơ Skillcetera, tiếp nối tinh thần dấn thân và theo đuổi ý tưởng đến cùng.",
     "statusNote": "Mùa gần nhất được ghi nhận trong hồ sơ CLB; chưa có thông báo về mùa tiếp theo.",
     "image": "/assets/tedx.webp",
-    "originalImage": "/assets/tedx.jpg"
+    "originalImage": "/assets/tedx.jpg",
+    "metrics": [
+      {
+        "label": "Vé bán ra mỗi mùa",
+        "value": "100+"
+      },
+      {
+        "label": "Lượt xem YouTube",
+        "value": "1M+"
+      },
+      {
+        "label": "Diễn giả đồng hành",
+        "value": "19"
+      },
+      {
+        "label": "Đối tác tài trợ",
+        "value": "50+"
+      }
+    ]
   }
 };
 

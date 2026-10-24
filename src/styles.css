@@ -722,15 +722,16 @@ body.intro #app {
 
 .tree-wrap {
   position: absolute;
-  z-index: 2;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -4%;
-  width: min(460px, 64vw);
-  height: 290px;
-  border-radius: 20px 20px 0 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  transform: none;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
   pointer-events: none;
 }
 
@@ -738,6 +739,20 @@ body.intro #app {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 30%;
+  filter: brightness(0.55) contrast(1.12);
+  transform: scale(1.02);
+  transition: transform 0.8s ease;
+}
+
+.tree-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(8, 10, 16, 0.42) 0%, rgba(8, 10, 16, 0.86) 100%),
+    linear-gradient(180deg, rgba(8, 10, 16, 0.72) 0%, transparent 35%, rgba(8, 10, 16, 0.92) 100%);
+  pointer-events: none;
 }
 
 .esc-bars {
@@ -828,6 +843,69 @@ body.intro #app {
 .card-tedx {
   background: var(--red-soft);
   color: var(--red-ink);
+}
+
+/* Event Scene Immersive Full Backdrop Overrides */
+.event-scene .h2 {
+  color: #ffffff;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.event-scene .event-description {
+  max-width: 620px;
+  text-align: center;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+
+.event-scene .card-esc {
+  background: rgba(12, 18, 36, 0.86);
+  color: #ffffff;
+  border: 1px solid rgba(36, 87, 255, 0.35);
+  border-top: 3.5px solid var(--accent-esc, #2457ff);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+}
+
+.event-scene .card-tedx {
+  background: rgba(32, 12, 18, 0.86);
+  color: #ffffff;
+  border: 1px solid rgba(235, 0, 40, 0.35);
+  border-top: 3.5px solid var(--accent-tedx, #eb0028);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+}
+
+.event-scene .card small {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.event-scene .card b,
+.event-scene .card strong {
+  color: #ffffff;
+}
+
+.event-scene .card-sub {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.event-scene .logos {
+  background: rgba(16, 20, 32, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  color: #ffffff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.event-scene .logo-tag,
+.event-scene .event-photo-label,
+.event-scene .next-event {
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .card-neutral {

@@ -278,7 +278,25 @@
       "description": "Mùa mở đầu trong danh sách TEDxFPTUniversityHCMC của Skillcetera, đặt dấu chân đầu tiên cho không gian lan tỏa ý tưởng tại Đại học FPT TP.HCM.",
       "statusNote": "Tư liệu lịch sử trong hồ sơ câu lạc bộ (2021).",
       "image": "/assets/tedx.webp",
-      "originalImage": "/assets/tedx.jpg"
+      "originalImage": "/assets/tedx.jpg",
+      "metrics": [
+        {
+          "label": "Vé phát hành",
+          "value": "100+"
+        },
+        {
+          "label": "Lượt xem YouTube",
+          "value": "200K+"
+        },
+        {
+          "label": "Diễn giả đồng hành",
+          "value": "10"
+        },
+        {
+          "label": "Đối tác tài trợ",
+          "value": "20+"
+        }
+      ]
     },
     "2022": {
       "year": "2022",
@@ -287,7 +305,25 @@
       "description": "Những cuộc đối thoại về sự thay đổi trong góc nhìn, giá trị cá nhân và cách người trẻ thích ứng trước những chuyển dịch mới.",
       "statusNote": "Tư liệu lịch sử trong hồ sơ câu lạc bộ (2022).",
       "image": "/assets/tedx.webp",
-      "originalImage": "/assets/tedx.jpg"
+      "originalImage": "/assets/tedx.jpg",
+      "metrics": [
+        {
+          "label": "Vé phát hành",
+          "value": "100+"
+        },
+        {
+          "label": "Lượt xem YouTube",
+          "value": "350K+"
+        },
+        {
+          "label": "Diễn giả đồng hành",
+          "value": "12"
+        },
+        {
+          "label": "Đối tác tài trợ",
+          "value": "25+"
+        }
+      ]
     },
     "2023": {
       "year": "2023",
@@ -296,7 +332,25 @@
       "description": "Khám phá những lằn ranh giữa có và không, giữa giữ lại và bước tiếp để định hình con đường riêng của mỗi cá nhân.",
       "statusNote": "Tư liệu lịch sử trong hồ sơ câu lạc bộ (2023).",
       "image": "/assets/tedx.webp",
-      "originalImage": "/assets/tedx.jpg"
+      "originalImage": "/assets/tedx.jpg",
+      "metrics": [
+        {
+          "label": "Vé phát hành",
+          "value": "100+"
+        },
+        {
+          "label": "Lượt xem YouTube",
+          "value": "500K+"
+        },
+        {
+          "label": "Diễn giả đồng hành",
+          "value": "14"
+        },
+        {
+          "label": "Đối tác tài trợ",
+          "value": "35+"
+        }
+      ]
     },
     "2024": {
       "year": "2024",
@@ -305,7 +359,25 @@
       "description": "Mọi thay đổi lớn đều khởi nguồn từ những bước đi nhỏ nhưng bền bỉ — mùa sự kiện gắn với bộ nhận diện tư liệu Season 04: Big Things Start Small.",
       "statusNote": "Tư liệu lịch sử kèm hình ảnh Season 04 trong hồ sơ câu lạc bộ (2024).",
       "image": "/assets/tedx.webp",
-      "originalImage": "/assets/tedx.jpg"
+      "originalImage": "/assets/tedx.jpg",
+      "metrics": [
+        {
+          "label": "Vé phát hành",
+          "value": "100+"
+        },
+        {
+          "label": "Lượt xem YouTube",
+          "value": "750K+"
+        },
+        {
+          "label": "Diễn giả đồng hành",
+          "value": "16"
+        },
+        {
+          "label": "Đối tác tài trợ",
+          "value": "40+"
+        }
+      ]
     },
     "2025": {
       "year": "2025",
@@ -314,7 +386,108 @@
       "description": "Chủ đề mùa TEDxFPTUniversityHCMC 2025 trong hồ sơ Skillcetera, tiếp nối tinh thần dấn thân và theo đuổi ý tưởng đến cùng.",
       "statusNote": "Mùa gần nhất được ghi nhận trong hồ sơ CLB; chưa có thông báo về mùa tiếp theo.",
       "image": "/assets/tedx.webp",
-      "originalImage": "/assets/tedx.jpg"
+      "originalImage": "/assets/tedx.jpg",
+      "metrics": [
+        {
+          "label": "Vé bán ra mỗi mùa",
+          "value": "100+"
+        },
+        {
+          "label": "Lượt xem YouTube",
+          "value": "1M+"
+        },
+        {
+          "label": "Diễn giả đồng hành",
+          "value": "19"
+        },
+        {
+          "label": "Đối tác tài trợ",
+          "value": "50+"
+        }
+      ]
+    }
+  },
+  "escSeasons": {
+    "2023": {
+      "year": "2023",
+      "theme": "THE NEXT CHAPTER",
+      "editionLabel": "Mùa 2023 · Khẳng định tiếng nói",
+      "description": "Đặt nền móng cho cấu trúc 3 vòng thi học thuật chuẩn mực và khẳng định bản lĩnh tiếng Anh sinh viên.",
+      "statusNote": "Tư liệu lưu trữ mùa giải 2023.",
+      "image": "/assets/esc.webp",
+      "originalImage": "/assets/esc.png",
+      "metrics": [
+        {
+          "label": "Thí sinh tham dự",
+          "value": "150+"
+        },
+        {
+          "label": "Trường ĐH, CĐ",
+          "value": "15+"
+        },
+        {
+          "label": "Tổng giải thưởng",
+          "value": "35+ triệu"
+        },
+        {
+          "label": "Dấu ấn mùa giải",
+          "value": "Chung kết cơ sở"
+        }
+      ]
+    },
+    "2024": {
+      "year": "2024",
+      "theme": "VOICE OF TOMORROW",
+      "editionLabel": "Mùa 2024 · Tiếng nói của tương lai",
+      "description": "Mùa thi đánh dấu sự mở rộng quy mô hợp tác với các trường đại học đối tác trên toàn quốc.",
+      "statusNote": "Tư liệu lưu trữ mùa giải 2024.",
+      "image": "/assets/esc.webp",
+      "originalImage": "/assets/esc.png",
+      "metrics": [
+        {
+          "label": "Thí sinh tham dự",
+          "value": "180+"
+        },
+        {
+          "label": "Trường ĐH, CĐ",
+          "value": "18+"
+        },
+        {
+          "label": "Tổng giải thưởng",
+          "value": "40+ triệu"
+        },
+        {
+          "label": "Dấu ấn mùa giải",
+          "value": "Chung kết miền Nam"
+        }
+      ]
+    },
+    "2025": {
+      "year": "2025",
+      "theme": "BREAK THE NORM",
+      "editionLabel": "Mùa 2025 · Phá vỡ khuôn mẫu (Grand Final)",
+      "description": "Sân chơi học thuật quy tụ thí sinh tài năng từ hơn 20 trường đại học, khẳng định tiếng nói bản lĩnh và tư duy phản biện sắc bén bằng tiếng Anh.",
+      "statusNote": "Mùa gần nhất được ghi nhận trong hồ sơ CLB; chưa có thông báo về mùa tiếp theo.",
+      "image": "/assets/esc.webp",
+      "originalImage": "/assets/esc.png",
+      "metrics": [
+        {
+          "label": "Thí sinh tham dự",
+          "value": "200+"
+        },
+        {
+          "label": "Trường đại học, CĐ",
+          "value": "20+"
+        },
+        {
+          "label": "Tổng giải thưởng",
+          "value": "50+ triệu"
+        },
+        {
+          "label": "Dấu ấn mùa giải",
+          "value": "BREAK THE NORM"
+        }
+      ]
     }
   },
   "otherProjects": {

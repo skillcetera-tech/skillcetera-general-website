@@ -617,3 +617,146 @@ body.subpage {
   }
 }
 
+/* Seasons Showcase for TEDx & ESC */
+.season-showcase {
+  margin-top: 28px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.04);
+}
+
+.season-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.season-tab-btn {
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--line);
+  background: var(--soft);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.season-tab-btn:hover {
+  border-color: var(--ink);
+}
+
+.season-tab-btn.is-active[data-accent="esc"],
+.season-tab-btn[data-accent="esc"][aria-pressed="true"] {
+  background: var(--accent-esc, #2457ff);
+  color: #fff;
+  border-color: var(--accent-esc, #2457ff);
+  box-shadow: 0 4px 14px rgba(36, 87, 255, 0.35);
+}
+
+.season-tab-btn.is-active[data-accent="tedx"],
+.season-tab-btn[data-accent="tedx"][aria-pressed="true"] {
+  background: var(--accent-tedx, #eb0028);
+  color: #fff;
+  border-color: var(--accent-tedx, #eb0028);
+  box-shadow: 0 4px 14px rgba(235, 0, 40, 0.35);
+}
+
+.season-spotlight {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 36px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .season-spotlight {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.season-spotlight-photo {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 380px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  background: var(--soft);
+}
+
+.season-spotlight-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.season-spotlight-photo .hq-trigger {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  padding: 6px 14px;
+  font-size: 11px;
+}
+
+.season-spotlight-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.season-spotlight-info h3 {
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.season-spotlight-info p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--gray);
+}
+
+.season-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.season-metric-box {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--soft);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.season-metric-box small {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.season-metric-box strong {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.season-metric-box[data-accent="esc"] {
+  border-left: 3.5px solid var(--accent-esc, #2457ff);
+}
+.season-metric-box[data-accent="tedx"] {
+  border-left: 3.5px solid var(--accent-tedx, #eb0028);
+}
+

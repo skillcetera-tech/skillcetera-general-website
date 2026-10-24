@@ -305,14 +305,10 @@ export function initMotion() {
               },
             });
 
-            // 20% entrance (stage photo rises + counters reach 100%), 60% stable reading, 20% subtle exit
-            if (treeWrap) {
-              timeline.fromTo(treeWrap, { yPercent: 32 }, { yPercent: 0, duration: 0.2 }, 0);
-              timeline.to(treeWrap, { yPercent: -4, duration: 0.2 }, 0.8);
-            }
+            // 20% entrance (stage photo zoom + counters reach 100%), 60% stable reading, 20% subtle exit
             if (image) {
-              timeline.fromTo(image, { scale: 1.05 }, { scale: 1, duration: 0.2 }, 0);
-              timeline.to(image, { scale: 1.02, duration: 0.2 }, 0.8);
+              timeline.fromTo(image, { scale: 1.12 }, { scale: 1.02, duration: 0.2 }, 0);
+              timeline.to(image, { scale: 1.06, duration: 0.2 }, 0.8);
             }
             if (ghost) {
               timeline.fromTo(ghost, { x: direction * -16 }, { x: 0, duration: 0.2 }, 0);
