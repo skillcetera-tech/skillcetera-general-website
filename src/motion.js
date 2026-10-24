@@ -273,7 +273,7 @@ export function initMotion() {
         const fittingScenes = conditions.desktop && !conditions.reduced
           ? scenes.filter((scene) => {
               const inner = scene.querySelector('.event-inner');
-              return inner && inner.scrollHeight <= availableHeight + 2;
+              return inner && inner.scrollHeight <= availableHeight + 40;
             })
           : [];
         const signature = fittingScenes.map((scene) => scene.id).join('|');
@@ -285,12 +285,16 @@ export function initMotion() {
         sceneContext = gsap.context(() => {
           fittingScenes.forEach((scene) => {
             const inner = scene.querySelector('.event-inner');
-            const treeWrap = scene.querySelector('.tree-wrap');
             const image = scene.querySelector('.event-photo img');
             const ghost = scene.querySelector('.event-ghost');
             const graphic = scene.querySelector('.event-graphic');
+            const cards = scene.querySelectorAll('.card');
+            const headline = scene.querySelector('.h2');
+            const pill = scene.querySelector('.stats-inner > .pill');
+            const desc = scene.querySelector('.event-description');
+            const bottomBar = scene.querySelector('.logos');
             const direction = scene.dataset.event === 'tedx' ? -1 : 1;
-            const counterProxy = { p: 1 };
+            const counterProxy = { p: 0 };
 
             const timeline = gsap.timeline({
               defaults: { ease: 'none' },
@@ -298,42 +302,99 @@ export function initMotion() {
                 trigger: scene,
                 pin: inner,
                 start: () => `top ${headerHeight()}px`,
-                end: () => `+=${Math.round(window.innerHeight * 0.9)}`,
+                end: () => `+=${Math.round(window.innerHeight * 0.95)}`,
                 scrub: 0.35,
                 anticipatePin: 0,
                 invalidateOnRefresh: true,
+                onEnter: () => setSceneCounters(scene, 0),
+                onLeaveBack: () => setSceneCounters(scene, 0),
               },
             });
 
-            // 20% entrance (stage photo zoom + counters reach 100%), 60% stable reading, 20% subtle exit
+            // 1. Stage photo cinematic parallax rise + depth zoom (0% -> 38%)
             if (image) {
-              timeline.fromTo(image, { scale: 1.12 }, { scale: 1.02, duration: 0.2 }, 0);
-              timeline.to(image, { scale: 1.06, duration: 0.2 }, 0.8);
-            }
-            if (ghost) {
-              timeline.fromTo(ghost, { x: direction * -16 }, { x: 0, duration: 0.2 }, 0);
-              timeline.to(ghost, { x: direction * 16, duration: 0.2 }, 0.8);
-            }
-            if (graphic) {
               timeline.fromTo(
-                graphic,
-                { scaleX: 0.78, transformOrigin: direction > 0 ? 'left center' : 'right center' },
-                { scaleX: 1, duration: 0.2 },
-                0,
+                image,
+                { yPercent: 12, scale: 1.16 },
+                { yPercent: 0, scale: 1.02, duration: 0.38, ease: 'power2.out' },
+                0
               );
-              timeline.to(graphic, { scaleX: 0.94, duration: 0.2 }, 0.8);
+              // Subtle float during exit (68% -> 100%)
+              timeline.to(
+                image,
+                { yPercent: -5, scale: 1.06, duration: 0.32, ease: 'power1.inOut' },
+                0.68
+              );
             }
+
+            // 2. Dynamic counter animation counting up from 0 to 100% (0% -> 38%)
             timeline.fromTo(
               counterProxy,
-              { p: 0.35 },
+              { p: 0 },
               {
                 p: 1,
-                duration: 0.2,
+                duration: 0.38,
+                ease: 'power2.out',
                 onUpdate: () => setSceneCounters(scene, counterProxy.p),
               },
-              0,
+              0
             );
-            setSceneCounters(scene, 1);
+
+            // 3. Floating ticket cards stagger entrance (float up with frosted glass depth)
+            if (cards.length) {
+              timeline.fromTo(
+                cards,
+                { y: 36, opacity: 0.25 },
+                { y: 0, opacity: 1, stagger: 0.04, duration: 0.34, ease: 'power2.out' },
+                0.02
+              );
+            }
+
+            // 4. Ghost text parallax slide across the backdrop
+            if (ghost) {
+              timeline.fromTo(
+                ghost,
+                { x: direction * -50, opacity: 0.2 },
+                { x: 0, opacity: 0.85, duration: 0.38, ease: 'power2.out' },
+                0
+              );
+              timeline.to(ghost, { x: direction * 36, opacity: 0.35, duration: 0.32 }, 0.68);
+            }
+
+            // 5. Graphic sound bars / TEDx corner frame
+            if (graphic) {
+              const bars = graphic.querySelectorAll('i');
+              if (bars.length) {
+                timeline.fromTo(
+                  bars,
+                  { scaleY: 0.25, transformOrigin: 'bottom center' },
+                  { scaleY: 1, stagger: 0.03, duration: 0.35, ease: 'back.out(1.6)' },
+                  0.04
+                );
+              } else {
+                timeline.fromTo(
+                  graphic,
+                  { scale: 0.65, opacity: 0.2, transformOrigin: direction > 0 ? 'left center' : 'right center' },
+                  { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(1.5)' },
+                  0.04
+                );
+              }
+              timeline.to(graphic, { scale: 0.94, duration: 0.3 }, 0.7);
+            }
+
+            // 6. Pill, headline, description and bottom bar floating entrance
+            if (pill) {
+              timeline.fromTo(pill, { y: 16, opacity: 0.2 }, { y: 0, opacity: 1, duration: 0.28 }, 0);
+            }
+            if (headline) {
+              timeline.fromTo(headline, { y: 22, opacity: 0.25 }, { y: 0, opacity: 1, duration: 0.32 }, 0.03);
+            }
+            if (desc) {
+              timeline.fromTo(desc, { y: 18, opacity: 0.25 }, { y: 0, opacity: 1, duration: 0.32 }, 0.05);
+            }
+            if (bottomBar) {
+              timeline.fromTo(bottomBar, { y: 24, opacity: 0.25 }, { y: 0, opacity: 1, duration: 0.34 }, 0.06);
+            }
 
             pinnedScenes.set(scene, timeline.scrollTrigger);
           });
@@ -377,8 +438,8 @@ export function initMotion() {
           heroTl.to('.hero-media img', { yPercent: 6, scale: 1.035, ease: 'none' }, 0);
         }
 
-        // Reveal elements
-        gsap.utils.toArray('.reveal').forEach((element) => {
+        // Reveal elements outside event scenes (event scenes are choreographed via timeline)
+        gsap.utils.toArray('.reveal:not(.event-scene .reveal)').forEach((element) => {
           gsap.fromTo(
             element,
             { y: 16, opacity: 0 },
@@ -392,8 +453,8 @@ export function initMotion() {
           );
         });
 
-        // Split headings in sections below hero
-        document.querySelectorAll('#about .split, #esc .split, #tedx .split, #projects .split, #community .split, #connect .split').forEach((heading) => {
+        // Split headings in sections below hero (excluding event scenes which animate with stage entrance)
+        document.querySelectorAll('#about .split, #projects .split, #community .split, #connect .split').forEach((heading) => {
           const words = heading.querySelectorAll('.w');
           if (!words.length) return;
           gsap.fromTo(
