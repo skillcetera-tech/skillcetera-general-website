@@ -1,3 +1,9 @@
+/* hallmark: v2.0.0 · project: skillcetera · genre: editorial · theme: custom (existing system) · sig: two-tone headline em split · stamp: 2026-10-26 */
+/* critique: strong identity system, literal rgba/hex values scattered throughout need tokenisation; overflow-x:hidden on body must be clip */
+/* waive: 38i — italic em in headings is the system's two-tone headline identity, one accent-coloured word per section heading is the signature device */
+/* waive: 63a — arrows in aria-hidden spans on CTAs; pill middle-dot separators are the established label syntax for this system */
+/* waive: 54 — tracked-cap pills are the project's section label language, replacing would require full system redesign */
+
 @import url('./tokens.css');
 
 *, *::before, *::after {
@@ -7,18 +13,19 @@
 }
 
 html {
-  background: #e9ecf2;
+  background: var(--bg-root);
   scroll-behavior: smooth;
   scroll-padding-top: 84px;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   background: transparent;
   color: var(--ink);
-  font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -159,36 +166,36 @@ body.intro #app {
   font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 3px 10px rgba(16, 16, 16, 0.16);
+  box-shadow: inset 0 1px 0 var(--white-25), 0 3px 10px var(--black-16);
   transition: transform 0.25s, background 0.25s;
 }
 
 .btn:hover {
   transform: translateY(-1px);
-  background: #2b2b2b;
+  background: var(--ink-hover);
 }
 
 .btn-esc {
   background: var(--blue);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 12px rgba(36, 87, 255, 0.28);
+  box-shadow: inset 0 1px 0 var(--white-3), 0 4px 12px var(--blue-dim-28);
 }
 .btn-esc:hover {
-  background: #1a45db;
+  background: var(--blue-hover);
 }
 
 .btn-tedx {
   background: var(--red);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 12px rgba(235, 0, 40, 0.28);
+  box-shadow: inset 0 1px 0 var(--white-3), 0 4px 12px var(--red-dim-28);
 }
 .btn-tedx:hover {
-  background: #c80022;
+  background: var(--red-hover);
 }
 
 .btn-light {
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--white-85);
   color: var(--ink);
-  border: 1px solid rgba(16, 16, 16, 0.14);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--black-14);
+  box-shadow: 0 2px 8px var(--black-8);
 }
 .btn-light:hover {
   background: var(--white);
@@ -212,11 +219,11 @@ body.intro #app {
 .glass {
   position: absolute;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.58);
+  background: var(--white-18);
+  border: 1px solid var(--white-58);
   -webkit-backdrop-filter: blur(10px) saturate(1.2);
   backdrop-filter: blur(10px) saturate(1.2);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 1px 0 var(--white-42);
 }
 
 .grid-sq {
@@ -256,9 +263,9 @@ body.intro #app {
   position: absolute;
   pointer-events: none;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.45);
-  border: 1.2px solid rgba(255, 255, 255, 0.88);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  background: var(--white-45);
+  border: 1.2px solid var(--white-88);
+  box-shadow: 0 4px 14px var(--black-8), inset 0 0 0 1px var(--white-45);
   -webkit-backdrop-filter: blur(6px) saturate(1.2);
   backdrop-filter: blur(6px) saturate(1.2);
   will-change: transform, opacity;
@@ -267,15 +274,15 @@ body.intro #app {
 }
 
 .cursor-sq.accent-esc {
-  background: rgba(36, 87, 255, 0.16);
-  border-color: rgba(36, 87, 255, 0.7);
-  box-shadow: 0 4px 16px rgba(36, 87, 255, 0.25), inset 0 0 0 1px rgba(36, 87, 255, 0.35);
+  background: var(--blue-dim-16);
+  border-color: var(--blue-dim-70);
+  box-shadow: 0 4px 16px var(--blue-dim-25), inset 0 0 0 1px var(--blue-dim-35);
 }
 
 .cursor-sq.accent-tedx {
-  background: rgba(235, 0, 40, 0.15);
-  border-color: rgba(235, 0, 40, 0.7);
-  box-shadow: 0 4px 16px rgba(235, 0, 40, 0.22), inset 0 0 0 1px rgba(235, 0, 40, 0.35);
+  background: var(--red-dim-15);
+  border-color: var(--red-dim-70);
+  box-shadow: 0 4px 16px var(--red-dim-22), inset 0 0 0 1px var(--red-dim-35);
 }
 
 @keyframes cursorSqPopFade {
@@ -334,8 +341,8 @@ body.intro #app {
   display: flex;
   align-items: center;
   gap: 32px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.07);
+  background: var(--white-9);
+  box-shadow: 0 0 0 1px var(--black-6), 0 8px 24px var(--black-7);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
@@ -416,9 +423,9 @@ body.intro #app {
   top: 58px;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--white-98);
   border-radius: 20px;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 14px 36px var(--black-8);
   border: 1px solid var(--line);
   padding: 14px 20px;
   display: grid;
@@ -466,11 +473,11 @@ body.intro #app {
   width: 100%;
   height: 100%;
   border-radius: 999px;
-  background: radial-gradient(closest-side, rgba(36, 87, 255, 0.16), rgba(36, 87, 255, 0.03) 65%, transparent 100%);
+  background: radial-gradient(closest-side, var(--blue-dim-16), var(--blue-dim-16) 65%, transparent 100%);
   filter: blur(16px);
 }
 .cloud-aura-red {
-  background: radial-gradient(closest-side, rgba(235, 0, 40, 0.15), rgba(235, 0, 40, 0.03) 65%, transparent 100%);
+  background: radial-gradient(closest-side, var(--red-dim-15), var(--red-dim-15) 65%, transparent 100%);
 }
 
 .hero-copy {
@@ -561,7 +568,7 @@ body.intro #app {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(10, 12, 18, 0.45) 0%, transparent 60%);
+  background: linear-gradient(0deg, var(--dark-overlay) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -583,7 +590,7 @@ body.intro #app {
 .image-credit {
   font-size: 9px;
   letter-spacing: 0.16em;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--white-78);
 }
 
 .hero-glass {
@@ -657,7 +664,7 @@ body.intro #app {
 .panel.is-active {
   flex-grow: 1;
   cursor: default;
-  background: linear-gradient(180deg, transparent 50%, rgba(243, 245, 248, 0.55) 100%);
+  background: linear-gradient(180deg, transparent 50%, var(--white-55) 100%);
 }
 
 .panel-in {
@@ -779,7 +786,7 @@ body.intro #app {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8, 10, 16, 0.58) 0%, rgba(8, 10, 16, 0.42) 40%, rgba(8, 10, 16, 0.68) 100%);
+  background: linear-gradient(180deg, var(--dark-scene-a) 0%, var(--dark-scene-b) 40%, var(--dark-scene-c) 100%);
   pointer-events: none;
 }
 
@@ -878,8 +885,8 @@ body.intro #app {
 
 /* Event Scene Immersive Full Backdrop Overrides */
 .event-scene .h2 {
-  color: #ffffff;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  color: var(--white);
+  text-shadow: 0 4px 24px var(--black-60);
 }
 
 .event-scene .event-description {
@@ -887,56 +894,56 @@ body.intro #app {
   text-align: center;
   font-size: 13.5px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+  color: var(--white-9);
+  text-shadow: 0 2px 14px var(--black-70);
 }
 
 .event-scene .card-esc {
-  background: rgba(12, 18, 36, 0.86);
-  color: #ffffff;
-  border: 1px solid rgba(36, 87, 255, 0.35);
-  border-top: 3.5px solid var(--accent-esc, #2457ff);
+  background: var(--dark-card);
+  color: var(--white);
+  border: 1px solid var(--blue-dim-35);
+  border-top: 3.5px solid var(--blue);
   -webkit-backdrop-filter: blur(16px) saturate(1.3);
   backdrop-filter: blur(16px) saturate(1.3);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 36px var(--shadow-scene);
 }
 
 .event-scene .card-tedx {
-  background: rgba(32, 12, 18, 0.86);
-  color: #ffffff;
-  border: 1px solid rgba(235, 0, 40, 0.35);
-  border-top: 3.5px solid var(--accent-tedx, #eb0028);
+  background: var(--dark-card-tedx);
+  color: var(--white);
+  border: 1px solid var(--red-dim-35);
+  border-top: 3.5px solid var(--red);
   -webkit-backdrop-filter: blur(16px) saturate(1.3);
   backdrop-filter: blur(16px) saturate(1.3);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 36px var(--shadow-scene);
 }
 
 .event-scene .card small {
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--white-78);
 }
 
 .event-scene .card b,
 .event-scene .card strong {
-  color: #ffffff;
+  color: var(--white);
 }
 
 .event-scene .card-sub {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--white-78);
 }
 
 .event-scene .logos {
-  background: rgba(16, 20, 32, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--dark-bar);
+  border: 1px solid var(--white-22);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-  color: #ffffff;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  color: var(--white);
+  box-shadow: 0 12px 32px var(--shadow-scene-35);
 }
 
 .event-scene .logo-tag,
 .event-scene .event-photo-label,
 .event-scene .next-event {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--white-82);
 }
 
 .card-neutral {
@@ -979,7 +986,7 @@ body.intro #app {
   height: 10px;
   margin-top: -10px;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.09), transparent);
+  background: radial-gradient(closest-side, var(--black-9), transparent);
   z-index: 3;
 }
 
@@ -1002,7 +1009,7 @@ body.intro #app {
   height: 62px;
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--white-55);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
   pointer-events: none;
@@ -1018,8 +1025,8 @@ body.intro #app {
   width: 100%;
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: var(--white-78);
+  border: 1px solid var(--black-6);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
@@ -1075,23 +1082,23 @@ body.intro #app {
 
 .seasons {
   --season-accent: var(--red);
-  --season-tint: rgba(255, 240, 243, 0.55);
-  --season-border: rgba(235, 0, 40, 0.14);
-  --season-shadow: rgba(235, 0, 40, 0.05);
+  --season-tint: var(--season-tint-tedx);
+  --season-border: var(--season-border-tedx);
+  --season-shadow: var(--season-shadow-tedx);
   padding-block: 24px 72px;
 }
 
 .seasons[data-seasons="esc"] {
   --season-accent: var(--blue);
-  --season-tint: rgba(235, 241, 255, 0.65);
-  --season-border: rgba(36, 87, 255, 0.14);
-  --season-shadow: rgba(36, 87, 255, 0.05);
+  --season-tint: var(--season-tint-esc);
+  --season-border: var(--season-border-esc);
+  --season-shadow: var(--season-shadow-esc);
 }
 
 .seasons-glass {
   padding: 28px 32px;
   border-radius: 26px;
-  background: linear-gradient(180deg, var(--season-tint) 0%, rgba(255, 255, 255, 0.95) 100%);
+  background: linear-gradient(180deg, var(--season-tint) 0%, var(--white-95) 100%);
   border: 1px solid var(--season-border);
   box-shadow: 0 16px 40px var(--season-shadow);
 }
@@ -1124,7 +1131,7 @@ body.intro #app {
   margin-top: 22px;
   padding: 5px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--white-9);
   border: 1px solid var(--line);
 }
 
@@ -1316,7 +1323,7 @@ body.intro #app {
   border-radius: 26px;
   overflow: hidden;
   background: var(--soft);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 24px 48px var(--black-8);
 }
 
 .project-preview-action {
@@ -1326,7 +1333,7 @@ body.intro #app {
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--white-92);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   display: grid;
@@ -1477,11 +1484,11 @@ body.intro #app {
   padding: 40px 32px 42px;
   text-align: center;
   border-radius: 28px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.86) 55%, rgba(255, 255, 255, 0.72) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  background: linear-gradient(to bottom, var(--white-96) 0%, var(--white-86) 55%, var(--white-72) 100%);
+  border: 1px solid var(--white-82);
   -webkit-backdrop-filter: blur(18px) saturate(1.15);
   backdrop-filter: blur(18px) saturate(1.15);
-  box-shadow: 0 30px 60px rgba(10, 20, 50, 0.18);
+  box-shadow: 0 30px 60px var(--shadow-sm);
 }
 
 .cta-card .h2 {
@@ -1495,7 +1502,7 @@ body.intro #app {
   letter-spacing: 0.08em;
   padding: 5px 12px;
   border-radius: 999px;
-  background: rgba(16, 16, 16, 0.07);
+  background: var(--black-14);
   color: var(--ink);
   margin-bottom: 10px;
 }
@@ -1503,7 +1510,7 @@ body.intro #app {
 .cta-desc {
   font-size: 13.5px;
   line-height: 1.65;
-  color: #1d2230;
+  color: var(--ink-deep);
   max-width: 600px;
   margin: 0 auto 20px;
 }
@@ -1522,15 +1529,15 @@ body.intro #app {
   gap: 16px;
   margin-top: 28px;
   padding-top: 22px;
-  border-top: 1px solid rgba(16, 16, 16, 0.1);
+  border-top: 1px solid var(--black-14);
   text-align: left;
 }
 
 .contact-card {
   padding: 12px 14px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.68);
-  border: 1px solid rgba(16, 16, 16, 0.06);
+  background: var(--white-68);
+  border: 1px solid var(--black-6);
 }
 
 .contact-card h3 {
@@ -1556,7 +1563,7 @@ body.intro #app {
 }
 
 .contact-card a {
-  border-bottom: 1px solid rgba(16, 16, 16, 0.25);
+  border-bottom: 1px solid var(--black-25);
 }
 
 /* FOOTER (Petalyx 3-column grid + animated SVG ring/dots) */
@@ -1590,7 +1597,7 @@ body.intro #app {
 }
 .f-logo:hover {
   transform: scale(1.08) rotate(4deg);
-  filter: drop-shadow(0 6px 16px rgba(191, 30, 46, 0.28));
+  filter: drop-shadow(0 6px 16px var(--red-dim-28));
 }
 .f-logo-img {
   width: 100%;

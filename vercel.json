@@ -3,6 +3,26 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio\\..*"
+        }
+      ],
+      "destination": "/pages/studio.html"
+    },
+    {
+      "source": "/((?!assets|src|fonts|vendor|data|_vercel|favicon).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio\\..*"
+        }
+      ],
+      "destination": "/pages/studio.html"
+    },
     { "source": "/about", "destination": "/pages/about.html" },
     { "source": "/esc", "destination": "/pages/esc.html" },
     { "source": "/tedx", "destination": "/pages/tedx.html" },

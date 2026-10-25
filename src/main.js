@@ -8,12 +8,15 @@ const heroPic = document.querySelector('.hero-media picture');
 if (heroPic && SITE_META?.heroImage) {
   const source = heroPic.querySelector('source');
   const img = heroPic.querySelector('img');
-  if (source) source.srcset = SITE_META.heroImage;
+  if (source && source.getAttribute('srcset') !== SITE_META.heroImage) {
+    source.srcset = SITE_META.heroImage;
+  }
   if (img) {
-    img.src = SITE_META.heroOriginalImage || SITE_META.heroImage;
-    if (SITE_META.heroImageAlt) img.alt = SITE_META.heroImageAlt;
-    if (SITE_META.heroImagePosition) img.style.objectPosition = SITE_META.heroImagePosition;
-    if (SITE_META.heroImageFit) img.style.objectFit = SITE_META.heroImageFit;
+    const targetSrc = SITE_META.heroOriginalImage || SITE_META.heroImage;
+    if (img.getAttribute('src') !== targetSrc) img.src = targetSrc;
+    if (SITE_META.heroImageAlt && img.alt !== SITE_META.heroImageAlt) img.alt = SITE_META.heroImageAlt;
+    if (SITE_META.heroImagePosition && img.style.objectPosition !== SITE_META.heroImagePosition) img.style.objectPosition = SITE_META.heroImagePosition;
+    if (SITE_META.heroImageFit && img.style.objectFit !== SITE_META.heroImageFit) img.style.objectFit = SITE_META.heroImageFit;
   }
 }
 
@@ -204,12 +207,17 @@ const hydrateFromContent = async () => {
     const heroImg = document.querySelector('.hero-media img');
     const heroSource = document.querySelector('.hero-media source');
     if (meta.heroImage && heroImg) {
-      if (heroImg.getAttribute('src') !== meta.heroImage) {
+      const targetSrc = meta.heroOriginalImage || meta.heroImage;
+      if (heroImg.getAttribute('src') !== targetSrc) {
         if (heroSource) heroSource.srcset = meta.heroImage;
-        heroImg.src = meta.heroOriginalImage || meta.heroImage;
+        heroImg.src = targetSrc;
       }
-      if (meta.heroImagePosition) heroImg.style.objectPosition = meta.heroImagePosition;
-      if (meta.heroImageFit) heroImg.style.objectFit = meta.heroImageFit;
+      if (meta.heroImagePosition && heroImg.style.objectPosition !== meta.heroImagePosition) {
+        heroImg.style.objectPosition = meta.heroImagePosition;
+      }
+      if (meta.heroImageFit && heroImg.style.objectFit !== meta.heroImageFit) {
+        heroImg.style.objectFit = meta.heroImageFit;
+      }
     }
 
     // 2. About Us Section on Homepage (#about)
