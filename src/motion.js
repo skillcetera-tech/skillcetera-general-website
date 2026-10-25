@@ -4,6 +4,31 @@ import { initChapterScroll } from './chapter-scroll.js';
 const DESKTOP_QUERY = '(min-width: 1024px) and (min-height: 760px)';
 const REDUCED_QUERY = '(prefers-reduced-motion: reduce)';
 
+export function splitWords(element) {
+  if (!element || element.dataset.splitDone === 'true') return;
+  element.setAttribute('aria-label', element.textContent.replace(/\s+/g, ' ').trim());
+  function walk(node) {
+    [...node.childNodes].forEach(child => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        const fragment = document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).filter(Boolean).forEach(part => {
+          if (/^\s+$/.test(part)) fragment.append(document.createTextNode(part));
+          else {
+            const word = document.createElement('span');
+            word.className = 'w';
+            word.setAttribute('aria-hidden', 'true');
+            word.textContent = part;
+            fragment.append(word);
+          }
+        });
+        child.replaceWith(fragment);
+      } else if (child.nodeType === Node.ELEMENT_NODE && child.tagName !== 'BR') walk(child);
+    });
+  }
+  walk(element);
+  element.dataset.splitDone = 'true';
+}
+
 /** Readable sections with optional reveals and independent event-frame alignment. */
 export function initMotion() {
   window.skillceteraMotion?.destroy();
@@ -25,31 +50,6 @@ export function initMotion() {
   function headerOffset() {
     const header = document.querySelector('.site-header');
     return header ? (parseFloat(getComputedStyle(header).top) || 0) + header.offsetHeight + 10 : 76;
-  }
-
-  function splitWords(element) {
-    if (element.dataset.splitDone === 'true') return;
-    element.setAttribute('aria-label', element.textContent.replace(/\s+/g, ' ').trim());
-    function walk(node) {
-      [...node.childNodes].forEach(child => {
-        if (child.nodeType === Node.TEXT_NODE) {
-          const fragment = document.createDocumentFragment();
-          child.textContent.split(/(\s+)/).filter(Boolean).forEach(part => {
-            if (/^\s+$/.test(part)) fragment.append(document.createTextNode(part));
-            else {
-              const word = document.createElement('span');
-              word.className = 'w';
-              word.setAttribute('aria-hidden', 'true');
-              word.textContent = part;
-              fragment.append(word);
-            }
-          });
-          child.replaceWith(fragment);
-        } else if (child.nodeType === Node.ELEMENT_NODE && child.tagName !== 'BR') walk(child);
-      });
-    }
-    walk(element);
-    element.dataset.splitDone = 'true';
   }
 
   document.querySelectorAll('.split').forEach(splitWords);
@@ -136,7 +136,7 @@ export function initMotion() {
     if (window.skillceteraMotion === api) delete window.skillceteraMotion;
   }
 
-  const api = { scrollToSection, refresh, destroy };
+  const api = { scrollToSection, refresh, destroy, splitWords };
   window.skillceteraMotion = api;
   if (!gsap || !ScrollTrigger) return api;
   gsap.registerPlugin(ScrollTrigger);

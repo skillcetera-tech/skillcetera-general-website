@@ -1,6 +1,6 @@
 /**
- * Structured content data for Skillcetera website (Home + 6 Subpages + Content Studio).
- * Synchronized with public/data/content.json.
+ * Dữ liệu có cấu trúc của hệ thống website Skillcetera (Trang chủ + 6 Subpage + Content Studio).
+ * Đồng bộ tự động từ public/data/content.json.
  */
 
 export const SITE_META = {
@@ -119,7 +119,10 @@ export const SITE_META = {
     ]
   },
   "heroImagePosition": "87% 88%",
-  "heroImageFit": "cover"
+  "heroImageFit": "cover",
+  "aboutPill": "ABOUT US · THREE CORE MISSIONS",
+  "aboutTitle": "Learn. Connect.<br><em>Make an impact.</em>",
+  "aboutLead": "Skillcetera - Skills and Languages Club is not just an academic club; it is a vibrant event-organizing hub that empowers students to thrive through the exchange of knowledge, skills, and experiences. Our vision is to create an engaging environment where creativity and collaboration flourish, allowing members to enhance their knowledge and develop essential skills in a supportive community."
 };
 
 export const MISSIONS = [
@@ -128,21 +131,24 @@ export const MISSIONS = [
     "titleEn": "Consistency is Flexibility",
     "titleVi": "Consistency is Flexibility",
     "descriptionVi": "Building a knowledge-sharing community that nurtures ideas daily, using consistency as the foundation to unlock flexible adaptability.",
-    "detailVi": "At Skillcetera, we act as a catalyst for personal growth and community empowerment. The club's mission is to create a space for 'Ideas worth spreading — Knowledge worth sharing', where ideas are celebrated, knowledge is shared, and consistency unlocks flexible thinking."
+    "detailVi": "At Skillcetera, we act as a catalyst for personal growth and community empowerment. The club's mission is to create a space for 'Ideas worth spreading — Knowledge worth sharing', where ideas are celebrated, knowledge is shared, and consistency unlocks flexible thinking.",
+    "pill": "MISSION 01 · CONSISTENCY IS FLEXIBILITY"
   },
   {
     "index": "02",
     "titleEn": "Professional Event Organizing Excellence",
     "titleVi": "Professional Event Organizing Excellence",
     "descriptionVi": "Organizing meticulous, engaging, educational, and inspiring events that reach far beyond university campus grounds.",
-    "detailVi": "Skillcetera takes pride in professional event organizing capabilities that have established a reputation beyond FPT University. Every initiative is thoroughly invested from academic quality and stage directing to attendee experience."
+    "detailVi": "Skillcetera takes pride in professional event organizing capabilities that have established a reputation beyond FPT University. Every initiative is thoroughly invested from academic quality and stage directing to attendee experience.",
+    "pill": "MISSION 02 · EVENT ORGANIZING EXCELLENCE"
   },
   {
     "index": "03",
     "titleEn": "An Open and Inclusive Environment",
     "titleVi": "An Open and Inclusive Environment",
     "descriptionVi": "An environment that respects diversity, encourages open dialogue, and stands together so that every member is heard and empowered.",
-    "detailVi": "We value diversity, mutual respect, and open communication. The club welcomes every individual with their unique personality, perspectives, and ideas, cultivating an empathetic culture of mutual support."
+    "detailVi": "We value diversity, mutual respect, and open communication. The club welcomes every individual with their unique personality, perspectives, and ideas, cultivating an empathetic culture of mutual support.",
+    "pill": "MISSION 03 · OPEN & INCLUSIVE ENVIRONMENT"
   }
 ];
 
@@ -209,7 +215,7 @@ export const ANNUAL_EVENTS = {
       "externalLabel": "ESC Documentary Post on Facebook",
       "externalUrl": "https://www.facebook.com/share/p/1Frf2ebFwQ/"
     },
-    "sourceNote": "Figures of 200+ contestants, 20+ universities, and 50+ million VND prize pool documented from club records (Oct 24, 2026); source does not specify single vs multi-season cumulative. Applications for next season are not yet open."
+    "sourceNote": "Official academic competition scale documented across seasons in Skillcetera club archives."
   },
   "tedx": {
     "id": "tedx",

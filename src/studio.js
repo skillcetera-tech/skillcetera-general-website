@@ -702,6 +702,10 @@ function renderAboutEditor() {
           </div>
         </div>
         <div class="form-group">
+          <label>Nhãn Pill sứ mệnh (Hiển thị góc trên thẻ)</label>
+          <input type="text" class="form-input" data-mission-idx="${idx}" data-field="pill" value="${m.pill || `MISSION ${m.index || `0${idx + 1}`} · ${(m.titleEn || '').toUpperCase()}`}" />
+        </div>
+        <div class="form-group">
           <label>Tóm tắt hiển thị ở Accordion trang chủ</label>
           <textarea class="form-textarea" data-mission-idx="${idx}" data-field="descriptionVi">${m.descriptionVi || ''}</textarea>
         </div>
@@ -749,6 +753,27 @@ function renderAboutEditor() {
             <img id="hero-img-preview" src="${meta.heroImage || '/assets/discussion-forum.webp'}" alt="Preview" style="width:100%;height:100%;object-fit:${meta.heroImageFit || 'cover'};object-position:${meta.heroImagePosition || 'center 45%'}" />
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="editor-repeater-item" style="border: 1px solid var(--line); background: #fafafa; margin-bottom: 24px; padding: 20px; border-radius: 12px;">
+      <div class="editor-repeater-head" style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="pill">Trang chủ #about</span>
+          <strong>Nội dung tiêu đề &amp; mô tả About Us trên Homepage</strong>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nhãn Pill (Mặc định: ABOUT US · THREE CORE MISSIONS)</label>
+        <input type="text" class="form-input" id="meta-about-pill" value="${meta.aboutPill || 'ABOUT US · THREE CORE MISSIONS'}" />
+      </div>
+      <div class="form-group">
+        <label>Tiêu đề chính About Us (Hỗ trợ định dạng HTML như &lt;br&gt;, &lt;em&gt;)</label>
+        <input type="text" class="form-input" id="meta-about-title" value="${meta.aboutTitle || 'Learn. Connect.<br><em>Make an impact.</em>'}" />
+      </div>
+      <div class="form-group">
+        <label>Đoạn giới thiệu ngắn About Us (About Lead)</label>
+        <textarea class="form-textarea" id="meta-about-lead">${meta.aboutLead || 'Skills and Languages Club at FPT University Ho Chi Minh City — where ideas are heard and large-scale experiences are created together.'}</textarea>
       </div>
     </div>
 
@@ -806,6 +831,9 @@ function renderAboutEditor() {
 
   container.oninput = (e) => {
     const target = e.target;
+    if (target.id === 'meta-about-pill') state.siteMeta.aboutPill = target.value;
+    if (target.id === 'meta-about-title') state.siteMeta.aboutTitle = target.value;
+    if (target.id === 'meta-about-lead') state.siteMeta.aboutLead = target.value;
     if (target.id === 'meta-name') state.siteMeta.clubName = target.value;
     if (target.id === 'meta-founded') state.siteMeta.foundedYear = target.value;
     if (target.id === 'meta-tagline') state.siteMeta.taglineVi = target.value;
@@ -1258,7 +1286,71 @@ function renderProjectsEditor() {
   if (!container || !state.otherProjects) return;
 
   const entries = Object.entries(state.otherProjects);
-  container.innerHTML = entries
+
+  state.communityMilestones = state.communityMilestones || [
+    {
+      tag: 'S-STORE · MERCHANDISE',
+      metric: '500+ lanyards · 100+ tees · 100+ totes',
+      caption: 'Branded apparel & accessories designed by club members'
+    },
+    {
+      tag: 'THE MONEYVERSE · VTV TIMES',
+      metric: '10 Southern campuses',
+      caption: 'Campus relations, student ambassador coordination & outreach'
+    },
+    {
+      tag: 'SCAVENGER HUNT · SAIGON',
+      metric: '6 seasons · 50+ members/season',
+      caption: 'Exploration race across 10+ cultural & historical landmarks in Saigon'
+    },
+    {
+      tag: 'DATA INTEGRITY PRINCIPLE',
+      metric: 'Discrete Project Accounting',
+      caption: 'Documented from source /2025 (Oct 24, 2026), never conflated'
+    }
+  ];
+
+  const milestonesHtml = `
+    <div class="editor-repeater-item" style="border: 2px solid rgba(0,0,0,0.12); background: #fafafa; margin-bottom: 28px; padding: 20px; border-radius: 14px;">
+      <div class="editor-repeater-head" style="margin-bottom: 14px;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="pill">Trang chủ #community</span>
+          <strong style="font-size:15px">4 Thẻ đục lỗ mốc dấu ấn dự án (Community Milestones)</strong>
+        </div>
+        <span class="pill pill-esc">${state.communityMilestones.length} thẻ dưới mục 5 dự án</span>
+      </div>
+      <p style="font-size:12.5px;color:var(--gray);margin-bottom:16px">
+        Chỉnh sửa nhãn, số liệu nổi bật và mô tả của 4 thẻ đục lỗ hiển thị ngay dưới mục 5 Dự án trên Trang chủ (phần People &amp; Project Milestones).
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        ${state.communityMilestones.map((ms, mIdx) => `
+          <div style="border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: #fff;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <strong style="font-size:13px">Thẻ đục lỗ 0${mIdx + 1}</strong>
+              <span class="pill">${ms.tag || `Thẻ 0${mIdx + 1}`}</span>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>Nhãn thẻ phía trên (Tag)</label>
+                <input type="text" class="form-input" data-milestone-idx="${mIdx}" data-milestone-field="tag" value="${ms.tag || ''}" />
+              </div>
+              <div class="form-group">
+                <label>Số liệu nổi bật chính (Metric)</label>
+                <input type="text" class="form-input" data-milestone-idx="${mIdx}" data-milestone-field="metric" value="${ms.metric || ''}" />
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:8px">
+              <label>Mô tả chi tiết chân thẻ (Caption)</label>
+              <input type="text" class="form-input" data-milestone-idx="${mIdx}" data-milestone-field="caption" value="${ms.caption || ''}" />
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  const projectsHtml = entries
     .map(
       ([key, p], idx) => `
       <div class="editor-repeater-item">
@@ -1308,6 +1400,12 @@ function renderProjectsEditor() {
     )
     .join('');
 
+  container.innerHTML = `
+    ${milestonesHtml}
+    <h3 style="font-size:16px;margin:22px 0 14px">Danh sách 5 Dự án &amp; Sáng kiến (/projects)</h3>
+    ${projectsHtml}
+  `;
+
   container.querySelectorAll('.btn-pick-proj-img').forEach((btn) => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.projKey;
@@ -1354,6 +1452,14 @@ function renderProjectsEditor() {
 
   container.oninput = (e) => {
     const t = e.target;
+    if (t.dataset.milestoneIdx !== undefined) {
+      const idx = Number(t.dataset.milestoneIdx);
+      const field = t.dataset.milestoneField;
+      if (state.communityMilestones[idx]) {
+        state.communityMilestones[idx][field] = t.value;
+      }
+      setStatus('Có thay đổi chưa lưu — Nhấn Lưu lên máy chủ hoặc Lưu nháp', '#d97706');
+    }
     if (t.dataset.projKey) {
       const key = t.dataset.projKey;
       const field = t.dataset.field;

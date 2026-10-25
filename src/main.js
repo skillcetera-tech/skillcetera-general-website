@@ -1,4 +1,4 @@
-import { initMotion } from './motion.js';
+import { initMotion, splitWords } from './motion.js';
 import { SITE_META, ANNUAL_EVENTS, ESC_SEASONS, TEDX_SEASONS, OTHER_PROJECTS } from './content/site-data.js';
 import { initCursorSquares } from './cursor-squares.js';
 import { initAmbientMotion } from './ambient-motion.js';
@@ -126,25 +126,23 @@ const previewTitle = document.querySelector('#project-preview-title');
 const previewMeta = document.querySelector('#project-preview-meta');
 const previewLink = document.querySelector('#project-preview-link');
 
-document.querySelectorAll('.project-select').forEach((button) => {
+document.querySelectorAll('.project-item').forEach((itemEl) => {
   const activate = () => {
-    const itemEl = button.closest('.project-item');
-    const projectKey = itemEl?.dataset.project;
+    const projectKey = itemEl.dataset.project;
     const project = projectKey ? OTHER_PROJECTS[projectKey] : null;
-    document.querySelectorAll('.project-select').forEach((item) => {
-      item.setAttribute('aria-pressed', String(item === button));
-      item.closest('.project-item').classList.toggle('active', item === button);
+    document.querySelectorAll('.project-item').forEach((item) => {
+      item.classList.toggle('active', item === itemEl);
     });
     if (previewImage) {
-      previewImage.src = project?.image || button.dataset.image;
-      previewImage.alt = project?.alt || itemEl.querySelector('.mobile-project-image').alt;
+      previewImage.src = project?.image || itemEl.querySelector('.project-select')?.dataset.image;
+      previewImage.alt = project?.alt || itemEl.querySelector('.mobile-project-image')?.alt || '';
       if (project?.imagePosition) previewImage.style.objectPosition = project.imagePosition;
       else previewImage.style.removeProperty('object-position');
       if (project?.imageFit) previewImage.style.objectFit = project.imageFit;
       else previewImage.style.removeProperty('object-fit');
     }
     if (previewTitle) {
-      previewTitle.textContent = project?.title || button.querySelector('.project-title').textContent;
+      previewTitle.textContent = project?.title || itemEl.querySelector('.project-title')?.textContent || '';
     }
     if (previewMeta && project) {
       previewMeta.textContent = project.metricsLabel;
@@ -154,11 +152,11 @@ document.querySelectorAll('.project-select').forEach((button) => {
       previewLink.setAttribute('aria-label', project.linkLabel);
     }
   };
-  button.addEventListener('click', activate);
-  button.addEventListener('focus', activate);
-  button.addEventListener('pointerenter', (event) => {
+
+  itemEl.addEventListener('pointerenter', (event) => {
     if (event.pointerType === 'mouse') activate();
   });
+  itemEl.addEventListener('focusin', activate);
 });
 
 let observer;
@@ -188,7 +186,7 @@ if (location.hash) {
   requestAnimationFrame(() => motion.scrollToSection(location.hash.slice(1), { behavior: 'auto', focus: false }));
 }
 
-const hydrateHeroFromContent = async () => {
+const hydrateFromContent = async () => {
   try {
     let content = null;
     const local = localStorage.getItem('skillcetera_studio_draft');
@@ -198,17 +196,81 @@ const hydrateHeroFromContent = async () => {
       const res = await fetch('/data/content.json');
       if (res.ok) content = await res.json();
     }
-    if (content?.meta?.heroImage) {
-      const heroImg = document.querySelector('.hero-media img');
-      const heroSource = document.querySelector('.hero-media source');
-      if (heroImg && heroImg.getAttribute('src') !== content.meta.heroImage) {
-        if (heroSource) heroSource.srcset = content.meta.heroImage;
-        heroImg.src = content.meta.heroOriginalImage || content.meta.heroImage;
+    if (!content) return;
+
+    const meta = content.siteMeta || content.meta || {};
+
+    // 1. Hero Image & Position/Fit
+    const heroImg = document.querySelector('.hero-media img');
+    const heroSource = document.querySelector('.hero-media source');
+    if (meta.heroImage && heroImg) {
+      if (heroImg.getAttribute('src') !== meta.heroImage) {
+        if (heroSource) heroSource.srcset = meta.heroImage;
+        heroImg.src = meta.heroOriginalImage || meta.heroImage;
       }
+      if (meta.heroImagePosition) heroImg.style.objectPosition = meta.heroImagePosition;
+      if (meta.heroImageFit) heroImg.style.objectFit = meta.heroImageFit;
+    }
+
+    // 2. About Us Section on Homepage (#about)
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      if (meta.aboutPill) {
+        const pillEl = aboutSection.querySelector('.loop-head .pill');
+        if (pillEl) pillEl.textContent = meta.aboutPill;
+      }
+      if (meta.aboutTitle) {
+        const titleEl = document.getElementById('about-title');
+        if (titleEl && titleEl.innerHTML !== meta.aboutTitle) {
+          titleEl.innerHTML = meta.aboutTitle;
+          delete titleEl.dataset.splitDone;
+          splitWords(titleEl);
+          motion?.refresh();
+        }
+      }
+      if (meta.aboutLead) {
+        const leadEl = aboutSection.querySelector('.about-lead');
+        if (leadEl) leadEl.textContent = meta.aboutLead;
+      }
+
+      // 3. 3 Core Missions
+      if (Array.isArray(content.missions) && content.missions.length > 0) {
+        const panels = aboutSection.querySelectorAll('#track .panel.mission');
+        content.missions.forEach((m, idx) => {
+          const panel = panels[idx];
+          if (!panel) return;
+          const title = m.titleEn || m.titleVi || '';
+          const desc = m.descriptionVi || m.description || '';
+          const pill = m.pill || `MISSION ${m.index || `0${idx + 1}`} · ${title.toUpperCase()}`;
+
+          panel.setAttribute('aria-label', `Mission ${m.index || `0${idx + 1}`}: ${title}`);
+          const pillEl = panel.querySelector('.step .pill');
+          if (pillEl) pillEl.textContent = pill;
+          const h3El = panel.querySelector('.step h3');
+          if (h3El) h3El.textContent = title;
+          const pEl = panel.querySelector('.step p');
+          if (pEl) pEl.textContent = desc;
+        });
+      }
+    }
+
+    // 4. Community Milestones Notched Ticket Cards below Projects
+    if (Array.isArray(content.communityMilestones) && content.communityMilestones.length > 0) {
+      const milestoneCards = document.querySelectorAll('.community-milestones .milestone-card');
+      content.communityMilestones.forEach((item, idx) => {
+        const card = milestoneCards[idx];
+        if (!card) return;
+        const smallEl = card.querySelector('small');
+        if (smallEl && item.tag) smallEl.textContent = item.tag;
+        const strongEl = card.querySelector('strong') || card.querySelector('b');
+        if (strongEl && item.metric) strongEl.textContent = item.metric;
+        const subEl = card.querySelector('.card-sub');
+        if (subEl && item.caption) subEl.textContent = item.caption;
+      });
     }
   } catch (_) {}
 };
-hydrateHeroFromContent();
+hydrateFromContent();
 
 const warmDeferredImages = () => {
   document.querySelectorAll('img[loading="lazy"]').forEach((img) => {

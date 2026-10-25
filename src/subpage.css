@@ -378,6 +378,11 @@ body.subpage {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
   align-items: center;
   scroll-margin-top: 96px;
+  transition: opacity 0.25s ease;
+}
+
+.project-detail-card[hidden] {
+  display: none !important;
 }
 
 .project-detail-media {

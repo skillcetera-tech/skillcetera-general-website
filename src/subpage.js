@@ -149,6 +149,7 @@ function setupProjectFilters() {
       const cat = card.getAttribute('data-category');
       const match = filter === 'all' || cat === filter;
       card.hidden = !match;
+      card.style.display = match ? '' : 'none';
     });
   });
 }
@@ -220,15 +221,6 @@ function setupSeasonShowcase(tabsId, spotlightId, seasonsData, accent) {
           data-hq-title="${s.editionLabel || `Season ${s.year} — ${s.theme}`}"
           data-hq-caption="Original high-resolution archive photo from season ${s.year}."
         />
-        <button
-          type="button"
-          class="hq-trigger"
-          data-hq-src="${displayOrig}"
-          data-hq-title="${s.editionLabel || `Season ${s.year} — ${s.theme}`}"
-          data-hq-caption="Original high-resolution archive photo from season ${s.year}."
-        >
-          View Full-Res ↗
-        </button>
       </div>
       <div class="season-spotlight-info">
         <div>
@@ -282,28 +274,24 @@ function applyContentOverrides(content) {
   setupSeasonShowcase('tedx-season-tabs', 'tedx-season-spotlight', content.tedxSeasons, 'tedx');
   setupSeasonShowcase('esc-season-tabs', 'esc-season-spotlight', content.escSeasons, 'esc');
 
-  // Render dynamic TEDx seasons on /tedx if container exists
-  const tedxContainer = document.getElementById('tedx-seasons-grid');
-  if (tedxContainer && content.tedxSeasons) {
-    const seasonsList = Array.isArray(content.tedxSeasons)
-      ? content.tedxSeasons
-      : Object.values(content.tedxSeasons);
-
-    tedxContainer.innerHTML = seasonsList
+  // Render dynamic missions on /about if container exists
+  const missionsGrid = document.getElementById('about-missions-grid');
+  if (missionsGrid && Array.isArray(content.missions) && content.missions.length > 0) {
+    missionsGrid.innerHTML = content.missions
       .map(
-        (item, idx) => `
-        <article class="editorial-card" data-accent="tedx">
+        (m, idx) => `
+        <article class="editorial-card"${idx === 1 ? ' data-accent="esc"' : idx === 2 ? ' data-accent="tedx"' : ''}>
           <div class="editorial-card-top">
-            <span class="editorial-idx">${item.editionLabel || `SEASON 0${idx + 1}`}</span>
-            <span class="pill pill-tedx">${item.year}</span>
+            <span class="editorial-idx">MISSION ${m.index || `0${idx + 1}`}</span>
+            <span class="pill${idx === 1 ? ' pill-esc' : idx === 2 ? ' pill-tedx' : ''}">${m.titleEn || m.titleVi || ''}</span>
           </div>
           <div>
-            <h3>${item.theme}</h3>
-            <p style="margin-top:8px">${item.description || item.summary || ''}</p>
+            <h3>${m.titleEn || m.titleVi || ''}</h3>
+            <p style="margin-top:8px">${m.detailVi || m.descriptionVi || ''}</p>
           </div>
           <div class="editorial-meta">
-            <span>Role: Organizing Unit</span>
-            <span>${item.statusNote || 'Club Archive'}</span>
+            <span>${idx === 0 ? 'Consistent in Standards' : idx === 1 ? '2 Annual Flagships' : 'Multidimensional Dialogue'}</span>
+            <span>${idx === 0 ? 'Flexible in Creativity' : idx === 1 ? '5 Multidisciplinary Projects' : 'Empathetic Culture'}</span>
           </div>
         </article>
       `
@@ -362,15 +350,6 @@ function applyContentOverrides(content) {
               <strong>${photo.title || 'Skillcetera Archive'}</strong>
               <span>${photo.dimensions || 'HQ Original'}</span>
             </div>
-            <button
-              type="button"
-              class="hq-trigger-light"
-              data-hq-src="${photo.originalUrl || photo.webpUrl}"
-              data-hq-title="${photo.title || 'High-Resolution Archive Photo'}"
-              data-hq-caption="${photo.caption || ''}"
-            >
-              View Original
-            </button>
           </div>
         </article>
       `
