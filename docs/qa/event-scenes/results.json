@@ -1,0 +1,1098 @@
+{
+  "checks": [
+    {
+      "name": "desktop event fills available viewport without sticky/zoom",
+      "passed": true,
+      "evidence": {
+        "y": 0,
+        "top": 1581,
+        "height": 824,
+        "fit": true,
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "reading",
+        "frameOpacity": "0",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "programmatic positioning alone does not auto-snap",
+      "passed": true
+    },
+    {
+      "name": "wheel pause gently aligns the event",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "111+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "counter starts after alignment without grabbing focus",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "esc",
+          "top": 76,
+          "focus": "BODY"
+        }
+      ]
+    },
+    {
+      "name": "time-based counter is loading while accessible value stays final",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "111+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "counter remains visibly loading after 1.5 seconds",
+      "passed": true
+    },
+    {
+      "name": "counter reaches exact final values",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "scrolling within a frame does not trap the user or restart the counter",
+      "passed": true
+    },
+    {
+      "name": "fast scroll past the capture region is not pulled back",
+      "passed": true,
+      "evidence": {
+        "y": 3683,
+        "top": -773.9375,
+        "height": 824,
+        "fit": true,
+        "values": [
+          "100+",
+          "1M+",
+          "19",
+          "50+"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "reading",
+        "frameOpacity": "0",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "pointer navigation aligns but does not focus the event heading",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "13+",
+          "0.1M+",
+          "2",
+          "6+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "A",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "TEDx count finishes once after navigation",
+      "passed": true
+    },
+    {
+      "name": "explicit keyboard navigation retains accessible focus",
+      "passed": true
+    },
+    {
+      "name": "esc wheel approach 1/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "111+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc wheel approach 2/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "111+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc wheel approach 3/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "111+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc wheel approach 4/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "111+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc wheel approach 5/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "113+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc wheel approach 6/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "111+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc wheel approach 7/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "113+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc wheel approach 8/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "113+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc wheel approach 9/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "111+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc wheel approach 10/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "111+",
+          "11+",
+          "28+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc counter starts once per deliberate entry",
+      "passed": true
+    },
+    {
+      "name": "tedx wheel approach 1/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "55+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx wheel approach 2/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "55+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx wheel approach 3/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "57+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx wheel approach 4/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "55+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx wheel approach 5/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "55+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx wheel approach 6/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "55+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx wheel approach 7/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "55+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx wheel approach 8/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "57+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx wheel approach 9/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "55+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx wheel approach 10/10 aligns and loads on repeated entry",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "55+",
+          "0.6M+",
+          "11",
+          "28+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx counter starts once per deliberate entry",
+      "passed": true
+    },
+    {
+      "name": "fit and stable values after resize 390x844",
+      "passed": true,
+      "evidence": {
+        "y": 2913,
+        "top": -1076.1875,
+        "height": 903.5,
+        "fit": false,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameOpacity": "1",
+        "frameColor": "rgb(16, 16, 16)"
+      }
+    },
+    {
+      "name": "fit and stable values after resize 1920x1080",
+      "passed": true,
+      "evidence": {
+        "y": 3197,
+        "top": -1436,
+        "height": 1004,
+        "fit": true,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "reading",
+        "frameOpacity": "0",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "fit and stable values after resize 1366x768",
+      "passed": true,
+      "evidence": {
+        "y": 3197,
+        "top": -1828.96875,
+        "height": 692,
+        "fit": true,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "reading",
+        "frameOpacity": "0",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "fit and stable values after resize 844x390",
+      "passed": true,
+      "evidence": {
+        "y": 3518,
+        "top": -2317,
+        "height": 837.90625,
+        "fit": false,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameOpacity": "1",
+        "frameColor": "rgb(16, 16, 16)"
+      }
+    },
+    {
+      "name": "fit and stable values after resize 1366x900",
+      "passed": true,
+      "evidence": {
+        "y": 3726,
+        "top": -2145,
+        "height": 824,
+        "fit": true,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "esc-title",
+        "imageTransform": "none",
+        "frameState": "reading",
+        "frameOpacity": "0",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "new input cancels alignment immediately",
+      "passed": true,
+      "evidence": {
+        "during": {
+          "y": 1496,
+          "top": 85,
+          "height": 824,
+          "fit": true,
+          "state": "ready",
+          "values": [
+            "200+",
+            "20+",
+            "50+ triệu"
+          ],
+          "final": true,
+          "accessible": true,
+          "focus": "BODY",
+          "imageTransform": "none",
+          "frameState": "aligning",
+          "frameOpacity": "0",
+          "frameColor": "rgb(36, 87, 255)"
+        },
+        "canceled": {
+          "y": 1264,
+          "top": 317,
+          "height": 824,
+          "fit": true,
+          "state": "ready",
+          "values": [
+            "200+",
+            "20+",
+            "50+ triệu"
+          ],
+          "final": true,
+          "accessible": true,
+          "focus": "BODY",
+          "imageTransform": "none",
+          "frameState": "reading",
+          "frameOpacity": "0",
+          "frameColor": "rgb(36, 87, 255)"
+        }
+      }
+    },
+    {
+      "name": "esc starts capture in the wheel handler before the next frame is visible",
+      "passed": true
+    },
+    {
+      "name": "esc captures on entry without waiting for scroll idle",
+      "passed": true,
+      "evidence": {
+        "y": 1476,
+        "top": 105,
+        "height": 824,
+        "fit": true,
+        "state": "ready",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligning",
+        "frameOpacity": "0",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc arrival from the upper frame aligns and starts counting via wheel alone",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "66+",
+          "7+",
+          "17+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "esc small scroll does not swallow the loading animation",
+      "passed": true
+    },
+    {
+      "name": "tedx starts capture in the wheel handler before the next frame is visible",
+      "passed": true
+    },
+    {
+      "name": "tedx captures on entry without waiting for scroll idle",
+      "passed": true,
+      "evidence": {
+        "y": 2753,
+        "top": 156.0625,
+        "height": 824,
+        "fit": true,
+        "state": "ready",
+        "values": [
+          "100+",
+          "1M+",
+          "19",
+          "50+"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligning",
+        "frameOpacity": "0",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx arrival from the upper frame aligns and starts counting via wheel alone",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "top": 76.0625,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "32+",
+          "0.3M+",
+          "6",
+          "16+"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(235, 0, 40)"
+      }
+    },
+    {
+      "name": "tedx small scroll does not swallow the loading animation",
+      "passed": true
+    },
+    {
+      "name": "pointercancel releases pointer state for later navigation",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "blur releases pointer state for later navigation",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "explicit alignment starts a timed count",
+      "passed": true
+    },
+    {
+      "name": "resizing a running count finalizes it instead of freezing",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 331.8125,
+        "height": 903.5,
+        "fit": false,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameOpacity": "1",
+        "frameColor": "rgb(16, 16, 16)"
+      }
+    },
+    {
+      "name": "returning to desktop never resets a finished count",
+      "passed": true
+    },
+    {
+      "name": "reduced motion uses static complete values and no ambient loops",
+      "passed": true,
+      "evidence": {
+        "reduced": {
+          "y": 1505,
+          "top": 76,
+          "height": 720,
+          "fit": false,
+          "state": "complete",
+          "values": [
+            "200+",
+            "20+",
+            "50+ triệu"
+          ],
+          "final": true,
+          "accessible": true,
+          "focus": "BODY",
+          "imageTransform": "none",
+          "frameOpacity": "1",
+          "frameColor": "rgb(16, 16, 16)"
+        },
+        "loops": 0
+      }
+    },
+    {
+      "name": "initial fallback does not consume the ESC count before it plays",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "running",
+        "values": [
+          "74+",
+          "7+",
+          "19+ triệu"
+        ],
+        "final": false,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "Back restores frames and final values without replay, round 1",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "Back restores frames and final values without replay, round 2",
+      "passed": true,
+      "evidence": {
+        "y": 1505,
+        "top": 76,
+        "height": 824,
+        "fit": true,
+        "state": "complete",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ],
+        "final": true,
+        "accessible": true,
+        "focus": "BODY",
+        "imageTransform": "none",
+        "frameState": "aligned",
+        "frameOpacity": "1",
+        "frameColor": "rgb(36, 87, 255)"
+      }
+    },
+    {
+      "name": "shared footer remains visible",
+      "passed": true
+    },
+    {
+      "name": "no browser JavaScript exceptions",
+      "passed": true,
+      "evidence": []
+    }
+  ],
+  "errors": []
+}

@@ -1,590 +1,163 @@
+import { initEventScenes } from './event-scenes.js';
+import { initChapterScroll } from './chapter-scroll.js';
+
 const DESKTOP_QUERY = '(min-width: 1024px) and (min-height: 760px)';
 const REDUCED_QUERY = '(prefers-reduced-motion: reduce)';
 
-/** Enhance the document with Petalyx-inspired choreography while keeping all content accessible. */
+/** Readable sections with optional reveals and independent event-frame alignment. */
 export function initMotion() {
-  window.skillceteraMotion?.destroy?.();
-
+  window.skillceteraMotion?.destroy();
   const gsap = window.gsap;
   const ScrollTrigger = window.ScrollTrigger;
-  const scenes = [...document.querySelectorAll('.event-scene')];
-  const pinnedScenes = new Map();
-  const listeners = [];
+  const desktopQuery = window.matchMedia(DESKTOP_QUERY);
+  const reducedQuery = window.matchMedia(REDUCED_QUERY);
+  const removers = [];
+  let effectsContext;
+  let frame = 0;
   let destroyed = false;
-  let refreshTimer = 0;
-  let refreshFrame = 0;
-  let rebuildPins = null;
-  let media = null;
-  let observer = null;
-  let internalFocus = false;
-  let introPlayed = false;
+  let mode = '';
 
-  const isReduced = () => window.matchMedia(REDUCED_QUERY).matches;
-  const isMobile = () => window.innerWidth <= 760;
+  function listen(target, type, callback, options) {
+    target.addEventListener(type, callback, options);
+    removers.push(() => target.removeEventListener(type, callback, options));
+  }
 
-  // 1) Split .split headings into <span class="w"> per word while preserving <br> and <em>
-  function splitWords(el) {
-    if (el.dataset.splitDone === 'true') return;
-    const plainText = el.textContent.replace(/\s+/g, ' ').trim();
-    if (plainText && !el.getAttribute('aria-label')) {
-      el.setAttribute('aria-label', plainText);
-    }
+  function headerOffset() {
+    const header = document.querySelector('.site-header');
+    return header ? (parseFloat(getComputedStyle(header).top) || 0) + header.offsetHeight + 10 : 76;
+  }
+
+  function splitWords(element) {
+    if (element.dataset.splitDone === 'true') return;
+    element.setAttribute('aria-label', element.textContent.replace(/\s+/g, ' ').trim());
     function walk(node) {
-      const children = [...node.childNodes];
-      node.innerHTML = '';
-      children.forEach((child) => {
-        if (child.nodeType === 3) {
-          const parts = child.textContent.split(/(\s+)/);
-          parts.forEach((part) => {
-            if (!part) return;
-            if (/^\s+$/.test(part)) {
-              node.appendChild(document.createTextNode(part));
-            } else {
-              const span = document.createElement('span');
-              span.className = 'w';
-              span.setAttribute('aria-hidden', 'true');
-              span.textContent = part;
-              node.appendChild(span);
+      [...node.childNodes].forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const fragment = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).filter(Boolean).forEach(part => {
+            if (/^\s+$/.test(part)) fragment.append(document.createTextNode(part));
+            else {
+              const word = document.createElement('span');
+              word.className = 'w';
+              word.setAttribute('aria-hidden', 'true');
+              word.textContent = part;
+              fragment.append(word);
             }
           });
-        } else if (child.nodeType === 1) {
-          if (child.tagName === 'BR') {
-            node.appendChild(child.cloneNode());
-          } else {
-            const clone = child.cloneNode(true);
-            walk(clone);
-            node.appendChild(clone);
-          }
-        }
+          child.replaceWith(fragment);
+        } else if (child.nodeType === Node.ELEMENT_NODE && child.tagName !== 'BR') walk(child);
       });
     }
-    walk(el);
-    el.dataset.splitDone = 'true';
+    walk(element);
+    element.dataset.splitDone = 'true';
   }
+
   document.querySelectorAll('.split').forEach(splitWords);
-
-  // 2) Generate .sq-field grid squares
-  document.querySelectorAll('.sq-field').forEach((field) => {
-    if (field.dataset.ready === 'true') return;
-    field.dataset.ready = 'true';
-    Object.assign(field.style, {
-      position: 'absolute',
-      inset: '0 0 auto 0',
-      height: '42%',
-      zIndex: '1',
-      pointerEvents: 'none',
-      webkitMaskImage: 'linear-gradient(#000, transparent)',
-      maskImage: 'linear-gradient(#000, transparent)',
-    });
-    const count = Number(field.dataset.count || 16);
-    for (let i = 0; i < count; i++) {
-      const sq = document.createElement('span');
-      sq.className = 'grid-sq';
-      const col = (i * 7 + 3) % 28;
-      const row = (i * 3 + 1) % 6;
-      Object.assign(sq.style, {
-        width: '46px',
-        height: '46px',
-        left: `${col * 48 - 10}px`,
-        top: `${row * 48 + 6}px`,
-        opacity: isReduced() ? '0.35' : '0',
-      });
-      field.appendChild(sq);
-      if (gsap && !isReduced()) {
-        gsap.to(sq, {
-          opacity: 0.9,
-          yoyo: true,
-          repeat: -1,
-          duration: 1.2,
-          delay: (i % 5) * 0.55,
-          repeatDelay: 0.8 + (i % 4) * 0.6,
-        });
-      }
-    }
-  });
-
-  // 3) Generate #heroGlass frosted squares
-  const heroGlass = document.getElementById('heroGlass');
-  if (heroGlass && !heroGlass.dataset.ready) {
-    heroGlass.dataset.ready = 'true';
-    const coords = [
-      [3, 64], [3, 71], [6.5, 71], [10, 71], [3, 78],
-      [-1, 70],
-      [45.5, 76], [49, 80], [49, 76], [52.5, 76],
-      [86, 58], [86, 67], [82, 76], [89.5, 76], [86, 84],
-    ];
-    coords.forEach(([x, y], idx) => {
-      if (isMobile() && idx % 2 === 1) return;
-      const sq = document.createElement('span');
-      sq.className = 'glass';
-      const isCenter = x > 40 && x < 60;
-      const size = isCenter ? 'clamp(28px, 3.4vw, 44px)' : 'clamp(36px, 5.2vw, 70px)';
-      Object.assign(sq.style, {
-        left: `${x}%`,
-        top: `${y}%`,
-        width: size,
-        aspectRatio: '1',
-      });
-      heroGlass.appendChild(sq);
-      if (gsap && !isReduced()) {
-        gsap.to(sq, {
-          opacity: 0.18,
-          duration: 0.95,
-          yoyo: true,
-          repeat: -1,
-          ease: 'sine.inOut',
-          delay: (idx % 6) * 0.4,
-          repeatDelay: 1 + (idx % 4) * 0.6,
-        });
-      }
-    });
-  }
-
-  // 4) Generate #petals falling particles in #connect
-  const petalsWrap = document.getElementById('petals');
-  if (petalsWrap && !petalsWrap.dataset.ready) {
-    petalsWrap.dataset.ready = 'true';
-    const colors = ['#ffffff', '#9bb5ff', '#ff9eae'];
-    for (let i = 0; i < 18; i++) {
-      const p = document.createElement('span');
-      p.className = 'petal';
-      const dx = ((i % 7) - 3) * 24;
-      const dur = 10 + (i % 6) * 1.4;
-      const delay = -(i * 0.85);
-      const scale = 0.65 + (i % 5) * 0.16;
-      p.style.left = `${(i * 5.5 + 3) % 98}%`;
-      p.style.background = colors[i % colors.length];
-      p.style.setProperty('--dx', `${dx}px`);
-      p.style.animationDuration = `${dur}s`;
-      p.style.animationDelay = `${delay}s`;
-      p.style.transform = `scale(${scale})`;
-      petalsWrap.appendChild(p);
-    }
-  }
-
-  // Clear body.intro immediately so #app has no scale transform that would distort ScrollTrigger pin offsets
   document.body.classList.remove('intro');
   document.querySelector('.backdrop')?.remove();
+  const events = initEventScenes({ headerOffset });
+  const chapters = initChapterScroll();
 
-  function headerHeight() {
-    return 76;
-  }
-
-  function getTarget(id) {
-    try {
-      return document.getElementById(decodeURIComponent(String(id).replace(/^#/, '')));
-    } catch {
-      return null;
-    }
-  }
-
-  function scrollToSection(id, { behavior = 'smooth', focus = true } = {}) {
-    const target = getTarget(id);
-    if (!target) return false;
-
-    const scene = target.closest('.event-scene');
-    const trigger = scene && pinnedScenes.get(scene);
-    const top = trigger
-      ? trigger.start + (trigger.end - trigger.start) * 0.45
-      : target.getBoundingClientRect().top + window.scrollY - headerHeight() - 16;
-
-    const resolvedBehavior = isReduced() ? 'instant' : behavior;
-    window.scrollTo({
-      top: Math.max(0, top),
-      behavior: resolvedBehavior,
-    });
-    if (resolvedBehavior !== 'smooth') {
-      window.dispatchEvent(new Event('scroll'));
-      ScrollTrigger?.update();
-    }
-
-    if (focus) {
-      const heading = target.matches('h1,h2,h3') ? target : target.querySelector('h1,h2,h3');
-      const focusTarget = heading || target;
-      if (!focusTarget.hasAttribute('tabindex')) focusTarget.setAttribute('tabindex', '-1');
-      internalFocus = true;
-      try {
-        focusTarget.focus({ preventScroll: true });
-      } finally {
-        internalFocus = false;
+  function buildEffects(reduced, desktop) {
+    effectsContext?.revert();
+    effectsContext = gsap.context(() => {
+      if (reduced) return;
+      const heroHeading = document.querySelector('#hero-title');
+      if (heroHeading && heroHeading.dataset.motionSeen !== 'true') {
+        heroHeading.dataset.motionSeen = 'true';
+        gsap.fromTo(heroHeading.querySelectorAll('.w'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, stagger: { amount: 0.12 }, ease: 'power2.out' });
       }
-    }
+      if (desktop && document.querySelector('.hero')) {
+        const hero = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 0, end: 'bottom top', scrub: true } });
+        hero.to('#heroCopy', { yPercent: -20, ease: 'none' }, 0);
+        document.querySelectorAll('.hero [data-par]').forEach(element => hero.to(element, { y: Number(element.dataset.par || 0), ease: 'none' }, 0));
+        hero.to('.hero-media img', { yPercent: 3, ease: 'none' }, 0);
+      }
+      document.querySelectorAll('.reveal:not(.event-scene .reveal)').forEach(element => {
+        if (element.dataset.motionSeen === 'true') return;
+        gsap.fromTo(element, { y: 16, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
+          scrollTrigger: { trigger: element, start: 'top 93%', once: true, onEnter: () => { element.dataset.motionSeen = 'true'; } },
+        });
+      });
+      document.querySelectorAll('#about .split, #projects .split, #community .split, #connect .split').forEach(heading => {
+        if (heading.dataset.motionSeen === 'true') return;
+        gsap.fromTo(heading.querySelectorAll('.w'), { y: 12, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 0.6, stagger: { amount: 0.12 }, ease: 'power2.out',
+          scrollTrigger: { trigger: heading, start: 'top 90%', once: true, onEnter: () => { heading.dataset.motionSeen = 'true'; } },
+        });
+      });
+      if (desktop && document.getElementById('ctaImg')) gsap.fromTo('#ctaImg', { yPercent: -3 }, {
+        yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#connect', start: 'top bottom', end: 'bottom bottom', scrub: true },
+      });
+    });
+  }
 
-    return true;
+  function syncLayout() {
+    if (destroyed || !gsap || !ScrollTrigger) return;
+    const desktop = desktopQuery.matches;
+    const reduced = reducedQuery.matches;
+    const nextMode = `${desktop}:${reduced}`;
+    events.refresh();
+    if (mode !== nextMode) buildEffects(reduced, desktop);
+    mode = nextMode;
+    ScrollTrigger.refresh();
   }
 
   function refresh() {
-    if (destroyed || !ScrollTrigger) return;
-    window.clearTimeout(refreshTimer);
-    refreshTimer = window.setTimeout(() => {
-      cancelAnimationFrame(refreshFrame);
-      refreshFrame = requestAnimationFrame(() => {
-        if (destroyed) return;
-        rebuildPins?.();
-        ScrollTrigger.update();
-        ScrollTrigger.refresh();
-      });
-    }, 90);
+    if (destroyed || frame) return;
+    frame = requestAnimationFrame(() => { frame = 0; syncLayout(); });
   }
 
-  function listen(target, type, handler, options) {
-    target.addEventListener(type, handler, options);
-    listeners.push(() => target.removeEventListener(type, handler, options));
+  function scrollToSection(id, { behavior = 'smooth', focus = false } = {}) {
+    let target;
+    try { target = document.getElementById(decodeURIComponent(String(id).replace(/^#/, ''))); } catch { return false; }
+    if (!target || destroyed) return false;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerOffset();
+    const instant = reducedQuery.matches || behavior !== 'smooth';
+    window.scrollTo({ top: Math.max(0, top), behavior: instant ? 'instant' : 'smooth' });
+    if (instant) { window.dispatchEvent(new Event('scroll')); ScrollTrigger?.update(); }
+    if (focus) {
+      const element = target.matches('h1,h2,h3') ? target : target.querySelector('h1,h2,h3') || target;
+      if (!element.hasAttribute('tabindex')) element.setAttribute('tabindex', '-1');
+      element.focus({ preventScroll: true });
+    }
+    return true;
   }
 
   function destroy() {
     if (destroyed) return;
     destroyed = true;
-    window.clearTimeout(refreshTimer);
-    cancelAnimationFrame(refreshFrame);
-    observer?.disconnect();
-    listeners.forEach((remove) => remove());
-    media?.revert();
-    pinnedScenes.clear();
+    cancelAnimationFrame(frame);
+    removers.forEach(remove => remove());
+    events.destroy();
+    chapters.destroy();
+    effectsContext?.revert();
     if (window.skillceteraMotion === api) delete window.skillceteraMotion;
   }
 
   const api = { scrollToSection, refresh, destroy };
   window.skillceteraMotion = api;
-
   if (!gsap || !ScrollTrigger) return api;
-
   gsap.registerPlugin(ScrollTrigger);
-  media = gsap.matchMedia();
-
-  media.add(
-    { desktop: DESKTOP_QUERY, reduced: REDUCED_QUERY, all: 'all' },
-    ({ conditions }) => {
-      let sceneContext = null;
-      let previousFit = '';
-
-      function setSceneCounters(scene, progress) {
-        scene.querySelectorAll('.card b[data-to]').forEach((b) => {
-          const to = Number(b.dataset.to);
-          const dec = Number(b.dataset.dec || 0);
-          const suf = b.dataset.suf || '';
-          const val = (to * progress).toFixed(dec);
-          b.textContent = `${val}${suf}`;
-        });
-      }
-
-      function setupPins() {
-        const availableHeight = window.innerHeight - headerHeight();
-        const fittingScenes = conditions.desktop && !conditions.reduced
-          ? scenes.filter((scene) => {
-              const inner = scene.querySelector('.event-inner');
-              return inner && inner.scrollHeight <= availableHeight + 40;
-            })
-          : [];
-        const signature = fittingScenes.map((scene) => scene.id).join('|');
-        if (signature === previousFit) return;
-        previousFit = signature;
-
-        sceneContext?.revert();
-        pinnedScenes.clear();
-        sceneContext = gsap.context(() => {
-          fittingScenes.forEach((scene) => {
-            const inner = scene.querySelector('.event-inner');
-            const image = scene.querySelector('.event-photo img');
-            const ghost = scene.querySelector('.event-ghost');
-            const graphic = scene.querySelector('.event-graphic');
-            const cards = scene.querySelectorAll('.card');
-            const headline = scene.querySelector('.h2');
-            const pill = scene.querySelector('.stats-inner > .pill');
-            const desc = scene.querySelector('.event-description');
-            const bottomBar = scene.querySelector('.logos');
-            const direction = scene.dataset.event === 'tedx' ? -1 : 1;
-            const counterProxy = { p: 0 };
-
-            const timeline = gsap.timeline({
-              defaults: { ease: 'none' },
-              scrollTrigger: {
-                trigger: scene,
-                pin: inner,
-                start: () => `top ${headerHeight()}px`,
-                end: () => `+=${Math.round(window.innerHeight * 0.95)}`,
-                scrub: 0.35,
-                anticipatePin: 0,
-                invalidateOnRefresh: true,
-                onEnter: () => setSceneCounters(scene, 0),
-                onLeaveBack: () => setSceneCounters(scene, 0),
-              },
-            });
-
-            // 1. Stage photo cinematic parallax rise + depth zoom (0% -> 38%)
-            if (image) {
-              timeline.fromTo(
-                image,
-                { yPercent: 12, scale: 1.16 },
-                { yPercent: 0, scale: 1.02, duration: 0.38, ease: 'power2.out' },
-                0
-              );
-              // Subtle float during exit (68% -> 100%)
-              timeline.to(
-                image,
-                { yPercent: -5, scale: 1.06, duration: 0.32, ease: 'power1.inOut' },
-                0.68
-              );
-            }
-
-            // 2. Dynamic counter animation counting up from 0 to 100% (0% -> 38%)
-            timeline.fromTo(
-              counterProxy,
-              { p: 0 },
-              {
-                p: 1,
-                duration: 0.38,
-                ease: 'power2.out',
-                onUpdate: () => setSceneCounters(scene, counterProxy.p),
-              },
-              0
-            );
-
-            // 3. Floating ticket cards stagger entrance (float up with frosted glass depth)
-            if (cards.length) {
-              timeline.fromTo(
-                cards,
-                { y: 36, opacity: 0.25 },
-                { y: 0, opacity: 1, stagger: 0.04, duration: 0.34, ease: 'power2.out' },
-                0.02
-              );
-            }
-
-            // 4. Ghost text parallax slide across the backdrop
-            if (ghost) {
-              timeline.fromTo(
-                ghost,
-                { x: direction * -50, opacity: 0.2 },
-                { x: 0, opacity: 0.85, duration: 0.38, ease: 'power2.out' },
-                0
-              );
-              timeline.to(ghost, { x: direction * 36, opacity: 0.35, duration: 0.32 }, 0.68);
-            }
-
-            // 5. Graphic sound bars / TEDx corner frame
-            if (graphic) {
-              const bars = graphic.querySelectorAll('i');
-              if (bars.length) {
-                timeline.fromTo(
-                  bars,
-                  { scaleY: 0.25, transformOrigin: 'bottom center' },
-                  { scaleY: 1, stagger: 0.03, duration: 0.35, ease: 'back.out(1.6)' },
-                  0.04
-                );
-              } else {
-                timeline.fromTo(
-                  graphic,
-                  { scale: 0.65, opacity: 0.2, transformOrigin: direction > 0 ? 'left center' : 'right center' },
-                  { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(1.5)' },
-                  0.04
-                );
-              }
-              timeline.to(graphic, { scale: 0.94, duration: 0.3 }, 0.7);
-            }
-
-            // 6. Pill, headline, description and bottom bar floating entrance
-            if (pill) {
-              timeline.fromTo(pill, { y: 16, opacity: 0.2 }, { y: 0, opacity: 1, duration: 0.28 }, 0);
-            }
-            if (headline) {
-              timeline.fromTo(headline, { y: 22, opacity: 0.25 }, { y: 0, opacity: 1, duration: 0.32 }, 0.03);
-            }
-            if (desc) {
-              timeline.fromTo(desc, { y: 18, opacity: 0.25 }, { y: 0, opacity: 1, duration: 0.32 }, 0.05);
-            }
-            if (bottomBar) {
-              timeline.fromTo(bottomBar, { y: 24, opacity: 0.25 }, { y: 0, opacity: 1, duration: 0.34 }, 0.06);
-            }
-
-            pinnedScenes.set(scene, timeline.scrollTrigger);
-          });
-        });
-      }
-
-      rebuildPins = setupPins;
-      setupPins();
-
-      if (conditions.reduced) {
-        scenes.forEach((scene) => setSceneCounters(scene, 1));
-        gsap.set('.reveal, .w', { clearProps: 'opacity,visibility,transform,filter' });
-      } else {
-        // Hero intro word & glass reveal (run once so resize does not re-blur)
-        const heroWords = document.querySelectorAll('#hero-title .w');
-        if (heroWords.length && !introPlayed) {
-          introPlayed = true;
-          gsap.fromTo(
-            heroWords,
-            { opacity: 0, y: 16, filter: 'blur(6px)' },
-            { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.35, stagger: 0.025, ease: 'power3.out' },
-          );
-        }
-
-        // Hero parallax on scroll
-        const hero = document.querySelector('.hero');
-        if (hero && conditions.desktop) {
-          const heroTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: hero,
-              start: 'top top',
-              end: 'bottom top',
-              scrub: true,
-            },
-          });
-          heroTl.to('#heroCopy', { yPercent: -35, ease: 'none' }, 0);
-          document.querySelectorAll('.hero [data-par]').forEach((el) => {
-            const par = Number(el.dataset.par || 0);
-            heroTl.to(el, { y: par * 1.6, ease: 'none' }, 0);
-          });
-          heroTl.to('.hero-media img', { yPercent: 6, scale: 1.035, ease: 'none' }, 0);
-        }
-
-        // Reveal elements outside event scenes (event scenes are choreographed via timeline)
-        gsap.utils.toArray('.reveal:not(.event-scene .reveal)').forEach((element) => {
-          gsap.fromTo(
-            element,
-            { y: 16, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.65,
-              ease: 'power2.out',
-              scrollTrigger: { trigger: element, start: 'top 93%', once: true },
-            },
-          );
-        });
-
-        // Split headings in sections below hero (excluding event scenes which animate with stage entrance)
-        document.querySelectorAll('#about .split, #projects .split, #community .split, #connect .split').forEach((heading) => {
-          const words = heading.querySelectorAll('.w');
-          if (!words.length) return;
-          gsap.fromTo(
-            words,
-            { opacity: 0, y: 18, filter: 'blur(6px)' },
-            {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              duration: 0.75,
-              stagger: 0.045,
-              ease: 'power3.out',
-              scrollTrigger: { trigger: heading, start: 'top 88%', once: true },
-            },
-          );
-        });
-
-        // CTA backdrop parallax
-        const ctaImg = document.getElementById('ctaImg');
-        if (ctaImg) {
-          gsap.fromTo(
-            ctaImg,
-            { yPercent: -10 },
-            {
-              yPercent: 0,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: '#connect',
-                start: 'top bottom',
-                end: 'bottom bottom',
-                scrub: true,
-              },
-            },
-          );
-        }
-
-        // Footer animated logo (Skillcetera club emblem)
-        const footerLogo = document.querySelector('#footer .f-logo');
-        if (footerLogo) {
-          gsap.fromTo(
-            footerLogo,
-            { scale: 0.5, opacity: 0, rotate: -15 },
-            {
-              scale: 1,
-              opacity: 1,
-              rotate: 0,
-              duration: 0.8,
-              ease: 'back.out(1.7)',
-              scrollTrigger: {
-                trigger: '#footer',
-                start: 'top 95%',
-                once: true,
-              },
-            }
-          );
-        }
-      }
-
-      return () => {
-        rebuildPins = null;
-        sceneContext?.revert();
-        pinnedScenes.clear();
-      };
-    },
-  );
-
-  listen(document, 'focusin', (event) => {
+  syncLayout();
+  listen(window, 'resize', refresh, { passive: true });
+  listen(desktopQuery, 'change', refresh);
+  listen(reducedQuery, 'change', refresh);
+  listen(window, 'hashchange', () => { if (location.hash) scrollToSection(location.hash, { behavior: 'instant', focus: false }); });
+  listen(document, 'focusin', event => {
     if (!(event.target instanceof Element)) return;
-
     const reveal = event.target.closest('.reveal');
     if (reveal) {
+      reveal.dataset.motionSeen = 'true';
       gsap.killTweensOf(reveal);
       gsap.set(reveal, { clearProps: 'opacity,visibility,transform' });
     }
-
-    if (internalFocus) return;
-
-    const scene = event.target.closest('.event-scene');
-    const trigger = scene && pinnedScenes.get(scene);
-    if (!trigger) return;
-
-    const bounds = event.target.getBoundingClientRect();
-    const outsideReadingPhase = trigger.progress < 0.2 || trigger.progress > 0.8;
-    if (outsideReadingPhase || bounds.top < headerHeight() || bounds.bottom > window.innerHeight) {
-      scrollToSection(scene.id, { behavior: 'instant', focus: false });
-      ScrollTrigger.update();
-    }
   });
-
-  listen(window, 'resize', refresh, { passive: true });
-  listen(window, 'hashchange', () => {
-    if (window.location.hash) scrollToSection(window.location.hash, { behavior: 'instant', focus: false });
+  document.querySelectorAll('img').forEach(image => {
+    listen(image, 'load', refresh);
+    listen(image, 'error', refresh);
   });
-
-  document.querySelectorAll('img').forEach((image) => {
-    if (image.complete) return;
-    listen(image, 'load', refresh, { once: true });
-    listen(image, 'error', refresh, { once: true });
-  });
-  document.fonts?.ready.then(() => {
-    if (!destroyed) refresh();
-  });
-
-  if ('ResizeObserver' in window) {
-    const heights = new WeakMap();
-    observer = new ResizeObserver((entries) => {
-      let changed = false;
-      for (const entry of entries) {
-        const nextHeight = Math.round(entry.target.scrollHeight);
-        const prevHeight = heights.get(entry.target);
-        if (prevHeight === undefined) {
-          heights.set(entry.target, nextHeight);
-        } else if (Math.abs(nextHeight - prevHeight) > 2) {
-          heights.set(entry.target, nextHeight);
-          changed = true;
-        }
-      }
-      if (changed) refresh();
-    });
-    scenes.forEach((scene) => {
-      const inner = scene.querySelector('.event-inner');
-      if (inner) observer.observe(inner);
-    });
-  }
-
-  refreshFrame = requestAnimationFrame(() => {
-    if (destroyed) return;
-    ScrollTrigger.refresh();
-    if (window.location.hash) scrollToSection(window.location.hash, { behavior: 'instant', focus: false });
-  });
-
+  document.fonts?.ready.then(refresh);
   return api;
 }

@@ -14,6 +14,9 @@
   --red-ink: #5c0010;
   --radius: 22px;
   --gutter: clamp(20px, 4.2vw, 72px);
+  --motion-fast: 180ms;
+  --motion-reveal: 650ms;
+  --motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root[data-theme="dark"] {

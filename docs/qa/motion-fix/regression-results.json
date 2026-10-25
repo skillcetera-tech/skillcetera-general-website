@@ -1,0 +1,715 @@
+{
+  "checks": [
+    {
+      "name": "initial desktop stages and values",
+      "passed": true,
+      "evidence": {
+        "y": 0,
+        "stages": [
+          {
+            "id": "esc",
+            "start": 1504,
+            "docTop": 1580,
+            "top": 1581
+          },
+          {
+            "id": "tedx",
+            "start": 3163,
+            "docTop": 3239.1875,
+            "top": 3240.1875
+          }
+        ],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 10,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "esc coverage and usable content at 0",
+      "passed": true,
+      "evidence": {
+        "top": 77,
+        "bottom": 797,
+        "gapTop": -21.600006103515625,
+        "gapBottom": -50.399993896484375,
+        "transform": "matrix(1.1, 0, 0, 1.1, 0, 14.4)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "esc coverage and usable content at 0.1",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -17.96978759765625,
+        "gapBottom": -32.2862548828125,
+        "transform": "matrix(1.0698, 0, 0, 1.0698, 0, 7.15824)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "esc coverage and usable content at 0.3",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -14.399993896484375,
+        "gapBottom": -14.400054931640625,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "esc coverage and usable content at 0.7",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -14.399993896484375,
+        "gapBottom": -14.400054931640625,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "esc reading phase holds still",
+      "passed": true,
+      "evidence": "matrix(1.04, 0, 0, 1.04, 0, 0)"
+    },
+    {
+      "name": "esc coverage and usable content at 0.9",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -28.87774658203125,
+        "gapBottom": -14.39422607421875,
+        "transform": "matrix(1.0601, 0, 0, 1.0601, 0, -7.24176)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "esc coverage and usable content at 1",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -43.20001220703125,
+        "gapBottom": -14.4000244140625,
+        "transform": "matrix(1.08, 0, 0, 1.08, 0, -14.4)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "esc coverage and usable content at 0.1",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -17.96978759765625,
+        "gapBottom": -32.2862548828125,
+        "transform": "matrix(1.0698, 0, 0, 1.0698, 0, 7.15824)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "tedx coverage and usable content at 0",
+      "passed": true,
+      "evidence": {
+        "top": 77.1875,
+        "bottom": 797.1875,
+        "gapTop": -21.600006103515625,
+        "gapBottom": -50.399993896484375,
+        "transform": "matrix(1.1, 0, 0, 1.1, 0, 14.4)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "tedx coverage and usable content at 0.1",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -17.96978759765625,
+        "gapBottom": -32.2862548828125,
+        "transform": "matrix(1.0698, 0, 0, 1.0698, 0, 7.15824)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "tedx coverage and usable content at 0.3",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -14.399993896484375,
+        "gapBottom": -14.400054931640625,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "tedx coverage and usable content at 0.7",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -14.399993896484375,
+        "gapBottom": -14.400054931640625,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "tedx reading phase holds still",
+      "passed": true,
+      "evidence": "matrix(1.04, 0, 0, 1.04, 0, 0)"
+    },
+    {
+      "name": "tedx coverage and usable content at 0.9",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -28.87774658203125,
+        "gapBottom": -14.39422607421875,
+        "transform": "matrix(1.0601, 0, 0, 1.0601, 0, -7.24176)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "tedx coverage and usable content at 1",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -43.20001220703125,
+        "gapBottom": -14.4000244140625,
+        "transform": "matrix(1.08, 0, 0, 1.08, 0, -14.4)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "tedx coverage and usable content at 0.1",
+      "passed": true,
+      "evidence": {
+        "top": 76,
+        "bottom": 796,
+        "gapTop": -17.96978759765625,
+        "gapBottom": -32.2862548828125,
+        "transform": "matrix(1.0698, 0, 0, 1.0698, 0, 7.15824)",
+        "ctaVisible": true,
+        "headlineOpacity": "1"
+      }
+    },
+    {
+      "name": "resize 390x844",
+      "passed": true,
+      "evidence": {
+        "y": 1932,
+        "stages": [],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "resize 1366x900",
+      "passed": true,
+      "evidence": {
+        "y": 1932,
+        "stages": [
+          {
+            "id": "esc",
+            "start": 1504,
+            "docTop": 1580,
+            "top": 76
+          },
+          {
+            "id": "tedx",
+            "start": 3163,
+            "docTop": 3239.1875,
+            "top": 1308.1875
+          }
+        ],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "ESC anchor after resize 1366x900",
+      "passed": true,
+      "evidence": {
+        "y": 1932,
+        "stages": [
+          {
+            "id": "esc",
+            "start": 1504,
+            "docTop": 1580,
+            "top": 76
+          },
+          {
+            "id": "tedx",
+            "start": 3163,
+            "docTop": 3239.1875,
+            "top": 1308.1875
+          }
+        ],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "resize 1023x760",
+      "passed": true,
+      "evidence": {
+        "y": 1932,
+        "stages": [],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "resize 1024x760",
+      "passed": true,
+      "evidence": {
+        "y": 1932,
+        "stages": [
+          {
+            "id": "esc",
+            "start": 1277,
+            "docTop": 1352.796875,
+            "top": 76
+          },
+          {
+            "id": "tedx",
+            "start": 2771,
+            "docTop": 2846.984375,
+            "top": 915.984375
+          }
+        ],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "ESC anchor after resize 1024x760",
+      "passed": true,
+      "evidence": {
+        "y": 1638,
+        "stages": [
+          {
+            "id": "esc",
+            "start": 1277,
+            "docTop": 1352.796875,
+            "top": 76
+          },
+          {
+            "id": "tedx",
+            "start": 2771,
+            "docTop": 2846.984375,
+            "top": 1209.984375
+          }
+        ],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "resize 844x390",
+      "passed": true,
+      "evidence": {
+        "y": 1638,
+        "stages": [],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 0,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "resize 1366x768",
+      "passed": true,
+      "evidence": {
+        "y": 1638,
+        "stages": [
+          {
+            "id": "esc",
+            "start": 1291,
+            "docTop": 1367.03125,
+            "top": 76
+          },
+          {
+            "id": "tedx",
+            "start": 2750,
+            "docTop": 2826.21875,
+            "top": 1189.21875
+          }
+        ],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "ESC anchor after resize 1366x768",
+      "passed": true,
+      "evidence": {
+        "y": 1656,
+        "stages": [
+          {
+            "id": "esc",
+            "start": 1291,
+            "docTop": 1367.03125,
+            "top": 76
+          },
+          {
+            "id": "tedx",
+            "start": 2750,
+            "docTop": 2826.21875,
+            "top": 1171.21875
+          }
+        ],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "resize 1366x900",
+      "passed": true,
+      "evidence": {
+        "y": 1656,
+        "stages": [
+          {
+            "id": "esc",
+            "start": 1504,
+            "docTop": 1580,
+            "top": 76
+          },
+          {
+            "id": "tedx",
+            "start": 3163,
+            "docTop": 3239.1875,
+            "top": 1584.1875
+          }
+        ],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "ESC anchor after resize 1366x900",
+      "passed": true,
+      "evidence": {
+        "y": 1932,
+        "stages": [
+          {
+            "id": "esc",
+            "start": 1504,
+            "docTop": 1580,
+            "top": 76
+          },
+          {
+            "id": "tedx",
+            "start": 3163,
+            "docTop": 3239.1875,
+            "top": 1308.1875
+          }
+        ],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 16,
+        "generated": 84,
+        "cursorLayers": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "live reduced motion cancels all infinite effects",
+      "passed": true,
+      "evidence": {
+        "y": 1932,
+        "stages": [],
+        "countersCorrect": true,
+        "gsapInfinite": 0,
+        "runningInfinite": 0,
+        "generated": 84,
+        "cursorLayers": 0,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "reduced motion creates no cursor particles",
+      "passed": true
+    },
+    {
+      "name": "motion returns after reduced mode is disabled",
+      "passed": true
+    },
+    {
+      "name": "mobile menu opens",
+      "passed": true
+    },
+    {
+      "name": "mobile menu closes",
+      "passed": true
+    },
+    {
+      "name": "BFCache restoration round 1",
+      "passed": true,
+      "evidence": {
+        "api": true,
+        "stages": 2,
+        "generated": 84,
+        "layers": 1,
+        "persisted": true
+      }
+    },
+    {
+      "name": "BFCache restoration round 2",
+      "passed": true,
+      "evidence": {
+        "api": true,
+        "stages": 2,
+        "generated": 84,
+        "layers": 1,
+        "persisted": true
+      }
+    },
+    {
+      "name": "footer remains visible at 6px entry",
+      "passed": true,
+      "evidence": "1"
+    },
+    {
+      "name": "footer remains visible at 25px entry",
+      "passed": true,
+      "evidence": "1"
+    },
+    {
+      "name": "footer remains visible at 40px entry",
+      "passed": true,
+      "evidence": "1"
+    },
+    {
+      "name": "subpage reduced motion stops ambient loops",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "no homepage JavaScript errors",
+      "passed": true,
+      "evidence": []
+    }
+  ],
+  "samples": [
+    {
+      "id": "esc",
+      "progress": 0,
+      "top": 77,
+      "bottom": 797,
+      "gapTop": -21.600006103515625,
+      "gapBottom": -50.399993896484375,
+      "transform": "matrix(1.1, 0, 0, 1.1, 0, 14.4)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "esc",
+      "progress": 0.1,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -17.96978759765625,
+      "gapBottom": -32.2862548828125,
+      "transform": "matrix(1.0698, 0, 0, 1.0698, 0, 7.15824)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "esc",
+      "progress": 0.3,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -14.399993896484375,
+      "gapBottom": -14.400054931640625,
+      "transform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "esc",
+      "progress": 0.7,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -14.399993896484375,
+      "gapBottom": -14.400054931640625,
+      "transform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "esc",
+      "progress": 0.9,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -28.87774658203125,
+      "gapBottom": -14.39422607421875,
+      "transform": "matrix(1.0601, 0, 0, 1.0601, 0, -7.24176)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "esc",
+      "progress": 1,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -43.20001220703125,
+      "gapBottom": -14.4000244140625,
+      "transform": "matrix(1.08, 0, 0, 1.08, 0, -14.4)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "esc",
+      "progress": 0.1,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -17.96978759765625,
+      "gapBottom": -32.2862548828125,
+      "transform": "matrix(1.0698, 0, 0, 1.0698, 0, 7.15824)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "tedx",
+      "progress": 0,
+      "top": 77.1875,
+      "bottom": 797.1875,
+      "gapTop": -21.600006103515625,
+      "gapBottom": -50.399993896484375,
+      "transform": "matrix(1.1, 0, 0, 1.1, 0, 14.4)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "tedx",
+      "progress": 0.1,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -17.96978759765625,
+      "gapBottom": -32.2862548828125,
+      "transform": "matrix(1.0698, 0, 0, 1.0698, 0, 7.15824)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "tedx",
+      "progress": 0.3,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -14.399993896484375,
+      "gapBottom": -14.400054931640625,
+      "transform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "tedx",
+      "progress": 0.7,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -14.399993896484375,
+      "gapBottom": -14.400054931640625,
+      "transform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "tedx",
+      "progress": 0.9,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -28.87774658203125,
+      "gapBottom": -14.39422607421875,
+      "transform": "matrix(1.0601, 0, 0, 1.0601, 0, -7.24176)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "tedx",
+      "progress": 1,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -43.20001220703125,
+      "gapBottom": -14.4000244140625,
+      "transform": "matrix(1.08, 0, 0, 1.08, 0, -14.4)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    },
+    {
+      "id": "tedx",
+      "progress": 0.1,
+      "top": 76,
+      "bottom": 796,
+      "gapTop": -17.96978759765625,
+      "gapBottom": -32.2862548828125,
+      "transform": "matrix(1.0698, 0, 0, 1.0698, 0, 7.15824)",
+      "ctaVisible": true,
+      "headlineOpacity": "1"
+    }
+  ],
+  "errors": []
+}

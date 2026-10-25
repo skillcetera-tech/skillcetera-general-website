@@ -51,8 +51,8 @@ Bản sáng là bản storyboard chính. Các token cũng có bản tối: nền
 |---|---|---|---|
 | 1. Mở đầu | Tên CLB, trực thuộc FPT University HCMC, thông điệp chia sẻ kiến thức | Tiêu đề lớn trên nền trắng, ảnh tập thể rộng đặt lệch; một CTA khám phá sự kiện | Ảnh mở khung bằng dịch chuyển và phóng nhẹ; tiêu đề rời vị trí khi chương tiếp theo tiến lên |
 | 2. Chúng tôi là ai | Giới thiệu, ba sứ mệnh: phát triển cộng đồng, tổ chức sự kiện chuyên nghiệp, môi trường cởi mở | Chữ theo ba ý nối tiếp, kèm ảnh sinh hoạt | Từng ý hiện theo dòng; mỗi ý ổn định trước khi chuyển sang ý kế tiếp |
-| 3. ESC | English Speaking Competition, đối tượng tham gia, ảnh cuộc thi, số liệu và liên kết hiện có | Poster chữ ESC lớn, ảnh thí sinh, ba số liệu, CTA | Ghim một vùng sân khấu; các thanh xanh mở ảnh, chuyển sang bố cục thông tin đứng yên |
-| 4. TEDxFPTUniversityHCMC | Vai trò tổ chức, ảnh diễn giả, các mùa 2021–2025, số liệu và liên kết | Logo chính thức trên nền trắng, ảnh sân khấu rộng, phần xem các mùa | Khung đỏ và ảnh chuyển vào vị trí; nội dung xuất hiện theo dòng; logo giữ nguyên hình dạng |
+| 3. ESC | English Speaking Competition, đối tượng tham gia, ảnh cuộc thi, số liệu và liên kết hiện có | Khung vừa vùng màn hình dưới điều hướng, ảnh thí sinh, số liệu và CTA | Căn nhẹ khi dừng cuộn gần khung; số liệu chạy một lần sau khi khung ổn định |
+| 4. TEDxFPTUniversityHCMC | Vai trò tổ chức, ảnh diễn giả, các mùa 2021–2025, số liệu và liên kết | Khung vừa màn hình, nhận diện đỏ, ảnh tư liệu và phần xem các mùa | Cùng cơ chế căn nhẹ và đếm số độc lập với cuộn; ảnh và logo giữ ổn định |
 | 5. Các trải nghiệm khác | Discussion Forum, Scavenger Hunt, Meditation Retreat, S-Store, The MoneyVerse | Danh sách năm dự án có mô tả đầy đủ; desktop có vùng ảnh xem trước bên cạnh | Vùng ảnh bám trong phạm vi phần dự án và đổi theo mục đang đọc; chữ vẫn cuộn tự nhiên |
 | 6. Con người và dấu ấn | Ảnh hoạt động, các thành tích đã có nguồn | Bộ ảnh bất đối xứng với một số số liệu chọn lọc, ghi rõ thuộc dự án nào | Ảnh xuất hiện lệch nhịp nhẹ; số liệu hiện trực tiếp, không chạy bộ đếm |
 | 7. Tham gia và liên hệ | Join us, Contact, liên kết About Skillcetera và Projects | Lời mời rõ ràng, nút tham gia, kênh liên hệ và footer gọn | Chuyển động vào cảnh một lần; nút và thông tin giữ yên để thao tác |
@@ -84,19 +84,15 @@ Thanh điều hướng desktop: logo Skillcetera, Giới thiệu, ESC, TEDxFPTUn
 
 Trang giữ cuộn dọc tự nhiên. Vị trí cuộn điều khiển tiến độ cảnh; cuộn ngược quay lại cảnh trước. Người xem có thể dừng ở bất kỳ chỗ nào để đọc.
 
-Hai chương ESC và TEDx có pin: khung hình giữ vị trí trong lúc các thành phần bên trong chuyển cảnh. Mỗi chương có tối đa hai trạng thái lớn là poster mở đầu và thông tin chi tiết. Các chương khác dùng chuyển cảnh nhẹ trong luồng trang.
+Theo điều chỉnh mới nhất của người dùng, ESC và TEDx nằm trong luồng cuộn bình thường, không có quãng ghim bổ sung và không zoom/focus riêng. Trên desktop đủ không gian đọc, mỗi khung cao bằng vùng màn hình còn lại dưới thanh điều hướng.
 
-Nhịp thử nghiệm cho mỗi chương sự kiện:
+Theo điều chỉnh mới nhất, toàn bộ 10 chương trang chủ dùng chung một controller chuyển khung hai chiều. Sau ít nhất 80 px wheel tích lũy cùng hướng (ngắt quá 220 ms thì tính lại), chuyển xuống nếu khung kế tiếp còn cách tối đa 76% vùng đọc; chuyển lên khi đang trong 24% đầu vùng đọc của chương hiện tại. Phần dài giữ toàn bộ quãng đọc trước khi tới ngưỡng. Khi chuyển lên phần dài, căn tới đoạn cuối của phần đó để tiếp tục đọc theo chiều ngược. Footer tham gia với điểm đến giới hạn ở đáy tài liệu.
 
-- 20% khoảng cuộn: vào cảnh và sắp xếp bố cục.
-- 60% khoảng cuộn: hình ảnh, chữ và CTA đứng yên để đọc.
-- 20% khoảng cuộn: rời cảnh.
+Chuyển động dài khoảng 620–780 ms, dùng đường cong smootherstep có vận tốc và gia tốc bằng 0 ở hai đầu. Quán tính cùng hướng không khởi động thêm chuyển động; cuộn ngược hủy ngay. Một khoảng nghỉ 220 ms sau chuyển giúp tránh nhảy liên tiếp nhiều chương. Không gọi preventDefault hoặc chuyển focus. Menu, phím, pointer, touch, resize và reduced motion hủy chuyển đang chạy. Vùng cuộn riêng được ưu tiên. ESC/TEDx không còn tự kéo trang bằng controller thứ hai; controller sự kiện chỉ quản lý khung vừa màn hình và đếm số khi tới nơi.
 
-Khoảng cuộn điều khiển ban đầu khoảng 1,5–2 chiều cao màn hình cho mỗi chương sự kiện. Đây là khoảng cách cuộn, không phải thời lượng bắt người dùng chờ. Điều chỉnh khi thử prototype trên trackpad và chuột.
+Sau mỗi lượt bắt khung mới, số liệu ESC và TEDx chạy từ đầu trong khoảng 2 giây theo thời gian. Cuộn nhẹ trong cùng lượt đọc không chạy lại hoặc hoàn tất số sớm; chỉ rời gần hết khung (còn dưới 35% chiều cao hiển thị), resize, ẩn tab hoặc bật reduced motion mới hoàn tất ngay. Bố cục tạm thời chưa vừa khung không được đánh dấu là đã phát hiệu ứng. Back và resize giữ giá trị cuối, không tự phát lại nếu chưa có lượt vào mới. Công cụ hỗ trợ đọc màn hình luôn nhận giá trị thật.
 
-Chuyển cảnh chung: lớp ảnh tiến lên; chữ dịch 24–40 px và đổi độ trong; ảnh chỉ phóng nhẹ, khoảng 1,04 về 1. Mỗi thời điểm ưu tiên một chuyển động chính để dễ theo dõi.
-
-CTA hiển thị ngay khi vùng thông tin xuất hiện và giữ vị trí trong phần đọc. Menu đưa người xem tới vị trí đọc ổn định, không tới giữa một hiệu ứng. Trạng thái mặc định không ép snap hoặc chặn thao tác wheel/touch.
+Ảnh, chữ và CTA của hai sự kiện giữ ổn định khi đọc. Cuộn tiếp đi tới phần kế tiếp bằng luồng trang bình thường. Menu đưa người xem tới đúng khung; chỉ điều hướng chủ động bằng bàn phím mới chuyển focus tới tiêu đề phù hợp.
 
 ### Các tương tác nhỏ
 
@@ -109,7 +105,7 @@ CTA hiển thị ngay khi vùng thông tin xuất hiện và giữ vị trí tro
 ### Mobile, màn hình thấp và giảm chuyển động
 
 - Dưới khoảng 768 px, dùng các phần xếp dọc với chiều cao theo nội dung. Tablet áp dụng tùy chiều cao và không gian đọc thực tế.
-- Thay pin dài bằng ảnh tĩnh hoặc reveal 12–20 px trong khoảng 250–400 ms. Cả năm dự án đều có tên, ảnh và mô tả trong luồng dọc.
+- Không căn khung tự động hoặc đếm số trên điện thoại/màn hình thấp. Số liệu hiển thị đầy đủ; cả năm dự án đều có tên, ảnh và mô tả trong luồng dọc.
 - Khi viewport thấp hoặc chữ phóng to làm nội dung vượt khung, tự chuyển sang luồng cuộn thường.
 - Với prefers-reduced-motion, nội dung hiện đầy đủ và bỏ pin, parallax, scrub. Liên kết neo vẫn dẫn đúng vị trí.
 - Nội dung đọc và thứ tự focus nhất quán; phần hoàn toàn ẩn không nhận focus. Khi điều hướng bằng bàn phím, nội dung được focus phải hiện ra và nằm trong viewport.
@@ -135,7 +131,7 @@ Tài sản cần có: logo Skillcetera, logo ESC và TEDx chính thức; ảnh t
 ## 6. Phương án kỹ thuật đề xuất
 
 - Next.js/React cho nội dung và điều hướng; CSS variables cho màu, chữ, khoảng cách và theme.
-- GSAP ScrollTrigger cho hai chương pin và tiến độ theo cuộn. Dùng CSS cho hover, focus và hiệu ứng nhỏ. [ScrollTrigger hỗ trợ pin và scrub](https://gsap.com/docs/v3/Plugins/ScrollTrigger/).
+- GSAP ScrollTrigger cho hero và reveal các phần khác. ESC/TEDx dùng controller riêng cho căn khung sau khi dừng cuộn và số liệu chạy một lần; dùng CSS cho hover/focus.
 - gsap.matchMedia quản lý phiên bản desktop, mobile và reduced motion cùng việc dọn animation khi điều kiện thay đổi. [Tài liệu matchMedia](https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/).
 - Dữ liệu CLB, dự án và mùa sự kiện tách khỏi component dưới dạng file dữ liệu có cấu trúc. Sự kiện có tên, năm, chủ đề, trạng thái, ảnh, số liệu kèm nguồn/mốc và URL CTA.
 - Phiên bản đầu dùng trang chủ kể chuyện cùng các đường dẫn chi tiết phù hợp với nội dung đã có. Việc tạo trang sự kiện riêng dựa trên lượng nội dung thực tế sau kiểm kê.

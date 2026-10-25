@@ -206,6 +206,7 @@
                   <label for="hq-input-target">Vị trí áp dụng trên website</label>
                   <select id="hq-input-target" class="form-select">
                     <option value="gallery">Thêm vào Thư viện Ảnh HQ (/about &amp; Studio)</option>
+                    <option value="hero">Cập nhật ảnh Hero trang chủ (#hero)</option>
                     <option value="esc">Cập nhật ảnh sân khấu chính ESC (#esc &amp; /esc)</option>
                     <option value="tedx">Cập nhật ảnh sân khấu chính TEDx (#tedx &amp; /tedx)</option>
                     <option value="project:discussion">Cập nhật ảnh dự án Discussion Forum</option>
@@ -296,6 +297,102 @@
   </main>
 
   <div class="studio-toast" id="studio-toast" role="status" aria-live="polite"></div>
+
+  <!-- Studio Media Picker Modal -->
+  <div class="studio-picker-modal" id="studio-picker-modal" hidden>
+    <div class="studio-picker-backdrop" id="studio-picker-backdrop"></div>
+    <div class="studio-picker-dialog" role="dialog" aria-modal="true" aria-labelledby="studio-picker-title">
+      <div class="studio-picker-header">
+        <div>
+          <h3 id="studio-picker-title">Chọn ảnh từ kho tư liệu có sẵn</h3>
+          <p id="studio-picker-subtitle">Bấm vào bất kỳ ảnh nào để áp dụng trực tiếp vào phần đang thiết kế.</p>
+        </div>
+        <button type="button" class="btn-icon-action" id="btn-close-picker" aria-label="Đóng cửa sổ chọn ảnh">✕</button>
+      </div>
+      <div class="studio-picker-body" id="studio-picker-grid"></div>
+    </div>
+  </div>
+
+  <!-- Studio Image Adjuster Modal -->
+  <div class="studio-adjuster-modal" id="studio-adjuster-modal" hidden>
+    <div class="studio-picker-backdrop" id="studio-adjuster-backdrop"></div>
+    <div class="studio-adjuster-dialog" role="dialog" aria-modal="true" aria-labelledby="studio-adjuster-title">
+      <div class="studio-picker-header">
+        <div>
+          <h3 id="studio-adjuster-title">Căn chỉnh khung hình &amp; Tiêu điểm ảnh</h3>
+          <p id="studio-adjuster-subtitle">Nhấp chuột trực tiếp lên ảnh hoặc dùng thanh trượt để căn chỉnh điểm nhìn và tỷ lệ hiển thị.</p>
+        </div>
+        <button type="button" class="btn-icon-action" id="btn-close-adjuster" aria-label="Đóng cửa sổ căn chỉnh">✕</button>
+      </div>
+
+      <div class="studio-adjuster-body">
+        <!-- Interactive Preview Box -->
+        <div class="studio-adjuster-preview-wrap">
+          <div class="studio-adjuster-frame" id="adjuster-frame">
+            <img id="adjuster-preview-img" src="" alt="Xem trước căn chỉnh" />
+            <div class="adjuster-crosshair" id="adjuster-crosshair" aria-hidden="true">
+              <div class="adjuster-dot"></div>
+            </div>
+          </div>
+          <span class="adjuster-hint">💡 <strong>Mẹo tương tác:</strong> Nhấp chuột hoặc kéo trực tiếp lên ảnh để đặt tiêu điểm (Focal Point). Khung hình bên trên mô phỏng tỷ lệ hiển thị thực tế trên website.</span>
+        </div>
+
+        <!-- Controls Sidebar -->
+        <div class="studio-adjuster-controls">
+          <div class="form-group">
+            <label>Chế độ hiển thị (Fit Mode)</label>
+            <div class="adjuster-fit-options">
+              <label class="adjuster-radio">
+                <input type="radio" name="adjuster-fit" value="cover" checked />
+                <span>Cover (Phủ kín khung hình)</span>
+              </label>
+              <label class="adjuster-radio">
+                <input type="radio" name="adjuster-fit" value="contain" />
+                <span>Contain (Hiển thị trọn vẹn)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>9 Vị trí căn nhanh</label>
+            <div class="adjuster-quick-grid">
+              <button type="button" class="adjuster-grid-btn" data-x="0" data-y="0" title="Trên - Trái">↖</button>
+              <button type="button" class="adjuster-grid-btn" data-x="50" data-y="0" title="Trên - Giữa">↑</button>
+              <button type="button" class="adjuster-grid-btn" data-x="100" data-y="0" title="Trên - Phải">↗</button>
+              <button type="button" class="adjuster-grid-btn" data-x="0" data-y="50" title="Giữa - Trái">←</button>
+              <button type="button" class="adjuster-grid-btn" data-x="50" data-y="50" title="Chính giữa">●</button>
+              <button type="button" class="adjuster-grid-btn" data-x="100" data-y="50" title="Giữa - Phải">→</button>
+              <button type="button" class="adjuster-grid-btn" data-x="0" data-y="100" title="Dưới - Trái">↙</button>
+              <button type="button" class="adjuster-grid-btn" data-x="50" data-y="100" title="Dưới - Giữa">↓</button>
+              <button type="button" class="adjuster-grid-btn" data-x="100" data-y="100" title="Dưới - Phải">↘</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <label style="margin:0">Vị trí Dọc (Trục Y: Đỉnh → Đáy)</label>
+              <span class="pill" id="val-adjuster-y">50%</span>
+            </div>
+            <input type="range" min="0" max="100" value="50" id="range-adjuster-y" class="form-range" />
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <label style="margin:0">Vị trí Ngang (Trục X: Trái → Phải)</label>
+              <span class="pill" id="val-adjuster-x">50%</span>
+            </div>
+            <input type="range" min="0" max="100" value="50" id="range-adjuster-x" class="form-range" />
+          </div>
+
+          <div class="studio-adjuster-actions" style="margin-top:8px">
+            <button type="button" class="btn btn-esc" id="btn-save-adjuster" style="width:100%;justify-content:center">
+              Áp dụng căn chỉnh &amp; Lưu lên máy chủ
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="/src/subpage.js"></script>
   <script type="module" src="/src/studio.js"></script>

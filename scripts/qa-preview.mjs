@@ -21,8 +21,8 @@ results.escAnchor = await page.evaluate(() => ({ top: document.querySelector('#e
 await page.evaluate(() => window.skillceteraMotion.scrollToSection('tedx', { behavior: 'instant', focus: false }));
 await page.waitForTimeout(600);
 await page.screenshot({ path: new URL('tedx.png', output).pathname.replace(/^\/(\w:)/, '$1') });
-await page.locator('[data-year="2021"]').click();
-results.yearControl = await page.locator('.season-theme').textContent();
+await page.locator('#tedx-seasons [data-year="2021"]').click();
+results.yearControl = await page.locator('#tedx-seasons .season-theme').textContent();
 await page.locator('[data-project="retreat"] .project-select').click();
 results.projectControl = await page.locator('#project-preview-title').textContent();
 await page.setViewportSize({ width: 1366, height: 768 });

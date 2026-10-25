@@ -29,7 +29,6 @@
         <a class="nav-tedx" href="#tedx">TEDx</a>
         <a href="#projects">Dự án</a>
         <a href="/projects">Chuyên trang</a>
-        <a href="/studio">Studio</a>
       </nav>
       <a class="header-connect btn" href="#connect">Kết nối <span aria-hidden="true">↗</span></a>
       <button type="button" class="menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span></button>
@@ -42,7 +41,6 @@
         <a href="/projects">Trang 5 Dự án (/projects)</a>
         <a href="/join">Trang Tuyển thành viên (/join)</a>
         <a href="/contact">Trang Liên hệ (/contact)</a>
-        <a href="/studio">Quản trị nội dung (/studio)</a>
       </nav>
     </header>
 
@@ -136,7 +134,7 @@
         </div>
       </section>
 
-      <!-- 3. ANNUAL EVENT 01: ESC (Petalyx #stats Pinned Ticket Cards + Rising Stage Backdrop + Frosted Band) -->
+      <!-- 3. ESC: viewport frame, gentle idle alignment, independent one-time counters. -->
       <section class="event-scene stats event-esc" id="esc" data-event="esc" aria-labelledby="esc-title">
         <div class="event-inner">
           <div class="sq-field" data-count="20" aria-hidden="true"></div>
@@ -178,7 +176,7 @@
               <div class="logos event-bottom">
                 <span class="event-ghost" aria-hidden="true">ESC</span>
                 <span class="logo-tag">TIẾNG ANH · TƯ DUY · BẢN LĨNH</span>
-                <a class="btn btn-esc event-link" href="#esc-details">Khám phá ESC <span aria-hidden="true">↗</span></a>
+                <a class="btn btn-esc event-link" href="#esc-seasons">Khám phá các mùa <span aria-hidden="true">↗</span></a>
                 <a class="next-event" href="#tedx" aria-label="Đến sự kiện TEDx">Tiếp theo: TEDx <span aria-hidden="true">↓</span></a>
               </div>
             </div>
@@ -193,7 +191,36 @@
         </div>
       </div>
 
-      <!-- 4. ANNUAL EVENT 02: TEDxFPTUniversityHCMC (Petalyx #stats Pinned Ticket Cards + Rising Stage Backdrop + Frosted Band) -->
+      <section class="seasons section-shell" id="esc-seasons" data-seasons="esc" tabindex="-1" aria-labelledby="esc-seasons-title">
+        <div class="seasons-glass">
+          <div class="seasons-heading">
+            <div>
+              <span class="pill pill-esc">ESC · HÀNH TRÌNH QUA CÁC MÙA</span>
+              <h3 id="esc-seasons-title">Những mùa cất lên tiếng nói</h3>
+            </div>
+            <p>Chọn từng năm để khám phá chủ đề và dấu ấn của English Speaking Competition.</p>
+          </div>
+          <div class="season-controls" role="group" aria-label="Chọn mùa ESC">
+            <button type="button" data-year="2023" aria-pressed="false">2023</button>
+            <button type="button" data-year="2024" aria-pressed="false">2024</button>
+            <button type="button" data-year="2025" aria-pressed="true">2025</button>
+          </div>
+          <div class="season-story" aria-live="polite" aria-atomic="true">
+            <div class="season-badge">
+              <span class="season-year">2025</span>
+              <span class="season-edition">Mùa 2025 · Phá vỡ khuôn mẫu (Grand Final)</span>
+            </div>
+            <div class="season-body">
+              <h4 class="season-theme">BREAK THE NORM</h4>
+              <p class="season-description">Sân chơi học thuật quy tụ thí sinh tài năng từ hơn 20 trường đại học, khẳng định tiếng nói bản lĩnh và tư duy phản biện sắc bén bằng tiếng Anh.</p>
+              <p class="season-status">Mùa gần nhất được ghi nhận trong hồ sơ CLB; chưa có thông báo về mùa tiếp theo.</p>
+            </div>
+            <a href="/esc" class="btn btn-esc">Xem chuyên trang ESC <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. TEDx: shared viewport frame and one-time counter behavior. -->
       <section class="event-scene stats event-tedx" id="tedx" data-event="tedx" aria-labelledby="tedx-title">
         <div class="event-inner">
           <div class="sq-field" data-count="20" aria-hidden="true"></div>
@@ -242,7 +269,7 @@
         </div>
       </section>
 
-      <section class="seasons section-shell" id="tedx-seasons" tabindex="-1" aria-labelledby="seasons-title">
+      <section class="seasons section-shell" id="tedx-seasons" data-seasons="tedx" tabindex="-1" aria-labelledby="seasons-title">
         <div class="seasons-glass">
           <div class="seasons-heading">
             <div>
@@ -457,7 +484,6 @@
         <a href="/projects">5 Dự án</a>
         <a href="/join">Tuyển thành viên</a>
         <a id="contact-link" href="/contact">Liên hệ</a>
-        <a href="/studio">Quản trị (Studio)</a>
       </nav>
 
       <div class="f-social" aria-label="Kênh mạng xã hội chính thức">

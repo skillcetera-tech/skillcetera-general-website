@@ -1,0 +1,354 @@
+{
+  "checks": [
+    {
+      "name": "all homepage chapters participate in document order",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "home",
+          "top": 0
+        },
+        {
+          "id": "about",
+          "top": 824
+        },
+        {
+          "id": "esc",
+          "top": 1504
+        },
+        {
+          "id": "esc-seasons",
+          "top": 2411.1875
+        },
+        {
+          "id": "tedx",
+          "top": 2832.0625
+        },
+        {
+          "id": "tedx-seasons",
+          "top": 3657.0625
+        },
+        {
+          "id": "projects",
+          "top": 4077.9375
+        },
+        {
+          "id": "community",
+          "top": 5202.84375
+        },
+        {
+          "id": "connect",
+          "top": 6228.9375
+        },
+        {
+          "id": "footer",
+          "top": 6368
+        }
+      ]
+    },
+    {
+      "name": "home → about has a gradual transition",
+      "passed": true,
+      "evidence": {
+        "y": 307,
+        "active": "about",
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "home → about settles below the header",
+      "passed": true,
+      "evidence": {
+        "y": 824,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "about → home preserves the previous chapter's reading end",
+      "passed": true,
+      "evidence": {
+        "y": 0,
+        "focus": "BODY",
+        "expected": 0
+      }
+    },
+    {
+      "name": "about → esc has a gradual transition",
+      "passed": true,
+      "evidence": {
+        "y": 1053,
+        "active": "esc",
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "about → esc settles below the header",
+      "passed": true,
+      "evidence": {
+        "y": 1504,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "esc count starts on arrival",
+      "passed": true
+    },
+    {
+      "name": "esc → about preserves the previous chapter's reading end",
+      "passed": true,
+      "evidence": {
+        "y": 824,
+        "focus": "BODY",
+        "expected": 824
+      }
+    },
+    {
+      "name": "esc → esc-seasons has a gradual transition",
+      "passed": true,
+      "evidence": {
+        "y": 1895,
+        "active": "esc-seasons",
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "esc → esc-seasons settles below the header",
+      "passed": true,
+      "evidence": {
+        "y": 2411,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "esc-seasons → esc preserves the previous chapter's reading end",
+      "passed": true,
+      "evidence": {
+        "y": 1587,
+        "focus": "BODY",
+        "expected": 1587.1875
+      }
+    },
+    {
+      "name": "esc-seasons → tedx has a gradual transition",
+      "passed": true,
+      "evidence": {
+        "y": 2554,
+        "active": "tedx",
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "esc-seasons → tedx settles below the header",
+      "passed": true,
+      "evidence": {
+        "y": 2832,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "tedx count starts on arrival",
+      "passed": true
+    },
+    {
+      "name": "tedx → esc-seasons preserves the previous chapter's reading end",
+      "passed": true,
+      "evidence": {
+        "y": 2411,
+        "focus": "BODY",
+        "expected": 2411.1875
+      }
+    },
+    {
+      "name": "tedx → tedx-seasons has a gradual transition",
+      "passed": true,
+      "evidence": {
+        "y": 3140,
+        "active": "tedx-seasons",
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "tedx → tedx-seasons settles below the header",
+      "passed": true,
+      "evidence": {
+        "y": 3657,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "tedx-seasons → tedx preserves the previous chapter's reading end",
+      "passed": true,
+      "evidence": {
+        "y": 2833,
+        "focus": "BODY",
+        "expected": 2833.0625
+      }
+    },
+    {
+      "name": "tedx-seasons → projects has a gradual transition",
+      "passed": true,
+      "evidence": {
+        "y": 3795,
+        "active": "projects",
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "tedx-seasons → projects settles below the header",
+      "passed": true,
+      "evidence": {
+        "y": 4078,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "projects → tedx-seasons preserves the previous chapter's reading end",
+      "passed": true,
+      "evidence": {
+        "y": 3657,
+        "focus": "BODY",
+        "expected": 3657.0625
+      }
+    },
+    {
+      "name": "projects → community has a gradual transition",
+      "passed": true,
+      "evidence": {
+        "y": 4686,
+        "active": "community",
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "projects → community settles below the header",
+      "passed": true,
+      "evidence": {
+        "y": 5203,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "community → projects preserves the previous chapter's reading end",
+      "passed": true,
+      "evidence": {
+        "y": 4379,
+        "focus": "BODY",
+        "expected": 4378.84375
+      }
+    },
+    {
+      "name": "community → connect has a gradual transition",
+      "passed": true,
+      "evidence": {
+        "y": 5712,
+        "active": "connect",
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "community → connect settles below the header",
+      "passed": true,
+      "evidence": {
+        "y": 6229,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "connect → community preserves the previous chapter's reading end",
+      "passed": true,
+      "evidence": {
+        "y": 5405,
+        "focus": "BODY",
+        "expected": 5404.9375
+      }
+    },
+    {
+      "name": "connect → footer has a gradual transition",
+      "passed": true,
+      "evidence": {
+        "y": 6275,
+        "active": "footer",
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "connect → footer settles below the header",
+      "passed": true,
+      "evidence": {
+        "y": 6368,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "footer → connect preserves the previous chapter's reading end",
+      "passed": true,
+      "evidence": {
+        "y": 6229,
+        "focus": "BODY",
+        "expected": 6228.9375
+      }
+    },
+    {
+      "name": "small wheel movement below the threshold remains native",
+      "passed": true,
+      "evidence": {
+        "y": 1034,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "reverse input cancels instead of finishing the old transition",
+      "passed": true,
+      "evidence": {
+        "y": 899,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "long chapters retain native scrolling before their boundary",
+      "passed": true,
+      "evidence": {
+        "y": 4228,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "nested scrolling is not captured",
+      "passed": true
+    },
+    {
+      "name": "reduced motion disables chapter transitions",
+      "passed": true,
+      "evidence": {
+        "y": 1124,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "mobile retains native scrolling",
+      "passed": true,
+      "evidence": {
+        "y": 420,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "menu anchors remain exact without changing focus",
+      "passed": true
+    },
+    {
+      "name": "resize cancels an active transition",
+      "passed": true,
+      "evidence": {
+        "y": 1022,
+        "focus": "BODY"
+      }
+    },
+    {
+      "name": "no browser JavaScript exceptions",
+      "passed": true,
+      "evidence": []
+    }
+  ],
+  "errors": []
+}

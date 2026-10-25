@@ -1,119 +1,123 @@
-/**
- * Hiệu ứng chuyển động các ô vuông frosted glass xuất hiện theo con trỏ chuột.
- * Nhận diện Petalyx: Các khối vuông bán trong suốt (frosted glass) trôi nhẹ và mờ dần,
- * điểm xuyết tinh tế màu xanh ESC (#2457FF) và đỏ TEDx (#EB0028).
- */
+let activeCleanup = null;
 
+/** Optional pointer feedback with the same lifecycle as ambient motion. */
 export function initCursorSquares() {
-  if (typeof window === 'undefined') return () => {};
-  // Chỉ chạy trên thiết bị có chuột/trackpad chính xác (không chạy trên điện thoại cảm ứng)
-  if (!window.matchMedia('(pointer: fine)').matches) return () => {};
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return () => {};
-
-  let container = document.getElementById('cursor-squares-layer');
-  if (!container) {
-    container = document.createElement('div');
-    container.id = 'cursor-squares-layer';
-    container.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(container);
-  }
-
+  activeCleanup?.();
+  const pointer = window.matchMedia('(pointer: fine)');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const squares = new Map();
+  let container = null;
+  let enabled = false;
+  let destroyed = false;
+  let frame = 0;
+  let pendingPoint = null;
   let lastX = -999;
   let lastY = -999;
   let lastTime = 0;
   let counter = 0;
-  const activeSquares = [];
-  const MAX_ACTIVE = 26;
 
-  const removeSquare = (el) => {
-    const idx = activeSquares.indexOf(el);
-    if (idx !== -1) activeSquares.splice(idx, 1);
-    if (el.parentNode) el.parentNode.removeChild(el);
+  const removeSquare = (element) => {
+    const timer = squares.get(element);
+    if (timer !== undefined) clearTimeout(timer);
+    squares.delete(element);
+    element.remove();
   };
 
-  const spawnSquare = (x, y, isBurst = false, burstAngle = 0, burstDist = 0) => {
+  const clearEffects = () => {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    pendingPoint = null;
+    squares.forEach((timer, element) => {
+      clearTimeout(timer);
+      element.remove();
+    });
+    squares.clear();
+    container?.remove();
+    container = null;
+  };
+
+  const spawnSquare = (x, y, burst = false, angle = 0, distance = 0) => {
+    if (!enabled || destroyed || !container || reduced.matches) return;
+    const square = document.createElement('span');
     counter += 1;
-    const sq = document.createElement('span');
-    sq.className = 'cursor-sq';
-
-    // Điểm xuyết nhận diện: mỗi 7 ô có 1 ô xanh ESC, mỗi 14 ô có 1 ô đỏ TEDx
-    if (counter % 14 === 0) {
-      sq.classList.add('accent-tedx');
-    } else if (counter % 7 === 0) {
-      sq.classList.add('accent-esc');
-    }
-
-    const baseSize = isBurst ? 16 + Math.floor(Math.random() * 16) : 22 + Math.floor(Math.random() * 18);
-    sq.style.width = `${baseSize}px`;
-    sq.style.height = `${baseSize}px`;
-
-    const offsetX = isBurst ? Math.cos(burstAngle) * burstDist : (Math.random() * 16 - 8);
-    const offsetY = isBurst ? Math.sin(burstAngle) * burstDist : (Math.random() * 16 - 8);
-
-    sq.style.left = `${x + offsetX}px`;
-    sq.style.top = `${y + offsetY}px`;
-
-    sq.style.setProperty('--rot-start', `${Math.round(Math.random() * 32 - 16)}deg`);
-    sq.style.setProperty('--rot-mid', `${Math.round(Math.random() * 12 - 6)}deg`);
-    sq.style.setProperty('--rot-end', `${Math.round(Math.random() * 44 - 22)}deg`);
-    sq.style.setProperty('--dx', `${Math.round(Math.random() * 26 - 13)}px`);
-
-    container.appendChild(sq);
-    activeSquares.push(sq);
-
-    if (activeSquares.length > MAX_ACTIVE) {
-      const oldest = activeSquares.shift();
-      if (oldest && oldest.parentNode) oldest.parentNode.removeChild(oldest);
-    }
-
-    sq.addEventListener('animationend', () => removeSquare(sq), { once: true });
-    setTimeout(() => removeSquare(sq), 950);
+    square.className = 'cursor-sq';
+    if (counter % 14 === 0) square.classList.add('accent-tedx');
+    else if (counter % 7 === 0) square.classList.add('accent-esc');
+    const size = burst ? 16 + Math.floor(Math.random() * 16) : 22 + Math.floor(Math.random() * 18);
+    square.style.width = `${size}px`;
+    square.style.height = `${size}px`;
+    square.style.left = `${x + (burst ? Math.cos(angle) * distance : Math.random() * 16 - 8)}px`;
+    square.style.top = `${y + (burst ? Math.sin(angle) * distance : Math.random() * 16 - 8)}px`;
+    square.style.setProperty('--rot-start', `${Math.round(Math.random() * 32 - 16)}deg`);
+    square.style.setProperty('--rot-mid', `${Math.round(Math.random() * 12 - 6)}deg`);
+    square.style.setProperty('--rot-end', `${Math.round(Math.random() * 44 - 22)}deg`);
+    square.style.setProperty('--dx', `${Math.round(Math.random() * 26 - 13)}px`);
+    container.appendChild(square);
+    squares.set(square, setTimeout(() => removeSquare(square), 950));
+    square.addEventListener('animationend', () => removeSquare(square), { once: true });
+    if (squares.size > 26) removeSquare(squares.keys().next().value);
   };
 
-  let ticking = false;
-  let pendingEvent = null;
+  const onPointerMove = (event) => {
+    pendingPoint = { x: event.clientX, y: event.clientY };
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      if (!enabled || !pendingPoint) return;
+      const now = performance.now();
+      const { x, y } = pendingPoint;
+      const distance = Math.hypot(x - lastX, y - lastY);
+      if (distance >= 30 || (now - lastTime > 55 && distance >= 14)) {
+        lastX = x;
+        lastY = y;
+        lastTime = now;
+        spawnSquare(x, y);
+      }
+    });
+  };
 
-  const onPointerMove = (e) => {
-    pendingEvent = e;
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(() => {
-        ticking = false;
-        if (!pendingEvent) return;
-        const now = performance.now();
-        const x = pendingEvent.clientX;
-        const y = pendingEvent.clientY;
-        const dist = Math.hypot(x - lastX, y - lastY);
-
-        // Khoảng cách tối thiểu giữa 2 ô để tạo vệt mượt mà, không giật lag
-        if (dist >= 30 || (now - lastTime > 55 && dist >= 14)) {
-          lastX = x;
-          lastY = y;
-          lastTime = now;
-          spawnSquare(x, y);
-        }
-      });
+  const onPointerDown = (event) => {
+    if (!enabled || event.isPrimary === false) return;
+    for (let index = 0; index < 4; index += 1) {
+      spawnSquare(event.clientX, event.clientY, true, index * Math.PI / 2 + Math.random() * 0.4 - 0.2, 18 + Math.random() * 18);
     }
   };
 
-  const onPointerDown = (e) => {
-    // Khi click chuột: bung tỏa nhẹ 4 ô vuông tạo cảm giác phản hồi xúc giác
-    const x = e.clientX;
-    const y = e.clientY;
-    for (let i = 0; i < 4; i += 1) {
-      const angle = (i * (Math.PI / 2)) + (Math.random() * 0.4 - 0.2);
-      const dist = 18 + Math.random() * 18;
-      spawnSquare(x, y, true, angle, dist);
+  const sync = () => {
+    const next = pointer.matches && !reduced.matches && !document.hidden && !destroyed;
+    if (next === enabled) return;
+    enabled = next;
+    if (enabled) {
+      container = document.createElement('div');
+      container.id = 'cursor-squares-layer';
+      container.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(container);
+      lastX = lastY = -999;
+      lastTime = 0;
+      window.addEventListener('pointermove', onPointerMove, { passive: true });
+      window.addEventListener('pointerdown', onPointerDown, { passive: true });
+    } else {
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerdown', onPointerDown);
+      clearEffects();
     }
   };
 
-  window.addEventListener('pointermove', onPointerMove, { passive: true });
-  window.addEventListener('pointerdown', onPointerDown, { passive: true });
+  pointer.addEventListener('change', sync);
+  reduced.addEventListener('change', sync);
+  document.addEventListener('visibilitychange', sync);
+  sync();
 
-  return () => {
-    window.removeEventListener('pointermove', onPointerMove);
-    window.removeEventListener('pointerdown', onPointerDown);
-    if (container && container.parentNode) container.parentNode.removeChild(container);
+  const cleanup = () => {
+    if (destroyed) return;
+    destroyed = true;
+    sync();
+    clearEffects();
+    pointer.removeEventListener('change', sync);
+    reduced.removeEventListener('change', sync);
+    document.removeEventListener('visibilitychange', sync);
+    if (activeCleanup === cleanup) activeCleanup = null;
   };
+  activeCleanup = cleanup;
+  return cleanup;
 }
-

@@ -1,0 +1,547 @@
+{
+  "initial": {
+    "y": 0,
+    "pins": [
+      {
+        "id": "esc",
+        "start": 1504,
+        "end": 2359,
+        "progress": 0,
+        "top": 1581
+      },
+      {
+        "id": "tedx",
+        "start": 3162,
+        "end": 4017,
+        "progress": 0,
+        "top": 3239.1875
+      }
+    ],
+    "counters": [
+      {
+        "id": "esc",
+        "values": [
+          "0+",
+          "0+",
+          "0+ triệu"
+        ]
+      },
+      {
+        "id": "tedx",
+        "values": [
+          "0+",
+          "0M+",
+          "0",
+          "0+"
+        ]
+      }
+    ],
+    "infinite": 87,
+    "reveals": 20
+  },
+  "errors": [],
+  "samples": [
+    {
+      "id": "esc",
+      "progress": 0,
+      "y": 1504,
+      "innerTop": 77,
+      "innerBottom": 797,
+      "imageGapTop": 28.800018310546875,
+      "counts": [
+        "0+",
+        "0+",
+        "0+ triệu"
+      ],
+      "headlineOpacity": "0.25",
+      "headlineTop": 281.921875
+    },
+    {
+      "id": "esc",
+      "progress": 0.1,
+      "y": 1590,
+      "innerTop": 77,
+      "innerBottom": 797,
+      "imageGapTop": 7.097015380859375,
+      "counts": [
+        "120+",
+        "12+",
+        "30+ triệu"
+      ],
+      "headlineOpacity": "0.4154",
+      "headlineTop": 277.0691833496094
+    },
+    {
+      "id": "esc",
+      "progress": 0.45,
+      "y": 1889,
+      "innerTop": 77,
+      "innerBottom": 797,
+      "imageGapTop": -7.199981689453125,
+      "counts": [
+        "200+",
+        "20+",
+        "50+ triệu"
+      ],
+      "headlineOpacity": "1",
+      "headlineTop": 259.921875
+    },
+    {
+      "id": "esc",
+      "progress": 0.75,
+      "y": 2145,
+      "innerTop": 77,
+      "innerBottom": 797,
+      "imageGapTop": -11.984405517578125,
+      "counts": [
+        "200+",
+        "20+",
+        "50+ triệu"
+      ],
+      "headlineOpacity": "1",
+      "headlineTop": 259.921875
+    },
+    {
+      "id": "esc",
+      "progress": 1,
+      "y": 2359,
+      "innerTop": 77,
+      "innerBottom": 797,
+      "imageGapTop": -57.5999755859375,
+      "counts": [
+        "200+",
+        "20+",
+        "50+ triệu"
+      ],
+      "headlineOpacity": "1",
+      "headlineTop": 259.921875
+    },
+    {
+      "id": "tedx",
+      "progress": 0,
+      "y": 3162,
+      "innerTop": 77.1875,
+      "innerBottom": 797.1875,
+      "imageGapTop": 28.800018310546875,
+      "counts": [
+        "0+",
+        "0M+",
+        "0",
+        "0+"
+      ],
+      "headlineOpacity": "0.25",
+      "headlineTop": 282.109375
+    },
+    {
+      "id": "tedx",
+      "progress": 0.1,
+      "y": 3248,
+      "innerTop": 77.1875,
+      "innerBottom": 797.1875,
+      "imageGapTop": 7.097015380859375,
+      "counts": [
+        "60+",
+        "1M+",
+        "11",
+        "30+"
+      ],
+      "headlineOpacity": "0.4154",
+      "headlineTop": 277.2566833496094
+    },
+    {
+      "id": "tedx",
+      "progress": 0.45,
+      "y": 3547,
+      "innerTop": 77.1875,
+      "innerBottom": 797.1875,
+      "imageGapTop": -7.199981689453125,
+      "counts": [
+        "100+",
+        "1M+",
+        "19",
+        "50+"
+      ],
+      "headlineOpacity": "1",
+      "headlineTop": 260.109375
+    },
+    {
+      "id": "tedx",
+      "progress": 0.75,
+      "y": 3803,
+      "innerTop": 77.1875,
+      "innerBottom": 797.1875,
+      "imageGapTop": -11.984405517578125,
+      "counts": [
+        "100+",
+        "1M+",
+        "19",
+        "50+"
+      ],
+      "headlineOpacity": "1",
+      "headlineTop": 260.109375
+    },
+    {
+      "id": "tedx",
+      "progress": 1,
+      "y": 4017,
+      "innerTop": 77.1875,
+      "innerBottom": 797.1875,
+      "imageGapTop": -57.5999755859375,
+      "counts": [
+        "100+",
+        "1M+",
+        "19",
+        "50+"
+      ],
+      "headlineOpacity": "1",
+      "headlineTop": 260.109375
+    }
+  ],
+  "beforeResize": {
+    "y": 1590,
+    "pins": [
+      {
+        "id": "esc",
+        "start": 1504,
+        "end": 2359,
+        "progress": 0.10058479532163743,
+        "top": 77
+      },
+      {
+        "id": "tedx",
+        "start": 3162,
+        "end": 4017,
+        "progress": 0,
+        "top": 1649.1875
+      }
+    ],
+    "counters": [
+      {
+        "id": "esc",
+        "values": [
+          "120+",
+          "12+",
+          "30+ triệu"
+        ]
+      },
+      {
+        "id": "tedx",
+        "values": [
+          "0+",
+          "0M+",
+          "0",
+          "0+"
+        ]
+      }
+    ],
+    "infinite": 87,
+    "reveals": 17
+  },
+  "afterResize": {
+    "y": 1590,
+    "pins": [],
+    "counters": [
+      {
+        "id": "esc",
+        "values": [
+          "0+",
+          "0+",
+          "0+ triệu"
+        ]
+      },
+      {
+        "id": "tedx",
+        "values": [
+          "0+",
+          "0M+",
+          "0",
+          "0+"
+        ]
+      }
+    ],
+    "infinite": 87,
+    "reveals": 14
+  },
+  "beforeReduce": {
+    "y": 1590,
+    "pins": [
+      {
+        "id": "esc",
+        "start": -86,
+        "end": 769,
+        "progress": 1,
+        "top": 846
+      },
+      {
+        "id": "tedx",
+        "start": 3162,
+        "end": 4017,
+        "progress": 0,
+        "top": 1649.1875
+      }
+    ],
+    "counters": [
+      {
+        "id": "esc",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ]
+      },
+      {
+        "id": "tedx",
+        "values": [
+          "0+",
+          "0M+",
+          "0",
+          "0+"
+        ]
+      }
+    ],
+    "infinite": 87,
+    "reveals": 17
+  },
+  "afterReduce": {
+    "y": 1590,
+    "pins": [],
+    "counters": [
+      {
+        "id": "esc",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ]
+      },
+      {
+        "id": "tedx",
+        "values": [
+          "100+",
+          "1M+",
+          "19",
+          "50+"
+        ]
+      }
+    ],
+    "infinite": 87,
+    "reveals": 0
+  },
+  "reduceOpacityA": "0.4516",
+  "reduceOpacityB": "0",
+  "beforeDestroy": {
+    "y": 1590,
+    "pins": [
+      {
+        "id": "esc",
+        "start": -86,
+        "end": 769,
+        "progress": 1,
+        "top": 846
+      },
+      {
+        "id": "tedx",
+        "start": 3162,
+        "end": 4017,
+        "progress": 0,
+        "top": 1649.1875
+      }
+    ],
+    "counters": [
+      {
+        "id": "esc",
+        "values": [
+          "200+",
+          "20+",
+          "50+ triệu"
+        ]
+      },
+      {
+        "id": "tedx",
+        "values": [
+          "0+",
+          "0M+",
+          "0",
+          "0+"
+        ]
+      }
+    ],
+    "infinite": 87,
+    "reveals": 17
+  },
+  "afterDestroy": {
+    "y": 1590,
+    "pins": [],
+    "counters": [
+      {
+        "id": "esc",
+        "values": [
+          "0+",
+          "0+",
+          "0+ triệu"
+        ]
+      },
+      {
+        "id": "tedx",
+        "values": [
+          "0+",
+          "0M+",
+          "0",
+          "0+"
+        ]
+      }
+    ],
+    "infinite": 87,
+    "reveals": 0
+  },
+  "viewports": [
+    {
+      "width": 1366,
+      "height": 768,
+      "pins": 2,
+      "scenes": [
+        {
+          "id": "",
+          "height": 645,
+          "scrollHeight": 645,
+          "logosBottom": 565.625,
+          "cardsBottom": 451.625
+        },
+        {
+          "id": "",
+          "height": 645,
+          "scrollHeight": 645,
+          "logosBottom": 565.625,
+          "cardsBottom": 451.625
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 760,
+      "pins": 2,
+      "scenes": [
+        {
+          "id": "",
+          "height": 638,
+          "scrollHeight": 638,
+          "logosBottom": 549.625,
+          "cardsBottom": 435.625
+        },
+        {
+          "id": "",
+          "height": 638,
+          "scrollHeight": 638,
+          "logosBottom": 549.625,
+          "cardsBottom": 435.625
+        }
+      ]
+    },
+    {
+      "width": 1023,
+      "height": 760,
+      "pins": 0,
+      "scenes": [
+        {
+          "id": "esc",
+          "height": 638,
+          "scrollHeight": 638,
+          "logosBottom": 525.59375,
+          "cardsBottom": 435.59375
+        },
+        {
+          "id": "tedx",
+          "height": 638,
+          "scrollHeight": 638,
+          "logosBottom": 525.59375,
+          "cardsBottom": 435.59375
+        }
+      ]
+    },
+    {
+      "width": 901,
+      "height": 700,
+      "pins": 0,
+      "scenes": [
+        {
+          "id": "esc",
+          "height": 600,
+          "scrollHeight": 600,
+          "logosBottom": 501.890625,
+          "cardsBottom": 411.890625
+        },
+        {
+          "id": "tedx",
+          "height": 600,
+          "scrollHeight": 600,
+          "logosBottom": 501.890625,
+          "cardsBottom": 411.890625
+        }
+      ]
+    },
+    {
+      "width": 900,
+      "height": 700,
+      "pins": 0,
+      "scenes": [
+        {
+          "id": "esc",
+          "height": 842,
+          "scrollHeight": 842,
+          "logosBottom": 601.71875,
+          "cardsBottom": 511.71875
+        },
+        {
+          "id": "tedx",
+          "height": 842,
+          "scrollHeight": 842,
+          "logosBottom": 601.71875,
+          "cardsBottom": 511.71875
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "pins": 0,
+      "scenes": [
+        {
+          "id": "esc",
+          "height": 904,
+          "scrollHeight": 904,
+          "logosBottom": 663.5,
+          "cardsBottom": 529.5
+        },
+        {
+          "id": "tedx",
+          "height": 983,
+          "scrollHeight": 983,
+          "logosBottom": 743.09375,
+          "cardsBottom": 551.09375
+        }
+      ]
+    }
+  ],
+  "subpage": {
+    "gsap": false,
+    "wordSpans": 0,
+    "revealNodes": 0,
+    "squareCount": 20
+  },
+  "history": {
+    "before": {
+      "api": true,
+      "pins": 2
+    },
+    "after": {
+      "api": true,
+      "pins": 2,
+      "events": [
+        {
+          "persisted": false,
+          "at": 236.29999999701977
+        }
+      ]
+    }
+  }
+}

@@ -1,9 +1,43 @@
 import { initMotion } from './motion.js';
-import { TEDX_SEASONS, OTHER_PROJECTS } from './content/site-data.js';
+import { SITE_META, ANNUAL_EVENTS, ESC_SEASONS, TEDX_SEASONS, OTHER_PROJECTS } from './content/site-data.js';
 import { initCursorSquares } from './cursor-squares.js';
+import { initAmbientMotion } from './ambient-motion.js';
 
-const motion = initMotion();
-initCursorSquares();
+// Bind dynamic Hero Image from site-data if configured
+const heroPic = document.querySelector('.hero-media picture');
+if (heroPic && SITE_META?.heroImage) {
+  const source = heroPic.querySelector('source');
+  const img = heroPic.querySelector('img');
+  if (source) source.srcset = SITE_META.heroImage;
+  if (img) {
+    img.src = SITE_META.heroOriginalImage || SITE_META.heroImage;
+    if (SITE_META.heroImageAlt) img.alt = SITE_META.heroImageAlt;
+    if (SITE_META.heroImagePosition) img.style.objectPosition = SITE_META.heroImagePosition;
+    if (SITE_META.heroImageFit) img.style.objectFit = SITE_META.heroImageFit;
+  }
+}
+
+// Bind ESC & TEDx stage image alignment
+if (ANNUAL_EVENTS?.esc?.image) {
+  const escImg = document.querySelector('#esc .tree-wrap img');
+  if (escImg) {
+    escImg.src = ANNUAL_EVENTS.esc.image;
+    if (ANNUAL_EVENTS.esc.imagePosition) escImg.style.objectPosition = ANNUAL_EVENTS.esc.imagePosition;
+    if (ANNUAL_EVENTS.esc.imageFit) escImg.style.objectFit = ANNUAL_EVENTS.esc.imageFit;
+  }
+}
+if (ANNUAL_EVENTS?.tedx?.image) {
+  const tedxImg = document.querySelector('#tedx .tree-wrap img');
+  if (tedxImg) {
+    tedxImg.src = ANNUAL_EVENTS.tedx.image;
+    if (ANNUAL_EVENTS.tedx.imagePosition) tedxImg.style.objectPosition = ANNUAL_EVENTS.tedx.imagePosition;
+    if (ANNUAL_EVENTS.tedx.imageFit) tedxImg.style.objectFit = ANNUAL_EVENTS.tedx.imageFit;
+  }
+}
+
+let motion = initMotion();
+let stopAmbient = initAmbientMotion();
+let stopCursor = initCursorSquares();
 const menuButton = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#mobile-nav');
 const closeMenu = () => {
@@ -29,6 +63,12 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('click', (event) => {
   if (!menu.hidden && !event.target.closest('.site-header')) closeMenu();
 });
+document.querySelector('.site-header').addEventListener('focusout', (event) => {
+  if (!menu.hidden && event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) closeMenu();
+});
+window.matchMedia('(max-width: 760px)').addEventListener('change', event => {
+  if (!event.matches) closeMenu();
+});
 
 document.querySelectorAll('a[href^="#"]').forEach((link) =>
   link.addEventListener('click', (event) => {
@@ -36,13 +76,13 @@ document.querySelectorAll('a[href^="#"]').forEach((link) =>
     if (!document.getElementById(id)) return;
     event.preventDefault();
     closeMenu();
-    history.pushState(null, '', `#${id}`);
-    motion.scrollToSection(id, { focus: true });
+    if (location.hash !== `#${id}`) history.pushState(null, '', `#${id}`);
+    motion.scrollToSection(id, { focus: event.detail === 0 });
   }),
 );
 
 window.addEventListener('popstate', () => {
-  if (location.hash) motion.scrollToSection(location.hash.slice(1), { behavior: 'auto', focus: true });
+  if (location.hash) motion.scrollToSection(location.hash.slice(1), { behavior: 'auto', focus: false });
 });
 
 // 3-panel Mission Hover/Focus/Click Accordion (Petalyx #loop pattern)
@@ -57,27 +97,28 @@ missionPanels.forEach((panel) => {
   panel.addEventListener('click', () => activateMission(panel));
 });
 
-// TEDx Season selector
-document.querySelectorAll('[data-year]').forEach((button) =>
-  button.addEventListener('click', () => {
-    const year = button.dataset.year;
-    const season = TEDX_SEASONS[year];
+// Scope each season selector to its own event and content collection.
+const seasonCollections = { esc: ESC_SEASONS, tedx: TEDX_SEASONS };
+document.querySelectorAll('[data-seasons]').forEach((panel) => {
+  const collection = seasonCollections[panel.dataset.seasons];
+  if (!collection) return;
+  const buttons = [...panel.querySelectorAll('[data-year]')];
+  const showSeason = button => {
+    const season = collection[button.dataset.year];
     if (!season) return;
-    document.querySelectorAll('[data-year]').forEach((item) =>
-      item.setAttribute('aria-pressed', String(item === button)),
-    );
-    const yearEl = document.querySelector('.season-year');
-    const editionEl = document.querySelector('.season-edition');
-    const themeEl = document.querySelector('.season-theme');
-    const descEl = document.querySelector('.season-description');
-    const statusEl = document.querySelector('.season-status');
-    if (yearEl) yearEl.textContent = season.year;
-    if (editionEl) editionEl.textContent = season.editionLabel;
-    if (themeEl) themeEl.textContent = season.theme;
-    if (descEl) descEl.textContent = season.description;
-    if (statusEl) statusEl.textContent = season.statusNote;
-  }),
-);
+    buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    for (const [selector, key] of [
+      ['.season-year', 'year'], ['.season-edition', 'editionLabel'],
+      ['.season-theme', 'theme'], ['.season-description', 'description'], ['.season-status', 'statusNote'],
+    ]) {
+      const element = panel.querySelector(selector);
+      if (element) element.textContent = season[key] || '';
+    }
+  };
+  buttons.forEach(button => button.addEventListener('click', () => showSeason(button)));
+  const selected = buttons.find(button => button.getAttribute('aria-pressed') === 'true');
+  if (selected) showSeason(selected);
+});
 
 // 5 Projects selector + preview frame
 const previewImage = document.querySelector('#project-preview-image');
@@ -97,6 +138,10 @@ document.querySelectorAll('.project-select').forEach((button) => {
     if (previewImage) {
       previewImage.src = project?.image || button.dataset.image;
       previewImage.alt = project?.alt || itemEl.querySelector('.mobile-project-image').alt;
+      if (project?.imagePosition) previewImage.style.objectPosition = project.imagePosition;
+      else previewImage.style.removeProperty('object-position');
+      if (project?.imageFit) previewImage.style.objectFit = project.imageFit;
+      else previewImage.style.removeProperty('object-fit');
     }
     if (previewTitle) {
       previewTitle.textContent = project?.title || button.querySelector('.project-title').textContent;
@@ -116,7 +161,10 @@ document.querySelectorAll('.project-select').forEach((button) => {
   });
 });
 
-const observer = new IntersectionObserver(
+let observer;
+function observeSections() {
+  observer?.disconnect();
+  observer = new IntersectionObserver(
   (entries) => {
     const visible = entries
       .filter((entry) => entry.isIntersecting)
@@ -133,6 +181,8 @@ const observer = new IntersectionObserver(
 document.querySelectorAll('#about,#esc,#tedx,#projects,#community,#connect').forEach((section) =>
   observer.observe(section),
 );
+}
+observeSections();
 
 if (location.hash) {
   requestAnimationFrame(() => motion.scrollToSection(location.hash.slice(1), { behavior: 'auto', focus: false }));
@@ -175,7 +225,16 @@ window.addEventListener(
   'pagehide',
   () => {
     observer.disconnect();
+    stopAmbient();
+    stopCursor();
     motion.destroy();
   },
-  { once: true },
 );
+window.addEventListener('pageshow', event => {
+  if (!event.persisted) return;
+  motion = initMotion();
+  stopAmbient = initAmbientMotion();
+  stopCursor = initCursorSquares();
+  observeSections();
+  motion.refresh();
+});

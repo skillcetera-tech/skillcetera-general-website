@@ -1,0 +1,190 @@
+{
+  "original": {
+    "y": 0,
+    "pins": [
+      {
+        "id": "esc",
+        "start": 1504,
+        "end": 2359,
+        "progress": 0,
+        "sceneDocTop": 1580,
+        "pinTop": 1581,
+        "pinPosition": "relative"
+      },
+      {
+        "id": "tedx",
+        "start": 3162,
+        "end": 4017,
+        "progress": 0,
+        "sceneDocTop": 3238.1875,
+        "pinTop": 3239.1875,
+        "pinPosition": "relative"
+      }
+    ],
+    "counters": [
+      "0+",
+      "0+",
+      "0+ triệu"
+    ]
+  },
+  "anchorOriginal": {
+    "y": 1889,
+    "pins": [
+      {
+        "id": "esc",
+        "start": 1504,
+        "end": 2359,
+        "progress": 0.4502923976608187,
+        "sceneDocTop": 1580,
+        "pinTop": 77,
+        "pinPosition": "fixed"
+      },
+      {
+        "id": "tedx",
+        "start": 3162,
+        "end": 4017,
+        "progress": 0,
+        "sceneDocTop": 3238.1875,
+        "pinTop": 1350.1875,
+        "pinPosition": "relative"
+      }
+    ],
+    "counters": [
+      "200+",
+      "20+",
+      "50+ triệu"
+    ]
+  },
+  "mobile": {
+    "y": 1889,
+    "pins": [],
+    "counters": [
+      "0+",
+      "0+",
+      "0+ triệu"
+    ]
+  },
+  "restored": {
+    "y": 1889,
+    "pins": [
+      {
+        "id": "esc",
+        "start": -385,
+        "end": 470,
+        "progress": 1,
+        "sceneDocTop": 1580,
+        "pinTop": 547,
+        "pinPosition": "relative"
+      },
+      {
+        "id": "tedx",
+        "start": 3162,
+        "end": 4017,
+        "progress": 0,
+        "sceneDocTop": 3238.1875,
+        "pinTop": 1350.1875,
+        "pinPosition": "relative"
+      }
+    ],
+    "counters": [
+      "0+",
+      "0+",
+      "0+ triệu"
+    ]
+  },
+  "manualRefresh": {
+    "y": 1889,
+    "pins": [
+      {
+        "id": "esc",
+        "start": -385,
+        "end": 470,
+        "progress": 1,
+        "sceneDocTop": 1580,
+        "pinTop": 547,
+        "pinPosition": "relative"
+      },
+      {
+        "id": "tedx",
+        "start": 3162,
+        "end": 4017,
+        "progress": 0,
+        "sceneDocTop": 3238.1875,
+        "pinTop": 1350.1875,
+        "pinPosition": "relative"
+      }
+    ],
+    "counters": [
+      "0+",
+      "0+",
+      "0+ triệu"
+    ]
+  },
+  "anchorAfterResize": {
+    "y": 0,
+    "pins": [
+      {
+        "id": "esc",
+        "start": -385,
+        "end": 470,
+        "progress": 0.4502923976608187,
+        "sceneDocTop": 1580,
+        "pinTop": 77,
+        "pinPosition": "fixed"
+      },
+      {
+        "id": "tedx",
+        "start": 3162,
+        "end": 4017,
+        "progress": 0,
+        "sceneDocTop": 3238.1875,
+        "pinTop": 3239.1875,
+        "pinPosition": "relative"
+      }
+    ],
+    "counters": [
+      "0+",
+      "0+",
+      "0+ triệu"
+    ]
+  },
+  "historyBefore": {
+    "api": true,
+    "pins": 2,
+    "show": [
+      false
+    ]
+  },
+  "historyAfter": {
+    "api": false,
+    "pins": 0,
+    "show": [
+      false,
+      true
+    ],
+    "inf": 87
+  },
+  "footer": [
+    {
+      "visible": 6,
+      "top": 894.234375,
+      "opacity": "1",
+      "transform": "none",
+      "classes": "f-logo"
+    },
+    {
+      "visible": 25,
+      "top": 882.6586303710938,
+      "opacity": "0",
+      "transform": "matrix(0.579556, -0.155291, 0.155291, 0.579556, 0, 0)",
+      "classes": "f-logo f-logo-revealed"
+    },
+    {
+      "visible": 40,
+      "top": 864.9005737304688,
+      "opacity": "0.281712",
+      "transform": "matrix(0.700121, -0.13323, 0.13323, 0.700121, 0, 0)",
+      "classes": "f-logo f-logo-revealed"
+    }
+  ]
+}

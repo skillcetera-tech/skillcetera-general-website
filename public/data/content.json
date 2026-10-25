@@ -7,9 +7,9 @@
     "taglineEn": "Ideas worth spreading. Knowledge worth sharing.",
     "taglineVi": "Ý tưởng đáng lan tỏa. Kiến thức đáng sẻ chia.",
     "heroLeadVi": "Câu lạc bộ Kỹ năng và Ngôn ngữ tại Đại học FPT TP.HCM — nơi những ý tưởng được lắng nghe và những sự kiện quy mô lớn được cùng nhau kiến tạo.",
-    "heroImage": "/assets/discussion-forum.webp",
-    "heroOriginalImage": "/assets/discussion-forum.png",
-    "heroImageAlt": "Hoạt động giao lưu và chia sẻ học thuật của Skillcetera",
+    "heroImage": "/assets/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.webp",
+    "heroOriginalImage": "/assets/originals/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.jpg",
+    "heroImageAlt": "Ảnh tư liệu Skillcetera",
     "heroImageCaption": "skillcetera. — Cùng học hỏi, cùng tạo dấu ấn.",
     "retrievedDate": "2026-10-24",
     "recruitment": {
@@ -113,7 +113,9 @@
           "url": "/studio"
         }
       ]
-    }
+    },
+    "heroImagePosition": "87% 88%",
+    "heroImageFit": "cover"
   },
   "missions": [
     {
@@ -568,6 +570,15 @@
     }
   },
   "hqGallery": [
+    {
+      "id": "hq-1792899496622",
+      "title": "553654839 1312594657543274 6065555061644359671 n",
+      "alt": "Ảnh tư liệu Skillcetera: 553654839 1312594657543274 6065555061644359671 n",
+      "caption": "1920 × 1280 px · Bản gốc chất lượng cao",
+      "webpUrl": "/assets/553654839_1312594657543274_6065555061644359671_n-mvna2gge.webp",
+      "originalUrl": "/assets/originals/553654839_1312594657543274_6065555061644359671_n-mvna2gge.jpg",
+      "dimensions": "1920 × 1280 px"
+    },
     {
       "id": "hq-615707596_1406518118150927_8099910856454498230_n-mvmf0nkw",
       "title": "Ảnh tư liệu đã tải lên (615707596_1406518118150927_8099910856454498230_n.jpg)",

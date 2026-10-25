@@ -1,5 +1,6 @@
 import { FULL_CONTENT } from './content/site-data.js';
 import { initCursorSquares } from './cursor-squares.js';
+import { initAmbientMotion } from './ambient-motion.js';
 
 const DRAFT_STORAGE_KEY = 'skillcetera_studio_draft';
 
@@ -34,23 +35,6 @@ function setupMobileDrawer() {
 
   document.addEventListener('click', (event) => {
     if (!menu.hidden && !event.target.closest('.site-header')) closeMenu();
-  });
-}
-
-function setupSqFields() {
-  document.querySelectorAll('.sq-field').forEach((field) => {
-    if (field.children.length > 0) return;
-    const count = Number(field.dataset.count || 16);
-    for (let i = 0; i < count; i += 1) {
-      const sq = document.createElement('span');
-      sq.className = 'grid-sq';
-      const size = 28 + ((i * 17) % 36);
-      sq.style.width = `${size}px`;
-      sq.style.height = `${size}px`;
-      sq.style.left = `${(i * 19 + 5) % 92}%`;
-      sq.style.top = `${(i * 29 + 7) % 78}%`;
-      field.appendChild(sq);
-    }
   });
 }
 
@@ -395,32 +379,32 @@ function applyContentOverrides(content) {
   }
 }
 
-function setupFooterMotion() {
-  const logo = document.querySelector('.footer .f-logo');
-  if (!logo || !('IntersectionObserver' in window)) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+let stopAmbientMotion = null;
+let stopCursorSquares = null;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          logo.classList.add('f-logo-revealed');
-          observer.disconnect();
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-  observer.observe(logo);
+function startMotion() {
+  if (stopAmbientMotion) return;
+  stopAmbientMotion = initAmbientMotion();
+  stopCursorSquares = initCursorSquares();
 }
+
+function stopMotion() {
+  stopAmbientMotion?.();
+  stopCursorSquares?.();
+  stopAmbientMotion = null;
+  stopCursorSquares = null;
+}
+
+window.addEventListener('pagehide', stopMotion);
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) startMotion();
+});
 
 async function initSubpage() {
   setupMobileDrawer();
-  setupSqFields();
   setupHQLightbox();
   setupProjectFilters();
-  setupFooterMotion();
-  initCursorSquares();
+  startMotion();
   const content = await loadLatestContent();
   applyContentOverrides(content);
 }

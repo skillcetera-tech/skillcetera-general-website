@@ -151,6 +151,23 @@ const server = http.createServer(async (req, res) => {
       await writeFile(path.join(project, 'public/data/content.json'), contentJson, 'utf8');
       await writeFile(path.join(project, 'src/content/site-data.js'), moduleCode, 'utf8');
 
+      // Sync hero image in index.html if modified
+      if (content.siteMeta?.heroImage) {
+        try {
+          const indexHtmlPath = path.join(project, 'index.html');
+          let html = await readFile(indexHtmlPath, 'utf8');
+          const webpUrl = content.siteMeta.heroImage;
+          const origUrl = content.siteMeta.heroOriginalImage || webpUrl;
+          html = html.replace(
+            /(<div class="hero-media hero-visual">\s*<picture>\s*<source srcset=")[^"]+(" type="image\/webp">\s*<img src=")[^"]+(")/,
+            `$1${webpUrl}$2${origUrl}$3`
+          );
+          await writeFile(indexHtmlPath, html, 'utf8');
+        } catch (err) {
+          console.error('Error updating index.html hero image:', err);
+        }
+      }
+
       // Sync to dist/ if present
       try {
         await stat(path.join(project, 'dist'));
@@ -158,6 +175,13 @@ const server = http.createServer(async (req, res) => {
         await mkdir(path.join(project, 'dist/src/content'), { recursive: true });
         await writeFile(path.join(project, 'dist/data/content.json'), contentJson, 'utf8');
         await writeFile(path.join(project, 'dist/src/content/site-data.js'), moduleCode, 'utf8');
+        if (content.siteMeta?.heroImage) {
+          try {
+            const distIndex = path.join(project, 'dist/index.html');
+            const rootIndex = await readFile(path.join(project, 'index.html'), 'utf8');
+            await writeFile(distIndex, rootIndex, 'utf8');
+          } catch {}
+        }
       } catch {
         // dist not built yet
       }
@@ -375,9 +399,45 @@ const server = http.createServer(async (req, res) => {
 });
 
 const host = process.env.HOST || '0.0.0.0';
-server.listen(port, host, () =>
-  console.log(`Skillcetera preview & Content Studio\nLocal: http://${host === '0.0.0.0' ? 'localhost' : host}:${port}\nStudio: http://${host === '0.0.0.0' ? 'localhost' : host}:${port}/studio`),
-);
+
+function listenWithFallback(serverInstance, currentPort, attemptsLeft = 10) {
+  const onError = (err) => {
+    serverInstance.removeListener('listening', onListening);
+    if (err.code === 'EADDRINUSE') {
+      if (process.env.PORT) {
+        console.error(`\n[Lỗi] Cổng ${currentPort} đang được sử dụng.`);
+        console.error(`Gợi ý: Chỉ định cổng khác bằng PORT=${currentPort + 1} npm run dev\n`);
+        process.exit(1);
+      } else if (attemptsLeft > 0) {
+        console.warn(`[Lưu ý] Cổng ${currentPort} đang bận, tự động thử cổng ${currentPort + 1}...`);
+        serverInstance.close(() => {
+          listenWithFallback(serverInstance, currentPort + 1, attemptsLeft - 1);
+        });
+      } else {
+        console.error(`\n[Lỗi] Đã thử nhiều cổng từ ${port} đến ${currentPort} nhưng tất cả đều đang bận.\n`);
+        process.exit(1);
+      }
+    } else {
+      console.error(`\n[Lỗi máy chủ]`, err);
+      process.exit(1);
+    }
+  };
+
+  const onListening = () => {
+    serverInstance.removeListener('error', onError);
+    const localHost = host === '0.0.0.0' ? 'localhost' : host;
+    console.log(
+      `Skillcetera preview & Content Studio\nLocal:  http://${localHost}:${currentPort}\nStudio: http://${localHost}:${currentPort}/studio`
+    );
+  };
+
+  serverInstance.once('error', onError);
+  serverInstance.once('listening', onListening);
+  serverInstance.listen(currentPort, host);
+}
+
+listenWithFallback(server, port);
+
 for (const signal of ['SIGTERM', 'SIGINT']) {
   process.on(signal, () => server.close(() => process.exit(0)));
 }

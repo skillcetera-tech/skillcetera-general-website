@@ -547,6 +547,303 @@
   transform: translateY(0);
 }
 
+/* Studio Image Picker Modal & Quick Actions */
+.studio-picker-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.studio-picker-modal[hidden] {
+  display: none !important;
+}
+.studio-picker-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 10, 14, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.studio-picker-dialog {
+  position: relative;
+  z-index: 2;
+  width: min(940px, 100%);
+  max-height: 85vh;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--line-strong);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.studio-picker-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--bg);
+}
+.studio-picker-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+.studio-picker-header p {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  margin: 4px 0 0 0;
+}
+.studio-picker-body {
+  padding: 24px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  background: var(--soft);
+}
+.studio-picker-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  user-select: none;
+}
+.studio-picker-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--blue);
+  box-shadow: 0 8px 24px rgba(36, 87, 255, 0.12);
+}
+.studio-picker-card-thumb {
+  aspect-ratio: 16 / 10;
+  background: #111;
+  overflow: hidden;
+}
+.studio-picker-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.studio-picker-card-info {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.studio-picker-card-info strong {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.studio-picker-card-info span {
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+.studio-picker-card-btn {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--ink);
+  transition: background 0.15s, color 0.15s;
+}
+.studio-picker-card:hover .studio-picker-card-btn {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+
+.gallery-apply-select {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  font-size: 11.5px;
+  background: #fff;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.gallery-apply-select:focus {
+  outline: 2px solid var(--blue);
+}
+
+/* Studio Image Adjuster Modal */
+.studio-adjuster-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 310;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.studio-adjuster-modal[hidden] {
+  display: none !important;
+}
+.studio-adjuster-dialog {
+  position: relative;
+  z-index: 2;
+  width: min(960px, 100%);
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.32);
+  border: 1px solid var(--line-strong);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.studio-adjuster-body {
+  padding: 24px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 24px;
+  align-items: start;
+  background: var(--bg);
+}
+.studio-adjuster-preview-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.studio-adjuster-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0d0f12;
+  border: 2px solid var(--line-strong);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  cursor: crosshair;
+}
+.studio-adjuster-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  transition: object-position 0.05s ease-out;
+}
+.adjuster-crosshair {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  transition: left 0.05s ease-out, top 0.05s ease-out;
+}
+.adjuster-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+.adjuster-hint {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+.studio-adjuster-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+}
+.adjuster-fit-options {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px;
+}
+.adjuster-radio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.adjuster-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  max-width: 180px;
+  margin-top: 6px;
+}
+.adjuster-grid-btn {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.15s;
+}
+.adjuster-grid-btn:hover {
+  background: var(--blue-soft);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.adjuster-grid-btn.active {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.form-range {
+  width: 100%;
+  height: 6px;
+  border-radius: 6px;
+  background: var(--line);
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--blue);
+}
+
+.adjust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--ink-soft);
+}
+
 /* Responsive adjustments */
 @media (max-width: 1080px) {
   .studio-stats-strip {

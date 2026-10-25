@@ -211,11 +211,236 @@ function setupTabs() {
   });
 }
 
+function getAllAvailableImages() {
+  const list = [];
+  const seen = new Set();
+  [...state.hqGallery, ...BUILTIN_HQ_ASSETS].forEach((item) => {
+    const key = item.webpUrl || item.originalUrl;
+    if (key && !seen.has(key)) {
+      seen.add(key);
+      list.push(item);
+    }
+  });
+  return list;
+}
+
+let currentPickerCallback = null;
+
+function openMediaPicker({ title = 'Chọn ảnh từ kho tư liệu có sẵn', onSelect }) {
+  const modal = document.getElementById('studio-picker-modal');
+  const grid = document.getElementById('studio-picker-grid');
+  const titleEl = document.getElementById('studio-picker-title');
+  if (!modal || !grid) return;
+
+  if (titleEl) titleEl.textContent = title;
+  currentPickerCallback = onSelect;
+
+  const images = getAllAvailableImages();
+  if (images.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--gray)">Kho ảnh hiện đang trống. Hãy tải ảnh lên ở mục 01 trước.</div>';
+  } else {
+    grid.innerHTML = images
+      .map(
+        (item, idx) => `
+        <article class="studio-picker-card" data-picker-idx="${idx}">
+          <div class="studio-picker-card-thumb">
+            <img src="${item.webpUrl || item.originalUrl}" alt="${item.alt || item.title}" loading="lazy" />
+          </div>
+          <div class="studio-picker-card-info">
+            <strong>${item.title || 'Ảnh tư liệu'}</strong>
+            <span>${item.dimensions || 'Full-Res'}</span>
+            <button type="button" class="studio-picker-card-btn">Chọn ảnh này</button>
+          </div>
+        </article>
+      `
+      )
+      .join('');
+
+    grid.querySelectorAll('.studio-picker-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        const idx = Number(card.dataset.pickerIdx);
+        const chosen = images[idx];
+        if (chosen && currentPickerCallback) {
+          currentPickerCallback(chosen);
+        }
+        closeMediaPicker();
+      });
+    });
+  }
+
+  modal.hidden = false;
+}
+
+function closeMediaPicker() {
+  const modal = document.getElementById('studio-picker-modal');
+  if (modal) modal.hidden = true;
+  currentPickerCallback = null;
+}
+
+function parsePosition(posStr) {
+  if (!posStr || typeof posStr !== 'string') return { x: 50, y: 50 };
+  const str = posStr.trim().toLowerCase();
+
+  // Named keywords
+  if (str === 'center top' || str === 'top center') return { x: 50, y: 0 };
+  if (str === 'center bottom' || str === 'bottom center') return { x: 50, y: 100 };
+  if (str === 'left center' || str === 'center left') return { x: 0, y: 50 };
+  if (str === 'right center' || str === 'center right') return { x: 100, y: 50 };
+  if (str === 'left top' || str === 'top left') return { x: 0, y: 0 };
+  if (str === 'right top' || str === 'top right') return { x: 100, y: 0 };
+  if (str === 'left bottom' || str === 'bottom left') return { x: 0, y: 100 };
+  if (str === 'right bottom' || str === 'bottom right') return { x: 100, y: 100 };
+  if (str === 'center' || str === 'center center') return { x: 50, y: 50 };
+
+  // Percentage or numbers
+  const parts = str.split(/\s+/);
+  let x = 50;
+  let y = 50;
+  if (parts.length >= 1) {
+    if (parts[0] === 'left') x = 0;
+    else if (parts[0] === 'right') x = 100;
+    else if (parts[0] === 'center') x = 50;
+    else {
+      const match = parts[0].match(/(\d+)%/);
+      if (match) x = Number(match[1]);
+    }
+  }
+  if (parts.length >= 2) {
+    if (parts[1] === 'top') y = 0;
+    else if (parts[1] === 'bottom') y = 100;
+    else if (parts[1] === 'center') y = 50;
+    else {
+      const match = parts[1].match(/(\d+)%/);
+      if (match) y = Number(match[1]);
+    }
+  }
+  return { x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) };
+}
+
+let currentAdjusterCallback = null;
+
+function openAdjusterModal({
+  title = 'Căn chỉnh khung hình & Tiêu điểm ảnh',
+  subtitle = 'Nhấp chuột trực tiếp lên ảnh hoặc dùng thanh trượt để căn chỉnh điểm nhìn.',
+  aspectRatio = '16 / 9',
+  imageUrl,
+  currentPosition = '50% 50%',
+  currentFit = 'cover',
+  onSave
+}) {
+  const modal = document.getElementById('studio-adjuster-modal');
+  const titleEl = document.getElementById('studio-adjuster-title');
+  const subtitleEl = document.getElementById('studio-adjuster-subtitle');
+  const frame = document.getElementById('adjuster-frame');
+  const img = document.getElementById('adjuster-preview-img');
+  const crosshair = document.getElementById('adjuster-crosshair');
+  const rangeX = document.getElementById('range-adjuster-x');
+  const rangeY = document.getElementById('range-adjuster-y');
+  const valX = document.getElementById('val-adjuster-x');
+  const valY = document.getElementById('val-adjuster-y');
+  const saveBtn = document.getElementById('btn-save-adjuster');
+
+  if (!modal || !frame || !img) return;
+
+  if (titleEl) titleEl.textContent = title;
+  if (subtitleEl) subtitleEl.textContent = subtitle;
+  frame.style.aspectRatio = aspectRatio;
+  img.src = imageUrl;
+
+  const parsed = parsePosition(currentPosition);
+  let curX = parsed.x;
+  let curY = parsed.y;
+  let curFit = currentFit || 'cover';
+
+  function applyState() {
+    img.style.objectPosition = `${curX}% ${curY}%`;
+    img.style.objectFit = curFit;
+    if (crosshair) {
+      crosshair.style.left = `${curX}%`;
+      crosshair.style.top = `${curY}%`;
+    }
+    if (rangeX) rangeX.value = curX;
+    if (rangeY) rangeY.value = curY;
+    if (valX) valX.textContent = `${curX}%`;
+    if (valY) valY.textContent = `${curY}%`;
+
+    document.querySelectorAll('.adjuster-grid-btn').forEach((b) => {
+      const bx = Number(b.dataset.x);
+      const by = Number(b.dataset.y);
+      b.classList.toggle('active', bx === curX && by === curY);
+    });
+  }
+
+  document.querySelectorAll('input[name="adjuster-fit"]').forEach((radio) => {
+    radio.checked = radio.value === curFit;
+    radio.onchange = () => {
+      curFit = radio.value;
+      applyState();
+    };
+  });
+
+  if (rangeX) rangeX.oninput = (e) => { curX = Number(e.target.value); applyState(); };
+  if (rangeY) rangeY.oninput = (e) => { curY = Number(e.target.value); applyState(); };
+
+  document.querySelectorAll('.adjuster-grid-btn').forEach((btn) => {
+    btn.onclick = () => {
+      curX = Number(btn.dataset.x);
+      curY = Number(btn.dataset.y);
+      applyState();
+    };
+  });
+
+  let isDragging = false;
+  const setFocalFromEvent = (e) => {
+    const rect = frame.getBoundingClientRect();
+    curX = Math.round(Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)));
+    curY = Math.round(Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100)));
+    applyState();
+  };
+
+  frame.onpointerdown = (e) => {
+    isDragging = true;
+    frame.setPointerCapture?.(e.pointerId);
+    setFocalFromEvent(e);
+  };
+  frame.onpointermove = (e) => {
+    if (isDragging) setFocalFromEvent(e);
+  };
+  frame.onpointerup = (e) => {
+    isDragging = false;
+    frame.releasePointerCapture?.(e.pointerId);
+  };
+  frame.onpointercancel = () => {
+    isDragging = false;
+  };
+
+  if (saveBtn) {
+    saveBtn.onclick = async () => {
+      if (onSave) {
+        await onSave({
+          position: `${curX}% ${curY}%`,
+          fit: curFit,
+        });
+      }
+      closeAdjusterModal();
+    };
+  }
+
+  applyState();
+  modal.hidden = false;
+}
+
+function closeAdjusterModal() {
+  const modal = document.getElementById('studio-adjuster-modal');
+  if (modal) modal.hidden = true;
+  currentAdjusterCallback = null;
+}
+
 function renderMediaLibrary() {
   const container = document.getElementById('studio-media-library');
   if (!container) return;
 
-  const combined = [...state.hqGallery, ...BUILTIN_HQ_ASSETS];
+  const combined = getAllAvailableImages();
   container.innerHTML = combined
     .map(
       (item) => `
@@ -229,25 +454,80 @@ function renderMediaLibrary() {
             data-hq-caption="${item.caption || ''}"
           />
         </div>
-        <div class="hq-gallery-caption">
-          <div>
+        <div class="hq-gallery-caption" style="flex-direction:column;align-items:stretch;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
             <strong>${item.title}</strong>
             <span>${item.dimensions || 'Full-Res Original'}</span>
           </div>
-          <button
-            type="button"
-            class="hq-trigger-light"
-            data-hq-src="${item.originalUrl || item.webpUrl}"
-            data-hq-title="${item.title}"
-            data-hq-caption="${item.caption || ''}"
-          >
-            Xem Full-Res
-          </button>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <button
+              type="button"
+              class="hq-trigger-light"
+              data-hq-src="${item.originalUrl || item.webpUrl}"
+              data-hq-title="${item.title}"
+              data-hq-caption="${item.caption || ''}"
+            >
+              Xem Full-Res
+            </button>
+            <select class="gallery-apply-select" data-apply-webp="${item.webpUrl || item.originalUrl}" data-apply-orig="${item.originalUrl || item.webpUrl}" data-apply-title="${item.title || ''}" data-apply-alt="${item.alt || item.title || ''}">
+              <option value="">Áp dụng ảnh này vào...</option>
+              <option value="hero">Ảnh Hero trang chủ (#hero)</option>
+              <option value="esc">Sân khấu chính ESC (#esc)</option>
+              <option value="tedx">Sân khấu chính TEDx (#tedx)</option>
+              <option value="project:discussion">Dự án Discussion Forum</option>
+              <option value="project:scavenger">Dự án Scavenger Hunt</option>
+              <option value="project:retreat">Dự án Meditation Retreat</option>
+              <option value="project:store">Dự án S-Store</option>
+              <option value="project:moneyverse">Dự án The MoneyVerse</option>
+            </select>
+          </div>
         </div>
       </article>
     `
     )
     .join('');
+
+  container.querySelectorAll('.gallery-apply-select').forEach((sel) => {
+    sel.addEventListener('change', async (e) => {
+      const val = e.target.value;
+      if (!val) return;
+      const webpUrl = e.target.dataset.applyWebp;
+      const origUrl = e.target.dataset.applyOrig;
+      const alt = e.target.dataset.applyAlt;
+
+      if (val === 'hero') {
+        if (!state.siteMeta) state.siteMeta = {};
+        state.siteMeta.heroImage = webpUrl;
+        state.siteMeta.heroOriginalImage = origUrl;
+        state.siteMeta.heroImageAlt = alt;
+        showToast('Đã áp dụng ảnh vào phần Hero trang chủ!');
+      } else if (val === 'esc' && state.annualEvents?.esc) {
+        state.annualEvents.esc.image = webpUrl;
+        state.annualEvents.esc.originalImage = origUrl;
+        state.annualEvents.esc.imageAlt = alt;
+        showToast('Đã áp dụng ảnh vào Sân khấu chính ESC!');
+      } else if (val === 'tedx' && state.annualEvents?.tedx) {
+        state.annualEvents.tedx.image = webpUrl;
+        state.annualEvents.tedx.originalImage = origUrl;
+        state.annualEvents.tedx.imageAlt = alt;
+        showToast('Đã áp dụng ảnh vào Sân khấu chính TEDx!');
+      } else if (val.startsWith('project:')) {
+        const pKey = val.split(':')[1];
+        if (state.otherProjects?.[pKey]) {
+          state.otherProjects[pKey].image = webpUrl;
+          state.otherProjects[pKey].originalImage = origUrl;
+          state.otherProjects[pKey].alt = alt;
+          showToast(`Đã áp dụng ảnh vào dự án ${state.otherProjects[pKey].title}!`);
+        }
+      }
+      e.target.value = '';
+      await saveToServer(false);
+      renderAboutEditor();
+      renderEscEditor();
+      renderTedxEditor();
+      renderProjectsEditor();
+    });
+  });
 }
 
 function setupHQUploader() {
@@ -364,7 +644,12 @@ function setupHQUploader() {
 
       state.hqGallery.unshift(newPhoto);
 
-      if (target === 'esc' && state.annualEvents?.esc) {
+      if (target === 'hero') {
+        if (!state.siteMeta) state.siteMeta = {};
+        state.siteMeta.heroImage = newPhoto.webpUrl;
+        state.siteMeta.heroOriginalImage = newPhoto.originalUrl;
+        state.siteMeta.heroImageAlt = alt;
+      } else if (target === 'esc' && state.annualEvents?.esc) {
         state.annualEvents.esc.image = newPhoto.webpUrl;
         state.annualEvents.esc.originalImage = newPhoto.originalUrl;
         state.annualEvents.esc.imageAlt = alt;
@@ -430,6 +715,43 @@ function renderAboutEditor() {
     .join('');
 
   container.innerHTML = `
+    <!-- Hero Image Manager -->
+    <div class="editor-repeater-item" style="border: 2px solid rgba(36,87,255,0.24); background: linear-gradient(180deg, rgba(36,87,255,0.04) 0%, #ffffff 100%); margin-bottom: 24px;">
+      <div class="editor-repeater-head">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="pill pill-esc">Trang chủ</span>
+          <strong>Ảnh Hero trang chủ (#hero)</strong>
+          <span class="adjust-badge" id="hero-adjust-badge">Vị trí: ${meta.heroImagePosition || 'center 45%'} · ${meta.heroImageFit || 'cover'}</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button type="button" class="btn btn-esc" id="btn-pick-hero-img">🖼️ Chọn từ kho ảnh</button>
+          <button type="button" class="hq-trigger-light" id="btn-adjust-hero-img">📐 Căn chỉnh khung ảnh</button>
+        </div>
+      </div>
+      <div class="form-grid-2" style="align-items: center; gap: 20px;">
+        <div>
+          <div class="form-group">
+            <label>Đường dẫn ảnh hiển thị WebP</label>
+            <input type="text" class="form-input" id="meta-hero-image" value="${meta.heroImage || '/assets/discussion-forum.webp'}" />
+          </div>
+          <div class="form-group">
+            <label>Đường dẫn ảnh gốc Full-Res</label>
+            <input type="text" class="form-input" id="meta-hero-orig" value="${meta.heroOriginalImage || '/assets/discussion-forum.png'}" />
+          </div>
+          <div class="form-group">
+            <label>Mô tả ảnh trợ năng (Alt text)</label>
+            <input type="text" class="form-input" id="meta-hero-alt" value="${meta.heroImageAlt || 'Hoạt động giao lưu và chia sẻ học thuật của Skillcetera'}" />
+          </div>
+        </div>
+        <div style="text-align:center">
+          <label style="display:block;margin-bottom:8px;font-size:12px;font-weight:600;color:var(--ink-soft)">Xem trước ảnh Hero hiện tại</label>
+          <div style="border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/8.5;background:#111;max-width:320px;margin:0 auto;box-shadow:0 8px 24px rgba(0,0,0,0.08)">
+            <img id="hero-img-preview" src="${meta.heroImage || '/assets/discussion-forum.webp'}" alt="Preview" style="width:100%;height:100%;object-fit:${meta.heroImageFit || 'cover'};object-position:${meta.heroImagePosition || 'center 45%'}" />
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="form-grid-2">
       <div class="form-group">
         <label>Tên câu lạc bộ</label>
@@ -448,11 +770,52 @@ function renderAboutEditor() {
     ${missionsHtml}
   `;
 
+  document.getElementById('btn-pick-hero-img')?.addEventListener('click', () => {
+    openMediaPicker({
+      title: 'Chọn ảnh cho phần Hero trang chủ',
+      onSelect: async (chosen) => {
+        if (!state.siteMeta) state.siteMeta = {};
+        state.siteMeta.heroImage = chosen.webpUrl;
+        state.siteMeta.heroOriginalImage = chosen.originalUrl || chosen.webpUrl;
+        state.siteMeta.heroImageAlt = chosen.alt || chosen.title;
+        await saveToServer(false);
+        renderAboutEditor();
+        showToast('Đã đổi ảnh Hero và lưu lên máy chủ thành công!');
+      }
+    });
+  });
+
+  document.getElementById('btn-adjust-hero-img')?.addEventListener('click', () => {
+    openAdjusterModal({
+      title: 'Căn chỉnh khung ảnh Hero trang chủ',
+      subtitle: 'Kéo thả tiêu điểm hoặc điều chỉnh trục Y/X để định vị đối tượng chính trên banner Hero.',
+      aspectRatio: '16 / 8.5',
+      imageUrl: state.siteMeta?.heroImage || '/assets/discussion-forum.webp',
+      currentPosition: state.siteMeta?.heroImagePosition || 'center 45%',
+      currentFit: state.siteMeta?.heroImageFit || 'cover',
+      onSave: async ({ position, fit }) => {
+        if (!state.siteMeta) state.siteMeta = {};
+        state.siteMeta.heroImagePosition = position;
+        state.siteMeta.heroImageFit = fit;
+        await saveToServer(false);
+        renderAboutEditor();
+        showToast('Đã lưu căn chỉnh ảnh Hero lên máy chủ!');
+      }
+    });
+  });
+
   container.oninput = (e) => {
     const target = e.target;
     if (target.id === 'meta-name') state.siteMeta.clubName = target.value;
     if (target.id === 'meta-founded') state.siteMeta.foundedYear = target.value;
     if (target.id === 'meta-tagline') state.siteMeta.taglineVi = target.value;
+    if (target.id === 'meta-hero-image') {
+      state.siteMeta.heroImage = target.value;
+      const prev = document.getElementById('hero-img-preview');
+      if (prev) prev.src = target.value;
+    }
+    if (target.id === 'meta-hero-orig') state.siteMeta.heroOriginalImage = target.value;
+    if (target.id === 'meta-hero-alt') state.siteMeta.heroImageAlt = target.value;
     if (target.dataset.missionIdx !== undefined) {
       const idx = Number(target.dataset.missionIdx);
       const field = target.dataset.field;
@@ -518,8 +881,17 @@ function renderSeasonsListHtml(eventType, seasonsObj) {
         </div>
         <div class="form-grid-2">
           <div class="form-group">
-            <label>Đường dẫn ảnh hiển thị WebP</label>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <label style="margin:0">Đường dẫn ảnh hiển thị WebP</label>
+              <div style="display:flex;gap:6px">
+                <button type="button" class="hq-trigger-light btn-pick-season-img" data-season-event="${eventType}" data-season-key="${key}">🖼️ Chọn ảnh</button>
+                <button type="button" class="hq-trigger-light btn-adjust-season-img" data-season-event="${eventType}" data-season-key="${key}">📐 Căn chỉnh</button>
+              </div>
+            </div>
             <input type="text" class="form-input" data-season-event="${eventType}" data-season-key="${key}" data-season-field="image" value="${s.image || ''}" />
+            <div style="margin-top:4px">
+              <span class="adjust-badge">Vị trí: ${s.imagePosition || '50% 50%'} · ${s.imageFit || 'cover'}</span>
+            </div>
           </div>
           <div class="form-group">
             <label>Đường dẫn ảnh gốc Full-Res</label>
@@ -599,6 +971,54 @@ function bindSeasonInputs(container, eventType) {
         obj[key].metrics[idx][prop] = e.target.value;
         setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
       }
+    });
+  });
+
+  container.querySelectorAll('.btn-pick-season-img').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.seasonKey;
+      openMediaPicker({
+        title: `Chọn ảnh từ kho cho mùa ${key} (${eventType.toUpperCase()})`,
+        onSelect: async (chosen) => {
+          const obj = getObj();
+          if (obj && obj[key]) {
+            obj[key].image = chosen.webpUrl;
+            obj[key].originalImage = chosen.originalUrl || chosen.webpUrl;
+            await saveToServer(false);
+            if (eventType === 'tedx') renderTedxEditor();
+            else renderEscEditor();
+            showToast(`Đã chọn ảnh cho mùa ${key} và lưu lên máy chủ!`);
+          }
+        }
+      });
+    });
+  });
+
+  container.querySelectorAll('.btn-adjust-season-img').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.seasonKey;
+      const obj = getObj();
+      const season = obj?.[key];
+      if (!season?.image) {
+        showToast('Mùa này chưa có ảnh. Hãy chọn ảnh trước!');
+        return;
+      }
+      openAdjusterModal({
+        title: `Căn chỉnh ảnh mùa ${key} (${eventType.toUpperCase()})`,
+        subtitle: `Định vị tiêu điểm và căn chỉnh khung ảnh của mùa ${key}.`,
+        aspectRatio: '16 / 9',
+        imageUrl: season.image,
+        currentPosition: season.imagePosition || '50% 50%',
+        currentFit: season.imageFit || 'cover',
+        onSave: async ({ position, fit }) => {
+          season.imagePosition = position;
+          season.imageFit = fit;
+          await saveToServer(false);
+          if (eventType === 'tedx') renderTedxEditor();
+          else renderEscEditor();
+          showToast(`Đã lưu căn chỉnh ảnh mùa ${key}!`);
+        }
+      });
     });
   });
 
@@ -699,6 +1119,20 @@ function renderEscEditor() {
         <label>Mô tả tổng quan cuộc thi ESC</label>
         <textarea class="form-textarea" id="esc-summary">${esc.detailOverview || esc.description || ''}</textarea>
       </div>
+
+      <div style="margin-top:16px;padding-top:16px;border-top:1px dashed var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>
+          <strong style="font-size:13px">Ảnh sân khấu chính ESC (#esc &amp; /esc):</strong>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
+            <span style="font-size:12px;color:var(--ink-muted)">${esc.image || 'Chưa đặt ảnh'}</span>
+            <span class="adjust-badge">Vị trí: ${esc.imagePosition || 'center 30%'} · ${esc.imageFit || 'cover'}</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button type="button" class="btn btn-esc" id="btn-pick-esc-stage">🖼️ Chọn từ kho ảnh</button>
+          <button type="button" class="hq-trigger-light" id="btn-adjust-esc-stage">📐 Căn chỉnh</button>
+        </div>
+      </div>
     </div>
 
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
@@ -709,6 +1143,39 @@ function renderEscEditor() {
       ${renderSeasonsListHtml('esc', state.escSeasons)}
     </div>
   `;
+
+  container.querySelector('#btn-pick-esc-stage')?.addEventListener('click', () => {
+    openMediaPicker({
+      title: 'Chọn ảnh cho Sân khấu chính ESC',
+      onSelect: async (chosen) => {
+        if (!state.annualEvents) state.annualEvents = {};
+        if (!state.annualEvents.esc) state.annualEvents.esc = {};
+        state.annualEvents.esc.image = chosen.webpUrl;
+        state.annualEvents.esc.originalImage = chosen.originalUrl || chosen.webpUrl;
+        await saveToServer(false);
+        renderEscEditor();
+        showToast('Đã đổi ảnh sân khấu chính ESC!');
+      }
+    });
+  });
+
+  container.querySelector('#btn-adjust-esc-stage')?.addEventListener('click', () => {
+    openAdjusterModal({
+      title: 'Căn chỉnh ảnh sân khấu chính ESC (#esc)',
+      subtitle: 'Định vị tiêu điểm để sân khấu và thí sinh hiển thị đẹp nhất trong khung toàn màn hình.',
+      aspectRatio: '16 / 9',
+      imageUrl: esc.image || '/assets/esc.webp',
+      currentPosition: esc.imagePosition || 'center 30%',
+      currentFit: esc.imageFit || 'cover',
+      onSave: async ({ position, fit }) => {
+        esc.imagePosition = position;
+        esc.imageFit = fit;
+        await saveToServer(false);
+        renderEscEditor();
+        showToast('Đã lưu căn chỉnh ảnh sân khấu chính ESC!');
+      }
+    });
+  });
 
   const seasonInput = container.querySelector('#esc-season');
   const statusInput = container.querySelector('#esc-status');
@@ -724,7 +1191,23 @@ function renderTedxEditor() {
   const container = document.getElementById('tedx-editor-fields');
   if (!container || !state.tedxSeasons) return;
 
+  const tedxEvent = state.annualEvents?.tedx || {};
+
   container.innerHTML = `
+    <div style="margin-bottom:24px;padding:20px;background:var(--soft);border-radius:16px;border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <strong style="font-size:14px">Ảnh sân khấu chính TEDx (#tedx &amp; /tedx):</strong>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
+          <span style="font-size:12px;color:var(--ink-muted)">${tedxEvent.image || 'Chưa đặt ảnh'}</span>
+          <span class="adjust-badge">Vị trí: ${tedxEvent.imagePosition || 'center 30%'} · ${tedxEvent.imageFit || 'cover'}</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button type="button" class="btn btn-tedx" id="btn-pick-tedx-stage">🖼️ Chọn từ kho ảnh</button>
+        <button type="button" class="hq-trigger-light" id="btn-adjust-tedx-stage">📐 Căn chỉnh</button>
+      </div>
+    </div>
+
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
       <h3 style="font-size:16px">Danh sách các mùa TEDxFPTUniversityHCMC (Mặc định hiển thị năm mới nhất)</h3>
       <span class="pill pill-tedx">${Object.keys(state.tedxSeasons).length} mùa trong hồ sơ</span>
@@ -733,6 +1216,39 @@ function renderTedxEditor() {
       ${renderSeasonsListHtml('tedx', state.tedxSeasons)}
     </div>
   `;
+
+  container.querySelector('#btn-pick-tedx-stage')?.addEventListener('click', () => {
+    openMediaPicker({
+      title: 'Chọn ảnh cho Sân khấu chính TEDx',
+      onSelect: async (chosen) => {
+        if (!state.annualEvents) state.annualEvents = {};
+        if (!state.annualEvents.tedx) state.annualEvents.tedx = {};
+        state.annualEvents.tedx.image = chosen.webpUrl;
+        state.annualEvents.tedx.originalImage = chosen.originalUrl || chosen.webpUrl;
+        await saveToServer(false);
+        renderTedxEditor();
+        showToast('Đã đổi ảnh sân khấu chính TEDx!');
+      }
+    });
+  });
+
+  container.querySelector('#btn-adjust-tedx-stage')?.addEventListener('click', () => {
+    openAdjusterModal({
+      title: 'Căn chỉnh ảnh sân khấu chính TEDx (#tedx)',
+      subtitle: 'Định vị tiêu điểm để thảm tròn đỏ và diễn giả hiển thị hoàn hảo nhất.',
+      aspectRatio: '16 / 9',
+      imageUrl: tedxEvent.image || '/assets/tedx.webp',
+      currentPosition: tedxEvent.imagePosition || 'center 30%',
+      currentFit: tedxEvent.imageFit || 'cover',
+      onSave: async ({ position, fit }) => {
+        tedxEvent.imagePosition = position;
+        tedxEvent.imageFit = fit;
+        await saveToServer(false);
+        renderTedxEditor();
+        showToast('Đã lưu căn chỉnh ảnh sân khấu chính TEDx!');
+      }
+    });
+  });
 
   bindSeasonInputs(container, 'tedx');
 }
@@ -770,8 +1286,17 @@ function renderProjectsEditor() {
         </div>
         <div class="form-grid-2">
           <div class="form-group">
-            <label>Ảnh WebP hiển thị</label>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <label style="margin:0">Ảnh WebP hiển thị</label>
+              <div style="display:flex;gap:6px">
+                <button type="button" class="hq-trigger-light btn-pick-proj-img" data-proj-key="${key}">🖼️ Chọn ảnh</button>
+                <button type="button" class="hq-trigger-light btn-adjust-proj-img" data-proj-key="${key}">📐 Căn chỉnh</button>
+              </div>
+            </div>
             <input type="text" class="form-input" data-proj-key="${key}" data-field="image" value="${p.image || ''}" />
+            <div style="margin-top:4px">
+              <span class="adjust-badge">Vị trí: ${p.imagePosition || '50% 50%'} · ${p.imageFit || 'cover'}</span>
+            </div>
           </div>
           <div class="form-group">
             <label>Ảnh gốc Full-Res (HQ Lightbox)</label>
@@ -782,6 +1307,50 @@ function renderProjectsEditor() {
     `
     )
     .join('');
+
+  container.querySelectorAll('.btn-pick-proj-img').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.projKey;
+      openMediaPicker({
+        title: `Chọn ảnh cho dự án ${state.otherProjects[key]?.title || key}`,
+        onSelect: async (chosen) => {
+          if (state.otherProjects?.[key]) {
+            state.otherProjects[key].image = chosen.webpUrl;
+            state.otherProjects[key].originalImage = chosen.originalUrl || chosen.webpUrl;
+            await saveToServer(false);
+            renderProjectsEditor();
+            showToast(`Đã chọn ảnh cho dự án ${state.otherProjects[key].title}!`);
+          }
+        }
+      });
+    });
+  });
+
+  container.querySelectorAll('.btn-adjust-proj-img').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.projKey;
+      const proj = state.otherProjects?.[key];
+      if (!proj?.image) {
+        showToast('Dự án này chưa có ảnh. Hãy chọn ảnh trước!');
+        return;
+      }
+      openAdjusterModal({
+        title: `Căn chỉnh ảnh dự án ${proj.title || key}`,
+        subtitle: 'Định vị tiêu điểm để thẻ dự án hiển thị trọng tâm đối tượng đẹp mắt.',
+        aspectRatio: '16 / 10',
+        imageUrl: proj.image,
+        currentPosition: proj.imagePosition || '50% 50%',
+        currentFit: proj.imageFit || 'cover',
+        onSave: async ({ position, fit }) => {
+          proj.imagePosition = position;
+          proj.imageFit = fit;
+          await saveToServer(false);
+          renderProjectsEditor();
+          showToast(`Đã lưu căn chỉnh ảnh dự án ${proj.title}!`);
+        }
+      });
+    });
+  });
 
   container.oninput = (e) => {
     const t = e.target;
@@ -1007,6 +1576,17 @@ async function saveToServer(notify = true) {
 }
 
 function setupToolbarActions() {
+  document.getElementById('btn-close-picker')?.addEventListener('click', closeMediaPicker);
+  document.getElementById('studio-picker-backdrop')?.addEventListener('click', closeMediaPicker);
+  document.getElementById('btn-close-adjuster')?.addEventListener('click', closeAdjusterModal);
+  document.getElementById('studio-adjuster-backdrop')?.addEventListener('click', closeAdjusterModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMediaPicker();
+      closeAdjusterModal();
+    }
+  });
+
   document.getElementById('btn-save-server')?.addEventListener('click', () => saveToServer(true));
 
   document.getElementById('btn-save-draft')?.addEventListener('click', () => {
