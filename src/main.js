@@ -43,14 +43,14 @@ const menu = document.querySelector('#mobile-nav');
 const closeMenu = () => {
   menu.hidden = true;
   menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-label', 'Mở menu');
+  menuButton.setAttribute('aria-label', 'Open menu');
 };
 
 menuButton.addEventListener('click', () => {
   const opening = menu.hidden;
   menu.hidden = !opening;
   menuButton.setAttribute('aria-expanded', String(opening));
-  menuButton.setAttribute('aria-label', opening ? 'Đóng menu' : 'Mở menu');
+  menuButton.setAttribute('aria-label', opening ? 'Close menu' : 'Open menu');
 });
 
 document.addEventListener('keydown', (event) => {

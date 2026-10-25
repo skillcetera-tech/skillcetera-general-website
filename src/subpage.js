@@ -12,14 +12,14 @@ function setupMobileDrawer() {
   const closeMenu = () => {
     menu.hidden = true;
     menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-label', 'Mở menu');
+    menuButton.setAttribute('aria-label', 'Open menu');
   };
 
   menuButton.addEventListener('click', () => {
     const opening = menu.hidden;
     menu.hidden = !opening;
     menuButton.setAttribute('aria-expanded', String(opening));
-    menuButton.setAttribute('aria-label', opening ? 'Đóng menu' : 'Mở menu');
+    menuButton.setAttribute('aria-label', opening ? 'Close menu' : 'Open menu');
   });
 
   menu.querySelectorAll('a').forEach((link) => {
@@ -46,17 +46,17 @@ function setupHQLightbox() {
     modal.className = 'hq-lightbox';
     modal.setAttribute('role', 'dialog');
     modal.setAttribute('aria-modal', 'true');
-    modal.setAttribute('aria-label', 'Trình xem ảnh chất lượng cao');
+    modal.setAttribute('aria-label', 'High-Resolution Image Viewer');
     modal.innerHTML = `
       <div class="hq-lightbox-top">
         <div class="hq-lightbox-meta">
           <span class="hq-lightbox-badge" id="hq-lightbox-res">ORIGINAL HQ</span>
-          <strong id="hq-lightbox-title" style="font-size:14px">Ảnh tư liệu gốc Skillcetera</strong>
+          <strong id="hq-lightbox-title" style="font-size:14px">Skillcetera Archival Photo</strong>
         </div>
         <div class="hq-lightbox-actions">
-          <button type="button" class="hq-trigger" id="hq-lightbox-zoom">Phóng to 1:1</button>
-          <a class="hq-trigger" id="hq-lightbox-download" href="#" download>Tải ảnh gốc (Full-Res)</a>
-          <button type="button" class="hq-trigger" id="hq-lightbox-close" aria-label="Đóng">Đóng ✕</button>
+          <button type="button" class="hq-trigger" id="hq-lightbox-zoom">Zoom 1:1</button>
+          <a class="hq-trigger" id="hq-lightbox-download" href="#" download>Download Original (Full-Res)</a>
+          <button type="button" class="hq-trigger" id="hq-lightbox-close" aria-label="Close">Close ✕</button>
         </div>
       </div>
       <div class="hq-lightbox-stage" id="hq-lightbox-stage">
@@ -78,25 +78,25 @@ function setupHQLightbox() {
 
   const closeModal = () => {
     modal.classList.remove('open', 'zoomed');
-    zoomBtn.textContent = 'Phóng to 1:1';
+    zoomBtn.textContent = 'Zoom 1:1';
   };
 
   const toggleZoom = () => {
     const isZoomed = modal.classList.toggle('zoomed');
-    zoomBtn.textContent = isZoomed ? 'Thu nhỏ vừa khung' : 'Phóng to 1:1';
+    zoomBtn.textContent = isZoomed ? 'Fit to Screen' : 'Zoom 1:1';
   };
 
   const openModal = ({ src, title, caption }) => {
     if (!src) return;
-    resBadge.textContent = 'ĐANG TẢI ẢNH GỐC...';
+    resBadge.textContent = 'LOADING ORIGINAL IMAGE...';
     img.src = src;
-    img.alt = title || caption || 'Ảnh tư liệu gốc Skillcetera';
-    titleEl.textContent = title || 'Tư liệu gốc chất lượng cao';
+    img.alt = title || caption || 'Skillcetera Archival Photo';
+    titleEl.textContent = title || 'High-Resolution Archive Photo';
     captionEl.textContent = caption || src;
     downloadBtn.href = src;
     modal.classList.add('open');
     modal.classList.remove('zoomed');
-    zoomBtn.textContent = 'Phóng to 1:1';
+    zoomBtn.textContent = 'Zoom 1:1';
   };
 
   img.addEventListener('load', () => {
@@ -127,7 +127,7 @@ function setupHQLightbox() {
     e.preventDefault();
     openModal({
       src: trigger.getAttribute('data-hq-src'),
-      title: trigger.getAttribute('data-hq-title') || trigger.getAttribute('alt') || 'Tư liệu gốc Skillcetera',
+      title: trigger.getAttribute('data-hq-title') || trigger.getAttribute('alt') || 'Skillcetera Archival Photo',
       caption: trigger.getAttribute('data-hq-caption') || ''
     });
   });
@@ -190,7 +190,7 @@ function setupSeasonShowcase(tabsId, spotlightId, seasonsData, accent) {
 
   if (entries.length === 0) return;
 
-  // Sắp xếp năm mới nhất lên đầu làm mặc định
+  // Sort newest year to top as default
   entries.sort((a, b) => Number(b.year || 0) - Number(a.year || 0));
 
   let activeYear = entries[0].year;
@@ -200,10 +200,10 @@ function setupSeasonShowcase(tabsId, spotlightId, seasonsData, accent) {
     const metrics = Array.isArray(s.metrics) && s.metrics.length === 4
       ? s.metrics
       : [
-          { label: 'Chỉ số 01', value: '100+' },
-          { label: 'Chỉ số 02', value: '1M+' },
-          { label: 'Chỉ số 03', value: '19' },
-          { label: 'Chỉ số 04', value: '50+' }
+          { label: 'Metric 01', value: '100+' },
+          { label: 'Metric 02', value: '1M+' },
+          { label: 'Metric 03', value: '19' },
+          { label: 'Metric 04', value: '50+' }
         ];
 
     const fallbackImg = accent === 'tedx' ? '/assets/tedx.webp' : '/assets/esc.webp';
@@ -215,24 +215,24 @@ function setupSeasonShowcase(tabsId, spotlightId, seasonsData, accent) {
       <div class="season-spotlight-photo">
         <img
           src="${displayImg}"
-          alt="Tư liệu ${s.editionLabel || `Mùa ${s.year}`}"
+          alt="Documentation ${s.editionLabel || `Season ${s.year}`}"
           data-hq-src="${displayOrig}"
-          data-hq-title="${s.editionLabel || `Mùa ${s.year} — ${s.theme}`}"
-          data-hq-caption="Tư liệu gốc chất lượng cao mùa ${s.year}."
+          data-hq-title="${s.editionLabel || `Season ${s.year} — ${s.theme}`}"
+          data-hq-caption="Original high-resolution archive photo from season ${s.year}."
         />
         <button
           type="button"
           class="hq-trigger"
           data-hq-src="${displayOrig}"
-          data-hq-title="${s.editionLabel || `Mùa ${s.year} — ${s.theme}`}"
-          data-hq-caption="Tư liệu gốc chất lượng cao mùa ${s.year}."
+          data-hq-title="${s.editionLabel || `Season ${s.year} — ${s.theme}`}"
+          data-hq-caption="Original high-resolution archive photo from season ${s.year}."
         >
-          Xem ảnh Full-Res ↗
+          View Full-Res ↗
         </button>
       </div>
       <div class="season-spotlight-info">
         <div>
-          <span class="pill ${accent === 'tedx' ? 'pill-tedx' : 'pill-esc'}">MÙA ${s.year} · ${s.editionLabel || `Season ${s.year}`}</span>
+          <span class="pill ${accent === 'tedx' ? 'pill-tedx' : 'pill-esc'}">SEASON ${s.year} · ${s.editionLabel || `Season ${s.year}`}</span>
           <h3 style="margin-top:10px">${s.theme || 'ALL THE WAY'}</h3>
           <p style="margin-top:8px">${s.description || ''}</p>
           ${s.statusNote ? `<small style="display:block;margin-top:6px;color:var(--gray)">${s.statusNote}</small>` : ''}
@@ -257,7 +257,7 @@ function setupSeasonShowcase(tabsId, spotlightId, seasonsData, accent) {
       data-season-year="${s.year}"
       aria-pressed="${idx === 0 ? 'true' : 'false'}"
     >
-      ${s.year} ${idx === 0 ? '★ Mới nhất' : ''}
+      ${s.year} ${idx === 0 ? '★ Latest' : ''}
     </button>
   `).join('');
 
@@ -302,8 +302,8 @@ function applyContentOverrides(content) {
             <p style="margin-top:8px">${item.description || item.summary || ''}</p>
           </div>
           <div class="editorial-meta">
-            <span>Vai trò: Đơn vị tổ chức</span>
-            <span>${item.statusNote || 'Tư liệu CLB'}</span>
+            <span>Role: Organizing Unit</span>
+            <span>${item.statusNote || 'Club Archive'}</span>
           </div>
         </article>
       `
@@ -328,8 +328,8 @@ function applyContentOverrides(content) {
             <p style="margin-top:8px">${d.desc || ''}</p>
           </div>
           <div class="editorial-meta">
-            <span>Kỹ năng: ${d.skills || 'Làm việc nhóm'}</span>
-            <span>${d.focus || 'Trọng tâm ban'}</span>
+            <span>Skills: ${d.skills || 'Teamwork'}</span>
+            <span>${d.focus || 'Key Focus'}</span>
           </div>
         </article>
       `
@@ -338,7 +338,7 @@ function applyContentOverrides(content) {
   }
   const deptCountBadge = document.getElementById('departments-count-badge');
   if (deptCountBadge && Array.isArray(depts)) {
-    deptCountBadge.textContent = `${String(depts.length).padStart(2, '0')} BAN CHUYÊN MÔN`;
+    deptCountBadge.textContent = `${String(depts.length).padStart(2, '0')} DEPARTMENTS`;
   }
 
   // Render custom HQ gallery uploads if present
@@ -351,25 +351,25 @@ function applyContentOverrides(content) {
           <div class="hq-gallery-thumb">
             <img
               src="${photo.webpUrl || photo.originalUrl}"
-              alt="${photo.alt || photo.title || 'Ảnh tư liệu Skillcetera'}"
+              alt="${photo.alt || photo.title || 'Skillcetera Archival Photo'}"
               data-hq-src="${photo.originalUrl || photo.webpUrl}"
-              data-hq-title="${photo.title || 'Ảnh tư liệu chất lượng cao'}"
+              data-hq-title="${photo.title || 'High-Resolution Archive Photo'}"
               data-hq-caption="${photo.caption || ''}"
             />
           </div>
           <div class="hq-gallery-caption">
             <div>
-              <strong>${photo.title || 'Tư liệu Skillcetera'}</strong>
+              <strong>${photo.title || 'Skillcetera Archive'}</strong>
               <span>${photo.dimensions || 'HQ Original'}</span>
             </div>
             <button
               type="button"
               class="hq-trigger-light"
               data-hq-src="${photo.originalUrl || photo.webpUrl}"
-              data-hq-title="${photo.title || 'Ảnh tư liệu chất lượng cao'}"
+              data-hq-title="${photo.title || 'High-Resolution Archive Photo'}"
               data-hq-caption="${photo.caption || ''}"
             >
-              Xem gốc
+              View Original
             </button>
           </div>
         </article>

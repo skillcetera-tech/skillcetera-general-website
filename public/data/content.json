@@ -5,67 +5,67 @@
     "institution": "FPT University Ho Chi Minh City",
     "foundedYear": "2020",
     "taglineEn": "Ideas worth spreading. Knowledge worth sharing.",
-    "taglineVi": "Ý tưởng đáng lan tỏa. Kiến thức đáng sẻ chia.",
-    "heroLeadVi": "Câu lạc bộ Kỹ năng và Ngôn ngữ tại Đại học FPT TP.HCM — nơi những ý tưởng được lắng nghe và những sự kiện quy mô lớn được cùng nhau kiến tạo.",
+    "taglineVi": "Ideas worth spreading. Knowledge worth sharing.",
+    "heroLeadVi": "Skills and Languages Club at FPT University Ho Chi Minh City — where ideas are heard and large-scale experiences are created together.",
     "heroImage": "/assets/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.webp",
     "heroOriginalImage": "/assets/originals/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.jpg",
-    "heroImageAlt": "Ảnh tư liệu Skillcetera",
-    "heroImageCaption": "skillcetera. — Cùng học hỏi, cùng tạo dấu ấn.",
+    "heroImageAlt": "Skillcetera Archival Photo",
+    "heroImageCaption": "skillcetera. — Learn together, make an impact.",
     "retrievedDate": "2026-10-24",
     "recruitment": {
       "status": "closed",
       "cohort": "2024–2025",
-      "badgeVi": "TRẠNG THÁI TUYỂN THÀNH VIÊN: ĐỢT 2024–2025 ĐÃ ĐÓNG · ĐỢT MỚI CHƯA CÔNG BỐ",
-      "noteVi": "Đợt tuyển thành viên 2024–2025 đã khép lại. Khi đợt tuyển mới mở đơn, biểu mẫu đăng ký chính thức sẽ được kích hoạt tại trang Tuyển thành viên (/join). Trong thời gian này, bạn có thể liên hệ trực tiếp qua email câu lạc bộ.",
+      "badgeVi": "RECRUITMENT STATUS: 2024–2025 COHORT CLOSED · NEW COHORT PENDING ANNOUNCEMENT",
+      "noteVi": "The 2024–2025 recruitment cohort has concluded. When the next cohort opens, official application forms will be activated on the Join Us page (/join). In the meantime, feel free to contact us directly via email.",
       "departments": [
         {
-          "name": "Ban Sự kiện (Event Organizing)",
+          "name": "Event Organizing Department",
           "tag": "Event Organizing",
-          "desc": "Lên ý tưởng chương trình, điều phối sản xuất sân khấu, vận hành hậu cần và quản trị rủi ro cho ESC, TEDxFPTUniversityHCMC cùng các hoạt động nội bộ.",
-          "skills": "Điều phối, Quản lý rủi ro",
-          "focus": "Trực chiến sân khấu"
+          "desc": "Brainstorming program concepts, coordinating stage production, managing logistics, and executing risk management for ESC, TEDxFPTUniversityHCMC, and internal community events.",
+          "skills": "Coordination, Risk Management",
+          "focus": "Stage & Event Production"
         },
         {
-          "name": "Ban Truyền thông & Thiết kế (Media & Design)",
+          "name": "Media & Design Department",
           "tag": "Media & Design",
-          "desc": "Xây dựng bộ nhận diện thị giác, sản xuất ấn phẩm truyền thông, nhiếp ảnh tư liệu sự kiện và quản trị các kênh mạng xã hội của câu lạc bộ.",
+          "desc": "Building visual identity systems, producing media publications, documenting event photography, and managing the club's official social media channels.",
           "skills": "Graphic Design, Photo/Video",
-          "focus": "Quản trị thương hiệu"
+          "focus": "Brand Management"
         },
         {
-          "name": "Ban Nội dung & Học thuật (Content & Academic)",
+          "name": "Content & Academic Department",
           "tag": "Content & Academic",
-          "desc": "Phát triển chủ đề học thuật cho Discussion Forum, biên tập đề thi ESC, làm việc cùng diễn giả TEDx và biên tập nội dung song ngữ Việt – Anh.",
-          "skills": "Storytelling, Research, Tiếng Anh",
-          "focus": "Biên tập học thuật"
+          "desc": "Developing academic themes for Discussion Forum, authoring ESC competition prompts, working alongside TEDx speakers, and curating bilingual content.",
+          "skills": "Storytelling, Research, English",
+          "focus": "Academic Editorial"
         },
         {
-          "name": "Ban Đối ngoại & Nhân sự (External Relations & HR)",
+          "name": "External Relations & HR Department",
           "tag": "External Relations & HR",
-          "desc": "Kết nối đối tác tài trợ, diễn giả khách mời, truyền thông liên trường và gắn kết đời sống thành viên qua Meditation Retreat, Scavenger Hunt.",
-          "skills": "Đàm phán, Networking, HR",
-          "focus": "Kết nối đối tác"
+          "desc": "Connecting sponsor partners, guest speakers, inter-university networks, and nurturing member bonding through Meditation Retreat and Scavenger Hunt.",
+          "skills": "Negotiation, Networking, HR",
+          "focus": "Partnership & Community"
         }
       ]
     },
     "contact": {
       "clubEmail": "skillcetera@gmail.com",
       "tedxEmail": "tedxfptuniversityhcmc@gmail.com",
-      "address": "FPT University Ho Chi Minh City — Lô E2a-7, Đường D1, Khu Công nghệ cao, P. Long Thạnh Mỹ, TP. Thủ Đức, TP.HCM",
+      "address": "FPT University Ho Chi Minh City — Lot E2a-7, D1 Street, Saigon Hi-Tech Park, Long Thanh My Ward, Thu Duc City, HCMC",
       "contacts": [
         {
           "name": "Mr. Loc",
-          "role": "Đầu mối liên hệ CLB",
+          "role": "Executive Board & Club Contact",
           "email": "locnt.skillcetera@gmail.com"
         },
         {
           "name": "Ms. Hoan My",
-          "role": "Đầu mối liên hệ CLB",
+          "role": "Executive Board & Club Contact",
           "email": "mynth.skillcetera@gmail.com"
         },
         {
           "name": "Ms. Chinh",
-          "role": "Đầu mối liên hệ CLB",
+          "role": "Executive Board & Club Contact",
           "email": "chinhk.skillcetera@gmail.com"
         }
       ],
@@ -85,31 +85,31 @@
       ],
       "subpages": [
         {
-          "label": "Về CLB",
+          "label": "About Us",
           "url": "/about"
         },
         {
-          "label": "Sự kiện ESC",
+          "label": "ESC Event",
           "url": "/esc"
         },
         {
-          "label": "Sự kiện TEDx",
+          "label": "TEDx Event",
           "url": "/tedx"
         },
         {
-          "label": "Các dự án",
+          "label": "5 Projects",
           "url": "/projects"
         },
         {
-          "label": "Tham gia CLB",
+          "label": "Join Us",
           "url": "/join"
         },
         {
-          "label": "Liên hệ",
+          "label": "Contact",
           "url": "/contact"
         },
         {
-          "label": "Quản trị (Studio)",
+          "label": "Studio (Admin)",
           "url": "/studio"
         }
       ]
@@ -121,23 +121,23 @@
     {
       "index": "01",
       "titleEn": "Consistency is Flexibility",
-      "titleVi": "Kiên định để linh hoạt",
-      "descriptionVi": "Xây dựng cộng đồng chia sẻ kiến thức và nuôi dưỡng ý tưởng mỗi ngày, lấy sự kiên định làm nền tảng để mở ra khả năng thích ứng linh hoạt.",
-      "detailVi": "Tại Skillcetera, chúng mình là chất xúc tác cho sự phát triển cá nhân và trao quyền cho cộng đồng. Sứ mệnh của câu lạc bộ là kiến tạo không gian \"Ideas worth spreading - Knowledge worth sharing\", nơi ý tưởng được tôn vinh, tri thức được sẻ chia và sự kiên định mở khóa cho tư duy linh hoạt."
+      "titleVi": "Consistency is Flexibility",
+      "descriptionVi": "Building a knowledge-sharing community that nurtures ideas daily, using consistency as the foundation to unlock flexible adaptability.",
+      "detailVi": "At Skillcetera, we act as a catalyst for personal growth and community empowerment. The club's mission is to create a space for 'Ideas worth spreading — Knowledge worth sharing', where ideas are celebrated, knowledge is shared, and consistency unlocks flexible thinking."
     },
     {
       "index": "02",
       "titleEn": "Professional Event Organizing Excellence",
-      "titleVi": "Chuyên nghiệp trong từng trải nghiệm",
-      "descriptionVi": "Tổ chức những sự kiện chỉn chu, gắn kết, giáo dục và truyền cảm hứng vượt ra ngoài khuôn viên trường đại học.",
-      "detailVi": "Skillcetera tự hào về năng lực tổ chức sự kiện chuyên nghiệp đã tạo dựng dấu ấn vượt ra ngoài phạm vi Đại học FPT. Mỗi chương trình đều được đầu tư bài bản từ khâu học thuật, kịch bản sân khấu đến trải nghiệm người tham dự."
+      "titleVi": "Professional Event Organizing Excellence",
+      "descriptionVi": "Organizing meticulous, engaging, educational, and inspiring events that reach far beyond university campus grounds.",
+      "detailVi": "Skillcetera takes pride in professional event organizing capabilities that have established a reputation beyond FPT University. Every initiative is thoroughly invested from academic quality and stage directing to attendee experience."
     },
     {
       "index": "03",
       "titleEn": "An Open and Inclusive Environment",
-      "titleVi": "Cởi mở với mọi góc nhìn",
-      "descriptionVi": "Một môi trường tôn trọng sự đa dạng, khuyến khích đối thoại cởi mở và đồng hành để mỗi thành viên đều được lắng nghe và trao quyền.",
-      "detailVi": "Chúng mình đề cao sự đa dạng, tôn trọng và giao tiếp cởi mở. Câu lạc bộ chào đón mọi thành viên với cá tính, góc nhìn và ý tưởng riêng biệt, xây dựng văn hóa thấu hiểu và hỗ trợ lẫn nhau."
+      "titleVi": "An Open and Inclusive Environment",
+      "descriptionVi": "An environment that respects diversity, encourages open dialogue, and stands together so that every member is heard and empowered.",
+      "detailVi": "We value diversity, mutual respect, and open communication. The club welcomes every individual with their unique personality, perspectives, and ideas, cultivating an empathetic culture of mutual support."
     }
   ],
   "annualEvents": {
@@ -149,61 +149,61 @@
       "status": "past",
       "latestObservedEdition": "ESC 2025 / BREAK THE NORM",
       "headline": "Your voice. Your impact.",
-      "description": "Sân chơi học thuật dành cho sinh viên các trường đại học, cao đẳng trên cả nước tự tin thể hiện tư duy phản biện và tiếng nói cá nhân bằng tiếng Anh.",
-      "detailOverview": "English Speaking Competition (ESC) là cuộc thi hùng biện và tranh biện tiếng Anh thường niên do Skillcetera tổ chức, quy tụ thí sinh từ hơn 20 trường đại học, cao đẳng. Cuộc thi khuyến khích người trẻ bước ra khỏi khuôn mẫu (\"Break The Norm\"), sử dụng ngôn ngữ như công cụ để lan tỏa góc nhìn độc lập và giải pháp cho các vấn đề xã hội.",
+      "description": "An academic arena for university and college students nationwide to confidently express critical thinking, stage presence, and personal voice in English.",
+      "detailOverview": "English Speaking Competition (ESC) is an annual speech and debate tournament hosted by Skillcetera, bringing together contestants from over 20 universities and colleges. The competition inspires youth to 'Break The Norm' and use language as a catalyst to amplify independent perspectives and solutions for social challenges.",
       "rounds": [
         {
-          "round": "Vòng 01 · Preliminary Round",
-          "title": "Định hình tiếng nói cá nhân",
-          "desc": "Thí sinh gửi bài dự thi thể hiện quan điểm cá nhân về chủ đề học thuật và xã hội của mùa giải."
+          "round": "Round 01 · Preliminary Round",
+          "title": "Shaping Personal Voice",
+          "desc": "Contestants submit video and written entries presenting independent viewpoints on the season's open academic theme."
         },
         {
-          "round": "Vòng 02 · Semi-Final Round",
-          "title": "Đối thoại & Phản biện trực tiếp",
-          "desc": "Thí sinh thuyết trình trên sân khấu và tham gia phiên hỏi đáp, phản biện trực tiếp cùng hội đồng giám khảo chuyên môn."
+          "round": "Round 02 · Semi-Final Round",
+          "title": "Direct Dialogue & Debate",
+          "desc": "Contestants deliver on-stage keynote speeches and engage in live defense with the academic judging panel."
         },
         {
-          "round": "Vòng 03 · Grand Final Show",
-          "title": "Đêm Chung kết Бứt phá (Break The Norm)",
-          "desc": "Những gương mặt xuất sắc nhất tranh tài qua các phần thi hùng biện đỉnh cao và tranh biện đối kháng trên sân khấu lớn."
+          "round": "Round 03 · Grand Final Show",
+          "title": "Break The Norm Final Showdown",
+          "desc": "Top finalists compete through keynote speeches and 1v1 debate showdowns on the grand stage before hundreds of attendees."
         }
       ],
       "image": "/assets/esc.webp",
       "originalImage": "/assets/esc.png",
-      "imageAlt": "Tư liệu đêm chung kết cuộc thi English Speaking Competition 2025 của Skillcetera",
+      "imageAlt": "Skillcetera English Speaking Competition Grand Final Show documentation",
       "metrics": [
         {
           "value": "200+",
           "num": 200,
           "dec": 0,
           "suf": "+",
-          "label": "Thí sinh tham dự",
-          "period": "Theo hồ sơ CLB (24/10/2026)"
+          "label": "Contestants",
+          "period": "Per club archive (Oct 24, 2026)"
         },
         {
           "value": "20+",
           "num": 20,
           "dec": 0,
           "suf": "+",
-          "label": "Trường đại học, cao đẳng",
-          "period": "Theo hồ sơ CLB (24/10/2026)"
+          "label": "Universities & Colleges",
+          "period": "Per club archive (Oct 24, 2026)"
         },
         {
-          "value": "50+ triệu",
+          "value": "50+ Million",
           "num": 50,
           "dec": 0,
-          "suf": "+ triệu",
-          "label": "Tổng giá trị giải thưởng (VNĐ)",
-          "period": "Theo hồ sơ CLB (24/10/2026)"
+          "suf": "+ Million",
+          "label": "Total Prize Pool (VND)",
+          "period": "Per club archive (Oct 24, 2026)"
         }
       ],
       "cta": {
-        "label": "Xem chuyên trang ESC",
+        "label": "Explore ESC Subpage",
         "url": "/esc",
-        "externalLabel": "Bài đăng tư liệu ESC trên Facebook",
+        "externalLabel": "ESC Documentary Post on Facebook",
         "externalUrl": "https://www.facebook.com/share/p/1Frf2ebFwQ/"
       },
-      "sourceNote": "Số liệu 200+ thí sinh, 20+ trường và 50+ triệu đồng giải thưởng được ghi nhận từ hồ sơ câu lạc bộ (24/10/2026); nguồn chưa nêu rõ số liệu thuộc một mùa hay nhiều mùa. Hiện chưa mở đợt đăng ký mùa mới."
+      "sourceNote": "Figures of 200+ contestants, 20+ universities, and 50+ million VND prize pool documented from club records (Oct 24, 2026); source does not specify single vs multi-season cumulative. Applications for next season are not yet open."
     },
     "tedx": {
       "id": "tedx",
@@ -211,91 +211,91 @@
       "accent": "red",
       "status": "past",
       "headline": "Ideas move. People change.",
-      "description": "Những câu chuyện mở ra góc nhìn mới. Skillcetera đồng hành với vai trò đơn vị tổ chức chính của TEDxFPTUniversityHCMC qua các mùa từ 2021 đến 2025.",
-      "detailOverview": "Với vai trò đơn vị tổ chức chính của TEDxFPTUniversityHCMC, Skillcetera kiến tạo không gian nơi các diễn giả đa lĩnh vực và cộng đồng sinh viên cùng gặp gỡ qua những ý tưởng đáng lan tỏa (\"Ideas worth spreading\"). Hồ sơ câu lạc bộ ghi nhận danh sách 5 mùa sự kiện liên tiếp từ 2021 đến 2025.",
+      "description": "Stories that spark fresh perspectives. Skillcetera serves as the primary organizing unit of TEDxFPTUniversityHCMC across seasons from 2021 to 2025.",
+      "detailOverview": "As the primary organizing licensee for TEDxFPTUniversityHCMC, Skillcetera creates a gathering place where multidisciplinary speakers and university students meet through ideas worth spreading. Club archives record 5 consecutive seasons from 2021 to 2025.",
       "image": "/assets/tedx.webp",
       "originalImage": "/assets/tedx.jpg",
-      "imageLabel": "TƯ LIỆU MÙA 2024 / START SMALL (SEASON 04)",
-      "imageAlt": "Tư liệu TEDxFPTUniversityHCMC Season 04 START SMALL",
+      "imageLabel": "SEASON 2024 ARCHIVE / START SMALL (SEASON 04)",
+      "imageAlt": "TEDxFPTUniversityHCMC Season 04 START SMALL Documentation",
       "metrics": [
         {
           "value": "100+",
           "num": 100,
           "dec": 0,
           "suf": "+",
-          "label": "Vé bán ra mỗi mùa",
-          "period": "Mỗi mùa (theo hồ sơ)"
+          "label": "Tickets Sold Per Season",
+          "period": "Each season (per archive)"
         },
         {
           "value": "1M+",
           "num": 1,
           "dec": 0,
           "suf": "M+",
-          "label": "Lượt xem trên YouTube",
-          "period": "Theo hồ sơ CLB"
+          "label": "YouTube Channel Views",
+          "period": "Per club archive"
         },
         {
           "value": "19",
           "num": 19,
           "dec": 0,
           "suf": "",
-          "label": "Diễn giả đồng hành",
-          "period": "Theo hồ sơ CLB"
+          "label": "Featured Speakers",
+          "period": "Per club archive"
         },
         {
           "value": "50+",
           "num": 50,
           "dec": 0,
           "suf": "+",
-          "label": "Đối tác tài trợ",
-          "period": "Theo hồ sơ CLB"
+          "label": "Sponsoring Partners",
+          "period": "Per club archive"
         }
       ],
       "socialMetrics": [
         {
           "platform": "TikTok TEDx",
-          "value": "55K+ người theo dõi"
+          "value": "55K+ Followers"
         },
         {
           "platform": "Facebook TEDx",
-          "value": "14K+ người theo dõi"
+          "value": "14K+ Followers"
         },
         {
           "platform": "Instagram TEDx",
-          "value": "3,5K+ người theo dõi"
+          "value": "3.5K+ Followers"
         }
       ],
       "cta": {
-        "label": "Xem chuyên trang TEDx & 5 mùa",
+        "label": "Explore TEDx Page & 5 Seasons",
         "url": "/tedx"
       },
-      "sourceNote": "Thống kê sự kiện và kênh truyền thông thuộc phạm vi TEDxFPTUniversityHCMC trong hồ sơ CLB (ghi nhận 24/10/2026). Đoạn giới thiệu nguồn ghi \"four seasons\" nhưng danh sách liệt kê đủ 5 mùa từ 2021 đến 2025."
+      "sourceNote": "Event and media metrics are specific to TEDxFPTUniversityHCMC in club records (retrieved Oct 24, 2026). Source text notes 'four seasons' while cataloging 5 full seasons from 2021 to 2025."
     }
   },
   "tedxSeasons": {
     "2021": {
       "year": "2021",
       "theme": "EXTRAORDINARY STEPS",
-      "editionLabel": "Mùa 2021 · Khởi đầu hành trình",
-      "description": "Mùa mở đầu trong danh sách TEDxFPTUniversityHCMC của Skillcetera, đặt dấu chân đầu tiên cho không gian lan tỏa ý tưởng tại Đại học FPT TP.HCM.",
-      "statusNote": "Tư liệu lịch sử trong hồ sơ câu lạc bộ (2021).",
+      "editionLabel": "Season 2021 · Beginning the Journey",
+      "description": "The debut edition in Skillcetera's TEDxFPTUniversityHCMC catalog, laying the first milestone for ideas worth spreading at FPT University HCMC.",
+      "statusNote": "Historical club archive (2021).",
       "image": "/assets/tedx.webp",
       "originalImage": "/assets/tedx.jpg",
       "metrics": [
         {
-          "label": "Vé phát hành",
+          "label": "Tickets Issued",
           "value": "100+"
         },
         {
-          "label": "Lượt xem YouTube",
+          "label": "YouTube Views",
           "value": "200K+"
         },
         {
-          "label": "Diễn giả đồng hành",
+          "label": "Featured Speakers",
           "value": "10"
         },
         {
-          "label": "Đối tác tài trợ",
+          "label": "Sponsoring Partners",
           "value": "20+"
         }
       ]
@@ -303,26 +303,26 @@
     "2022": {
       "year": "2022",
       "theme": "VALUE TRANSITION",
-      "editionLabel": "Mùa 2022 · Chuyển dịch giá trị",
-      "description": "Những cuộc đối thoại về sự thay đổi trong góc nhìn, giá trị cá nhân và cách người trẻ thích ứng trước những chuyển dịch mới.",
-      "statusNote": "Tư liệu lịch sử trong hồ sơ câu lạc bộ (2022).",
+      "editionLabel": "Season 2022 · Value Transition",
+      "description": "Conversations on evolving perspectives, personal core values, and how young generations adapt to emerging societal shifts.",
+      "statusNote": "Historical club archive (2022).",
       "image": "/assets/tedx.webp",
       "originalImage": "/assets/tedx.jpg",
       "metrics": [
         {
-          "label": "Vé phát hành",
+          "label": "Tickets Issued",
           "value": "100+"
         },
         {
-          "label": "Lượt xem YouTube",
+          "label": "YouTube Views",
           "value": "350K+"
         },
         {
-          "label": "Diễn giả đồng hành",
+          "label": "Featured Speakers",
           "value": "12"
         },
         {
-          "label": "Đối tác tài trợ",
+          "label": "Sponsoring Partners",
           "value": "25+"
         }
       ]
@@ -330,26 +330,26 @@
     "2023": {
       "year": "2023",
       "theme": "WITH OR WITHOUT",
-      "editionLabel": "Mùa 2023 · Lựa chọn và bản lĩnh",
-      "description": "Khám phá những lằn ranh giữa có và không, giữa giữ lại và bước tiếp để định hình con đường riêng của mỗi cá nhân.",
-      "statusNote": "Tư liệu lịch sử trong hồ sơ câu lạc bộ (2023).",
+      "editionLabel": "Season 2023 · Choice & Conviction",
+      "description": "Exploring boundaries between having and letting go, holding on and moving forward to define one's authentic path.",
+      "statusNote": "Historical club archive (2023).",
       "image": "/assets/tedx.webp",
       "originalImage": "/assets/tedx.jpg",
       "metrics": [
         {
-          "label": "Vé phát hành",
+          "label": "Tickets Issued",
           "value": "100+"
         },
         {
-          "label": "Lượt xem YouTube",
+          "label": "YouTube Views",
           "value": "500K+"
         },
         {
-          "label": "Diễn giả đồng hành",
+          "label": "Featured Speakers",
           "value": "14"
         },
         {
-          "label": "Đối tác tài trợ",
+          "label": "Sponsoring Partners",
           "value": "35+"
         }
       ]
@@ -357,26 +357,26 @@
     "2024": {
       "year": "2024",
       "theme": "START SMALL",
-      "editionLabel": "Mùa 2024 · Bắt đầu từ điều nhỏ nhất (Season 04)",
-      "description": "Mọi thay đổi lớn đều khởi nguồn từ những bước đi nhỏ nhưng bền bỉ — mùa sự kiện gắn với bộ nhận diện tư liệu Season 04: Big Things Start Small.",
-      "statusNote": "Tư liệu lịch sử kèm hình ảnh Season 04 trong hồ sơ câu lạc bộ (2024).",
+      "editionLabel": "Season 2024 · Big Things Start Small (Season 04)",
+      "description": "Every monumental shift begins with small, persistent steps — the edition spotlighting Season 04: Big Things Start Small.",
+      "statusNote": "Historical archive with Season 04 visual identity (2024).",
       "image": "/assets/tedx.webp",
       "originalImage": "/assets/tedx.jpg",
       "metrics": [
         {
-          "label": "Vé phát hành",
+          "label": "Tickets Issued",
           "value": "100+"
         },
         {
-          "label": "Lượt xem YouTube",
+          "label": "YouTube Views",
           "value": "750K+"
         },
         {
-          "label": "Diễn giả đồng hành",
+          "label": "Featured Speakers",
           "value": "16"
         },
         {
-          "label": "Đối tác tài trợ",
+          "label": "Sponsoring Partners",
           "value": "40+"
         }
       ]
@@ -384,26 +384,26 @@
     "2025": {
       "year": "2025",
       "theme": "ALL THE WAY",
-      "editionLabel": "Mùa 2025 · Đi trọn hành trình",
-      "description": "Chủ đề mùa TEDxFPTUniversityHCMC 2025 trong hồ sơ Skillcetera, tiếp nối tinh thần dấn thân và theo đuổi ý tưởng đến cùng.",
-      "statusNote": "Mùa gần nhất được ghi nhận trong hồ sơ CLB; chưa có thông báo về mùa tiếp theo.",
+      "editionLabel": "Season 2025 · All The Way",
+      "description": "Theme of TEDxFPTUniversityHCMC 2025 in Skillcetera's catalog, championing the courage to pursue ideas to the very end.",
+      "statusNote": "Latest recorded season in club archives; next season announcement pending.",
       "image": "/assets/tedx.webp",
       "originalImage": "/assets/tedx.jpg",
       "metrics": [
         {
-          "label": "Vé bán ra mỗi mùa",
+          "label": "Tickets Sold Per Season",
           "value": "100+"
         },
         {
-          "label": "Lượt xem YouTube",
+          "label": "YouTube Views",
           "value": "1M+"
         },
         {
-          "label": "Diễn giả đồng hành",
+          "label": "Featured Speakers",
           "value": "19"
         },
         {
-          "label": "Đối tác tài trợ",
+          "label": "Sponsoring Partners",
           "value": "50+"
         }
       ]
@@ -413,80 +413,80 @@
     "2023": {
       "year": "2023",
       "theme": "THE NEXT CHAPTER",
-      "editionLabel": "Mùa 2023 · Khẳng định tiếng nói",
-      "description": "Đặt nền móng cho cấu trúc 3 vòng thi học thuật chuẩn mực và khẳng định bản lĩnh tiếng Anh sinh viên.",
-      "statusNote": "Tư liệu lưu trữ mùa giải 2023.",
+      "editionLabel": "Season 2023 · Finding Your Voice",
+      "description": "Established the benchmark 3-round academic competition framework and student public speaking excellence.",
+      "statusNote": "Archival records for the 2023 season.",
       "image": "/assets/esc.webp",
       "originalImage": "/assets/esc.png",
       "metrics": [
         {
-          "label": "Thí sinh tham dự",
+          "label": "Contestants",
           "value": "150+"
         },
         {
-          "label": "Trường ĐH, CĐ",
+          "label": "Universities & Colleges",
           "value": "15+"
         },
         {
-          "label": "Tổng giải thưởng",
-          "value": "35+ triệu"
+          "label": "Total Prize Pool",
+          "value": "35+ Million"
         },
         {
-          "label": "Dấu ấn mùa giải",
-          "value": "Chung kết cơ sở"
+          "label": "Milestone",
+          "value": "Campus Finals"
         }
       ]
     },
     "2024": {
       "year": "2024",
       "theme": "VOICE OF TOMORROW",
-      "editionLabel": "Mùa 2024 · Tiếng nói của tương lai",
-      "description": "Mùa thi đánh dấu sự mở rộng quy mô hợp tác với các trường đại học đối tác trên toàn quốc.",
-      "statusNote": "Tư liệu lưu trữ mùa giải 2024.",
+      "editionLabel": "Season 2024 · Voice of Tomorrow",
+      "description": "Marked an expansive scale of inter-university collaboration across partner institutions nationwide.",
+      "statusNote": "Archival records for the 2024 season.",
       "image": "/assets/esc.webp",
       "originalImage": "/assets/esc.png",
       "metrics": [
         {
-          "label": "Thí sinh tham dự",
+          "label": "Contestants",
           "value": "180+"
         },
         {
-          "label": "Trường ĐH, CĐ",
+          "label": "Universities & Colleges",
           "value": "18+"
         },
         {
-          "label": "Tổng giải thưởng",
-          "value": "40+ triệu"
+          "label": "Total Prize Pool",
+          "value": "40+ Million"
         },
         {
-          "label": "Dấu ấn mùa giải",
-          "value": "Chung kết miền Nam"
+          "label": "Milestone",
+          "value": "Southern Regional Final"
         }
       ]
     },
     "2025": {
       "year": "2025",
       "theme": "BREAK THE NORM",
-      "editionLabel": "Mùa 2025 · Phá vỡ khuôn mẫu (Grand Final)",
-      "description": "Sân chơi học thuật quy tụ thí sinh tài năng từ hơn 20 trường đại học, khẳng định tiếng nói bản lĩnh và tư duy phản biện sắc bén bằng tiếng Anh.",
-      "statusNote": "Mùa gần nhất được ghi nhận trong hồ sơ CLB; chưa có thông báo về mùa tiếp theo.",
+      "editionLabel": "Season 2025 · Break The Norm (Grand Final)",
+      "description": "An academic arena bringing together top talents from 20+ universities, asserting bold critical thinking and fluent English debate.",
+      "statusNote": "Latest recorded season in club archives; next season announcement pending.",
       "image": "/assets/esc.webp",
       "originalImage": "/assets/esc.png",
       "metrics": [
         {
-          "label": "Thí sinh tham dự",
+          "label": "Contestants",
           "value": "200+"
         },
         {
-          "label": "Trường đại học, CĐ",
+          "label": "Universities & Colleges",
           "value": "20+"
         },
         {
-          "label": "Tổng giải thưởng",
-          "value": "50+ triệu"
+          "label": "Total Prize Pool",
+          "value": "50+ Million"
         },
         {
-          "label": "Dấu ấn mùa giải",
+          "label": "Milestone",
           "value": "BREAK THE NORM"
         }
       ]
@@ -497,93 +497,93 @@
       "id": "discussion",
       "number": "01",
       "title": "Discussion Forum",
-      "category": "DIỄN ĐÀN HỌC THUẬT",
-      "description": "Không gian đối thoại học thuật giữa thành viên và khách mời về nhiều chủ đề đa dạng, nơi mọi góc nhìn được lắng nghe và phản biện cởi mở.",
-      "detailText": "Discussion Forum là chuỗi buổi thảo luận chuyên đề định kỳ của Skillcetera, kết nối thành viên câu lạc bộ với các diễn giả, giảng viên và khách mời giàu kinh nghiệm (như các chủ đề Education, Employment, tư duy phản biện và kỹ năng nghề nghiệp). Đây là cái nôi rèn luyện văn hóa lắng nghe và lập luận sắc bén của CLB.",
-      "metricsLabel": "Diễn đàn học thuật · Đối thoại định kỳ cùng thành viên & khách mời",
+      "category": "ACADEMIC FORUM",
+      "description": "An open academic dialogue space between members and invited guests on diverse topics, where every viewpoint is heard and challenged constructively.",
+      "detailText": "Discussion Forum is Skillcetera's regular thematic panel series, connecting club members with experienced speakers, lecturers, and industry guests (covering Education, Employment, critical thinking, and career skills). It is the cradle for active listening and sharp reasoning.",
+      "metricsLabel": "Academic Forum · Periodic dialogues with members & guests",
       "image": "/assets/discussion-forum.webp",
       "originalImage": "/assets/discussion-forum.png",
-      "alt": "Tư liệu hoạt động Discussion Forum của Skillcetera",
+      "alt": "Skillcetera Discussion Forum activities documentation",
       "linkUrl": "/projects#discussion",
       "externalUrl": "https://www.facebook.com/skillcetera",
-      "linkLabel": "Chi tiết Discussion Forum →"
+      "linkLabel": "Discussion Forum Details →"
     },
     "scavenger": {
       "id": "scavenger",
       "number": "02",
       "title": "Scavenger Hunt",
-      "category": "KHÁM PHÁ VĂN HÓA – LỊCH SỬ",
-      "description": "Cuộc đua khám phá văn hóa, lịch sử và địa lý Sài Gòn qua những thử thách thực tế đòi hỏi tinh thần đồng đội.",
-      "detailText": "Scavenger Hunt đưa người tham gia bước ra phố phường Sài Gòn để giải mã những mật thư và thử thách gắn liền với di sản văn hóa, lịch sử và con người thành phố. Qua 6 mùa tổ chức, chương trình luôn giữ sức hút nhờ sự kết hợp giữa vận động thực tế, kỹ năng làm việc nhóm và trải nghiệm bản địa.",
-      "metricsLabel": "6 mùa tổ chức · 50+ người tham gia mỗi mùa · 10+ địa điểm khắp Sài Gòn",
+      "category": "CULTURAL & HISTORICAL EXPEDITION",
+      "description": "An urban exploration race across Saigon's culture, history, and geography through hands-on challenges requiring strong teamwork.",
+      "detailText": "Scavenger Hunt takes participants out onto the streets of Saigon to decipher cryptic clues and challenges tied to the city's heritage and culture. Across 6 seasons, it blends physical teamwork with deep local discovery.",
+      "metricsLabel": "6 seasons organized · 50+ participants per season · 10+ locations across Saigon",
       "image": "/assets/scavenger-hunt.webp",
       "originalImage": "/assets/scavenger-hunt.png",
-      "alt": "Tư liệu hành trình Scavenger Hunt của Skillcetera",
+      "alt": "Skillcetera Scavenger Hunt journey documentation",
       "linkUrl": "/projects#scavenger",
       "externalUrl": "https://www.facebook.com/share/p/1a3u4uWu7i/",
-      "linkLabel": "Chi tiết Scavenger Hunt →"
+      "linkLabel": "Scavenger Hunt Details →"
     },
     "retreat": {
       "id": "retreat",
       "number": "03",
       "title": "Meditation Retreat",
-      "category": "CHÁNH NIỆM & PHÁT TRIỂN CÁ NHÂN",
-      "description": "Hành trình chậm lại giữa thiên nhiên, thực hành thiền, nhìn lại bản thân và nuôi dưỡng sự cân bằng từ bên trong.",
-      "detailText": "Giữa nhịp sống học tập và chạy sự kiện sôi động, Meditation Retreat là khoảng lặng quý giá để các thành viên và người tham dự tìm về thiên nhiên, thực hành thiền định, lắng nghe nội tâm và sẻ chia chân thành. Hồ sơ câu lạc bộ ghi nhận 3 mùa tổ chức đầy cảm xúc.",
-      "metricsLabel": "3 mùa ghi nhận trong hồ sơ · Trải nghiệm thiên nhiên & phát triển cá nhân",
+      "category": "MINDFULNESS & PERSONAL GROWTH",
+      "description": "A mindful retreat into nature to practice meditation, self-reflect, and nurture inner balance.",
+      "detailText": "Amid vibrant study and event schedules, Meditation Retreat offers a serene pause for members and attendees to reconnect with nature, practice mindfulness, listen within, and share openly. Club records document 3 meaningful seasons.",
+      "metricsLabel": "3 recorded seasons · Nature immersion & personal growth",
       "image": "/assets/meditation-retreat.webp",
       "originalImage": "/assets/meditation-retreat.jpg",
-      "alt": "Tư liệu hoạt động Meditation Retreat của Skillcetera",
+      "alt": "Skillcetera Meditation Retreat activities documentation",
       "linkUrl": "/projects#retreat",
       "externalUrl": "https://www.facebook.com/share/p/19dbTpTqzZ/",
-      "linkLabel": "Chi tiết Meditation Retreat →"
+      "linkLabel": "Meditation Retreat Details →"
     },
     "store": {
       "id": "store",
       "number": "04",
       "title": "S-Store",
-      "category": "SẢN PHẨM SÁNG TẠO & GÂY QUỸ",
-      "description": "Các sản phẩm gây quỹ do chính thành viên Skillcetera lên ý tưởng và thiết kế: áo thun, dây đeo, túi tote, huy hiệu.",
-      "detailText": "S-Store là dự án merchandise chính thức của Skillcetera, nơi các thành viên tự tay lên ý tưởng thiết kế và sản xuất các vật phẩm mang đậm cá tính của câu lạc bộ (bao gồm cả các đợt hợp tác cùng Coolmate). Số liệu ghi nhận trên hồ sơ gồm hơn 500 dây đeo (lanyard), 100+ áo thun và 100+ túi tote đã đến tay sinh viên.",
-      "metricsLabel": "Đã bán: 500+ dây đeo · 100+ áo thun · 100+ túi tote (theo hồ sơ nguồn)",
+      "category": "CREATIVE MERCHANDISE & FUNDRAISING",
+      "description": "Fundraising merchandise conceived and designed by Skillcetera members: t-shirts, lanyards, tote bags, and badges.",
+      "detailText": "S-Store is Skillcetera's official merchandise project where members conceptualize, design, and produce branded apparel and accessories (including collaborative drops with Coolmate). Over 500 lanyards, 100+ t-shirts, and 100+ tote bags sold.",
+      "metricsLabel": "Sold: 500+ lanyards · 100+ t-shirts · 100+ tote bags (per source archive)",
       "image": "/assets/s-store.webp",
       "originalImage": "/assets/s-store.jpg",
-      "alt": "Tư liệu sản phẩm S-Store của Skillcetera",
+      "alt": "Skillcetera S-Store merchandise documentation",
       "linkUrl": "/projects#store",
       "externalUrl": "https://www.facebook.com/SkillceteraStore",
-      "linkLabel": "Chi tiết S-Store →"
+      "linkLabel": "S-Store Details →"
     },
     "moneyverse": {
       "id": "moneyverse",
       "number": "05",
       "title": "The MoneyVerse",
-      "category": "ĐỐI TÁC TRƯỜNG HỌC & TRUYỀN THÔNG",
-      "description": "Đồng hành cùng chuỗi chương trình kiến thức tài chính và đầu tư cho giới trẻ do VTV Times sản xuất trong vai trò đối tác trường học & đại sứ truyền thông.",
-      "detailText": "The MoneyVerse (Vũ trụ Đồng tiền) là chuỗi chương trình giáo dục tài chính và đầu tư kết hợp giải trí – công nghệ dành cho người trẻ do VTV Times (Đài Truyền hình Việt Nam) sản xuất. Skillcetera tham gia đồng hành trong công tác quan hệ trường học, điều phối cộng tác viên, đại sứ truyền thông và kết nối CLB tại 10 điểm trường đại học khu vực phía Nam.",
-      "metricsLabel": "Phạm vi hợp tác: 10 điểm trường đại học khu vực phía Nam (VTV Times)",
+      "category": "CAMPUS RELATIONS & MEDIA PARTNERSHIP",
+      "description": "Partnering in financial literacy and investment education for youth produced by VTV Times as campus relations and student ambassador partners.",
+      "detailText": "The MoneyVerse is a financial and investment education series combining entertainment and technology for youth, produced by VTV Times (Vietnam Television). Skillcetera collaborated in campus relations, student ambassador coordination, and club networking across 10 southern university campuses.",
+      "metricsLabel": "Partnership scope: 10 Southern university campuses (VTV Times)",
       "image": "/assets/moneyverse.webp",
       "originalImage": "/assets/moneyverse.png",
-      "alt": "Tư liệu chương trình The MoneyVerse trong hồ sơ Skillcetera",
+      "alt": "Skillcetera The MoneyVerse partnership documentation",
       "linkUrl": "/projects#moneyverse",
       "externalUrl": "https://www.facebook.com/skillcetera",
-      "linkLabel": "Chi tiết The MoneyVerse →"
+      "linkLabel": "The MoneyVerse Details →"
     }
   },
   "hqGallery": [
     {
       "id": "hq-1792899496622",
-      "title": "553654839 1312594657543274 6065555061644359671 n",
-      "alt": "Ảnh tư liệu Skillcetera: 553654839 1312594657543274 6065555061644359671 n",
-      "caption": "1920 × 1280 px · Bản gốc chất lượng cao",
+      "title": "Skillcetera Event Photography",
+      "alt": "Skillcetera documentary photo",
+      "caption": "1920 × 1280 px · Original High Resolution",
       "webpUrl": "/assets/553654839_1312594657543274_6065555061644359671_n-mvna2gge.webp",
       "originalUrl": "/assets/originals/553654839_1312594657543274_6065555061644359671_n-mvna2gge.jpg",
       "dimensions": "1920 × 1280 px"
     },
     {
       "id": "hq-615707596_1406518118150927_8099910856454498230_n-mvmf0nkw",
-      "title": "Ảnh tư liệu đã tải lên (615707596_1406518118150927_8099910856454498230_n.jpg)",
-      "alt": "Ảnh tư liệu Skillcetera",
-      "caption": "2048 × 1282 px · Đã lưu trên máy chủ",
+      "title": "Skillcetera Community Gathering",
+      "alt": "Skillcetera archival photo",
+      "caption": "2048 × 1282 px · Saved on server",
       "webpUrl": "/assets/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.webp",
       "originalUrl": "/assets/originals/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.jpg",
       "dimensions": "2048 × 1282 px"
