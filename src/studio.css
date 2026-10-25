@@ -875,3 +875,211 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Studio Authentication Gate & Restricted Access
+   ========================================================================== */
+
+.studio-shell {
+  display: none;
+}
+
+.is-authenticated .studio-shell {
+  display: block;
+}
+
+.studio-auth-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
+  padding: 40px 20px;
+  position: relative;
+  z-index: 50;
+}
+
+.is-authenticated .studio-auth-overlay {
+  display: none !important;
+}
+
+.studio-auth-card {
+  width: min(440px, 100%);
+  padding: 40px 34px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.studio-auth-brand {
+  margin-bottom: 28px;
+}
+
+.studio-auth-logo-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.studio-auth-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.studio-auth-brand h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.studio-auth-sub {
+  font-size: 13.5px;
+  color: var(--gray);
+  margin: 0 0 14px;
+}
+
+.studio-auth-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(235, 0, 40, 0.08);
+  color: var(--red);
+  border: 1px solid rgba(235, 0, 40, 0.2);
+}
+
+.studio-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.studio-auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.studio-auth-field label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.studio-auth-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.studio-auth-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--gray);
+  pointer-events: none;
+}
+
+.studio-auth-input-wrap input {
+  width: 100%;
+  padding: 12px 14px 12px 40px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong, #d8dbe2);
+  background: #ffffff;
+  color: var(--ink);
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.studio-auth-input-wrap input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(36, 87, 255, 0.16);
+}
+
+.studio-auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.studio-auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+  cursor: pointer;
+}
+
+.studio-auth-checkbox input {
+  cursor: pointer;
+  accent-color: var(--blue);
+}
+
+.studio-auth-error {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(235, 0, 40, 0.08);
+  border: 1px solid rgba(235, 0, 40, 0.25);
+  color: var(--red);
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  animation: shake 0.3s ease;
+}
+
+.studio-auth-btn {
+  width: 100%;
+  padding: 13px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 14px;
+  margin-top: 4px;
+}
+
+.studio-auth-footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.studio-auth-footer a {
+  font-size: 13px;
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+
+.studio-auth-footer a:hover {
+  color: var(--ink);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}

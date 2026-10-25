@@ -1828,7 +1828,90 @@ function renderAllEditors() {
   updateStatsStrip();
 }
 
+const AUTH_KEY = 'skillcetera_admin_auth';
+
+function checkAuth() {
+  return sessionStorage.getItem(AUTH_KEY) === 'true' || localStorage.getItem(AUTH_KEY) === 'true';
+}
+
+function setupAuth() {
+  const gate = document.getElementById('studio-auth-gate');
+  const form = document.getElementById('studio-login-form');
+  const userInp = document.getElementById('auth-username');
+  const passInp = document.getElementById('auth-password');
+  const remChk = document.getElementById('auth-remember');
+  const errBox = document.getElementById('auth-error-msg');
+  const card = document.getElementById('studio-auth-card');
+  const logoutBtn = document.getElementById('btn-studio-logout');
+
+  const updateUI = (isAuthed) => {
+    if (isAuthed) {
+      document.documentElement.classList.add('is-authenticated');
+      if (gate) gate.style.display = 'none';
+      const shell = document.getElementById('main-content');
+      if (shell) shell.style.display = 'block';
+    } else {
+      document.documentElement.classList.remove('is-authenticated');
+      if (gate) gate.style.display = 'flex';
+      const shell = document.getElementById('main-content');
+      if (shell) shell.style.display = 'none';
+      if (userInp) {
+        userInp.value = '';
+        setTimeout(() => userInp.focus(), 150);
+      }
+      if (passInp) passInp.value = '';
+      if (errBox) errBox.hidden = true;
+    }
+  };
+
+  // Run initial state check
+  updateUI(checkAuth());
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = (userInp?.value || '').trim();
+      const p = (passInp?.value || '').trim();
+
+      if (u.toLowerCase() === 'admin' && p === '321') {
+        if (errBox) errBox.hidden = true;
+        if (remChk?.checked) {
+          localStorage.setItem(AUTH_KEY, 'true');
+        } else {
+          sessionStorage.setItem(AUTH_KEY, 'true');
+        }
+        showToast('Signed in successfully as Administrator.');
+        updateUI(true);
+      } else {
+        if (errBox) {
+          errBox.hidden = false;
+          errBox.textContent = 'Invalid username or password. Please try again.';
+        }
+        if (card) {
+          card.style.animation = 'none';
+          void card.offsetWidth; // Trigger reflow
+          card.style.animation = 'shake 0.35s ease';
+        }
+        if (passInp) {
+          passInp.value = '';
+          passInp.focus();
+        }
+      }
+    });
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(AUTH_KEY);
+      showToast('Signed out of Skillcetera Studio.');
+      updateUI(false);
+    });
+  }
+}
+
 async function initStudio() {
+  setupAuth();
   await fetchInitialContent();
   setupTabs();
   setupHQUploader();

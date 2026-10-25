@@ -12,6 +12,11 @@
   <link rel="stylesheet" href="/src/styles.css" />
   <link rel="stylesheet" href="/src/subpage.css" />
   <link rel="stylesheet" href="/src/studio.css" />
+  <script>
+    if (sessionStorage.getItem('skillcetera_admin_auth') === 'true' || localStorage.getItem('skillcetera_admin_auth') === 'true') {
+      document.documentElement.classList.add('is-authenticated');
+    }
+  </script>
 </head>
 <body class="subpage studio-body">
   <header class="site-header nav">
@@ -40,6 +45,58 @@
       <a href="/studio">Content Studio</a>
     </nav>
   </header>
+
+  <!-- Studio Admin Gate / Login Overlay -->
+  <section id="studio-auth-gate" class="studio-auth-overlay" aria-label="Studio Admin Login">
+    <div class="studio-auth-card" id="studio-auth-card">
+      <div class="studio-auth-brand">
+        <div class="studio-auth-logo-wrap">
+          <img src="/assets/skillcetera-logo.png" width="52" height="52" alt="Skillcetera Logo" class="studio-auth-logo" />
+        </div>
+        <h2>Skillcetera Studio</h2>
+        <p class="studio-auth-sub">Content Management &amp; Media Administration</p>
+        <span class="studio-auth-badge">Restricted Access · Authorized Personnel Only</span>
+      </div>
+
+      <form id="studio-login-form" class="studio-auth-form" autocomplete="off">
+        <div class="studio-auth-field">
+          <label for="auth-username">Username</label>
+          <div class="studio-auth-input-wrap">
+            <svg class="studio-auth-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" id="auth-username" required placeholder="admin" autocomplete="username" />
+          </div>
+        </div>
+
+        <div class="studio-auth-field">
+          <label for="auth-password">Password</label>
+          <div class="studio-auth-input-wrap">
+            <svg class="studio-auth-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="auth-password" required placeholder="••••••" autocomplete="current-password" />
+          </div>
+        </div>
+
+        <div class="studio-auth-row">
+          <label class="studio-auth-checkbox">
+            <input type="checkbox" id="auth-remember" />
+            <span>Remember this device</span>
+          </label>
+        </div>
+
+        <div id="auth-error-msg" class="studio-auth-error" hidden>
+          Invalid credentials. Please verify your username and password.
+        </div>
+
+        <button type="submit" class="btn btn-esc studio-auth-btn">
+          <span>Sign In to Studio</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <div class="studio-auth-footer">
+        <a href="/" class="text-link">← Return to Public Homepage</a>
+      </div>
+    </div>
+  </section>
 
   <main id="main-content" class="studio-shell">
     <div class="studio-topbar">
@@ -70,6 +127,9 @@
         </label>
         <button type="button" class="btn-icon-action danger" id="btn-reset-default">
           Restore Defaults
+        </button>
+        <button type="button" class="btn-icon-action" id="btn-studio-logout" title="Sign out of Studio">
+          Log Out ↗
         </button>
       </div>
     </div>
