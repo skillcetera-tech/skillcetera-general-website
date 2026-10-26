@@ -153,6 +153,7 @@
             
             
             
+            
             <div class="cards event-metrics">
               <div class="card card-esc">
                 <small>Contestants</small>
@@ -186,30 +187,25 @@
           </div>
         </div>
       </section>
-
-      <!-- Intermission / Bridge between ESC and TEDx: restores visual rhythm, prevents scene collision -->
-      <section class="event-bridge" id="bridge" aria-labelledby="bridge-title">
+      <!-- 3.5 MINI-GAME: Flagship Duel (ESC Blue vs TEDx Red) -->
+      <section class="event-bridge event-game" id="bridge" aria-labelledby="bridge-title">
         <div class="bridge-ticker-wrap" aria-hidden="true">
           <div class="bridge-ticker">
-            <span class="ticker-item"><i class="ticker-dot blue"></i> ESC 2025 · BREAK THE NORM</span>
+            <span class="ticker-item"><i class="ticker-dot blue"></i> MINI-GAME · ARE YOU TEAM ESC (BLUE) OR TEAM TEDX (RED)?</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item"><i class="ticker-dot red"></i> TEDxFPTUniversityHCMC · IDEAS WORTH SPREADING</span>
+            <span class="ticker-item"><i class="ticker-dot red"></i> TEST YOUR INSTINCT</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item">200+ CONTESTANTS NATIONWIDE</span>
+            <span class="ticker-item">SWIPE OR CLICK TO PLAY</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item">2.5M+ YOUTUBE VIEWS</span>
+            <span class="ticker-item">CHALLENGE YOUR SKILLCETERA KNOWLEDGE</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item">ACADEMIC DEBATE &amp; GLOBAL INSPIRATION</span>
+            <span class="ticker-item"><i class="ticker-dot blue"></i> MINI-GAME · ARE YOU TEAM ESC (BLUE) OR TEAM TEDX (RED)?</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item"><i class="ticker-dot blue"></i> ESC 2025 · BREAK THE NORM</span>
+            <span class="ticker-item"><i class="ticker-dot red"></i> TEST YOUR INSTINCT</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item"><i class="ticker-dot red"></i> TEDxFPTUniversityHCMC · IDEAS WORTH SPREADING</span>
+            <span class="ticker-item">SWIPE OR CLICK TO PLAY</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item">200+ CONTESTANTS NATIONWIDE</span>
-            <span class="ticker-sep">✦</span>
-            <span class="ticker-item">2.5M+ YOUTUBE VIEWS</span>
-            <span class="ticker-sep">✦</span>
-            <span class="ticker-item">ACADEMIC DEBATE &amp; GLOBAL INSPIRATION</span>
+            <span class="ticker-item">CHALLENGE YOUR SKILLCETERA KNOWLEDGE</span>
             <span class="ticker-sep">✦</span>
           </div>
         </div>
@@ -217,50 +213,92 @@
         <div class="bridge-inner section-shell">
           <div class="bridge-heading reveal">
             <div class="bridge-pills">
-              <span class="pill pill-esc">01 · ESC (ACADEMIC)</span>
-              <span class="bridge-connector" aria-hidden="true">➔</span>
-              <span class="pill pill-tedx">02 · TEDx (INSPIRATION)</span>
+              <span class="pill pill-esc">🔵 TEAM ESC</span>
+              <span class="bridge-connector" aria-hidden="true">VS</span>
+              <span class="pill pill-tedx">🔴 TEAM TEDX</span>
             </div>
-            <h2 id="bridge-title" class="h2 split">From Confident Debate.<br><em>To Ideas Worth Spreading.</em></h2>
-            <p class="bridge-desc">Skillcetera champions intellectual depth through English competition while connecting youth with transformative ideas on global speaking stages.</p>
+            <h2 id="bridge-title" class="h2 split">Pick Your Stage.<br><em>Test Your Reflexes.</em></h2>
+            <p class="bridge-desc">Thử tài phân định sự kiện: Dữ kiện hiển thị dưới đây thuộc về <b>ESC (Xanh)</b> hay <b>TEDxFPTUniversityHCMC (Đỏ)</b>?</p>
           </div>
 
-          <div class="bridge-duo reveal">
-            <article class="bridge-card bridge-card-esc">
-              <div class="bridge-card-top">
-                <span class="bridge-card-tag">ANNUAL ARENA · 01</span>
-                <span class="bridge-card-badge esc-badge">BLUE IDENTITY</span>
+          <!-- Interactive Game Container -->
+          <div class="game-container reveal" id="flagship-game">
+            <!-- Game HUD -->
+            <div class="game-hud">
+              <div class="game-progress-wrap">
+                <span class="game-round-text" id="game-round">Câu 1 / 6</span>
+                <div class="game-progress-bar">
+                  <div class="game-progress-fill" id="game-progress" style="width: 16.66%"></div>
+                </div>
               </div>
-              <h3 class="bridge-card-title">English Speaking Competition</h3>
-              <p class="bridge-card-text">A premier academic debate arena across 20+ universities, challenging students to assert critical conviction before judging panels.</p>
-              <div class="bridge-card-meta">
-                <span><b>200+</b> Contestants</span>
-                <span><b>20+</b> Universities</span>
-                <span><b>50M+</b> VND Prizes</span>
+              <div class="game-score-badge">
+                <span class="game-score-label">ĐIỂM:</span>
+                <strong class="game-score-num" id="game-score">0</strong>
+                <span class="game-streak-pill" id="game-streak" hidden>🔥 x2</span>
               </div>
-            </article>
-
-            <div class="bridge-symbol" aria-hidden="true">
-              <div class="bridge-symbol-line"></div>
-              <div class="bridge-symbol-circle">
-                <span>✦</span>
-              </div>
-              <div class="bridge-symbol-line"></div>
             </div>
 
-            <article class="bridge-card bridge-card-tedx">
-              <div class="bridge-card-top">
-                <span class="bridge-card-tag">ANNUAL ARENA · 02</span>
-                <span class="bridge-card-badge tedx-badge">RED IDENTITY</span>
+            <!-- Card Arena -->
+            <div class="game-arena">
+              <div class="game-card" id="game-card" tabindex="0" role="region" aria-label="Game question card">
+                <div class="game-card-stamp stamp-esc" aria-hidden="true">ESC 🔵</div>
+                <div class="game-card-stamp stamp-tedx" aria-hidden="true">TEDx 🔴</div>
+                <div class="game-card-clue" id="game-card-clue">HỌC THUẬT &amp; TRANH BIỆN</div>
+                <div class="game-card-question" id="game-card-text">
+                  Đấu trường tranh biện tiếng Anh học thuật với quy mô 200+ thí sinh đến từ 20+ trường đại học toàn quốc?
+                </div>
+                <div class="game-card-hint">
+                  <span class="hint-desktop">Kéo thẻ sang trái/phải hoặc bấm nút bên dưới</span>
+                  <span class="hint-mobile">Vuốt trái (ESC) hoặc vuốt phải (TEDx)</span>
+                </div>
               </div>
-              <h3 class="bridge-card-title">TEDxFPTUniversityHCMC</h3>
-              <p class="bridge-card-text">Under official TED license, curating multidisciplinary talks that move audiences, foster empathy, and spark collective change.</p>
-              <div class="bridge-card-meta">
-                <span><b>2.5M+</b> Views</span>
-                <span><b>19</b> Speakers</span>
-                <span><b>50+</b> Partners</span>
+
+              <!-- Feedback Overlay -->
+              <div class="game-feedback" id="game-feedback" aria-live="polite" hidden>
+                <div class="feedback-badge" id="feedback-badge">Chính xác! +100</div>
+                <p class="feedback-detail" id="feedback-detail"></p>
               </div>
-            </article>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="game-actions" id="game-actions">
+              <button type="button" class="btn btn-game btn-game-esc" id="btn-pick-esc" aria-label="Chọn ESC (Phím mũi tên trái)">
+                <span class="btn-game-icon">🔵</span>
+                <span class="btn-game-text">Team ESC</span>
+                <kbd class="btn-game-kbd">←</kbd>
+              </button>
+
+              <button type="button" class="btn btn-game btn-game-tedx" id="btn-pick-tedx" aria-label="Chọn TEDx (Phím mũi tên phải)">
+                <span class="btn-game-icon">🔴</span>
+                <span class="btn-game-text">Team TEDx</span>
+                <kbd class="btn-game-kbd">→</kbd>
+              </button>
+            </div>
+
+            <!-- Game Over / Victory Modal -->
+            <div class="game-result" id="game-result" hidden>
+              <div class="result-trophy" id="result-trophy">🏆</div>
+              <h3 class="result-title" id="result-title">Skillcetera Grandmaster!</h3>
+              <p class="result-desc" id="result-desc">Bạn đã trả lời đúng 6/6 câu hỏi về ESC và TEDx!</p>
+              <div class="result-score-box">
+                <div>
+                  <small>Tổng điểm</small>
+                  <strong id="result-final-score">600</strong>
+                </div>
+                <div>
+                  <small>Độ chính xác</small>
+                  <strong id="result-accuracy">100%</strong>
+                </div>
+              </div>
+              <div class="result-actions">
+                <button type="button" class="btn btn-game-replay" id="btn-replay">
+                  <span>Chơi lại ↺</span>
+                </button>
+                <a href="#tedx" class="btn btn-game-next">
+                  <span>Khám phá TEDx ↓</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -280,6 +318,7 @@
             <h2 id="tedx-title" class="h2 split">Ideas worth<br><em>spreading.</em></h2>
             <p class="event-description reveal">Stories that spark fresh perspectives. Skillcetera serves as the primary organizing unit of TEDxFPTUniversityHCMC across seasons from 2021 to 2025.</p>
 
+            
             
             
             
