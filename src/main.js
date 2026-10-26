@@ -20,21 +20,114 @@ if (heroPic && SITE_META?.heroImage) {
   }
 }
 
-// Bind ESC & TEDx stage image alignment
-if (ANNUAL_EVENTS?.esc?.image) {
-  const escImg = document.querySelector('#esc .tree-wrap img');
-  if (escImg) {
-    escImg.src = ANNUAL_EVENTS.esc.image;
-    if (ANNUAL_EVENTS.esc.imagePosition) escImg.style.objectPosition = ANNUAL_EVENTS.esc.imagePosition;
-    if (ANNUAL_EVENTS.esc.imageFit) escImg.style.objectFit = ANNUAL_EVENTS.esc.imageFit;
+// Bind dynamic ESC & TEDx stage content from site-data if configured
+if (ANNUAL_EVENTS?.esc) {
+  const esc = ANNUAL_EVENTS.esc;
+  const escSection = document.getElementById('esc');
+  if (escSection) {
+    if (esc.image) {
+      const escImg = escSection.querySelector('.tree-wrap img');
+      if (escImg) {
+        escImg.src = esc.image;
+        if (esc.imagePosition) escImg.style.objectPosition = esc.imagePosition;
+        if (esc.imageFit) escImg.style.objectFit = esc.imageFit;
+      }
+    }
+    if (esc.pill) {
+      const pill = escSection.querySelector('.pill.pill-esc');
+      if (pill) pill.textContent = esc.pill;
+    }
+    if (esc.title) {
+      const title = document.getElementById('esc-title');
+      if (title) title.innerHTML = esc.title;
+    }
+    if (esc.description) {
+      const desc = escSection.querySelector('.event-description');
+      if (desc) desc.textContent = esc.description;
+    }
+    if (esc.logoTag) {
+      const tag = escSection.querySelector('.logos.event-bottom .logo-tag');
+      if (tag) tag.textContent = esc.logoTag;
+    }
+    if (Array.isArray(esc.metrics)) {
+      const cards = escSection.querySelectorAll('.cards.event-metrics .card');
+      esc.metrics.forEach((m, i) => {
+        const card = cards[i];
+        if (card && m) {
+          const small = card.querySelector('small');
+          if (small && m.label) small.textContent = m.label;
+          const b = card.querySelector('b');
+          if (b && m.num !== undefined) {
+            b.dataset.to = m.num;
+            if (m.dec !== undefined) b.dataset.dec = m.dec;
+            if (m.suf !== undefined) b.dataset.suf = m.suf;
+            b.textContent = `${m.num}${m.suf || ''}`;
+          }
+        }
+      });
+    }
+    if (esc.editionMilestone) {
+      const card4 = escSection.querySelector('.cards.event-metrics .card.card-edition');
+      if (card4) {
+        const small = card4.querySelector('small');
+        if (small && esc.editionMilestone.label) small.textContent = esc.editionMilestone.label;
+        const strong = card4.querySelector('strong');
+        if (strong && esc.editionMilestone.edition) strong.textContent = esc.editionMilestone.edition;
+        const sub = card4.querySelector('.card-sub');
+        if (sub && esc.editionMilestone.theme) sub.textContent = esc.editionMilestone.theme;
+      }
+    }
   }
 }
-if (ANNUAL_EVENTS?.tedx?.image) {
-  const tedxImg = document.querySelector('#tedx .tree-wrap img');
-  if (tedxImg) {
-    tedxImg.src = ANNUAL_EVENTS.tedx.image;
-    if (ANNUAL_EVENTS.tedx.imagePosition) tedxImg.style.objectPosition = ANNUAL_EVENTS.tedx.imagePosition;
-    if (ANNUAL_EVENTS.tedx.imageFit) tedxImg.style.objectFit = ANNUAL_EVENTS.tedx.imageFit;
+
+if (ANNUAL_EVENTS?.tedx) {
+  const tedx = ANNUAL_EVENTS.tedx;
+  const tedxSection = document.getElementById('tedx');
+  if (tedxSection) {
+    if (tedx.image) {
+      const tedxImg = tedxSection.querySelector('.tree-wrap img');
+      if (tedxImg) {
+        tedxImg.src = tedx.image;
+        if (tedx.imagePosition) tedxImg.style.objectPosition = tedx.imagePosition;
+        if (tedx.imageFit) tedxImg.style.objectFit = tedx.imageFit;
+      }
+    }
+    if (tedx.pill) {
+      const pill = tedxSection.querySelector('.pill.pill-tedx');
+      if (pill) {
+        if (tedx.pill.includes('<')) pill.innerHTML = tedx.pill;
+        else pill.textContent = tedx.pill;
+      }
+    }
+    if (tedx.title) {
+      const title = document.getElementById('tedx-title');
+      if (title) title.innerHTML = tedx.title;
+    }
+    if (tedx.description) {
+      const desc = tedxSection.querySelector('.event-description');
+      if (desc) desc.textContent = tedx.description;
+    }
+    if (tedx.logoTag) {
+      const tag = tedxSection.querySelector('.logos.event-bottom .logo-tag');
+      if (tag) tag.textContent = tedx.logoTag;
+    }
+    if (Array.isArray(tedx.metrics)) {
+      const cards = tedxSection.querySelectorAll('.cards.event-metrics .card');
+      tedx.metrics.forEach((m, i) => {
+        const card = cards[i];
+        if (card && m) {
+          const small = card.querySelector('small');
+          if (small && m.label) small.textContent = m.label;
+          const b = card.querySelector('b');
+          if (b && m.num !== undefined) {
+            b.dataset.to = m.num;
+            if (m.dec !== undefined) b.dataset.dec = m.dec;
+            if (m.suf !== undefined) b.dataset.suf = m.suf;
+            b.textContent = `${m.num}${m.suf || ''}`;
+          }
+        }
+      });
+    }
   }
 }
 
@@ -354,6 +447,135 @@ const hydrateFromContent = async () => {
         const subEl = card.querySelector('.card-sub');
         if (subEl && item.caption) subEl.textContent = item.caption;
       });
+    }
+
+    // 5. ESC Stage Section on Homepage (#esc)
+    const escData = content.annualEvents?.esc;
+    const escSec = document.getElementById('esc');
+    if (escData && escSec) {
+      if (escData.image) {
+        const escImg = escSec.querySelector('.tree-wrap img');
+        if (escImg) {
+          if (escImg.getAttribute('src') !== escData.image) escImg.src = escData.image;
+          if (escData.imagePosition) escImg.style.objectPosition = escData.imagePosition;
+          if (escData.imageFit) escImg.style.objectFit = escData.imageFit;
+        }
+      }
+      if (escData.pill) {
+        const pillEl = escSec.querySelector('.pill.pill-esc');
+        if (pillEl && pillEl.textContent !== escData.pill) pillEl.textContent = escData.pill;
+      }
+      if (escData.title) {
+        const titleEl = document.getElementById('esc-title');
+        if (titleEl && titleEl.innerHTML !== escData.title) {
+          titleEl.innerHTML = escData.title;
+          delete titleEl.dataset.splitDone;
+          splitWords(titleEl);
+          motion?.refresh();
+        }
+      }
+      if (escData.description) {
+        const descEl = escSec.querySelector('.event-description');
+        if (descEl && descEl.textContent !== escData.description) descEl.textContent = escData.description;
+      }
+      if (escData.logoTag) {
+        const tagEl = escSec.querySelector('.logos.event-bottom .logo-tag');
+        if (tagEl && tagEl.textContent !== escData.logoTag) tagEl.textContent = escData.logoTag;
+      }
+      if (Array.isArray(escData.metrics)) {
+        const cards = escSec.querySelectorAll('.cards.event-metrics .card');
+        escData.metrics.forEach((m, idx) => {
+          const card = cards[idx];
+          if (!card || !m) return;
+          const smallEl = card.querySelector('small');
+          if (smallEl && m.label) smallEl.textContent = m.label;
+          const bEl = card.querySelector('b');
+          if (bEl && m.num !== undefined) {
+            bEl.dataset.to = m.num;
+            if (m.dec !== undefined) bEl.dataset.dec = m.dec;
+            if (m.suf !== undefined) bEl.dataset.suf = m.suf;
+            const finalVal = `${m.num}${m.suf || ''}`;
+            const counterVal = bEl.querySelector('.event-counter-value');
+            const counterAcc = bEl.querySelector('.event-counter-accessible');
+            if (counterVal) counterVal.textContent = finalVal;
+            if (counterAcc) counterAcc.textContent = finalVal;
+            if (!counterVal && !counterAcc) bEl.textContent = finalVal;
+          }
+        });
+      }
+      if (escData.editionMilestone) {
+        const card4 = escSec.querySelector('.cards.event-metrics .card.card-edition');
+        if (card4) {
+          const smallEl = card4.querySelector('small');
+          if (smallEl && escData.editionMilestone.label) smallEl.textContent = escData.editionMilestone.label;
+          const strongEl = card4.querySelector('strong');
+          if (strongEl && escData.editionMilestone.edition) strongEl.textContent = escData.editionMilestone.edition;
+          const subEl = card4.querySelector('.card-sub');
+          if (subEl && escData.editionMilestone.theme) subEl.textContent = escData.editionMilestone.theme;
+        }
+      }
+    }
+
+    // 6. TEDx Stage Section on Homepage (#tedx)
+    const tedxData = content.annualEvents?.tedx;
+    const tedxSec = document.getElementById('tedx');
+    if (tedxData && tedxSec) {
+      if (tedxData.image) {
+        const tedxImg = tedxSec.querySelector('.tree-wrap img');
+        if (tedxImg) {
+          if (tedxImg.getAttribute('src') !== tedxData.image) tedxImg.src = tedxData.image;
+          if (tedxData.imagePosition) tedxImg.style.objectPosition = tedxData.imagePosition;
+          if (tedxData.imageFit) tedxImg.style.objectFit = tedxData.imageFit;
+        }
+      }
+      if (tedxData.pill) {
+        const pillEl = tedxSec.querySelector('.pill.pill-tedx');
+        if (pillEl) {
+          if (tedxData.pill.includes('<')) {
+            if (pillEl.innerHTML !== tedxData.pill) pillEl.innerHTML = tedxData.pill;
+          } else {
+            if (pillEl.textContent !== tedxData.pill) pillEl.textContent = tedxData.pill;
+          }
+        }
+      }
+      if (tedxData.title) {
+        const titleEl = document.getElementById('tedx-title');
+        if (titleEl && titleEl.innerHTML !== tedxData.title) {
+          titleEl.innerHTML = tedxData.title;
+          delete titleEl.dataset.splitDone;
+          splitWords(titleEl);
+          motion?.refresh();
+        }
+      }
+      if (tedxData.description) {
+        const descEl = tedxSec.querySelector('.event-description');
+        if (descEl && descEl.textContent !== tedxData.description) descEl.textContent = tedxData.description;
+      }
+      if (tedxData.logoTag) {
+        const tagEl = tedxSec.querySelector('.logos.event-bottom .logo-tag');
+        if (tagEl && tagEl.textContent !== tedxData.logoTag) tagEl.textContent = tedxData.logoTag;
+      }
+      if (Array.isArray(tedxData.metrics)) {
+        const cards = tedxSec.querySelectorAll('.cards.event-metrics .card');
+        tedxData.metrics.forEach((m, idx) => {
+          const card = cards[idx];
+          if (!card || !m) return;
+          const smallEl = card.querySelector('small');
+          if (smallEl && m.label) smallEl.textContent = m.label;
+          const bEl = card.querySelector('b');
+          if (bEl && m.num !== undefined) {
+            bEl.dataset.to = m.num;
+            if (m.dec !== undefined) bEl.dataset.dec = m.dec;
+            if (m.suf !== undefined) bEl.dataset.suf = m.suf;
+            const finalVal = `${m.num}${m.suf || ''}`;
+            const counterVal = bEl.querySelector('.event-counter-value');
+            const counterAcc = bEl.querySelector('.event-counter-accessible');
+            if (counterVal) counterVal.textContent = finalVal;
+            if (counterAcc) counterAcc.textContent = finalVal;
+            if (!counterVal && !counterAcc) bEl.textContent = finalVal;
+          }
+        });
+      }
     }
   } catch (_) {}
 };

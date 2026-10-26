@@ -356,6 +356,62 @@ function applyContentOverrides(content) {
       )
       .join('');
   }
+
+  // Hydrate ESC subpage (/esc)
+  const escSub = document.querySelector('.sub-section[data-accent="esc"]');
+  if (escSub && content.annualEvents?.esc) {
+    const esc = content.annualEvents.esc;
+    if (esc.description) {
+      const lead = document.querySelector('.sub-lead');
+      if (lead) lead.textContent = esc.description;
+    }
+    if (esc.image) {
+      const showcaseImg = document.querySelector('.sub-showcase img');
+      if (showcaseImg) {
+        showcaseImg.src = esc.image;
+        if (esc.originalImage) showcaseImg.setAttribute('data-hq-src', esc.originalImage);
+      }
+    }
+    if (Array.isArray(esc.metrics)) {
+      const cards = escSub.querySelectorAll('.cards .card-esc');
+      esc.metrics.forEach((m, idx) => {
+        const c = cards[idx];
+        if (!c || !m) return;
+        const s = c.querySelector('small');
+        if (s && m.label) s.textContent = m.label;
+        const b = c.querySelector('b');
+        if (b && (m.value || m.num !== undefined)) b.textContent = m.value || `${m.num}${m.suf || ''}`;
+      });
+    }
+  }
+
+  // Hydrate TEDx subpage (/tedx)
+  const tedxSub = document.querySelector('.sub-section[data-accent="tedx"]');
+  if (tedxSub && content.annualEvents?.tedx) {
+    const tedx = content.annualEvents.tedx;
+    if (tedx.description) {
+      const lead = document.querySelector('.sub-lead');
+      if (lead) lead.textContent = tedx.description;
+    }
+    if (tedx.image) {
+      const showcaseImg = document.querySelector('.sub-showcase img');
+      if (showcaseImg) {
+        showcaseImg.src = tedx.image;
+        if (tedx.originalImage) showcaseImg.setAttribute('data-hq-src', tedx.originalImage);
+      }
+    }
+    if (Array.isArray(tedx.metrics)) {
+      const cards = tedxSub.querySelectorAll('.cards .card-tedx');
+      tedx.metrics.forEach((m, idx) => {
+        const c = cards[idx];
+        if (!c || !m) return;
+        const s = c.querySelector('small');
+        if (s && m.label) s.textContent = m.label;
+        const b = c.querySelector('b');
+        if (b && (m.value || m.num !== undefined)) b.textContent = m.value || `${m.num}${m.suf || ''}`;
+      });
+    }
+  }
 }
 
 let stopAmbientMotion = null;

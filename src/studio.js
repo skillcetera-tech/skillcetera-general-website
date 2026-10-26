@@ -1359,9 +1359,139 @@ function renderEscEditor() {
   const esc = state.annualEvents.esc;
   state.escSeasons = state.escSeasons || {};
 
+  if (!Array.isArray(esc.metrics) || esc.metrics.length < 3) {
+    esc.metrics = [
+      { label: 'Contestants', value: '200+', num: 200, dec: 0, suf: '+' },
+      { label: 'Universities & Colleges', value: '20+', num: 20, dec: 0, suf: '+' },
+      { label: 'Total Prize Pool', value: '50+ Million', num: 50, dec: 0, suf: '+ Million' }
+    ];
+  }
+  esc.editionMilestone = esc.editionMilestone || {
+    label: 'Latest Edition Milestone',
+    edition: 'ESC 2025',
+    theme: 'BREAK THE NORM'
+  };
+
   container.innerHTML = `
+    <!-- Khối 1: Nội dung hiển thị trên ảnh sân khấu chính ESC (#esc trên Trang chủ) -->
+    <div class="editor-repeater-item" style="border: 2px solid rgba(36,87,255,0.28); background: #ffffff; margin-bottom: 24px; padding: 22px; border-radius: 16px; box-shadow: 0 4px 20px rgba(36,87,255,0.04);">
+      <div class="editor-repeater-head" style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="pill pill-esc">Trang chủ #esc</span>
+          <strong style="font-size:15px">Nội dung hiển thị trên ảnh sân khấu chính ESC</strong>
+          <span class="adjust-badge" id="esc-adjust-badge">Vị trí: ${esc.imagePosition || 'center 30%'} · ${esc.imageFit || 'cover'}</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button type="button" class="btn btn-esc" id="btn-pick-esc-stage">🖼️ Chọn từ kho ảnh</button>
+          <button type="button" class="hq-trigger-light" id="btn-adjust-esc-stage">📐 Căn chỉnh khung ảnh</button>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Nhãn Pill trên sân khấu (Pill Badge)</label>
+          <input type="text" class="form-input" id="esc-pill" value="${esc.pill || 'ANNUAL EVENT 01 · ENGLISH SPEAKING COMPETITION'}" />
+        </div>
+        <div class="form-group">
+          <label>Dải Tag chân trang (Bottom Strip Tagline)</label>
+          <input type="text" class="form-input" id="esc-logo-tag" value="${esc.logoTag || 'ENGLISH · CRITICAL THINKING · CONVICTION'}" />
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:10px">
+        <label>Tiêu đề chính trên ảnh (H2) — <em>Hỗ trợ thẻ &lt;br&gt; xuống dòng và &lt;em&gt; in nghiêng nghệ thuật</em></label>
+        <input type="text" class="form-input" id="esc-title-input" value="${esc.title || 'Your voice.<br><em>Your impact.</em>'}" style="font-weight:600;font-size:15px" />
+      </div>
+
+      <div class="form-group" style="margin-top:10px">
+        <label>Đoạn văn mô tả ngắn hiển thị trên ảnh sân khấu</label>
+        <textarea class="form-textarea" id="esc-desc-input">${esc.description || 'An academic arena for university and college students nationwide to confidently express critical thinking, stage presence, and personal voice in English.'}</textarea>
+      </div>
+
+      <!-- 4 Thẻ chỉ số hiển thị đè trên ảnh sân khấu ESC -->
+      <div style="margin-top:20px;padding:18px;background:var(--soft);border-radius:14px;border:1px solid var(--line)">
+        <strong style="display:block;font-size:14px;margin-bottom:12px;color:var(--ink)">04 Thẻ chỉ số đục lỗ (Notched Cards) đè trên ảnh sân khấu ESC:</strong>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+          <!-- Card 1 -->
+          <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid var(--line)">
+            <span class="pill pill-esc" style="font-size:10px;margin-bottom:8px">Thẻ 01 · Thí sinh</span>
+            <div class="form-group" style="margin-top:6px">
+              <label>Nhãn (Label)</label>
+              <input type="text" class="form-input" data-esc-metric-idx="0" data-esc-metric-field="label" value="${esc.metrics[0]?.label || 'Contestants'}" />
+            </div>
+            <div style="display:flex;gap:6px;margin-top:6px">
+              <div style="flex:1">
+                <label>Số đếm</label>
+                <input type="number" class="form-input" data-esc-metric-idx="0" data-esc-metric-field="num" value="${esc.metrics[0]?.num ?? 200}" />
+              </div>
+              <div style="width:70px">
+                <label>Hậu tố</label>
+                <input type="text" class="form-input" data-esc-metric-idx="0" data-esc-metric-field="suf" value="${esc.metrics[0]?.suf ?? '+'}" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid var(--line)">
+            <span class="pill pill-esc" style="font-size:10px;margin-bottom:8px">Thẻ 02 · ĐH &amp; CĐ</span>
+            <div class="form-group" style="margin-top:6px">
+              <label>Nhãn (Label)</label>
+              <input type="text" class="form-input" data-esc-metric-idx="1" data-esc-metric-field="label" value="${esc.metrics[1]?.label || 'Universities & Colleges'}" />
+            </div>
+            <div style="display:flex;gap:6px;margin-top:6px">
+              <div style="flex:1">
+                <label>Số đếm</label>
+                <input type="number" class="form-input" data-esc-metric-idx="1" data-esc-metric-field="num" value="${esc.metrics[1]?.num ?? 20}" />
+              </div>
+              <div style="width:70px">
+                <label>Hậu tố</label>
+                <input type="text" class="form-input" data-esc-metric-idx="1" data-esc-metric-field="suf" value="${esc.metrics[1]?.suf ?? '+'}" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid var(--line)">
+            <span class="pill pill-esc" style="font-size:10px;margin-bottom:8px">Thẻ 03 · Giải thưởng</span>
+            <div class="form-group" style="margin-top:6px">
+              <label>Nhãn (Label)</label>
+              <input type="text" class="form-input" data-esc-metric-idx="2" data-esc-metric-field="label" value="${esc.metrics[2]?.label || 'Total Prize Pool'}" />
+            </div>
+            <div style="display:flex;gap:6px;margin-top:6px">
+              <div style="flex:1">
+                <label>Số đếm</label>
+                <input type="number" class="form-input" data-esc-metric-idx="2" data-esc-metric-field="num" value="${esc.metrics[2]?.num ?? 50}" />
+              </div>
+              <div style="width:110px">
+                <label>Hậu tố</label>
+                <input type="text" class="form-input" data-esc-metric-idx="2" data-esc-metric-field="suf" value="${esc.metrics[2]?.suf ?? '+ Million'}" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 (Milestone) -->
+          <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid var(--line)">
+            <span class="pill pill-esc" style="font-size:10px;margin-bottom:8px">Thẻ 04 · Cột mốc mùa</span>
+            <div class="form-group" style="margin-top:6px">
+              <label>Nhãn (Label)</label>
+              <input type="text" class="form-input" id="esc-milestone-label" value="${esc.editionMilestone?.label || 'Latest Edition Milestone'}" />
+            </div>
+            <div class="form-group" style="margin-top:6px">
+              <label>Tên mùa (Edition)</label>
+              <input type="text" class="form-input" id="esc-milestone-edition" value="${esc.editionMilestone?.edition || 'ESC 2025'}" />
+            </div>
+            <div class="form-group" style="margin-top:6px">
+              <label>Chủ đề (Theme)</label>
+              <input type="text" class="form-input" id="esc-milestone-theme" value="${esc.editionMilestone?.theme || 'BREAK THE NORM'}" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Khối 2: Cấu hình mùa giải & Subpage ESC (/esc) -->
     <div style="margin-bottom:24px;padding:20px;background:var(--soft);border-radius:16px;border:1px solid var(--line)">
-      <strong style="display:block;font-size:15px;margin-bottom:12px">Thông tin chung &amp; Trạng thái cuộc thi ESC</strong>
+      <strong style="display:block;font-size:15px;margin-bottom:12px">Thông tin chung &amp; Trạng thái cuộc thi ESC (/esc)</strong>
       <div class="form-grid-2">
         <div class="form-group">
           <label>Nhãn mùa giải gần nhất</label>
@@ -1377,25 +1507,12 @@ function renderEscEditor() {
         </div>
       </div>
       <div class="form-group" style="margin-top:12px">
-        <label>Mô tả tổng quan cuộc thi ESC</label>
+        <label>Mô tả tổng quan cuộc thi ESC trên subpage /esc</label>
         <textarea class="form-textarea" id="esc-summary">${esc.detailOverview || esc.description || ''}</textarea>
-      </div>
-
-      <div style="margin-top:16px;padding-top:16px;border-top:1px dashed var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-        <div>
-          <strong style="font-size:13px">Ảnh sân khấu chính ESC (#esc &amp; /esc):</strong>
-          <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
-            <span style="font-size:12px;color:var(--ink-muted)">${esc.image || 'Chưa đặt ảnh'}</span>
-            <span class="adjust-badge">Vị trí: ${esc.imagePosition || 'center 30%'} · ${esc.imageFit || 'cover'}</span>
-          </div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <button type="button" class="btn btn-esc" id="btn-pick-esc-stage">🖼️ Chọn từ kho ảnh</button>
-          <button type="button" class="hq-trigger-light" id="btn-adjust-esc-stage">📐 Căn chỉnh</button>
-        </div>
       </div>
     </div>
 
+    <!-- Khối 3: Danh sách các mùa giải ESC -->
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
       <h3 style="font-size:16px">Danh sách các mùa giải ESC (Mặc định hiển thị năm mới nhất)</h3>
       <span class="pill pill-esc">${Object.keys(state.escSeasons).length} mùa trong hồ sơ</span>
@@ -1438,12 +1555,54 @@ function renderEscEditor() {
     });
   });
 
-  const seasonInput = container.querySelector('#esc-season');
+  container.addEventListener('input', (e) => {
+    const t = e.target;
+    if (t.id === 'esc-pill') esc.pill = t.value;
+    if (t.id === 'esc-logo-tag') esc.logoTag = t.value;
+    if (t.id === 'esc-title-input') esc.title = t.value;
+    if (t.id === 'esc-desc-input') esc.description = t.value;
+    if (t.id === 'esc-season') esc.latestObservedEdition = t.value;
+    if (t.id === 'esc-summary') esc.detailOverview = t.value;
+
+    if (t.id === 'esc-milestone-label') {
+      esc.editionMilestone = esc.editionMilestone || {};
+      esc.editionMilestone.label = t.value;
+    }
+    if (t.id === 'esc-milestone-edition') {
+      esc.editionMilestone = esc.editionMilestone || {};
+      esc.editionMilestone.edition = t.value;
+    }
+    if (t.id === 'esc-milestone-theme') {
+      esc.editionMilestone = esc.editionMilestone || {};
+      esc.editionMilestone.theme = t.value;
+    }
+
+    if (t.dataset.escMetricIdx !== undefined) {
+      const idx = Number(t.dataset.escMetricIdx);
+      const field = t.dataset.escMetricField;
+      if (!esc.metrics[idx]) esc.metrics[idx] = {};
+      if (field === 'num') {
+        esc.metrics[idx].num = Number(t.value);
+        esc.metrics[idx].value = `${t.value}${esc.metrics[idx].suf || ''}`;
+      } else if (field === 'suf') {
+        esc.metrics[idx].suf = t.value;
+        esc.metrics[idx].value = `${esc.metrics[idx].num ?? ''}${t.value}`;
+      } else if (field === 'label') {
+        esc.metrics[idx].label = t.value;
+      }
+    }
+    localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
+    setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
+  });
+
   const statusInput = container.querySelector('#esc-status');
-  const summaryInput = container.querySelector('#esc-summary');
-  if (seasonInput) seasonInput.oninput = (e) => { esc.latestObservedEdition = e.target.value; setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu', '#d97706', true); };
-  if (statusInput) statusInput.onchange = (e) => { esc.status = e.target.value; setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu', '#d97706', true); };
-  if (summaryInput) summaryInput.oninput = (e) => { esc.detailOverview = e.target.value; setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu', '#d97706', true); };
+  if (statusInput) {
+    statusInput.onchange = (e) => {
+      esc.status = e.target.value;
+      localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
+      setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
+    };
+  }
 
   bindSeasonInputs(container, 'esc');
 }
@@ -1453,22 +1612,144 @@ function renderTedxEditor() {
   if (!container || !state.tedxSeasons) return;
 
   const tedxEvent = state.annualEvents?.tedx || {};
+  if (!Array.isArray(tedxEvent.metrics) || tedxEvent.metrics.length < 4) {
+    tedxEvent.metrics = [
+      { label: 'Tickets Sold Per Season', value: '100+', num: 100, dec: 0, suf: '+' },
+      { label: 'YouTube Channel Views', value: '1M+', num: 1, dec: 0, suf: 'M+' },
+      { label: 'Featured Speakers', value: '19', num: 19, dec: 0, suf: '' },
+      { label: 'Sponsoring Partners', value: '50+', num: 50, dec: 0, suf: '+' }
+    ];
+  }
 
   container.innerHTML = `
-    <div style="margin-bottom:24px;padding:20px;background:var(--soft);border-radius:16px;border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-      <div>
-        <strong style="font-size:14px">Ảnh sân khấu chính TEDx (#tedx &amp; /tedx):</strong>
-        <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
-          <span style="font-size:12px;color:var(--ink-muted)">${tedxEvent.image || 'Chưa đặt ảnh'}</span>
-          <span class="adjust-badge">Vị trí: ${tedxEvent.imagePosition || 'center 30%'} · ${tedxEvent.imageFit || 'cover'}</span>
+    <!-- Khối 1: Nội dung hiển thị trên ảnh sân khấu chính TEDx (#tedx trên Trang chủ) -->
+    <div class="editor-repeater-item" style="border: 2px solid rgba(235,0,40,0.28); background: #ffffff; margin-bottom: 24px; padding: 22px; border-radius: 16px; box-shadow: 0 4px 20px rgba(235,0,40,0.04);">
+      <div class="editor-repeater-head" style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="pill pill-tedx">Trang chủ #tedx</span>
+          <strong style="font-size:15px">Nội dung hiển thị trên ảnh sân khấu chính TEDx</strong>
+          <span class="adjust-badge" id="tedx-adjust-badge">Vị trí: ${tedxEvent.imagePosition || 'center 30%'} · ${tedxEvent.imageFit || 'cover'}</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button type="button" class="btn btn-tedx" id="btn-pick-tedx-stage">🖼️ Chọn từ kho ảnh</button>
+          <button type="button" class="hq-trigger-light" id="btn-adjust-tedx-stage">📐 Căn chỉnh khung ảnh</button>
         </div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button type="button" class="btn btn-tedx" id="btn-pick-tedx-stage">🖼️ Chọn từ kho ảnh</button>
-        <button type="button" class="hq-trigger-light" id="btn-adjust-tedx-stage">📐 Căn chỉnh</button>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Nhãn Pill trên sân khấu (Pill Badge)</label>
+          <input type="text" class="form-input" id="tedx-pill" value="${tedxEvent.pill || 'ANNUAL EVENT 02 · TEDxFPTUniversityHCMC'}" />
+        </div>
+        <div class="form-group">
+          <label>Dải Tag chân trang (Bottom Strip Tagline)</label>
+          <input type="text" class="form-input" id="tedx-logo-tag" value="${tedxEvent.logoTag || 'TIKTOK 55K+ · FACEBOOK 14K+ · IG 3.5K+'}" />
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:10px">
+        <label>Tiêu đề chính trên ảnh (H2) — <em>Hỗ trợ thẻ &lt;br&gt; xuống dòng và &lt;em&gt; in nghiêng nghệ thuật</em></label>
+        <input type="text" class="form-input" id="tedx-title-input" value="${tedxEvent.title || 'Ideas move.<br><em>People change.</em>'}" style="font-weight:600;font-size:15px" />
+      </div>
+
+      <div class="form-group" style="margin-top:10px">
+        <label>Đoạn văn mô tả ngắn hiển thị trên ảnh sân khấu</label>
+        <textarea class="form-textarea" id="tedx-desc-input">${tedxEvent.description || 'Stories that spark fresh perspectives. Skillcetera serves as the primary organizing unit of TEDxFPTUniversityHCMC across seasons from 2021 to 2025.'}</textarea>
+      </div>
+
+      <!-- 4 Thẻ chỉ số hiển thị đè trên ảnh sân khấu TEDx -->
+      <div style="margin-top:20px;padding:18px;background:var(--soft);border-radius:14px;border:1px solid var(--line)">
+        <strong style="display:block;font-size:14px;margin-bottom:12px;color:var(--ink)">04 Thẻ chỉ số đục lỗ (Notched Cards) đè trên ảnh sân khấu TEDx:</strong>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+          <!-- Card 1 -->
+          <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid var(--line)">
+            <span class="pill pill-tedx" style="font-size:10px;margin-bottom:8px">Thẻ 01 · Vé bán ra</span>
+            <div class="form-group" style="margin-top:6px">
+              <label>Nhãn (Label)</label>
+              <input type="text" class="form-input" data-tedx-metric-idx="0" data-tedx-metric-field="label" value="${tedxEvent.metrics[0]?.label || 'Tickets Sold Per Season'}" />
+            </div>
+            <div style="display:flex;gap:6px;margin-top:6px">
+              <div style="flex:1">
+                <label>Số đếm</label>
+                <input type="number" class="form-input" data-tedx-metric-idx="0" data-tedx-metric-field="num" value="${tedxEvent.metrics[0]?.num ?? 100}" />
+              </div>
+              <div style="width:70px">
+                <label>Hậu tố</label>
+                <input type="text" class="form-input" data-tedx-metric-idx="0" data-tedx-metric-field="suf" value="${tedxEvent.metrics[0]?.suf ?? '+'}" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid var(--line)">
+            <span class="pill pill-tedx" style="font-size:10px;margin-bottom:8px">Thẻ 02 · Lượt xem YT</span>
+            <div class="form-group" style="margin-top:6px">
+              <label>Nhãn (Label)</label>
+              <input type="text" class="form-input" data-tedx-metric-idx="1" data-tedx-metric-field="label" value="${tedxEvent.metrics[1]?.label || 'YouTube Channel Views'}" />
+            </div>
+            <div style="display:flex;gap:6px;margin-top:6px">
+              <div style="flex:1">
+                <label>Số đếm</label>
+                <input type="number" class="form-input" data-tedx-metric-idx="1" data-tedx-metric-field="num" value="${tedxEvent.metrics[1]?.num ?? 1}" />
+              </div>
+              <div style="width:70px">
+                <label>Hậu tố</label>
+                <input type="text" class="form-input" data-tedx-metric-idx="1" data-tedx-metric-field="suf" value="${tedxEvent.metrics[1]?.suf ?? 'M+'}" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid var(--line)">
+            <span class="pill pill-tedx" style="font-size:10px;margin-bottom:8px">Thẻ 03 · Diễn giả</span>
+            <div class="form-group" style="margin-top:6px">
+              <label>Nhãn (Label)</label>
+              <input type="text" class="form-input" data-tedx-metric-idx="2" data-tedx-metric-field="label" value="${tedxEvent.metrics[2]?.label || 'Featured Speakers'}" />
+            </div>
+            <div style="display:flex;gap:6px;margin-top:6px">
+              <div style="flex:1">
+                <label>Số đếm</label>
+                <input type="number" class="form-input" data-tedx-metric-idx="2" data-tedx-metric-field="num" value="${tedxEvent.metrics[2]?.num ?? 19}" />
+              </div>
+              <div style="width:70px">
+                <label>Hậu tố</label>
+                <input type="text" class="form-input" data-tedx-metric-idx="2" data-tedx-metric-field="suf" value="${tedxEvent.metrics[2]?.suf ?? ''}" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid var(--line)">
+            <span class="pill pill-tedx" style="font-size:10px;margin-bottom:8px">Thẻ 04 · Đối tác</span>
+            <div class="form-group" style="margin-top:6px">
+              <label>Nhãn (Label)</label>
+              <input type="text" class="form-input" data-tedx-metric-idx="3" data-tedx-metric-field="label" value="${tedxEvent.metrics[3]?.label || 'Sponsoring Partners'}" />
+            </div>
+            <div style="display:flex;gap:6px;margin-top:6px">
+              <div style="flex:1">
+                <label>Số đếm</label>
+                <input type="number" class="form-input" data-tedx-metric-idx="3" data-tedx-metric-field="num" value="${tedxEvent.metrics[3]?.num ?? 50}" />
+              </div>
+              <div style="width:70px">
+                <label>Hậu tố</label>
+                <input type="text" class="form-input" data-tedx-metric-idx="3" data-tedx-metric-field="suf" value="${tedxEvent.metrics[3]?.suf ?? '+'}" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- Khối 2: Cấu hình subpage TEDx (/tedx) -->
+    <div style="margin-bottom:24px;padding:20px;background:var(--soft);border-radius:16px;border:1px solid var(--line)">
+      <strong style="display:block;font-size:15px;margin-bottom:12px">Thông tin chung cuộc thi TEDx trên subpage /tedx</strong>
+      <div class="form-group">
+        <label>Mô tả chi tiết tổng quan TEDx trên /tedx</label>
+        <textarea class="form-textarea" id="tedx-summary">${tedxEvent.detailOverview || tedxEvent.description || ''}</textarea>
+      </div>
+    </div>
+
+    <!-- Khối 3: Danh sách các mùa TEDx -->
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
       <h3 style="font-size:16px">Danh sách các mùa TEDxFPTUniversityHCMC (Mặc định hiển thị năm mới nhất)</h3>
       <span class="pill pill-tedx">${Object.keys(state.tedxSeasons).length} mùa trong hồ sơ</span>
@@ -1509,6 +1790,32 @@ function renderTedxEditor() {
         showToast('Đã lưu căn chỉnh ảnh sân khấu chính TEDx!');
       }
     });
+  });
+
+  container.addEventListener('input', (e) => {
+    const t = e.target;
+    if (t.id === 'tedx-pill') tedxEvent.pill = t.value;
+    if (t.id === 'tedx-logo-tag') tedxEvent.logoTag = t.value;
+    if (t.id === 'tedx-title-input') tedxEvent.title = t.value;
+    if (t.id === 'tedx-desc-input') tedxEvent.description = t.value;
+    if (t.id === 'tedx-summary') tedxEvent.detailOverview = t.value;
+
+    if (t.dataset.tedxMetricIdx !== undefined) {
+      const idx = Number(t.dataset.tedxMetricIdx);
+      const field = t.dataset.tedxMetricField;
+      if (!tedxEvent.metrics[idx]) tedxEvent.metrics[idx] = {};
+      if (field === 'num') {
+        tedxEvent.metrics[idx].num = Number(t.value);
+        tedxEvent.metrics[idx].value = `${t.value}${tedxEvent.metrics[idx].suf || ''}`;
+      } else if (field === 'suf') {
+        tedxEvent.metrics[idx].suf = t.value;
+        tedxEvent.metrics[idx].value = `${tedxEvent.metrics[idx].num ?? ''}${t.value}`;
+      } else if (field === 'label') {
+        tedxEvent.metrics[idx].label = t.value;
+      }
+    }
+    localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
+    setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
   });
 
   bindSeasonInputs(container, 'tedx');
