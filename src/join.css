@@ -703,3 +703,79 @@ html, body {
     transition: none;
   }
 }
+
+/* ── Recruitment open state ─────────────────────────────── */
+.join-status-strip--open {
+  background: #f0faf4;
+  border-bottom: 1px solid #b8e8cc;
+}
+
+.join-status-dot--open {
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.18);
+}
+
+/* ── Application form section ───────────────────────────── */
+.join-apply {
+  padding-block: 80px 96px;
+  border-bottom: 1px solid var(--line);
+  background: var(--soft);
+}
+
+.join-apply .join-section-lead a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.join-apply .join-section-lead a:hover {
+  color: var(--ink);
+}
+
+.join-apply .join-section-lead a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.join-form-frame {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+.join-form-frame iframe {
+  display: block;
+  width: 100%;
+  min-height: 800px;
+  border: none;
+}
+
+.join-form-fallback {
+  padding: 32px;
+  font-size: 14px;
+  color: var(--gray);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.join-form-fallback a {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.join-form-fallback a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .join-form-frame iframe {
+    min-height: 900px;
+  }
+}
