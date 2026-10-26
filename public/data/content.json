@@ -117,7 +117,7 @@
     "heroImagePosition": "87% 88%",
     "heroImageFit": "cover",
     "heroPill": "SKILLS & LANGUAGES CLUB · FPTU HCMC",
-    "heroTitle": "Ideas worth spreading.<br>Knowledge <em>worth sharing.</em>",
+    "heroTitle": "Consistency is <em>flexibility.</em>",
     "heroCtaPrimaryText": "Explore Events",
     "heroCtaPrimaryLink": "#esc",
     "heroCtaSecondaryText": "About Skillcetera",
@@ -582,6 +582,26 @@
       "linkLabel": "The MoneyVerse Details →"
     }
   },
+  "hqGallery": [
+    {
+      "id": "hq-1792899496622",
+      "title": "Skillcetera Event Photography",
+      "alt": "Skillcetera documentary photo",
+      "caption": "1920 × 1280 px · Original High Resolution",
+      "webpUrl": "/assets/553654839_1312594657543274_6065555061644359671_n-mvna2gge.webp",
+      "originalUrl": "/assets/originals/553654839_1312594657543274_6065555061644359671_n-mvna2gge.jpg",
+      "dimensions": "1920 × 1280 px"
+    },
+    {
+      "id": "hq-615707596_1406518118150927_8099910856454498230_n-mvmf0nkw",
+      "title": "Skillcetera Community Gathering",
+      "alt": "Skillcetera archival photo",
+      "caption": "2048 × 1282 px · Saved on server",
+      "webpUrl": "/assets/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.webp",
+      "originalUrl": "/assets/originals/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.jpg",
+      "dimensions": "2048 × 1282 px"
+    }
+  ],
   "communityMilestones": [
     {
       "tag": "S-STORE · MERCHANDISE",
@@ -602,26 +622,6 @@
       "tag": "DATA INTEGRITY PRINCIPLE",
       "metric": "Discrete Project Accounting",
       "caption": "Documented from source /2025 (Oct 24, 2026), never conflated"
-    }
-  ],
-  "hqGallery": [
-    {
-      "id": "hq-1792899496622",
-      "title": "Skillcetera Event Photography",
-      "alt": "Skillcetera documentary photo",
-      "caption": "1920 × 1280 px · Original High Resolution",
-      "webpUrl": "/assets/553654839_1312594657543274_6065555061644359671_n-mvna2gge.webp",
-      "originalUrl": "/assets/originals/553654839_1312594657543274_6065555061644359671_n-mvna2gge.jpg",
-      "dimensions": "1920 × 1280 px"
-    },
-    {
-      "id": "hq-615707596_1406518118150927_8099910856454498230_n-mvmf0nkw",
-      "title": "Skillcetera Community Gathering",
-      "alt": "Skillcetera archival photo",
-      "caption": "2048 × 1282 px · Saved on server",
-      "webpUrl": "/assets/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.webp",
-      "originalUrl": "/assets/originals/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.jpg",
-      "dimensions": "2048 × 1282 px"
     }
   ]
 }
