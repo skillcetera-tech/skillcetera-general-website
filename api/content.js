@@ -1,3 +1,31 @@
+function deepMerge(target, source) {
+  if (!target || typeof target !== 'object') return source;
+  if (!source || typeof source !== 'object') return target;
+  if (Array.isArray(target) && Array.isArray(source)) {
+    return source.map((item, idx) => {
+      if (item && typeof item === 'object' && target[idx] && typeof target[idx] === 'object') {
+        return deepMerge(target[idx], item);
+      }
+      return item;
+    });
+  }
+  const result = { ...target };
+  for (const key of Object.keys(source)) {
+    const sVal = source[key];
+    const tVal = target[key];
+    if (sVal !== undefined && sVal !== null) {
+      if (typeof sVal === 'object' && !Array.isArray(sVal) && typeof tVal === 'object' && !Array.isArray(tVal)) {
+        result[key] = deepMerge(tVal, sVal);
+      } else if (Array.isArray(sVal) && Array.isArray(tVal)) {
+        result[key] = deepMerge(tVal, sVal);
+      } else {
+        result[key] = sVal;
+      }
+    }
+  }
+  return result;
+}
+
 export default async function handler(req, res) {
   // CORS headers & Cache-Control
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -90,12 +118,18 @@ export default async function handler(req, res) {
         'User-Agent': 'Skillcetera-Studio-Sync',
       };
 
-      // 1. Get current file sha from GitHub
+      // 1. Get current file sha & existing content from GitHub
       let currentSha = null;
+      let existingContent = null;
       const getFileRes = await fetch(fileUrl, { headers });
       if (getFileRes.ok) {
         const fileData = await getFileRes.json();
         currentSha = fileData.sha;
+        if (fileData.content) {
+          try {
+            existingContent = JSON.parse(Buffer.from(fileData.content, 'base64').toString('utf8'));
+          } catch (_) {}
+        }
       } else if (getFileRes.status !== 404) {
         const errText = await getFileRes.text();
         return res.status(getFileRes.status).json({
@@ -104,8 +138,9 @@ export default async function handler(req, res) {
         });
       }
 
-      // 2. Prepare formatted JSON string & Base64
-      const newContentStr = JSON.stringify(content, null, 2) + '\n';
+      // 2. Safe Deep Merge to prevent any field deletion or state overwrites
+      const finalContent = existingContent ? deepMerge(existingContent, content) : content;
+      const newContentStr = JSON.stringify(finalContent, null, 2) + '\n';
       const contentBase64 = Buffer.from(newContentStr, 'utf8').toString('base64');
 
       // 3. Put commit to GitHub

@@ -216,7 +216,15 @@
         "externalLabel": "ESC Documentary Post on Facebook",
         "externalUrl": "https://www.facebook.com/share/p/1Frf2ebFwQ/"
       },
-      "sourceNote": "Official academic competition scale documented across seasons in Skillcetera club archives."
+      "sourceNote": "Official academic competition scale documented across seasons in Skillcetera club archives.",
+      "pill": "ANNUAL EVENT 01 · ENGLISH SPEAKING COMPETITION",
+      "title": "Your voice.<br><em>Your impact.</em>",
+      "logoTag": "ENGLISH · CRITICAL THINKING · CONVICTION",
+      "editionMilestone": {
+        "label": "Latest Edition Milestone",
+        "edition": "ESC 2025",
+        "theme": "BREAK THE NORM"
+      }
     },
     "tedx": {
       "id": "tedx",
@@ -240,9 +248,9 @@
           "period": "Each season (per archive)"
         },
         {
-          "value": "1M+",
-          "num": 1,
-          "dec": 0,
+          "value": "2.5M+",
+          "num": 2.5,
+          "dec": 1,
           "suf": "M+",
           "label": "YouTube Channel Views",
           "period": "Per club archive"
@@ -284,7 +292,10 @@
       },
       "sourceNote": "Event and media metrics are specific to TEDxFPTUniversityHCMC in club records (retrieved Oct 24, 2026). Source text notes 'four seasons' while cataloging 5 full seasons from 2021 to 2025.",
       "imagePosition": "51% 62%",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "pill": "ANNUAL EVENT 02 · TEDxFPTUniversityHCMC",
+      "title": "Ideas move.<br><em>People change.</em>",
+      "logoTag": "TIKTOK 55K+ · FACEBOOK 14K+ · IG 3.5K+"
     }
   },
   "tedxSeasons": {

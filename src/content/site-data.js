@@ -252,9 +252,9 @@ export const ANNUAL_EVENTS = {
         "period": "Each season (per archive)"
       },
       {
-        "value": "1M+",
-        "num": 1,
-        "dec": 0,
+        "value": "2.5M+",
+        "num": 2.5,
+        "dec": 1,
         "suf": "M+",
         "label": "YouTube Channel Views",
         "period": "Per club archive"

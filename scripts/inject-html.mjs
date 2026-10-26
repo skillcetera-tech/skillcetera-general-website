@@ -124,19 +124,21 @@ export function injectContentIntoHtml(html, content) {
     const m2 = esc.metrics[2];
     const m3 = esc.editionMilestone || { label: 'Latest Edition Milestone', edition: 'ESC 2025', theme: 'BREAK THE NORM' };
 
+    const calcDec = (m) => m?.dec ?? (String(m?.num ?? '').includes('.') ? 1 : 0);
+
     const escCardsHtml = `
             <div class="cards event-metrics">
               <div class="card card-esc">
                 <small>${m0.label}</small>
-                <b data-to="${m0.num ?? 200}" data-dec="${m0.dec ?? 0}" data-suf="${m0.suf ?? '+'}">${m0.value || `${m0.num ?? 200}${m0.suf ?? '+'}`}</b>
+                <b data-to="${m0.num ?? 200}" data-dec="${calcDec(m0)}" data-suf="${m0.suf ?? '+'}">${m0.value || `${m0.num ?? 200}${m0.suf ?? '+'}`}</b>
               </div>
               <div class="card card-esc">
                 <small>${m1.label}</small>
-                <b data-to="${m1.num ?? 20}" data-dec="${m1.dec ?? 0}" data-suf="${m1.suf ?? '+'}">${m1.value || `${m1.num ?? 20}${m1.suf ?? '+'}`}</b>
+                <b data-to="${m1.num ?? 20}" data-dec="${calcDec(m1)}" data-suf="${m1.suf ?? '+'}">${m1.value || `${m1.num ?? 20}${m1.suf ?? '+'}`}</b>
               </div>
               <div class="card card-esc">
                 <small>${m2.label}</small>
-                <b data-to="${m2.num ?? 50}" data-dec="${m2.dec ?? 0}" data-suf="${m2.suf ?? '+ Million'}">${m2.value || `${m2.num ?? 50}${m2.suf ?? '+ Million'}`}</b>
+                <b data-to="${m2.num ?? 50}" data-dec="${calcDec(m2)}" data-suf="${m2.suf ?? '+ Million'}">${m2.value || `${m2.num ?? 50}${m2.suf ?? '+ Million'}`}</b>
               </div>
               <div class="card card-esc card-edition">
                 <small>${m3.label || 'Latest Edition Milestone'}</small>
@@ -188,23 +190,25 @@ export function injectContentIntoHtml(html, content) {
     const t2 = tedx.metrics[2];
     const t3 = tedx.metrics[3];
 
+    const calcDec = (m) => m?.dec ?? (String(m?.num ?? '').includes('.') ? 1 : 0);
+
     const tedxCardsHtml = `
             <div class="cards event-metrics">
               <div class="card card-tedx">
                 <small>${t0.label}</small>
-                <b data-to="${t0.num ?? 100}" data-dec="${t0.dec ?? 0}" data-suf="${t0.suf ?? '+'}">${t0.value || `${t0.num ?? 100}${t0.suf ?? '+'}`}</b>
+                <b data-to="${t0.num ?? 100}" data-dec="${calcDec(t0)}" data-suf="${t0.suf ?? '+'}">${t0.value || `${t0.num ?? 100}${t0.suf ?? '+'}`}</b>
               </div>
               <div class="card card-tedx">
                 <small>${t1.label}</small>
-                <b data-to="${t1.num ?? 1}" data-dec="${t1.dec ?? 0}" data-suf="${t1.suf ?? 'M+'}">${t1.value || `${t1.num ?? 1}${t1.suf ?? 'M+'}`}</b>
+                <b data-to="${t1.num ?? 2.5}" data-dec="${calcDec(t1)}" data-suf="${t1.suf ?? 'M+'}">${t1.value || `${t1.num ?? 2.5}${t1.suf ?? 'M+'}`}</b>
               </div>
               <div class="card card-tedx">
                 <small>${t2.label}</small>
-                <b data-to="${t2.num ?? 19}" data-dec="${t2.dec ?? 0}" data-suf="${t2.suf ?? ''}">${t2.value || `${t2.num ?? 19}${t2.suf ?? ''}`}</b>
+                <b data-to="${t2.num ?? 19}" data-dec="${calcDec(t2)}" data-suf="${t2.suf ?? ''}">${t2.value || `${t2.num ?? 19}${t2.suf ?? ''}`}</b>
               </div>
               <div class="card card-tedx">
                 <small>${t3.label}</small>
-                <b data-to="${t3.num ?? 50}" data-dec="${t3.dec ?? 0}" data-suf="${t3.suf ?? '+'}">${t3.value || `${t3.num ?? 50}${t3.suf ?? '+'}`}</b>
+                <b data-to="${t3.num ?? 50}" data-dec="${calcDec(t3)}" data-suf="${t3.suf ?? '+'}">${t3.value || `${t3.num ?? 50}${t3.suf ?? '+'}`}</b>
               </div>
             </div>`;
 

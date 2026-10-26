@@ -1,3 +1,15 @@
+
+function parseMetricValue(str) {
+  if (!str) return { num: 0, suf: '', dec: 0 };
+  const match = String(str).trim().match(/^([0-9]+(?:\.[0-9]+)?)\s*(.*)$/);
+  if (match) {
+    const num = parseFloat(match[1]);
+    const suf = match[2];
+    const dec = match[1].includes('.') ? match[1].split('.')[1].length : 0;
+    return { num, suf, dec };
+  }
+  return { num: parseFloat(str) || 0, suf: '', dec: 0 };
+}
 import { FULL_CONTENT } from './content/site-data.js';
 
 const DRAFT_STORAGE_KEY = 'skillcetera_studio_draft';
@@ -1234,6 +1246,24 @@ function bindSeasonInputs(container, eventType) {
         }
         if (!obj[key].metrics[idx]) obj[key].metrics[idx] = { label: '', value: '' };
         obj[key].metrics[idx][prop] = e.target.value;
+        // Tự động đồng bộ số liệu mùa mới nhất sang các thẻ hiển thị trên trang chủ
+        const allKeys = Object.keys(obj).sort((a,b) => Number(a)-Number(b));
+        const latestKey = allKeys[allKeys.length - 1];
+        if (key === latestKey && state.annualEvents?.[eventType]?.metrics) {
+          const mainMetrics = state.annualEvents[eventType].metrics;
+          if (mainMetrics[idx]) {
+            if (prop === 'label') mainMetrics[idx].label = e.target.value;
+            if (prop === 'value') {
+              const p = parseMetricValue(e.target.value);
+              mainMetrics[idx].value = e.target.value;
+              mainMetrics[idx].num = p.num;
+              mainMetrics[idx].suf = p.suf;
+              mainMetrics[idx].dec = p.dec;
+            }
+          }
+        }
+        state._isSynced = false;
+        localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
         setStatus('Có thay đổi chưa lưu — Bấm Ctrl + S để lưu lên máy chủ', '#d97706', true);
       }
     });
@@ -1426,7 +1456,7 @@ function renderEscEditor() {
             <div style="display:flex;gap:6px;margin-top:6px">
               <div style="flex:1">
                 <label>Số đếm</label>
-                <input type="number" class="form-input" data-esc-metric-idx="0" data-esc-metric-field="num" value="${esc.metrics[0]?.num ?? 200}" />
+                <input type="number" step="any" class="form-input" data-esc-metric-idx="0" data-esc-metric-field="num" value="${esc.metrics[0]?.num ?? 200}" />
               </div>
               <div style="width:70px">
                 <label>Hậu tố</label>
@@ -1445,7 +1475,7 @@ function renderEscEditor() {
             <div style="display:flex;gap:6px;margin-top:6px">
               <div style="flex:1">
                 <label>Số đếm</label>
-                <input type="number" class="form-input" data-esc-metric-idx="1" data-esc-metric-field="num" value="${esc.metrics[1]?.num ?? 20}" />
+                <input type="number" step="any" class="form-input" data-esc-metric-idx="1" data-esc-metric-field="num" value="${esc.metrics[1]?.num ?? 20}" />
               </div>
               <div style="width:70px">
                 <label>Hậu tố</label>
@@ -1464,7 +1494,7 @@ function renderEscEditor() {
             <div style="display:flex;gap:6px;margin-top:6px">
               <div style="flex:1">
                 <label>Số đếm</label>
-                <input type="number" class="form-input" data-esc-metric-idx="2" data-esc-metric-field="num" value="${esc.metrics[2]?.num ?? 50}" />
+                <input type="number" step="any" class="form-input" data-esc-metric-idx="2" data-esc-metric-field="num" value="${esc.metrics[2]?.num ?? 50}" />
               </div>
               <div style="width:110px">
                 <label>Hậu tố</label>
@@ -1675,7 +1705,7 @@ function renderTedxEditor() {
             <div style="display:flex;gap:6px;margin-top:6px">
               <div style="flex:1">
                 <label>Số đếm</label>
-                <input type="number" class="form-input" data-tedx-metric-idx="0" data-tedx-metric-field="num" value="${tedxEvent.metrics[0]?.num ?? 100}" />
+                <input type="number" step="any" class="form-input" data-tedx-metric-idx="0" data-tedx-metric-field="num" value="${tedxEvent.metrics[0]?.num ?? 100}" />
               </div>
               <div style="width:70px">
                 <label>Hậu tố</label>
@@ -1694,7 +1724,7 @@ function renderTedxEditor() {
             <div style="display:flex;gap:6px;margin-top:6px">
               <div style="flex:1">
                 <label>Số đếm</label>
-                <input type="number" class="form-input" data-tedx-metric-idx="1" data-tedx-metric-field="num" value="${tedxEvent.metrics[1]?.num ?? 1}" />
+                <input type="number" step="any" class="form-input" data-tedx-metric-idx="1" data-tedx-metric-field="num" value="${tedxEvent.metrics[1]?.num ?? 1}" />
               </div>
               <div style="width:70px">
                 <label>Hậu tố</label>
@@ -1713,7 +1743,7 @@ function renderTedxEditor() {
             <div style="display:flex;gap:6px;margin-top:6px">
               <div style="flex:1">
                 <label>Số đếm</label>
-                <input type="number" class="form-input" data-tedx-metric-idx="2" data-tedx-metric-field="num" value="${tedxEvent.metrics[2]?.num ?? 19}" />
+                <input type="number" step="any" class="form-input" data-tedx-metric-idx="2" data-tedx-metric-field="num" value="${tedxEvent.metrics[2]?.num ?? 19}" />
               </div>
               <div style="width:70px">
                 <label>Hậu tố</label>
@@ -1732,7 +1762,7 @@ function renderTedxEditor() {
             <div style="display:flex;gap:6px;margin-top:6px">
               <div style="flex:1">
                 <label>Số đếm</label>
-                <input type="number" class="form-input" data-tedx-metric-idx="3" data-tedx-metric-field="num" value="${tedxEvent.metrics[3]?.num ?? 50}" />
+                <input type="number" step="any" class="form-input" data-tedx-metric-idx="3" data-tedx-metric-field="num" value="${tedxEvent.metrics[3]?.num ?? 50}" />
               </div>
               <div style="width:70px">
                 <label>Hậu tố</label>
@@ -1809,13 +1839,20 @@ function renderTedxEditor() {
       const field = t.dataset.tedxMetricField;
       if (!tedxEvent.metrics[idx]) tedxEvent.metrics[idx] = {};
       if (field === 'num') {
-        tedxEvent.metrics[idx].num = Number(t.value);
+        const val = parseFloat(t.value);
+        tedxEvent.metrics[idx].num = isNaN(val) ? 0 : val;
+        tedxEvent.metrics[idx].dec = String(t.value).includes('.') ? 1 : 0;
         tedxEvent.metrics[idx].value = `${t.value}${tedxEvent.metrics[idx].suf || ''}`;
       } else if (field === 'suf') {
         tedxEvent.metrics[idx].suf = t.value;
         tedxEvent.metrics[idx].value = `${tedxEvent.metrics[idx].num ?? ''}${t.value}`;
       } else if (field === 'label') {
         tedxEvent.metrics[idx].label = t.value;
+      }
+      // Đồng bộ sang mùa 2025 nếu có
+      if (state.tedxSeasons?.['2025']?.metrics?.[idx]) {
+        if (field === 'label') state.tedxSeasons['2025'].metrics[idx].label = t.value;
+        else state.tedxSeasons['2025'].metrics[idx].value = tedxEvent.metrics[idx].value;
       }
     }
     localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
