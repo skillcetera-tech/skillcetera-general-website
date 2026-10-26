@@ -80,7 +80,7 @@ export function initMotion() {
           scrollTrigger: { trigger: element, start: 'top 93%', once: true, onEnter: () => { element.dataset.motionSeen = 'true'; } },
         });
       });
-      document.querySelectorAll('#about .split, #projects .split, #connect .split').forEach(heading => {
+      document.querySelectorAll('#about .split, #bridge .split, #projects .split, #connect .split').forEach(heading => {
         if (heading.dataset.motionSeen === 'true') return;
         gsap.fromTo(heading.querySelectorAll('.w'), { y: 12, opacity: 0 }, {
           y: 0, opacity: 1, duration: 0.6, stagger: { amount: 0.12 }, ease: 'power2.out',
