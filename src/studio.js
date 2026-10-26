@@ -1441,6 +1441,16 @@ function renderEscEditor() {
         <label>Đoạn văn mô tả ngắn hiển thị trên ảnh sân khấu</label>
         <textarea class="form-textarea" id="esc-desc-input">${esc.description || 'An academic arena for university and college students nationwide to confidently express critical thinking, stage presence, and personal voice in English.'}</textarea>
       </div>
+      <div class="form-grid-2" style="margin-top:14px;padding:12px;background:#fff;border-radius:10px;border:1px solid var(--line)">
+        <div class="form-group">
+          <label>Nhãn nút bấm ESC (CTA Label)</label>
+          <input type="text" class="form-input" id="esc-cta-label" value="${esc.cta?.label || 'View on Facebook'}" />
+        </div>
+        <div class="form-group">
+          <label>Link nút bấm ESC (Facebook / URL)</label>
+          <input type="text" class="form-input" id="esc-cta-url" value="${esc.cta?.url || 'https://www.facebook.com/share/p/1Frf2ebFwQ/'}" />
+        </div>
+      </div>
 
       <!-- 4 Thẻ chỉ số hiển thị đè trên ảnh sân khấu ESC -->
       <div style="margin-top:20px;padding:18px;background:var(--soft);border-radius:14px;border:1px solid var(--line)">
@@ -1597,6 +1607,15 @@ function renderEscEditor() {
     if (t.id === 'esc-desc-input') esc.description = t.value;
     if (t.id === 'esc-season') esc.latestObservedEdition = t.value;
     if (t.id === 'esc-summary') esc.detailOverview = t.value;
+    if (t.id === 'esc-cta-label') {
+      esc.cta = esc.cta || {};
+      esc.cta.label = t.value;
+    }
+    if (t.id === 'esc-cta-url') {
+      esc.cta = esc.cta || {};
+      esc.cta.url = t.value;
+      esc.cta.externalUrl = t.value;
+    }
 
     if (t.id === 'esc-milestone-label') {
       esc.editionMilestone = esc.editionMilestone || {};
@@ -1689,6 +1708,16 @@ function renderTedxEditor() {
       <div class="form-group" style="margin-top:10px">
         <label>Đoạn văn mô tả ngắn hiển thị trên ảnh sân khấu</label>
         <textarea class="form-textarea" id="tedx-desc-input">${tedxEvent.description || 'Stories that spark fresh perspectives. Skillcetera serves as the primary organizing unit of TEDxFPTUniversityHCMC across seasons from 2021 to 2025.'}</textarea>
+      </div>
+      <div class="form-grid-2" style="margin-top:14px;padding:12px;background:#fff;border-radius:10px;border:1px solid var(--line)">
+        <div class="form-group">
+          <label>Nhãn nút bấm TEDx (CTA Label)</label>
+          <input type="text" class="form-input" id="tedx-cta-label" value="${tedxEvent.cta?.label || 'View on Facebook'}" />
+        </div>
+        <div class="form-group">
+          <label>Link nút bấm TEDx (Facebook / URL)</label>
+          <input type="text" class="form-input" id="tedx-cta-url" value="${tedxEvent.cta?.url || 'https://www.facebook.com/tedxfptuniversityhcmc'}" />
+        </div>
       </div>
 
       <!-- 4 Thẻ chỉ số hiển thị đè trên ảnh sân khấu TEDx -->
@@ -1833,6 +1862,15 @@ function renderTedxEditor() {
     if (t.id === 'tedx-title-input') tedxEvent.title = t.value;
     if (t.id === 'tedx-desc-input') tedxEvent.description = t.value;
     if (t.id === 'tedx-summary') tedxEvent.detailOverview = t.value;
+    if (t.id === 'tedx-cta-label') {
+      tedxEvent.cta = tedxEvent.cta || {};
+      tedxEvent.cta.label = t.value;
+    }
+    if (t.id === 'tedx-cta-url') {
+      tedxEvent.cta = tedxEvent.cta || {};
+      tedxEvent.cta.url = t.value;
+      tedxEvent.cta.externalUrl = t.value;
+    }
 
     if (t.dataset.tedxMetricIdx !== undefined) {
       const idx = Number(t.dataset.tedxMetricIdx);

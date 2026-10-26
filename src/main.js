@@ -175,6 +175,26 @@ export function applyContentToDom(content, refreshMotion = false) {
         if (subEl && escData.editionMilestone.theme) subEl.textContent = escData.editionMilestone.theme;
       }
     }
+    if (escData.cta) {
+      const ctaEl = escSec.querySelector('.logos.event-bottom a.event-link');
+      if (ctaEl) {
+        const url = escData.cta.url || escData.cta.externalUrl;
+        if (url && ctaEl.getAttribute('href') !== url) {
+          ctaEl.href = url;
+          if (url.startsWith('http')) {
+            ctaEl.target = '_blank';
+            ctaEl.rel = 'noopener noreferrer';
+          }
+        }
+        if (escData.cta.label) {
+          const label = escData.cta.label;
+          const currentText = ctaEl.textContent.trim().replace(/[↗→\s]+$/, '');
+          if (currentText !== label) {
+            ctaEl.innerHTML = `${label} <span aria-hidden="true">↗</span>`;
+          }
+        }
+      }
+    }
   }
 
   // 4. TEDx Stage Section on Homepage (#tedx)
@@ -410,7 +430,7 @@ function observeSections() {
   { rootMargin: '-15% 0px -50% 0px', threshold: [0, 0.2, 0.5] },
 );
 
-document.querySelectorAll('#about,#esc,#tedx,#projects,#community,#connect').forEach((section) =>
+document.querySelectorAll('#about,#esc,#tedx,#projects,#connect').forEach((section) =>
   observer.observe(section),
 );
 }

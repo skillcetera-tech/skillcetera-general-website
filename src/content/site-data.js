@@ -215,8 +215,8 @@ export const ANNUAL_EVENTS = {
       }
     ],
     "cta": {
-      "label": "Explore ESC Subpage",
-      "url": "/esc",
+      "label": "View on Facebook",
+      "url": "https://www.facebook.com/share/p/1Frf2ebFwQ/",
       "externalLabel": "ESC Documentary Post on Facebook",
       "externalUrl": "https://www.facebook.com/share/p/1Frf2ebFwQ/"
     },
@@ -291,8 +291,10 @@ export const ANNUAL_EVENTS = {
       }
     ],
     "cta": {
-      "label": "Explore TEDx Page & 5 Seasons",
-      "url": "/tedx"
+      "label": "View on Facebook",
+      "url": "https://www.facebook.com/tedxfptuniversityhcmc",
+      "externalLabel": "TEDxFPTUniversityHCMC on Facebook",
+      "externalUrl": "https://www.facebook.com/tedxfptuniversityhcmc"
     },
     "sourceNote": "Event and media metrics are specific to TEDxFPTUniversityHCMC in club records (retrieved Oct 24, 2026). Source text notes 'four seasons' while cataloging 5 full seasons from 2021 to 2025.",
     "imagePosition": "51% 62%",

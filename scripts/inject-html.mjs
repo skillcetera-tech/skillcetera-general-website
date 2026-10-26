@@ -152,6 +152,16 @@ export function injectContentIntoHtml(html, content) {
       `$1${escCardsHtml}`
     );
   }
+  if (esc.cta) {
+    const url = esc.cta.url || esc.cta.externalUrl || 'https://www.facebook.com/share/p/1Frf2ebFwQ/';
+    const label = esc.cta.label || 'View on Facebook';
+    const isExt = url.startsWith('http');
+    const targetAttrs = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
+    html = html.replace(
+      /(<section class="event-scene stats event-esc"[^>]*>[\s\S]*?<div class="logos event-bottom">[\s\S]*?<a class="btn btn-esc event-link"[^>]*href=")([^"]*)(")([^>]*>)([\s\S]*?)(<\/a>)/,
+      `$1${url}"${targetAttrs}>${label} <span aria-hidden="true">↗</span>$6`
+    );
+  }
 
   // 4. TEDx Stage Section (#tedx)
   if (tedx.pill) {
@@ -215,6 +225,16 @@ export function injectContentIntoHtml(html, content) {
     html = html.replace(
       /(<section class="event-scene stats event-tedx"[^>]*>[\s\S]*?<p class="event-description reveal">[\s\S]*?<\/p>\s*)(<div class="cards event-metrics">[\s\S]*?<\/div>\s*<\/div>)/,
       `$1${tedxCardsHtml}`
+    );
+  }
+  if (tedx.cta) {
+    const url = tedx.cta.url || tedx.cta.externalUrl || 'https://www.facebook.com/tedxfptuniversityhcmc';
+    const label = tedx.cta.label || 'View on Facebook';
+    const isExt = url.startsWith('http');
+    const targetAttrs = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
+    html = html.replace(
+      /(<section class="event-scene stats event-tedx"[^>]*>[\s\S]*?<div class="logos event-bottom">[\s\S]*?<a class="btn btn-tedx event-link"[^>]*href=")([^"]*)(")([^>]*>)([\s\S]*?)(<\/a>)/,
+      `$1${url}"${targetAttrs}>${label} <span aria-hidden="true">↗</span>$6`
     );
   }
 
