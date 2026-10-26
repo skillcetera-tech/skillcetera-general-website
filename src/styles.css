@@ -247,10 +247,6 @@ body.intro #app {
   mask-image: linear-gradient(#000, transparent);
 }
 
-.hero-glass > .glass {
-  opacity: 0.24;
-}
-
 /* Interactive cursor frosted squares motion */
 #cursor-squares-layer {
   position: fixed;
@@ -592,13 +588,6 @@ body.intro #app {
   font-size: 9px;
   letter-spacing: 0.16em;
   color: var(--white-78);
-}
-
-.hero-glass {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
 }
 
 /* 2. ABOUT & 3 MISSIONS (Petalyx #loop 3-Panel Hover Accordion) */

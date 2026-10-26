@@ -73,22 +73,6 @@ export function initAmbientMotion() {
     }
   });
 
-  const heroGlass = document.getElementById('heroGlass');
-  if (heroGlass) {
-    const positions = [[3, 64], [3, 76], [10, 76], [46, 78], [51, 78], [82, 70], [88, 70], [88, 82]];
-    positions.forEach(([x, y], index) => {
-      const square = append(heroGlass, 'glass', {
-        left: `${x}%`, top: `${y}%`, width: 'clamp(28px, 4vw, 56px)', aspectRatio: '1',
-      });
-      observeAnimation(square, heroGlass, [{ opacity: 0.2 }, { opacity: 0.42 }, { opacity: 0.2 }], {
-        duration: 8000 + (index % 3) * 900,
-        delay: -index * 600,
-        easing: 'ease-in-out',
-        iterations: Infinity,
-      });
-    });
-  }
-
   document.querySelectorAll('.drift-a, .drift-b').forEach((element, index) => {
     const direction = element.classList.contains('drift-b') ? -1 : 1;
     observeAnimation(element, element, [
