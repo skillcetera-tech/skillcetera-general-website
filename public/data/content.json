@@ -19,32 +19,147 @@
       "noteVi": "The 2024–2025 recruitment cohort has concluded. When the next cohort opens, official application forms will be activated on the Join Us page (/join). In the meantime, feel free to contact us directly via email.",
       "departments": [
         {
-          "name": "Event Organizing Department",
-          "tag": "Event Organizing",
-          "desc": "Brainstorming program concepts, coordinating stage production, managing logistics, and executing risk management for ESC, TEDxFPTUniversityHCMC, and internal community events.",
-          "skills": "Coordination, Risk Management",
-          "focus": "Stage & Event Production"
+          "id": "event",
+          "name": "Event Department",
+          "tag": "Sản xuất & Vận hành Onsite",
+          "desc": "Chịu trách nhiệm toàn diện về trang thiết bị, cơ sở vật chất, hậu cần và là lực lượng nòng cốt điều phối trực tiếp tại các sự kiện lớn như ESC và TEDxFPTUniversityHCMC.",
+          "responsibilities": [
+            "Nắm thông tin về vật dụng, cơ sở vật chất, mối quan hệ, nguồn lực trong trường và các nhà thầu, nhà cung cấp, dịch vụ bên ngoài trường có thể mượn/sử dụng/thuê.",
+            "Kiểm kê số lượng, vị trí, tình trạng của vật dụng, cơ sở vật chất mượn từ trường trước và sau khi mượn.",
+            "Lập checklist chi tiết và phân bổ nhân sự cho ngày on-site.",
+            "Đóng góp, tiếp nhận ý tưởng để setup không gian ngày onsite.",
+            "Phân chia quà từ trường và sponsor; đảm bảo quà tặng đến đúng đối tượng trong ngày onsite.",
+            "Kiểm tra, thu thập giấy tờ và báo giá vật phẩm phục vụ sự kiện.",
+            "Hỗ trợ team Account lập kế hoạch và thủ tục gửi phòng PDP.",
+            "Là nhân lực chính chạy và điều phối onsite tại các sự kiện."
+          ],
+          "requirements": [
+            "Nắm được các yêu cầu của các loại giấy tờ, văn bản, tài liệu hành chính cần thiết.",
+            "Có khả năng giao tiếp, chủ động tìm kiếm các nhà cung cấp phù hợp với mục đích dự án.",
+            "Có tinh thần trách nhiệm cao, đặc biệt vào những ngày sát sự kiện.",
+            "Biết cách lập các checklist khoa học để đảm bảo sự kiện suôn sẻ.",
+            "Năng lượng cao, sức chịu đựng tốt, độc lập và nhanh nhạy.",
+            "Cần có sự tỉ mỉ, chu đáo, trung thực trong dự án."
+          ],
+          "skills": "Logistics, Onsite Operation, Checklist Management, Vendor Coordination",
+          "focus": "Event & Stage Operations"
         },
         {
-          "name": "Media & Design Department",
-          "tag": "Media & Design",
-          "desc": "Building visual identity systems, producing media publications, documenting event photography, and managing the club's official social media channels.",
-          "skills": "Graphic Design, Photo/Video",
-          "focus": "Brand Management"
+          "id": "account",
+          "name": "Account Department",
+          "tag": "Đối ngoại Học đường & Quản lý Dự án",
+          "desc": "Đầu mối ngoại giao và hành chính chiến lược, chịu trách nhiệm kết nối trực tiếp với phòng PDP, quản lý thanh toán, hợp đồng và chăm sóc diễn giả, đối tác tổ chức.",
+          "responsibilities": [
+            "Làm việc với phòng PDP: Trao đổi thông tin với cán bộ PDP về các dự án của CLB, thực hiện nghĩa vụ thanh toán và thủ tục mượn cơ sở vật chất.",
+            "Kiểm kê các giấy tờ thanh toán, hợp đồng với các đối tác đảm bảo tránh sai sót và sự cố diễn ra.",
+            "Trực tiếp liên lạc, làm việc với các diễn giả, câu lạc bộ, và tổ chức bên ngoài để đảm bảo quyền lợi hai bên, giúp sự kiện diễn ra suôn sẻ, tốt đẹp.",
+            "Trong trường hợp bất khả kháng, ban Account có thể bù lấp vị trí còn thiếu ở một số ban khác."
+          ],
+          "requirements": [
+            "Biết viết Email, làm báo cáo cũng như các bản kế hoạch dự án chỉn chu.",
+            "Biết làm nội dung và xây dựng ý tưởng cho các sự kiện và dự án.",
+            "Có khả năng trình bày, thuyết trình tốt trước mọi người.",
+            "Có kinh nghiệm liên quan là một lợi thế."
+          ],
+          "skills": "Stakeholder Management, Official Documentation, Negotiation, Presentation",
+          "focus": "School Relations & Partner Protocol"
         },
         {
-          "name": "Content & Academic Department",
-          "tag": "Content & Academic",
-          "desc": "Developing academic themes for Discussion Forum, authoring ESC competition prompts, working alongside TEDx speakers, and curating bilingual content.",
-          "skills": "Storytelling, Research, English",
-          "focus": "Academic Editorial"
+          "id": "sponsorship",
+          "name": "Sponsorship Department",
+          "tag": "Tài trợ & Phát triển Đối tác",
+          "desc": "Khai phá và duy trì nguồn lực tài chính, hiện vật; xây dựng hồ sơ tài trợ và đàm phán hợp tác bền vững với các doanh nghiệp đồng hành cùng Skillcetera.",
+          "responsibilities": [
+            "Xây dựng và hoàn thiện hồ sơ tài trợ (Sponsorship Proposal) chuyên nghiệp.",
+            "Nghiên cứu và tìm kiếm Nhà tài trợ tiềm năng phù hợp với từng dự án.",
+            "Phát triển và duy trì mối quan hệ với Nhà tài trợ (đàm phán ký hợp đồng, hỗ trợ tại ngày onsite, theo dõi quyền lợi, liên lạc qua email/zalo...).",
+            "Chuẩn bị các giấy tờ liên quan trong quá trình làm việc với Nhà tài trợ (hợp đồng tài trợ, biên bản xác nhận, file theo dõi quyền lợi, hợp đồng nghiệm thu...).",
+            "Theo dõi và đảm bảo quyền lợi cho Nhà tài trợ trong suốt quá trình hợp tác.",
+            "Làm việc và phối hợp chặt chẽ với các ban khác (Admin, Account, Event...)."
+          ],
+          "requirements": [
+            "Có khả năng tìm kiếm và quản lí thông tin.",
+            "Có tính kiên trì và ham học hỏi.",
+            "Có kỹ năng trong giao tiếp, đàm phán và thiết kế là một lợi thế."
+          ],
+          "skills": "Sponsorship Pitching, Contract Negotiation, CRM, Partner Deliverables",
+          "focus": "Fundraising & Corporate Partnerships"
         },
         {
-          "name": "External Relations & HR Department",
-          "tag": "External Relations & HR",
-          "desc": "Connecting sponsor partners, guest speakers, inter-university networks, and nurturing member bonding through Meditation Retreat and Scavenger Hunt.",
-          "skills": "Negotiation, Networking, HR",
-          "focus": "Partnership & Community"
+          "id": "admin",
+          "name": "Admin Department",
+          "tag": "Quản trị Nhân sự & Vận hành Nội bộ",
+          "desc": "Trục xương sống quản trị nội bộ của CLB, quản lý cơ sở dữ liệu thành viên, đảm bảo chính sách quyền lợi, tổ chức tuyển quân và gìn giữ văn hóa gắn kết Skillcetera.",
+          "responsibilities": [
+            "Quản lý thông tin thành viên, tuyển thành viên & cộng tác viên mới.",
+            "Cập nhật liên tục Database của Câu lạc bộ.",
+            "Thông báo, quản lý các nhiệm vụ truyền thông hoặc thông tin sự kiện, dự án quan trọng đến các thành viên.",
+            "Đảm bảo các chính sách quyền lợi của thành viên được thực hiện đúng và đầy đủ.",
+            "Kiểm tra và ghi nhận hoạt động của các thành viên trong CLB.",
+            "Giải quyết các vấn đề, tâm tư giữa các thành viên trong câu lạc bộ.",
+            "Phối hợp với team Event lên kế hoạch tổ chức các sự kiện gắn kết thành viên (bonding, retreat...)."
+          ],
+          "requirements": [
+            "Biết viết email, làm báo cáo và kế hoạch rõ ràng.",
+            "Tỉ mỉ, cẩn thận, có khả năng giao tiếp tốt.",
+            "Có khả năng về quản lý database.",
+            "Biết sử dụng Notion là một lợi thế.",
+            "Biết kiến thức lập trình website là một lợi thế."
+          ],
+          "skills": "Database Management, HR Operations, Internal Communication, Notion, Web Basics",
+          "focus": "Human Resources & Internal Operations"
+        },
+        {
+          "id": "media",
+          "name": "Media Department",
+          "tag": "Truyền thông & Đa phương tiện",
+          "desc": "Khối sáng tạo đa phương tiện phụ trách thiết kế nhận diện thương hiệu, hoạch định chiến lược nội dung, sản xuất hình ảnh và dựng video cho toàn bộ các kênh của Skillcetera.",
+          "roles": [
+            {
+              "title": "Vị trí 1: Designer",
+              "tag": "Graphic & Brand Identity",
+              "duties": [
+                "Thiết kế các ấn phẩm truyền thông (social post, banner, standee, merchandise, backdrop...).",
+                "Thiết kế bộ nhận diện thương hiệu độc bản cho các sự kiện của CLB."
+              ],
+              "requirements": [
+                "Có kỹ năng về đồ hoạ, tư duy thiết kế tốt.",
+                "Sử dụng thành thạo Canva.",
+                "Biết sử dụng Photoshop, Illustrator là một lợi thế."
+              ]
+            },
+            {
+              "title": "Vị trí 2: Content and Planning",
+              "tag": "Strategy & Content Writing",
+              "duties": [
+                "Xây dựng kế hoạch truyền thông trong các kỳ học của CLB.",
+                "Lên chiến lược marketing (sáng tạo những hình thức truyền thông mới lạ, phù hợp với tính chất từng sự kiện và đồng nhất).",
+                "Xây dựng nội dung cho các bài đăng truyền thông, những kế hoạch truyền thông trong các kỳ học của CLB.",
+                "Viết content đăng trên kênh truyền thông của CLB."
+              ],
+              "requirements": [
+                "Sử dụng tốt Google Suite (Google Docs, Sheet,...).",
+                "Có khả năng quản lí, lên kế hoạch tốt cho truyền thông.",
+                "Luôn cập nhật xu hướng mới.",
+                "Ngôn ngữ diễn đạt tốt, sáng tạo và chủ động bắt trend.",
+                "Có khả năng nghiên cứu và phân tích các nội dung mới."
+              ]
+            },
+            {
+              "title": "Vị trí 3: Production team (Chụp hình & Hậu kỳ)",
+              "tag": "Photo & Video Production",
+              "duties": [
+                "Photographer: Chụp và xử lý hậu kỳ hình ảnh của các sự kiện của CLB.",
+                "Video Editor: Edit video đăng tải trên các nền tảng mạng xã hội; Đảm bảo chất lượng video tốt, thu hút người xem; Hỗ trợ các công việc edit video khác theo từng kế hoạch."
+              ],
+              "requirements": [
+                "Photographer: Có máy ảnh cá nhân; Xử lý hậu kỳ sau mỗi buổi chụp ảnh (chỉnh sửa và tối ưu hóa ảnh đảm bảo chất lượng); Siêng năng, chịu khó học hỏi, đam mê sáng tạo.",
+                "Video Editor: Có kinh nghiệm làm việc trong lĩnh vực edit video (Ưu tiên); Thông thạo ít nhất 1 phần mềm dựng (Premiere Pro, DaVinci Resolve, CapCut…); Có niềm yêu thích nghệ thuật, điện ảnh; Thái độ tốt, khiêm tốn và chủ động; Cập nhật nhanh xu hướng mạng xã hội."
+              ]
+            }
+          ],
+          "skills": "Brand Identity, Copywriting, Photo Editing, Video Editing, Social Trends",
+          "focus": "Content, Creative Design & Visual Media"
         }
       ]
     },

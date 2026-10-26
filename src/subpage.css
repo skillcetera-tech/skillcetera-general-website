@@ -760,3 +760,103 @@ body.subpage {
   border-left: 3.5px solid var(--accent-tedx, #eb0028);
 }
 
+
+/* ============================================================
+   Detailed Recruitment JD Styles (/join)
+   ============================================================ */
+.editorial-card.card-wide {
+  grid-column: 1 / -1;
+}
+
+.jd-block {
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: var(--bg-soft, #f7f9fc);
+  border-radius: 14px;
+  border: 1px solid var(--line-strong, #eaecef);
+}
+
+.jd-subtitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink, #101010);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.jd-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.jd-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-soft, #3a3e47);
+}
+
+.jd-list li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  top: -1px;
+  color: var(--blue, #2457ff);
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.jd-list.req li::before {
+  color: #10b981;
+}
+
+.jd-roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.jd-role-card {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid var(--line, #eaecef);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jd-role-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--line, #eaecef);
+  padding-bottom: 8px;
+}
+
+.jd-role-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink, #101010);
+}
+
+.jd-role-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--pill, #eef1f6);
+  color: var(--ink-muted, #5a5e56);
+}

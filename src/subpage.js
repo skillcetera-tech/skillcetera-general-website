@@ -299,14 +299,68 @@ function applyContentOverrides(content) {
       .join('');
   }
 
-  // Render dynamic departments on /join if container exists
+    // Render dynamic departments on /join if container exists
   const deptGrid = document.getElementById('departments-grid');
   const depts = content.siteMeta?.recruitment?.departments;
   if (deptGrid && Array.isArray(depts)) {
     deptGrid.innerHTML = depts
-      .map(
-        (d, idx) => `
-        <article class="editorial-card">
+      .map((d, idx) => {
+        const isWide = d.roles && d.roles.length > 0;
+        const respsHtml = Array.isArray(d.responsibilities) && d.responsibilities.length > 0
+          ? `
+            <div class="jd-block">
+              <h4 class="jd-subtitle">📋 Nội dung công việc:</h4>
+              <ul class="jd-list">
+                ${d.responsibilities.map(r => `<li>${r}</li>`).join('')}
+              </ul>
+            </div>
+          `
+          : '';
+
+        const reqsHtml = Array.isArray(d.requirements) && d.requirements.length > 0
+          ? `
+            <div class="jd-block">
+              <h4 class="jd-subtitle">🎯 Yêu cầu ứng viên:</h4>
+              <ul class="jd-list req">
+                ${d.requirements.map(r => `<li>${r}</li>`).join('')}
+              </ul>
+            </div>
+          `
+          : '';
+
+        const rolesHtml = Array.isArray(d.roles) && d.roles.length > 0
+          ? `
+            <div class="jd-roles-grid">
+              ${d.roles.map(role => `
+                <div class="jd-role-card">
+                  <div class="jd-role-header">
+                    <span class="jd-role-title">${role.title}</span>
+                    <span class="jd-role-tag">${role.tag || ''}</span>
+                  </div>
+                  ${Array.isArray(role.duties) && role.duties.length > 0 ? `
+                    <div>
+                      <strong style="font-size:12px;color:var(--ink);display:block;margin-bottom:4px">Nội dung công việc:</strong>
+                      <ul class="jd-list">
+                        ${role.duties.map(dt => `<li>${dt}</li>`).join('')}
+                      </ul>
+                    </div>
+                  ` : ''}
+                  ${Array.isArray(role.requirements) && role.requirements.length > 0 ? `
+                    <div style="margin-top:6px">
+                      <strong style="font-size:12px;color:var(--ink);display:block;margin-bottom:4px">Yêu cầu:</strong>
+                      <ul class="jd-list req">
+                        ${role.requirements.map(rq => `<li>${rq}</li>`).join('')}
+                      </ul>
+                    </div>
+                  ` : ''}
+                </div>
+              `).join('')}
+            </div>
+          `
+          : '';
+
+        return `
+        <article class="editorial-card ${isWide ? 'card-wide' : ''}">
           <div class="editorial-card-top">
             <span class="editorial-idx">DEPARTMENT 0${idx + 1}</span>
             <span class="pill">${d.tag || `Department 0${idx + 1}`}</span>
@@ -315,13 +369,16 @@ function applyContentOverrides(content) {
             <h3>${d.name || ''}</h3>
             <p style="margin-top:8px">${d.desc || ''}</p>
           </div>
+          ${respsHtml}
+          ${reqsHtml}
+          ${rolesHtml}
           <div class="editorial-meta">
-            <span>Skills: ${d.skills || 'Teamwork'}</span>
-            <span>${d.focus || 'Key Focus'}</span>
+            <span><b>Skills:</b> ${d.skills || 'Teamwork'}</span>
+            <span><b>Focus:</b> ${d.focus || 'Key Focus'}</span>
           </div>
         </article>
-      `
-      )
+      `;
+      })
       .join('');
   }
   const deptCountBadge = document.getElementById('departments-count-badge');
