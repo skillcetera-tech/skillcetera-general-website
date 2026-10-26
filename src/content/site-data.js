@@ -17,10 +17,10 @@ export const SITE_META = {
   "heroImageCaption": "skillcetera. — Learn together, make an impact.",
   "retrievedDate": "2026-10-24",
   "recruitment": {
-    "status": "closed",
+    "status": "open",
     "cohort": "2024–2025",
-    "badgeVi": "RECRUITMENT STATUS: 2024–2025 COHORT CLOSED · NEW COHORT PENDING ANNOUNCEMENT",
-    "noteVi": "The 2024–2025 recruitment cohort has concluded. When the next cohort opens, official application forms will be activated on the Join Us page (/join). In the meantime, feel free to contact us directly via email.",
+    "badgeVi": "RECRUITMENT STATUS: APPLICATION FORM IS OPEN · CHÍNH THỨC MỞ ĐƠN ỨNG TUYỂN",
+    "noteVi": "Biểu mẫu đăng ký ứng tuyển thành viên CLB Skillcetera đã chính thức mở tại https://skillcetera.fillout.com/t/s3dAm5Lr6rus.",
     "departments": [
       {
         "id": "event",
@@ -165,7 +165,8 @@ export const SITE_META = {
         "skills": "Brand Identity, Copywriting, Photo Editing, Video Editing, Social Trends",
         "focus": "Content, Creative Design & Visual Media"
       }
-    ]
+    ],
+    "formUrl": "https://skillcetera.fillout.com/t/s3dAm5Lr6rus"
   },
   "contact": {
     "clubEmail": "skillcetera@gmail.com",
