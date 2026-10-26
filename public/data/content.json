@@ -282,7 +282,9 @@
         "label": "Explore TEDx Page & 5 Seasons",
         "url": "/tedx"
       },
-      "sourceNote": "Event and media metrics are specific to TEDxFPTUniversityHCMC in club records (retrieved Oct 24, 2026). Source text notes 'four seasons' while cataloging 5 full seasons from 2021 to 2025."
+      "sourceNote": "Event and media metrics are specific to TEDxFPTUniversityHCMC in club records (retrieved Oct 24, 2026). Source text notes 'four seasons' while cataloging 5 full seasons from 2021 to 2025.",
+      "imagePosition": "51% 62%",
+      "imageFit": "cover"
     }
   },
   "tedxSeasons": {
