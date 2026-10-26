@@ -1,4 +1,3 @@
-import { initGame } from './game.js';
 import { initMotion, splitWords } from './motion.js';
 import { SITE_META, ANNUAL_EVENTS, ESC_SEASONS, TEDX_SEASONS, OTHER_PROJECTS } from './content/site-data.js';
 import { initCursorSquares } from './cursor-squares.js';
@@ -291,7 +290,6 @@ try {
 applyContentToDom(initialPayload, false);
 
 motion = initMotion();
-initGame();
 let stopAmbient = initAmbientMotion();
 let stopCursor = initCursorSquares();
 const menuButton = document.querySelector('.menu-toggle');

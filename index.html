@@ -154,6 +154,7 @@
             
             
             
+            
             <div class="cards event-metrics">
               <div class="card card-esc">
                 <small>Contestants</small>
@@ -187,118 +188,239 @@
           </div>
         </div>
       </section>
-      <!-- 3.5 MINI-GAME: Flagship Duel (ESC Blue vs TEDx Red) -->
-      <section class="event-bridge event-game" id="bridge" aria-labelledby="bridge-title">
+      <!-- 3.5 INFINITE PHOTO BANNER EXHIBITION: Moments In Motion -->
+      <section class="event-bridge event-gallery" id="bridge" aria-labelledby="gallery-title">
         <div class="bridge-ticker-wrap" aria-hidden="true">
           <div class="bridge-ticker">
-            <span class="ticker-item"><i class="ticker-dot blue"></i> MINI-GAME · ARE YOU TEAM ESC (BLUE) OR TEAM TEDX (RED)?</span>
+            <span class="ticker-item"><i class="ticker-dot blue"></i> VISUAL ARCHIVES</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item"><i class="ticker-dot red"></i> TEST YOUR INSTINCT</span>
+            <span class="ticker-item"><i class="ticker-dot red"></i> SKILLCETERA DOCUMENTARY GALLERY</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item">SWIPE OR CLICK TO PLAY</span>
+            <span class="ticker-item">MOMENTS OF PASSION, DIALOGUE &amp; IMPACT</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item">CHALLENGE YOUR SKILLCETERA KNOWLEDGE</span>
+            <span class="ticker-item">FPT UNIVERSITY HO CHI MINH CITY</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item"><i class="ticker-dot blue"></i> MINI-GAME · ARE YOU TEAM ESC (BLUE) OR TEAM TEDX (RED)?</span>
+            <span class="ticker-item"><i class="ticker-dot blue"></i> VISUAL ARCHIVES</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item"><i class="ticker-dot red"></i> TEST YOUR INSTINCT</span>
+            <span class="ticker-item"><i class="ticker-dot red"></i> SKILLCETERA DOCUMENTARY GALLERY</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item">SWIPE OR CLICK TO PLAY</span>
+            <span class="ticker-item">MOMENTS OF PASSION, DIALOGUE &amp; IMPACT</span>
             <span class="ticker-sep">✦</span>
-            <span class="ticker-item">CHALLENGE YOUR SKILLCETERA KNOWLEDGE</span>
+            <span class="ticker-item">FPT UNIVERSITY HO CHI MINH CITY</span>
             <span class="ticker-sep">✦</span>
           </div>
         </div>
 
-        <div class="bridge-inner section-shell">
-          <div class="bridge-heading reveal">
-            <div class="bridge-pills">
-              <span class="pill pill-esc">🔵 TEAM ESC</span>
-              <span class="bridge-connector" aria-hidden="true">VS</span>
-              <span class="pill pill-tedx">🔴 TEAM TEDX</span>
-            </div>
-            <h2 id="bridge-title" class="h2 split">Pick Your Stage.<br><em>Test Your Reflexes.</em></h2>
-            <p class="bridge-desc">Thử tài phân định sự kiện: Dữ kiện hiển thị dưới đây thuộc về <b>ESC (Xanh)</b> hay <b>TEDxFPTUniversityHCMC (Đỏ)</b>?</p>
+        <div class="gallery-head section-shell reveal">
+          <div class="bridge-pills">
+            <span class="pill">SKILLCETERA ARCHIVES · VISUAL EXHIBITION</span>
           </div>
+          <h2 id="gallery-title" class="h2 split">Moments In Motion.<br><em>Memories In Frame.</em></h2>
+          <p class="bridge-desc">Triển lãm tư liệu ghi lại hành trình nhiệt huyết qua các mùa sự kiện, diễn đàn học thuật và trải nghiệm cộng đồng của Skillcetera.</p>
+        </div>
 
-          <!-- Interactive Game Container -->
-          <div class="game-container reveal" id="flagship-game">
-            <!-- Game HUD -->
-            <div class="game-hud">
-              <div class="game-progress-wrap">
-                <span class="game-round-text" id="game-round">Câu 1 / 6</span>
-                <div class="game-progress-bar">
-                  <div class="game-progress-fill" id="game-progress" style="width: 16.66%"></div>
+        <!-- Infinite Running Photo Banner -->
+        <div class="photo-marquee-container" aria-label="Skillcetera documentary photo gallery">
+          <div class="photo-marquee-track">
+            <!-- 9 Photos (Set 1) -->
+            <figure class="gallery-card">
+              <img src="/assets/esc.webp" alt="ESC 2025 Break The Norm Grand Final Stage" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag tag-esc">ESC · BREAK THE NORM</span>
+                <div class="gallery-info">
+                  <strong>English Speaking Competition</strong>
+                  <small>Đấu trường tranh biện học thuật toàn quốc</small>
                 </div>
               </div>
-              <div class="game-score-badge">
-                <span class="game-score-label">ĐIỂM:</span>
-                <strong class="game-score-num" id="game-score">0</strong>
-                <span class="game-streak-pill" id="game-streak" hidden>🔥 x2</span>
-              </div>
-            </div>
+            </figure>
 
-            <!-- Card Arena -->
-            <div class="game-arena">
-              <div class="game-card" id="game-card" tabindex="0" role="region" aria-label="Game question card">
-                <div class="game-card-stamp stamp-esc" aria-hidden="true">ESC 🔵</div>
-                <div class="game-card-stamp stamp-tedx" aria-hidden="true">TEDx 🔴</div>
-                <div class="game-card-clue" id="game-card-clue">HỌC THUẬT &amp; TRANH BIỆN</div>
-                <div class="game-card-question" id="game-card-text">
-                  Đấu trường tranh biện tiếng Anh học thuật với quy mô 200+ thí sinh đến từ 20+ trường đại học toàn quốc?
-                </div>
-                <div class="game-card-hint">
-                  <span class="hint-desktop">Kéo thẻ sang trái/phải hoặc bấm nút bên dưới</span>
-                  <span class="hint-mobile">Vuốt trái (ESC) hoặc vuốt phải (TEDx)</span>
+            <figure class="gallery-card">
+              <img src="/assets/tedx.webp" alt="TEDxFPTUniversityHCMC All The Way Season" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag tag-tedx">TEDx · ALL THE WAY</span>
+                <div class="gallery-info">
+                  <strong>TEDxFPTUniversityHCMC</strong>
+                  <small>Diễn thuyết lan tỏa những ý tưởng đáng giá</small>
                 </div>
               </div>
+            </figure>
 
-              <!-- Feedback Overlay -->
-              <div class="game-feedback" id="game-feedback" aria-live="polite" hidden>
-                <div class="feedback-badge" id="feedback-badge">Chính xác! +100</div>
-                <p class="feedback-detail" id="feedback-detail"></p>
-              </div>
-            </div>
-
-            <!-- Action Controls -->
-            <div class="game-actions" id="game-actions">
-              <button type="button" class="btn btn-game btn-game-esc" id="btn-pick-esc" aria-label="Chọn ESC (Phím mũi tên trái)">
-                <span class="btn-game-icon">🔵</span>
-                <span class="btn-game-text">Team ESC</span>
-                <kbd class="btn-game-kbd">←</kbd>
-              </button>
-
-              <button type="button" class="btn btn-game btn-game-tedx" id="btn-pick-tedx" aria-label="Chọn TEDx (Phím mũi tên phải)">
-                <span class="btn-game-icon">🔴</span>
-                <span class="btn-game-text">Team TEDx</span>
-                <kbd class="btn-game-kbd">→</kbd>
-              </button>
-            </div>
-
-            <!-- Game Over / Victory Modal -->
-            <div class="game-result" id="game-result" hidden>
-              <div class="result-trophy" id="result-trophy">🏆</div>
-              <h3 class="result-title" id="result-title">Skillcetera Grandmaster!</h3>
-              <p class="result-desc" id="result-desc">Bạn đã trả lời đúng 6/6 câu hỏi về ESC và TEDx!</p>
-              <div class="result-score-box">
-                <div>
-                  <small>Tổng điểm</small>
-                  <strong id="result-final-score">600</strong>
-                </div>
-                <div>
-                  <small>Độ chính xác</small>
-                  <strong id="result-accuracy">100%</strong>
+            <figure class="gallery-card">
+              <img src="/assets/scavenger-hunt.webp" alt="Skillcetera Scavenger Hunt Saigon Race" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">SCAVENGER HUNT</span>
+                <div class="gallery-info">
+                  <strong>Khám phá Sài Gòn</strong>
+                  <small>6 mùa trải nghiệm qua 10+ địa danh văn hóa</small>
                 </div>
               </div>
-              <div class="result-actions">
-                <button type="button" class="btn btn-game-replay" id="btn-replay">
-                  <span>Chơi lại ↺</span>
-                </button>
-                <a href="#tedx" class="btn btn-game-next">
-                  <span>Khám phá TEDx ↓</span>
-                </a>
+            </figure>
+
+            <figure class="gallery-card">
+              <img src="/assets/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.webp" alt="Skillcetera Member Community Gathering" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">SKILLCETERA COMMUNITY</span>
+                <div class="gallery-info">
+                  <strong>Đại gia đình Skillcetera</strong>
+                  <small>Cùng học hỏi, gắn kết và tạo tác động tích cực</small>
+                </div>
               </div>
-            </div>
+            </figure>
+
+            <figure class="gallery-card">
+              <img src="/assets/meditation-retreat.webp" alt="Mindful reflection at Meditation Retreat" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">MEDITATION RETREAT</span>
+                <div class="gallery-info">
+                  <strong>Hành trình Tĩnh tâm</strong>
+                  <small>3 mùa hòa mình cùng thiên nhiên và lắng đọng</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card">
+              <img src="/assets/discussion-forum.webp" alt="Academic Discussion Forum" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">DISCUSSION FORUM</span>
+                <div class="gallery-info">
+                  <strong>Diễn đàn Học thuật</strong>
+                  <small>Đối thoại học thuật và trao đổi chuyên đề định kỳ</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card">
+              <img src="/assets/moneyverse.webp" alt="The MoneyVerse University Tour" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">THE MONEYVERSE</span>
+                <div class="gallery-info">
+                  <strong>Hợp tác VTV Times</strong>
+                  <small>Điều phối truyền thông tại 10 cụm trường ĐH phía Nam</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card">
+              <img src="/assets/s-store.webp" alt="S-Store Merchandise Collection" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">S-STORE</span>
+                <div class="gallery-info">
+                  <strong>Văn hóa phẩm CLB</strong>
+                  <small>500+ lanyard, 100+ áo và túi tote do thành viên thiết kế</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card">
+              <img src="/assets/553654839_1312594657543274_6065555061644359671_n-mvna2gge.webp" alt="Skillcetera Event Coordination Team" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">MEMBERS IN ACTION</span>
+                <div class="gallery-info">
+                  <strong>Nhiệt huyết Tuổi trẻ</strong>
+                  <small>Đồng hành cùng nhau qua từng dự án ý nghĩa</small>
+                </div>
+              </div>
+            </figure>
+
+            <!-- 9 Photos (Set 2 - Exact Clone for Seamless Infinite Loop) -->
+            <figure class="gallery-card" aria-hidden="true">
+              <img src="/assets/esc.webp" alt="" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag tag-esc">ESC · BREAK THE NORM</span>
+                <div class="gallery-info">
+                  <strong>English Speaking Competition</strong>
+                  <small>Đấu trường tranh biện học thuật toàn quốc</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card" aria-hidden="true">
+              <img src="/assets/tedx.webp" alt="" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag tag-tedx">TEDx · ALL THE WAY</span>
+                <div class="gallery-info">
+                  <strong>TEDxFPTUniversityHCMC</strong>
+                  <small>Diễn thuyết lan tỏa những ý tưởng đáng giá</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card" aria-hidden="true">
+              <img src="/assets/scavenger-hunt.webp" alt="" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">SCAVENGER HUNT</span>
+                <div class="gallery-info">
+                  <strong>Khám phá Sài Gòn</strong>
+                  <small>6 mùa trải nghiệm qua 10+ địa danh văn hóa</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card" aria-hidden="true">
+              <img src="/assets/615707596_1406518118150927_8099910856454498230_n-mvmf0nkw.webp" alt="" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">SKILLCETERA COMMUNITY</span>
+                <div class="gallery-info">
+                  <strong>Đại gia đình Skillcetera</strong>
+                  <small>Cùng học hỏi, gắn kết và tạo tác động tích cực</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card" aria-hidden="true">
+              <img src="/assets/meditation-retreat.webp" alt="" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">MEDITATION RETREAT</span>
+                <div class="gallery-info">
+                  <strong>Hành trình Tĩnh tâm</strong>
+                  <small>3 mùa hòa mình cùng thiên nhiên và lắng đọng</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card" aria-hidden="true">
+              <img src="/assets/discussion-forum.webp" alt="" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">DISCUSSION FORUM</span>
+                <div class="gallery-info">
+                  <strong>Diễn đàn Học thuật</strong>
+                  <small>Đối thoại học thuật và trao đổi chuyên đề định kỳ</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card" aria-hidden="true">
+              <img src="/assets/moneyverse.webp" alt="" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">THE MONEYVERSE</span>
+                <div class="gallery-info">
+                  <strong>Hợp tác VTV Times</strong>
+                  <small>Điều phối truyền thông tại 10 cụm trường ĐH phía Nam</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card" aria-hidden="true">
+              <img src="/assets/s-store.webp" alt="" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">S-STORE</span>
+                <div class="gallery-info">
+                  <strong>Văn hóa phẩm CLB</strong>
+                  <small>500+ lanyard, 100+ áo và túi tote do thành viên thiết kế</small>
+                </div>
+              </div>
+            </figure>
+
+            <figure class="gallery-card" aria-hidden="true">
+              <img src="/assets/553654839_1312594657543274_6065555061644359671_n-mvna2gge.webp" alt="" width="600" height="400" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">MEMBERS IN ACTION</span>
+                <div class="gallery-info">
+                  <strong>Nhiệt huyết Tuổi trẻ</strong>
+                  <small>Đồng hành cùng nhau qua từng dự án ý nghĩa</small>
+                </div>
+              </div>
+            </figure>
           </div>
         </div>
       </section>
@@ -318,6 +440,7 @@
             <h2 id="tedx-title" class="h2 split">Ideas worth<br><em>spreading.</em></h2>
             <p class="event-description reveal">Stories that spark fresh perspectives. Skillcetera serves as the primary organizing unit of TEDxFPTUniversityHCMC across seasons from 2021 to 2025.</p>
 
+            
             
             
             
