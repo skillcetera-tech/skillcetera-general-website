@@ -1899,11 +1899,25 @@ async function saveToServer(notify = true) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(state)
     });
+    const result = await res.json().catch(() => ({}));
     if (res.ok) {
       localStorage.removeItem(DRAFT_STORAGE_KEY);
-      setStatus('Đã ghi trực tiếp vào public/data/content.json trên máy chủ!', '#16a34a', false);
+      if (result.syncedWithGitHub) {
+        setStatus('Đã commit lên GitHub! Vercel đang deploy lại (20-30s)...', '#16a34a', false);
+        if (notify) showToast('Đã lưu và commit lên GitHub thành công! Vercel sẽ tự cập nhật sau 20-30 giây.');
+      } else {
+        setStatus('Đã ghi trực tiếp vào public/data/content.json trên máy chủ!', '#16a34a', false);
+        if (notify) showToast('Đã lưu toàn bộ nội dung lên máy chủ (/data/content.json)!');
+      }
       updateStatsStrip();
-      if (notify) showToast('Đã lưu toàn bộ nội dung lên máy chủ (/data/content.json)!');
+      return;
+    } else if (result.error === 'GITHUB_TOKEN_NOT_CONFIGURED') {
+      setStatus('Cần cấu hình GITHUB_TOKEN trên Vercel', '#dc2626', false);
+      if (notify) showToast('Cần thêm GITHUB_TOKEN trong Vercel Settings -> Environment Variables!');
+      return;
+    } else if (result.error) {
+      setStatus(`Lỗi lưu: ${result.error}`, '#dc2626', false);
+      if (notify) showToast(`Không thể lưu: ${result.error}`);
       return;
     }
   } catch {

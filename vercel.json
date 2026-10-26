@@ -14,7 +14,7 @@
       "destination": "/pages/studio.html"
     },
     {
-      "source": "/((?!assets|src|fonts|vendor|data|_vercel|favicon).*)",
+      "source": "/((?!assets|src|fonts|vendor|data|_vercel|favicon|api).*)",
       "has": [
         {
           "type": "host",

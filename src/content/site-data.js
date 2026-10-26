@@ -131,7 +131,6 @@ export const SITE_META = {
   "aboutTitle": "Learn. Connect.<br><em>Make an impact.</em>",
   "aboutLead": "Skillcetera - Skills and Languages Club is not just an academic club; it is a vibrant event-organizing hub that empowers students to thrive through the exchange of knowledge, skills, and experiences. Our vision is to create an engaging environment where creativity and collaboration flourish, allowing members to enhance their knowledge and develop essential skills in a supportive community."
 };
-
 export const MISSIONS = [
   {
     "index": "01",
@@ -158,7 +157,6 @@ export const MISSIONS = [
     "pill": "MISSION 03 · OPEN & INCLUSIVE ENVIRONMENT"
   }
 ];
-
 export const ANNUAL_EVENTS = {
   "esc": {
     "id": "esc",
@@ -291,7 +289,6 @@ export const ANNUAL_EVENTS = {
     "sourceNote": "Event and media metrics are specific to TEDxFPTUniversityHCMC in club records (retrieved Oct 24, 2026). Source text notes 'four seasons' while cataloging 5 full seasons from 2021 to 2025."
   }
 };
-
 export const TEDX_SEASONS = {
   "2021": {
     "year": "2021",
@@ -429,7 +426,6 @@ export const TEDX_SEASONS = {
     ]
   }
 };
-
 export const ESC_SEASONS = {
   "2023": {
     "year": "2023",
@@ -513,7 +509,6 @@ export const ESC_SEASONS = {
     ]
   }
 };
-
 export const OTHER_PROJECTS = {
   "discussion": {
     "id": "discussion",
@@ -591,7 +586,6 @@ export const OTHER_PROJECTS = {
     "linkLabel": "The MoneyVerse Details →"
   }
 };
-
 export const HQ_GALLERY = [
   {
     "id": "hq-1792899496622",
