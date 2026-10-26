@@ -1702,7 +1702,7 @@ function renderTedxEditor() {
 
       <div class="form-group" style="margin-top:10px">
         <label>Tiêu đề chính trên ảnh (H2) — <em>Hỗ trợ thẻ &lt;br&gt; xuống dòng và &lt;em&gt; in nghiêng nghệ thuật</em></label>
-        <input type="text" class="form-input" id="tedx-title-input" value="${tedxEvent.title || 'Ideas move.<br><em>People change.</em>'}" style="font-weight:600;font-size:15px" />
+        <input type="text" class="form-input" id="tedx-title-input" value="${tedxEvent.title || 'Ideas worth<br><em>spreading.</em>'}" style="font-weight:600;font-size:15px" />
       </div>
 
       <div class="form-group" style="margin-top:10px">

@@ -235,7 +235,7 @@ export const ANNUAL_EVENTS = {
     "name": "TEDxFPTUniversityHCMC",
     "accent": "red",
     "status": "past",
-    "headline": "Ideas move. People change.",
+    "headline": "Ideas worth spreading.",
     "description": "Stories that spark fresh perspectives. Skillcetera serves as the primary organizing unit of TEDxFPTUniversityHCMC across seasons from 2021 to 2025.",
     "detailOverview": "As the primary organizing licensee for TEDxFPTUniversityHCMC, Skillcetera creates a gathering place where multidisciplinary speakers and university students meet through ideas worth spreading. Club archives record 5 consecutive seasons from 2021 to 2025.",
     "image": "/assets/tedx.webp",
@@ -300,7 +300,7 @@ export const ANNUAL_EVENTS = {
     "imagePosition": "51% 62%",
     "imageFit": "cover",
     "pill": "ANNUAL EVENT 02 · TEDxFPTUniversityHCMC",
-    "title": "Ideas move.<br><em>People change.</em>",
+    "title": "Ideas worth<br><em>spreading.</em>",
     "logoTag": "TIKTOK 55K+ · FACEBOOK 14K+ · IG 3.5K+"
   }
 };
