@@ -1,21 +1,55 @@
 export default async function handler(req, res) {
-  // CORS headers
+  // CORS headers & Cache-Control
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
-  // GET: Return current content.json
+  const token = process.env.GITHUB_TOKEN;
+  const repo = process.env.GITHUB_REPO || 'skillcetera-tech/skillcetera-general-website';
+  const branch = process.env.GITHUB_BRANCH || 'main';
+
+  // GET: Return current content.json (Fetch directly from GitHub if token present to prevent stale read)
   if (req.method === 'GET') {
+    if (token) {
+      try {
+        const filePath = 'public/data/content.json';
+        const fileUrl = `https://api.github.com/repos/${repo}/contents/${filePath}?ref=${branch}&_t=${Date.now()}`;
+        const headers = {
+          'Accept': 'application/vnd.github+json',
+          'Authorization': `Bearer ${token.trim()}`,
+          'X-GitHub-Api-Version': '2022-11-28',
+          'User-Agent': 'Skillcetera-Studio-Sync',
+        };
+        const getFileRes = await fetch(fileUrl, { headers, cache: 'no-store' });
+        if (getFileRes.ok) {
+          const fileData = await getFileRes.json();
+          if (fileData.content) {
+            const decoded = Buffer.from(fileData.content, 'base64').toString('utf8');
+            return res.status(200).json({
+              ok: true,
+              source: 'github-live',
+              sha: fileData.sha,
+              content: JSON.parse(decoded)
+            });
+          }
+        }
+      } catch (ghErr) {
+        console.warn('GitHub direct fetch failed, falling back to local file:', ghErr.message);
+      }
+    }
+
+    // Fallback: Read local file
     try {
       const fs = await import('node:fs/promises');
       const path = await import('node:path');
       const filePath = path.join(process.cwd(), 'public/data/content.json');
       const data = await fs.readFile(filePath, 'utf8');
-      return res.status(200).json({ ok: true, content: JSON.parse(data) });
+      return res.status(200).json({ ok: true, source: 'local-fallback', content: JSON.parse(data) });
     } catch (err) {
       return res.status(500).json({ ok: false, error: err.message });
     }

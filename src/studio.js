@@ -140,8 +140,12 @@ async function fetchInitialContent() {
     const draftRaw = localStorage.getItem(DRAFT_STORAGE_KEY);
     if (draftRaw) {
       const draft = JSON.parse(draftRaw);
-      state = { ...state, ...draft };
-      setStatus('Đang mở bản nháp lưu trong trình duyệt (Nhấn Lưu lên máy chủ để ghi vào /data/content.json)', '#d97706', true);
+      if (draft && draft._isSynced === false) {
+        state = { ...state, ...draft };
+        setStatus('Đang mở bản nháp có thay đổi chưa lưu trên máy chủ (Nhấn Lưu lên máy chủ)', '#d97706', true);
+      } else if (loadedContent) {
+        state = { ...state, ...loadedContent };
+      }
     }
   } catch {
     // Ignore invalid draft
@@ -2208,7 +2212,10 @@ async function saveToServer(notify = true) {
     });
     const result = await res.json().catch(() => ({}));
     if (res.ok) {
-      localStorage.removeItem(DRAFT_STORAGE_KEY);
+      state._isSynced = true;
+      state._lastSavedAt = Date.now();
+      if (result.sha) state._sha = result.sha;
+      localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
       if (result.syncedWithGitHub) {
         setStatus('Đã commit lên GitHub! Vercel đang deploy lại (20-30s)...', '#16a34a', false);
         if (notify) showToast('Đã lưu và commit lên GitHub thành công! Vercel sẽ tự cập nhật sau 20-30 giây.');

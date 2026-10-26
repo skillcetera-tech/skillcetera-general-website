@@ -210,7 +210,7 @@ export const ANNUAL_EVENTS = {
         "num": 50,
         "dec": 0,
         "suf": "+ Million",
-        "label": "Total Prize Pool",
+        "label": "Total Prize Pool (VND)",
         "period": "Per club archive (Oct 24, 2026)"
       }
     ],
@@ -295,6 +295,8 @@ export const ANNUAL_EVENTS = {
       "url": "/tedx"
     },
     "sourceNote": "Event and media metrics are specific to TEDxFPTUniversityHCMC in club records (retrieved Oct 24, 2026). Source text notes 'four seasons' while cataloging 5 full seasons from 2021 to 2025.",
+    "imagePosition": "51% 62%",
+    "imageFit": "cover",
     "pill": "ANNUAL EVENT 02 · TEDxFPTUniversityHCMC",
     "title": "Ideas move.<br><em>People change.</em>",
     "logoTag": "TIKTOK 55K+ · FACEBOOK 14K+ · IG 3.5K+"

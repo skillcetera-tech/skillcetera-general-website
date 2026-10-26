@@ -1,6 +1,7 @@
 import { mkdir, copyFile, cp, stat, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { injectContentIntoHtml } from './inject-html.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -9,11 +10,12 @@ for (const file of ['public/vendor/gsap.min.js', 'public/vendor/ScrollTrigger.mi
   await stat(path.join(root, file));
 }
 
-// Synchronize src/content/site-data.js from public/data/content.json
+let content = null;
+// 1. Synchronize src/content/site-data.js from public/data/content.json
 try {
   const contentJsonPath = path.join(root, 'public/data/content.json');
   const contentRaw = await readFile(contentJsonPath, 'utf8');
-  const content = JSON.parse(contentRaw);
+  content = JSON.parse(contentRaw);
 
   const siteDataModule = `/**
  * Dữ liệu có cấu trúc của hệ thống website Skillcetera (Trang chủ + 6 Subpage + Content Studio).
@@ -43,10 +45,25 @@ export const FULL_CONTENT = {
   console.warn('Could not sync site-data.js during build:', e.message);
 }
 
+// 2. SSG: Pre-render content directly into index.html to eliminate Flash of Outdated Content
+let injectedHtml = '';
+try {
+  const indexPath = path.join(root, 'index.html');
+  const rawIndexHtml = await readFile(indexPath, 'utf8');
+  injectedHtml = content ? injectContentIntoHtml(rawIndexHtml, content) : rawIndexHtml;
+  await writeFile(indexPath, injectedHtml, 'utf8');
+} catch (e) {
+  console.warn('Could not inject content into index.html:', e.message);
+}
+
 await mkdir(dist, { recursive: true });
-await copyFile(path.join(root, 'index.html'), path.join(dist, 'index.html'));
+if (injectedHtml) {
+  await writeFile(path.join(dist, 'index.html'), injectedHtml, 'utf8');
+} else {
+  await copyFile(path.join(root, 'index.html'), path.join(dist, 'index.html'));
+}
 await cp(path.join(root, 'pages'), path.join(dist, 'pages'), { recursive: true });
 await cp(path.join(root, 'src'), path.join(dist, 'src'), { recursive: true });
 await cp(path.join(root, 'public'), dist, { recursive: true });
 
-console.log('Static website built in dist/');
+console.log('Static website built in dist/ with SSG content injection!');
