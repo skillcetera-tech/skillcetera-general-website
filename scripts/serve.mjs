@@ -28,13 +28,13 @@ const types = {
 };
 
 const cleanRoutes = {
-  '/about': 'pages/about.html',
-  '/esc': 'pages/esc.html',
-  '/tedx': 'pages/tedx.html',
-  '/projects': 'pages/projects.html',
   '/join': 'pages/join.html',
-  '/contact': 'pages/contact.html',
   '/studio': 'pages/studio.html',
+  '/about': 'index.html',
+  '/esc': 'index.html',
+  '/tedx': 'index.html',
+  '/projects': 'index.html',
+  '/contact': 'index.html',
 };
 
 function readRawBuffer(req, maxBytes = 60 * 1024 * 1024) {

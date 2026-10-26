@@ -1,4 +1,4 @@
-import { mkdir, copyFile, cp, stat, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, copyFile, cp, stat, readFile, writeFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { injectContentIntoHtml } from './inject-html.mjs';
@@ -56,6 +56,7 @@ try {
   console.warn('Could not inject content into index.html:', e.message);
 }
 
+await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 if (injectedHtml) {
   await writeFile(path.join(dist, 'index.html'), injectedHtml, 'utf8');

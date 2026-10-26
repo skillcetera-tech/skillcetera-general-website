@@ -89,28 +89,8 @@ export const SITE_META = {
     ],
     "subpages": [
       {
-        "label": "About Us",
-        "url": "/about"
-      },
-      {
-        "label": "ESC Event",
-        "url": "/esc"
-      },
-      {
-        "label": "TEDx Event",
-        "url": "/tedx"
-      },
-      {
-        "label": "5 Projects",
-        "url": "/projects"
-      },
-      {
         "label": "Join Us",
         "url": "/join"
-      },
-      {
-        "label": "Contact",
-        "url": "/contact"
       },
       {
         "label": "Studio (Admin)",
