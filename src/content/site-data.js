@@ -121,7 +121,7 @@ export const SITE_META = {
   "heroImagePosition": "87% 88%",
   "heroImageFit": "cover",
   "heroPill": "SKILLS & LANGUAGES CLUB · FPTU HCMC",
-  "heroTitle": "Ideas worth spreading.<br>Knowledge <em>worth sharing.</em>",
+  "heroTitle": "Consistency is <em>flexibility.</em>",
   "heroCtaPrimaryText": "Explore Events",
   "heroCtaPrimaryLink": "#esc",
   "heroCtaSecondaryText": "About Skillcetera",
