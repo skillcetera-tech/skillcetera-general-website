@@ -469,6 +469,15 @@ function renderMediaLibrary() {
             >
               Xem Full-Res
             </button>
+            <button
+              type="button"
+              class="hq-trigger-light btn-media-pdf"
+              data-pdf-src="${item.originalUrl || item.webpUrl}"
+              data-pdf-title="${item.title}"
+              title="Lưu ảnh này dưới dạng tài liệu PDF"
+            >
+              📄 Lưu dạng PDF
+            </button>
             <select class="gallery-apply-select" data-apply-webp="${item.webpUrl || item.originalUrl}" data-apply-orig="${item.originalUrl || item.webpUrl}" data-apply-title="${item.title || ''}" data-apply-alt="${item.alt || item.title || ''}">
               <option value="">Áp dụng ảnh này vào...</option>
               <option value="hero">Ảnh Hero trang chủ (#hero)</option>
@@ -528,6 +537,137 @@ function renderMediaLibrary() {
       renderProjectsEditor();
     });
   });
+
+  container.querySelectorAll('.btn-media-pdf').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const src = e.currentTarget.dataset.pdfSrc;
+      const title = e.currentTarget.dataset.pdfTitle;
+      if (src) downloadImageAsPdf(src, title);
+    });
+  });
+}
+
+/**
+ * Convert any image URL (or loaded Image element) into a standalone, downloadable PDF file
+ * Zero external libraries needed, runs entirely in the browser.
+ */
+async function downloadImageAsPdf(imageUrl, title = 'Skillcetera-Asset') {
+  showToast('Đang tạo tệp PDF từ ảnh chất lượng cao...');
+  try {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = () => reject(new Error('Không thể tải ảnh để xuất PDF'));
+      img.src = imageUrl;
+    });
+
+    const w = img.naturalWidth || img.width;
+    const h = img.naturalHeight || img.height;
+    if (!w || !h) throw new Error('Kích thước ảnh không hợp lệ');
+
+    // Draw to canvas to get high quality JPEG bytes
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    // White background for transparency safety
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(img, 0, 0);
+
+    const jpegDataUrl = canvas.toDataURL('image/jpeg', 0.95);
+    const base64Data = jpegDataUrl.split(',')[1];
+    const binaryStr = atob(base64Data);
+    const jpegBytes = new Uint8Array(binaryStr.length);
+    for (let i = 0; i < binaryStr.length; i++) {
+      jpegBytes[i] = binaryStr.charCodeAt(i);
+    }
+
+    // Determine A4 layout: landscape or portrait based on aspect ratio
+    const isLandscape = w >= h;
+    const pageWidth = isLandscape ? 842 : 595;
+    const pageHeight = isLandscape ? 595 : 842;
+    const margin = 28;
+    const maxW = pageWidth - margin * 2;
+    const maxH = pageHeight - margin * 2;
+    const scale = Math.min(maxW / w, maxH / h);
+    const imgW = Math.round(w * scale);
+    const imgH = Math.round(h * scale);
+    const imgX = Math.round((pageWidth - imgW) / 2);
+    const imgY = Math.round((pageHeight - imgH) / 2);
+
+    // Build valid PDF-1.4 binary structure
+    const enc = new TextEncoder();
+    const parts = [];
+    const offsets = [];
+
+    const addPart = (strOrBytes) => {
+      const bytes = typeof strOrBytes === 'string' ? enc.encode(strOrBytes) : strOrBytes;
+      parts.push(bytes);
+      return bytes.length;
+    };
+
+    let currentPos = 0;
+    const writeObj = (objNum, contentBytes) => {
+      offsets[objNum] = currentPos;
+      currentPos += addPart(`${objNum} 0 obj\n`);
+      currentPos += addPart(contentBytes);
+      currentPos += addPart('\nendobj\n');
+    };
+
+    // Header
+    currentPos += addPart('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+
+    // Obj 1: Catalog
+    writeObj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+
+    // Obj 2: Pages
+    writeObj(2, '<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+
+    // Obj 3: Page
+    writeObj(3, `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pageWidth} ${pageHeight}] /Resources << /XObject << /Im1 4 0 R >> >> /Contents 5 0 R >>`);
+
+    // Obj 4: Image XObject
+    offsets[4] = currentPos;
+    currentPos += addPart(`4 0 obj\n<< /Type /XObject /Subtype /Image /Width ${w} /Height ${h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpegBytes.length} >>\nstream\n`);
+    currentPos += addPart(jpegBytes);
+    currentPos += addPart('\nendstream\nendobj\n');
+
+    // Obj 5: Page Content stream (placement)
+    const streamOps = `q\n${imgW} 0 0 ${imgH} ${imgX} ${imgY} cm\n/Im1 Do\nQ\n`;
+    const streamBytes = enc.encode(streamOps);
+    writeObj(5, `<< /Length ${streamBytes.length} >>\nstream\n${streamOps}endstream`);
+
+    // Cross-reference table (xref)
+    const xrefStart = currentPos;
+    let xref = `xref\n0 6\n0000000000 65535 f \n`;
+    for (let i = 1; i <= 5; i++) {
+      xref += String(offsets[i]).padStart(10, '0') + ' 00000 n \n';
+    }
+    xref += `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF`;
+    addPart(xref);
+
+    // Merge into single Blob
+    const pdfBlob = new Blob(parts, { type: 'application/pdf' });
+    const downloadUrl = URL.createObjectURL(pdfBlob);
+    const a = document.createElement('a');
+    const safeTitle = (title || 'skillcetera-media')
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    a.href = downloadUrl;
+    a.download = `${safeTitle || 'skillcetera-asset'}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(downloadUrl), 4000);
+
+    showToast(`Đã xuất và tải xuống tệp PDF (${a.download}) thành công!`);
+  } catch (err) {
+    console.error('PDF export error:', err);
+    showToast(`Không thể tạo PDF: ${err.message}`);
+  }
 }
 
 function setupHQUploader() {
@@ -550,11 +690,40 @@ function setupHQUploader() {
     if (!file) return;
     selectedFile = file;
     const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
-    specSize.textContent = `${sizeMB} MB · ${file.type.replace('image/', '').toUpperCase()}`;
+    const fileType = file.type ? file.type.replace('image/', '').toUpperCase() : 'UNKNOWN';
+    specSize.textContent = `${sizeMB} MB · ${fileType}`;
 
     const baseName = file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ');
     if (!titleInput.value) titleInput.value = baseName;
     if (!altInput.value) altInput.value = `Ảnh tư liệu Skillcetera: ${baseName}`;
+
+    if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+      selectedDimensions = 'PDF Document (Vector)';
+      specDim.textContent = selectedDimensions;
+      specTier.textContent = 'Tài liệu PDF gốc (Vector / In ấn)';
+      const canvas = document.createElement('canvas');
+      canvas.width = 640;
+      canvas.height = 420;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, 640, 420);
+      ctx.fillStyle = '#eb0028';
+      ctx.fillRect(40, 40, 110, 140);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 38px sans-serif';
+      ctx.fillText('PDF', 55, 126);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 22px sans-serif';
+      ctx.fillText(file.name.slice(0, 32), 175, 80);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '16px sans-serif';
+      ctx.fillText(`Dung lượng: ${sizeMB} MB`, 175, 118);
+      ctx.fillText('Định dạng tài liệu PDF chất lượng cao', 175, 148);
+      previewImg.onload = null;
+      previewImg.src = canvas.toDataURL('image/png');
+      inspector.hidden = false;
+      return;
+    }
 
     const objectUrl = URL.createObjectURL(file);
     previewImg.onload = () => {
@@ -676,6 +845,16 @@ function setupHQUploader() {
       uploadBtn.textContent = 'Tải lên & Xử lý Ảnh Chất lượng cao (POST /api/upload)';
     }
   });
+
+  const exportPdfBtn = document.getElementById('btn-export-pdf');
+  exportPdfBtn?.addEventListener('click', () => {
+    if (!selectedFile && !previewImg.src) {
+      showToast('Vui lòng chọn ảnh trước khi lưu PDF.');
+      return;
+    }
+    const title = titleInput?.value?.trim() || selectedFile?.name || 'skillcetera-media';
+    downloadImageAsPdf(previewImg.src, title);
+  });
 }
 
 function renderAboutEditor() {
@@ -752,6 +931,52 @@ function renderAboutEditor() {
           <div style="border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/8.5;background:#111;max-width:320px;margin:0 auto;box-shadow:0 8px 24px rgba(0,0,0,0.08)">
             <img id="hero-img-preview" src="${meta.heroImage || '/assets/discussion-forum.webp'}" alt="Preview" style="width:100%;height:100%;object-fit:${meta.heroImageFit || 'cover'};object-position:${meta.heroImagePosition || 'center 45%'}" />
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Text Content Editor (#home / .hero) -->
+    <div class="editor-repeater-item" style="border: 2px solid rgba(36,87,255,0.24); background: #ffffff; margin-bottom: 24px; padding: 22px; border-radius: 14px;">
+      <div class="editor-repeater-head" style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="pill pill-esc">Trang chủ #home</span>
+          <strong>Nội dung chữ Hero Trang chủ (Headline, Pill, Nút bấm &amp; Caption)</strong>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Nhãn Pill nhỏ trên đầu (Pill Badge)</label>
+          <input type="text" class="form-input" id="meta-hero-pill" value="${meta.heroPill || 'SKILLS &amp; LANGUAGES CLUB · FPTU HCMC'}" placeholder="e.g. SKILLS &amp; LANGUAGES CLUB · FPTU HCMC" />
+        </div>
+        <div class="form-group">
+          <label>Dòng Credit dưới ảnh (Photo Credit)</label>
+          <input type="text" class="form-input" id="meta-hero-credit" value="${meta.heroImageCredit || 'IDEAS WORTH SPREADING · KNOWLEDGE WORTH SHARING'}" placeholder="e.g. IDEAS WORTH SPREADING · KNOWLEDGE WORTH SHARING" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Tiêu đề chính Hero (H1) — <em>Hỗ trợ thẻ &lt;br&gt; xuống dòng và &lt;em&gt; in nghiêng chữ có màu</em></label>
+        <input type="text" class="form-input" id="meta-hero-title" value="${meta.heroTitle || 'Ideas worth spreading.<br>Knowledge <em>worth sharing.</em>'}" style="font-weight:600;font-size:15px" />
+      </div>
+
+      <div class="form-group">
+        <label>Dòng Caption đè trên ảnh Hero (Photo Caption)</label>
+        <input type="text" class="form-input" id="meta-hero-caption" value="${meta.heroImageCaption || 'skillcetera. — Learn together, make an impact.'}" />
+      </div>
+
+      <div class="form-grid-2" style="background:#f8fafc;padding:16px;border-radius:12px;border:1px solid var(--line);margin-top:10px">
+        <div class="form-group">
+          <label>Nút chính (Primary CTA): Chữ hiển thị</label>
+          <input type="text" class="form-input" id="meta-hero-cta-primary-text" value="${meta.heroCtaPrimaryText || 'Explore Events'}" />
+          <label style="margin-top:8px">Nút chính: Đường dẫn liên kết (Href)</label>
+          <input type="text" class="form-input" id="meta-hero-cta-primary-link" value="${meta.heroCtaPrimaryLink || '#esc'}" />
+        </div>
+        <div class="form-group">
+          <label>Nút phụ (Secondary CTA): Chữ hiển thị</label>
+          <input type="text" class="form-input" id="meta-hero-cta-secondary-text" value="${meta.heroCtaSecondaryText || 'About Skillcetera'}" />
+          <label style="margin-top:8px">Nút phụ: Đường dẫn liên kết (Href)</label>
+          <input type="text" class="form-input" id="meta-hero-cta-secondary-link" value="${meta.heroCtaSecondaryLink || '#about'}" />
         </div>
       </div>
     </div>
@@ -834,6 +1059,14 @@ function renderAboutEditor() {
     if (target.id === 'meta-about-pill') state.siteMeta.aboutPill = target.value;
     if (target.id === 'meta-about-title') state.siteMeta.aboutTitle = target.value;
     if (target.id === 'meta-about-lead') state.siteMeta.aboutLead = target.value;
+    if (target.id === 'meta-hero-pill') state.siteMeta.heroPill = target.value;
+    if (target.id === 'meta-hero-title') state.siteMeta.heroTitle = target.value;
+    if (target.id === 'meta-hero-caption') state.siteMeta.heroImageCaption = target.value;
+    if (target.id === 'meta-hero-credit') state.siteMeta.heroImageCredit = target.value;
+    if (target.id === 'meta-hero-cta-primary-text') state.siteMeta.heroCtaPrimaryText = target.value;
+    if (target.id === 'meta-hero-cta-primary-link') state.siteMeta.heroCtaPrimaryLink = target.value;
+    if (target.id === 'meta-hero-cta-secondary-text') state.siteMeta.heroCtaSecondaryText = target.value;
+    if (target.id === 'meta-hero-cta-secondary-link') state.siteMeta.heroCtaSecondaryLink = target.value;
     if (target.id === 'meta-name') state.siteMeta.clubName = target.value;
     if (target.id === 'meta-founded') state.siteMeta.foundedYear = target.value;
     if (target.id === 'meta-tagline') state.siteMeta.taglineVi = target.value;

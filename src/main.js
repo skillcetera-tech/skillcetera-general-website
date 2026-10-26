@@ -38,6 +38,38 @@ if (ANNUAL_EVENTS?.tedx?.image) {
   }
 }
 
+// Bind dynamic Hero Text from site-data if configured
+if (SITE_META?.heroPill) {
+  const pill = document.querySelector('.hero-pills > .pill');
+  if (pill) pill.textContent = SITE_META.heroPill;
+}
+if (SITE_META?.heroTitle) {
+  const title = document.getElementById('hero-title');
+  if (title) title.innerHTML = SITE_META.heroTitle;
+}
+if (SITE_META?.heroCtaPrimaryText) {
+  const btn = document.querySelector('.hero-actions .btn');
+  if (btn) {
+    btn.innerHTML = `${SITE_META.heroCtaPrimaryText} <span aria-hidden="true">↘</span>`;
+    if (SITE_META.heroCtaPrimaryLink) btn.setAttribute('href', SITE_META.heroCtaPrimaryLink);
+  }
+}
+if (SITE_META?.heroCtaSecondaryText) {
+  const link = document.querySelector('.hero-actions .text-link');
+  if (link) {
+    link.innerHTML = `${SITE_META.heroCtaSecondaryText} <span aria-hidden="true">→</span>`;
+    if (SITE_META.heroCtaSecondaryLink) link.setAttribute('href', SITE_META.heroCtaSecondaryLink);
+  }
+}
+if (SITE_META?.heroImageCaption) {
+  const cap = document.querySelector('.hero-photo-overlay > span:first-child');
+  if (cap) cap.textContent = SITE_META.heroImageCaption;
+}
+if (SITE_META?.heroImageCredit) {
+  const credit = document.querySelector('.hero-photo-overlay .image-credit');
+  if (credit) credit.textContent = SITE_META.heroImageCredit;
+}
+
 let motion = initMotion();
 let stopAmbient = initAmbientMotion();
 let stopCursor = initCursorSquares();
@@ -203,20 +235,67 @@ const hydrateFromContent = async () => {
 
     const meta = content.siteMeta || content.meta || {};
 
-    // 1. Hero Image & Position/Fit
-    const heroImg = document.querySelector('.hero-media img');
-    const heroSource = document.querySelector('.hero-media source');
-    if (meta.heroImage && heroImg) {
-      const targetSrc = meta.heroOriginalImage || meta.heroImage;
-      if (heroImg.getAttribute('src') !== targetSrc) {
-        if (heroSource) heroSource.srcset = meta.heroImage;
-        heroImg.src = targetSrc;
+    // 1. Hero Section on Homepage (#home)
+    const heroSection = document.getElementById('home') || document.querySelector('.hero');
+    if (heroSection) {
+      // 1.1 Hero Image & Position/Fit
+      const heroImg = heroSection.querySelector('.hero-media img');
+      const heroSource = heroSection.querySelector('.hero-media source');
+      if (meta.heroImage && heroImg) {
+        const targetSrc = meta.heroOriginalImage || meta.heroImage;
+        if (heroImg.getAttribute('src') !== targetSrc) {
+          if (heroSource) heroSource.srcset = meta.heroImage;
+          heroImg.src = targetSrc;
+        }
+        if (meta.heroImagePosition && heroImg.style.objectPosition !== meta.heroImagePosition) {
+          heroImg.style.objectPosition = meta.heroImagePosition;
+        }
+        if (meta.heroImageFit && heroImg.style.objectFit !== meta.heroImageFit) {
+          heroImg.style.objectFit = meta.heroImageFit;
+        }
       }
-      if (meta.heroImagePosition && heroImg.style.objectPosition !== meta.heroImagePosition) {
-        heroImg.style.objectPosition = meta.heroImagePosition;
+
+      // 1.2 Hero Pill Badge
+      if (meta.heroPill) {
+        const pillEl = heroSection.querySelector('.hero-pills > .pill');
+        if (pillEl && pillEl.textContent !== meta.heroPill) pillEl.textContent = meta.heroPill;
       }
-      if (meta.heroImageFit && heroImg.style.objectFit !== meta.heroImageFit) {
-        heroImg.style.objectFit = meta.heroImageFit;
+
+      // 1.3 Hero Title (h1) with dynamic splitWords & GSAP refresh
+      if (meta.heroTitle) {
+        const heroTitleEl = document.getElementById('hero-title');
+        if (heroTitleEl && heroTitleEl.innerHTML !== meta.heroTitle) {
+          heroTitleEl.innerHTML = meta.heroTitle;
+          delete heroTitleEl.dataset.splitDone;
+          splitWords(heroTitleEl);
+          motion?.refresh();
+        }
+      }
+
+      // 1.4 Hero CTA Buttons & Links
+      if (meta.heroCtaPrimaryText) {
+        const btnPrimary = heroSection.querySelector('.hero-actions .btn');
+        if (btnPrimary) {
+          btnPrimary.innerHTML = `${meta.heroCtaPrimaryText} <span aria-hidden="true">↘</span>`;
+          if (meta.heroCtaPrimaryLink) btnPrimary.setAttribute('href', meta.heroCtaPrimaryLink);
+        }
+      }
+      if (meta.heroCtaSecondaryText) {
+        const btnSecondary = heroSection.querySelector('.hero-actions .text-link');
+        if (btnSecondary) {
+          btnSecondary.innerHTML = `${meta.heroCtaSecondaryText} <span aria-hidden="true">→</span>`;
+          if (meta.heroCtaSecondaryLink) btnSecondary.setAttribute('href', meta.heroCtaSecondaryLink);
+        }
+      }
+
+      // 1.5 Hero Photo Overlay Captions
+      if (meta.heroImageCaption) {
+        const capEl = heroSection.querySelector('.hero-photo-overlay > span:first-child');
+        if (capEl && capEl.textContent !== meta.heroImageCaption) capEl.textContent = meta.heroImageCaption;
+      }
+      if (meta.heroImageCredit) {
+        const creditEl = heroSection.querySelector('.hero-photo-overlay .image-credit');
+        if (creditEl && creditEl.textContent !== meta.heroImageCredit) creditEl.textContent = meta.heroImageCredit;
       }
     }
 

@@ -24,6 +24,7 @@ const types = {
   '.svg': 'image/svg+xml',
   '.woff2': 'font/woff2',
   '.ico': 'image/x-icon',
+  '.pdf': 'application/pdf',
 };
 
 const cleanRoutes = {
@@ -239,8 +240,8 @@ const server = http.createServer(async (req, res) => {
       }
 
       const ext = path.extname(filename).toLowerCase() || '.png';
-      if (!['.png', '.jpg', '.jpeg', '.webp', '.avif'].includes(ext)) {
-        sendJson(res, 400, { ok: false, error: 'Unsupported image format' });
+      if (!['.png', '.jpg', '.jpeg', '.webp', '.avif', '.pdf'].includes(ext)) {
+        sendJson(res, 400, { ok: false, error: 'Unsupported format. Supported: PNG, JPG, JPEG, WebP, AVIF, PDF' });
         return;
       }
 
@@ -252,7 +253,7 @@ const server = http.createServer(async (req, res) => {
       const stamp = Date.now().toString(36);
       const slug = `${baseSlug}-${stamp}`;
       const origRel = `assets/originals/${slug}${ext}`;
-      const webpRel = `assets/${slug}.webp`;
+      const webpRel = ext === '.pdf' ? `assets/originals/${slug}${ext}` : `assets/${slug}.webp`;
 
       const origFullPath = path.join(project, 'public', origRel);
       const webpFullPath = path.join(project, 'public', webpRel);
@@ -266,18 +267,27 @@ const server = http.createServer(async (req, res) => {
         webpBytes: buffer.length,
       };
 
-      try {
-        const pythonBin = process.env.PYTHON_BIN || (process.platform === 'win32' ? 'python' : 'python3');
-        const { stdout } = await execFileAsync(pythonBin, [
-          path.join(project, 'scripts/optimize-assets.py'),
-          origFullPath,
-          webpFullPath,
-          '2400',
-          '92',
-        ]);
-        meta = JSON.parse(stdout.trim());
-      } catch {
-        await copyFile(origFullPath, webpFullPath);
+      if (ext === '.pdf') {
+        meta = {
+          width: 1200,
+          height: 1600,
+          originalBytes: buffer.length,
+          webpBytes: buffer.length,
+        };
+      } else {
+        try {
+          const pythonBin = process.env.PYTHON_BIN || (process.platform === 'win32' ? 'python' : 'python3');
+          const { stdout } = await execFileAsync(pythonBin, [
+            path.join(project, 'scripts/optimize-assets.py'),
+            origFullPath,
+            webpFullPath,
+            '2400',
+            '92',
+          ]);
+          meta = JSON.parse(stdout.trim());
+        } catch {
+          await copyFile(origFullPath, webpFullPath);
+        }
       }
 
       // Sync to dist/ if present

@@ -121,6 +121,7 @@ body.intro #app {
   background: var(--pill);
   color: var(--ink);
   letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 
 .pill-esc {
@@ -1348,6 +1349,14 @@ body.intro #app {
   align-items: flex-start;
   gap: 16px;
   padding-top: 14px;
+}
+.project-preview figcaption > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.project-preview figcaption .pill {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .project-preview figcaption strong {
   display: block;

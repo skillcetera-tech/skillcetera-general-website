@@ -190,7 +190,7 @@
           <span class="pill" id="badge-media-count">50MB</span>
         </button>
         <button type="button" class="studio-tab-btn" role="tab" aria-selected="false" data-tab="about">
-          <span>🌱 02. About &amp; Missions</span>
+          <span>🌱 02. Home Hero &amp; About</span>
           <span class="pill">/about</span>
         </button>
         <button type="button" class="studio-tab-btn" role="tab" aria-selected="false" data-tab="esc" data-accent="esc">
@@ -238,10 +238,10 @@
             </div>
           </div>
 
-          <div class="hq-upload-zone" id="hq-dropzone" tabindex="0" role="button" aria-label="Drop high-resolution photo here or click to browse">
-            <h3>Drag and drop high-resolution photos here or click to browse</h3>
-            <p>Supports PNG, JPG, JPEG, WebP (Max 50MB · Recommended 1920×1080px or higher)</p>
-            <input type="file" id="hq-file-input" accept="image/png,image/jpeg,image/webp" hidden />
+          <div class="hq-upload-zone" id="hq-dropzone" tabindex="0" role="button" aria-label="Drop high-resolution photo or PDF document here or click to browse">
+            <h3>Drag and drop high-resolution photos or PDF documents here</h3>
+            <p>Supports PNG, JPG, JPEG, WebP, PDF (Max 50MB · High-resolution media &amp; documents)</p>
+            <input type="file" id="hq-file-input" accept="image/png,image/jpeg,image/webp,application/pdf" hidden />
           </div>
 
           <div class="hq-inspector" id="hq-inspector" hidden>
@@ -286,9 +286,14 @@
                 <input type="text" id="hq-input-caption" class="form-input" placeholder="e.g. Photography: Skillcetera Media Team · Original Resolution" />
               </div>
 
-              <button type="button" class="btn btn-esc" id="btn-upload-hq">
-                Upload &amp; Process High-Resolution Photo (POST /api/upload)
-              </button>
+              <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px">
+                <button type="button" class="btn btn-esc" id="btn-upload-hq">
+                  Upload &amp; Process High-Resolution Photo (POST /api/upload)
+                </button>
+                <button type="button" class="btn btn-light" id="btn-export-pdf" title="Save this photo as a PDF document">
+                  📄 Lưu dạng PDF
+                </button>
+              </div>
             </div>
           </div>
 
@@ -301,8 +306,8 @@
         <section class="studio-panel" id="panel-about" role="tabpanel" hidden>
           <div class="studio-panel-head">
             <div>
-              <h2>Edit Home &amp; About Section (/about)</h2>
-              <p>Manage club positioning statements and detailed copy for the 3 core missions.</p>
+              <h2>Edit Home Hero &amp; About Section (/about)</h2>
+              <p>Manage hero headlines, pill badges, CTA buttons, photo overlays, and 3 core missions.</p>
             </div>
           </div>
           <div id="about-editor-fields"></div>
