@@ -64,6 +64,15 @@ if (injectedHtml) {
   await copyFile(path.join(root, 'index.html'), path.join(dist, 'index.html'));
 }
 await cp(path.join(root, 'pages'), path.join(dist, 'pages'), { recursive: true });
+
+// Copy subpages to clean URL root paths (/join and /studio) with directory fallbacks
+await copyFile(path.join(root, 'pages/join.html'), path.join(dist, 'join.html'));
+await mkdir(path.join(dist, 'join'), { recursive: true });
+await copyFile(path.join(root, 'pages/join.html'), path.join(dist, 'join/index.html'));
+
+await copyFile(path.join(root, 'pages/studio.html'), path.join(dist, 'studio.html'));
+await mkdir(path.join(dist, 'studio'), { recursive: true });
+await copyFile(path.join(root, 'pages/studio.html'), path.join(dist, 'studio/index.html'));
 await cp(path.join(root, 'src'), path.join(dist, 'src'), { recursive: true });
 await cp(path.join(root, 'public'), dist, { recursive: true });
 

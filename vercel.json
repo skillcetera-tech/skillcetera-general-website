@@ -51,7 +51,7 @@
           "value": "studio\\..*"
         }
       ],
-      "destination": "/pages/studio.html"
+      "destination": "/pages/studio"
     },
     {
       "source": "/((?!assets|src|fonts|vendor|data|_vercel|favicon|api).*)",
@@ -61,15 +61,15 @@
           "value": "studio\\..*"
         }
       ],
-      "destination": "/pages/studio.html"
+      "destination": "/pages/studio"
     },
     {
       "source": "/join",
-      "destination": "/pages/join.html"
+      "destination": "/join"
     },
     {
       "source": "/studio",
-      "destination": "/pages/studio.html"
+      "destination": "/studio"
     },
     {
       "source": "/about",
