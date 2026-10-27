@@ -290,6 +290,10 @@ export const ANNUAL_EVENTS = {
       "label": "Latest Edition Milestone",
       "edition": "SISC 2024–2025",
       "theme": "THE ODYSSEY"
+    },
+    "cta": {
+      "label": "View on Facebook",
+      "url": "https://www.facebook.com/skillcetera"
     }
   },
   "esc": {

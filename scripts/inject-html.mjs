@@ -114,6 +114,22 @@ export function injectContentIntoHtml(html, content) {
       `$1${sisc.image}$3`
     );
   }
+  if (sisc.logoTag) {
+    html = html.replace(
+      /(<section class="event-scene stats event-step-into"[^>]*>[\s\S]*?<span class="logo-tag">)([\s\S]*?)(<\/span>)/,
+      `$1${sisc.logoTag}$3`
+    );
+  }
+  if (sisc.cta) {
+    const label = sisc.cta.label || 'View on Facebook';
+    const url = sisc.cta.url || 'https://www.facebook.com/skillcetera';
+    const isExt = url.startsWith('http');
+    const targetAttrs = isExt ? ' target="_blank" rel="noopener noreferrer"' : '';
+    html = html.replace(
+      /(<section class="event-scene stats event-step-into"[^>]*>[\s\S]*?<div class="logos event-bottom">[\s\S]*?<a class="btn btn-sisc event-link"[^>]*href=")([^"]*)(")([^>]*>)([\s\S]*?)(<\/a>)/,
+      `$1${url}"${targetAttrs}>${label} <span aria-hidden="true">↗</span>$6`
+    );
+  }
 
   // 3. ESC Stage Section (#esc)
   if (esc.pill) {

@@ -864,12 +864,13 @@ body.intro #app {
   position: relative;
   z-index: 3;
   height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  padding: 24px 16px 20px;
+  gap: clamp(8px, 1.4vh, 14px);
+  padding: clamp(16px, 2.5vh, 24px) 16px clamp(16px, 2.5vh, 20px);
 }
 
 .event-description {
@@ -958,19 +959,38 @@ body.intro #app {
 }
 
 .btn-sisc {
-  background: var(--white);
-  color: var(--black);
-  border-color: var(--white);
-  font-weight: 600;
+  background: #ffffff !important;
+  color: #06090e !important;
+  border: 1px solid #ffffff;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-sisc span {
+  color: inherit !important;
 }
 .btn-sisc:hover {
-  background: var(--soft);
-  color: var(--black);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.28);
+  background: #f0f3f8 !important;
+  color: #000000 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
 }
 
 .event-step-into .event-ghost {
-  color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.event-step-into .logos {
+  background: rgba(12, 16, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.event-step-into .logo-tag {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .sisc-ring {

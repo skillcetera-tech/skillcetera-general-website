@@ -96,7 +96,7 @@ export function initEventScenes({ headerOffset = () => 76 } = {}) {
   function syncLayout() {
     layoutFrame = 0;
     if (destroyed) return;
-    const available = innerHeight - headerOffset();
+    const available = Math.max(innerHeight - headerOffset(), 640);
     scenes.forEach(scene => {
       const canFit = desktop.matches && !reduced.matches;
       if (canFit) {
