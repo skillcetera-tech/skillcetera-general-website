@@ -17,26 +17,22 @@
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <header class="site-header nav">
-    <a class="brand" href="/" aria-label="Skillcetera, back to home">
+    <a class="brand" href="#main-content" aria-label="Skillcetera, back to top">
       <img class="brand-icon" src="/assets/skillcetera-logo.png" width="32" height="32" alt="" />
       <span>skillcetera<span class="brand-dot">.</span></span>
     </a>
-    <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="/#about">About Us</a>
-      <a class="nav-esc" href="/#esc">ESC</a>
-      <a class="nav-tedx" href="/#tedx">TEDx</a>
-      <a href="/#projects">Projects</a>
-      <a href="/join" aria-current="page">Join Us</a>
+    <nav class="desktop-nav" aria-label="Join page navigation">
+      <a href="#recruitment">Recruitment</a>
+      <a href="#depts">Departments</a>
+      <a href="#why-skillcetera">Why Skillcetera</a>
     </nav>
-    <a class="header-connect btn" href="/#connect">Connect</a>
+    <a class="header-connect btn" href="#apply">Apply now</a>
     <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span></button>
-    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>
-      <a href="/">Home</a>
-      <a href="/#about">About Us</a>
-      <a href="/#esc">ESC</a>
-      <a href="/#tedx">TEDx</a>
-      <a href="/#projects">Projects</a>
-      <a href="/join">Join Us</a>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Join page navigation" hidden>
+      <a href="#recruitment">Recruitment</a>
+      <a href="#depts">Departments</a>
+      <a href="#why-skillcetera">Why Skillcetera</a>
+      <a href="#apply">Apply now</a>
     </nav>
   </header>
 
@@ -68,23 +64,8 @@
       </div>
     </section>
 
-    <!-- ── STATUS STRIP ───────────────────────────────────────── -->
-    <div class="ds-status-strip" role="status" aria-live="polite">
-      <div class="ds-container">
-        <div class="ds-status-inner">
-          <p>
-            <strong>Recruitment 2026 is open.</strong>
-            The Awakening round closes 23:59 on 16 November 2026. Read the departments below, then apply via the form on this page.
-          </p>
-          <a href="#apply" class="ds-status-link">
-            Apply now
-          </a>
-        </div>
-      </div>
-    </div>
-
     <!-- ── ROADMAP ────────────────────────────────────────────── -->
-    <section class="ds-section" aria-labelledby="roadmap-heading">
+    <section class="ds-section" id="recruitment" aria-labelledby="roadmap-heading">
       <div class="ds-container">
         <header class="ds-section-header">
           <h2 id="roadmap-heading" class="ds-section-title">The 2026 recruitment</h2>
@@ -473,23 +454,24 @@
         </header>
 
         <div class="ds-form-frame">
-          <iframe
-            src="https://skillcetera.fillout.com/t/s3dAm5Lr6rus?embed=1"
-            title="Skillcetera Member Recruitment Form 2026"
-            width="100%"
-            allow="clipboard-write"
-            loading="lazy"
-          ></iframe>
-            <p class="ds-form-fallback">
-              <span>Form not loading?</span>
-              <a href="https://skillcetera.fillout.com/t/s3dAm5Lr6rus" target="_blank" rel="noopener noreferrer">Open the application form directly</a>
-            </p>
+          <div
+            class="ds-fillout-embed"
+            data-fillout-id="s3dAm5Lr6rus"
+            data-fillout-embed-type="standard"
+            data-fillout-inherit-parameters
+            data-fillout-dynamic-resize
+            aria-label="Skillcetera Member Recruitment Form 2026"
+          ></div>
+          <p class="ds-form-fallback">
+            <span>Form not loading?</span>
+            <a href="https://skillcetera.fillout.com/t/s3dAm5Lr6rus" target="_blank" rel="noopener noreferrer">Open the application form directly</a>
+          </p>
         </div>
       </div>
     </section>
 
     <!-- ── WHY JOIN ───────────────────────────────────────────── -->
-    <section class="ds-section" aria-labelledby="why-heading">
+    <section class="ds-section" id="why-skillcetera" aria-labelledby="why-heading">
       <div class="ds-container">
         <h2 id="why-heading" class="ds-section-title">Why Skillcetera?</h2>
         <ol class="ds-why-list" role="list">
@@ -562,5 +544,6 @@
 
   <script type="module" src="/src/subpage.js"></script>
   <script type="module" src="/src/join-desert.js"></script>
+  <script src="https://server.fillout.com/embed/v1/" async></script>
 </body>
 </html>
