@@ -70,7 +70,7 @@ export function injectContentIntoHtml(html, content) {
   // 2. About Section
   if (meta.aboutPill) {
     html = html.replace(
-      /(<div class="loop-head"[^>]*>\s*<span class="pill"[^>]*>)([\s\S]*?)(<\/span>)/,
+      /(<section class="about[^"]*" id="about"[^>]*>[\s\S]*?<span class="pill[^"]*">)([\s\S]*?)(<\/span>)/,
       `$1${meta.aboutPill}$3`
     );
   }

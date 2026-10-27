@@ -591,128 +591,175 @@ body.intro #app {
   color: var(--white-78);
 }
 
-/* 2. ABOUT & 3 MISSIONS (Petalyx #loop 3-Panel Hover Accordion) */
-.loop {
+/* 2. ABOUT US (2-Column Grid: Left Text, Right Logo) */
+.about {
   position: relative;
-  height: clamp(560px, 78vh, 680px);
-  overflow: hidden;
   background: var(--bg);
   border-top: 1px solid var(--line);
+  padding: clamp(64px, 10vh, 100px) 0;
+  overflow: hidden;
 }
 
-.loop-cloud {
-  position: absolute;
-  z-index: 3;
-  top: 4vh;
-  left: -4vw;
-  width: min(36vw, 480px);
-  height: 220px;
-  pointer-events: none;
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(40px, 6vw, 84px);
+  align-items: center;
 }
 
-.loop-head {
-  position: absolute;
-  z-index: 4;
-  top: 32px;
-  left: 0;
-  width: 100%;
+.about-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 0 16px;
-  text-align: center;
-  pointer-events: none;
+  gap: 16px;
+}
+
+.about-content .pill {
+  width: fit-content;
+  margin-bottom: 4px;
+}
+
+.about-content .h2 {
+  font-size: clamp(34px, 4.4vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
 }
 
 .about-lead {
-  max-width: 620px;
+  font-size: clamp(15px, 1.3vw, 17px);
+  line-height: 1.6;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.about-body {
   font-size: 13.5px;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--gray);
 }
 
-.track {
-  position: absolute;
-  z-index: 2;
-  inset: 0;
+.about-missions {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
 }
 
-.panel {
-  position: relative;
-  flex: 0 0 clamp(104px, 12vw, 180px);
-  height: 100%;
-  overflow: hidden;
-  border-right: 1px solid var(--line);
-  cursor: pointer;
-  outline: none;
-  transition: flex-grow 0.9s cubic-bezier(0.77, 0, 0.18, 1), background-color 0.4s;
-}
-.panel:last-child {
-  border-right: none;
-}
-.panel.is-active {
-  flex-grow: 1;
-  cursor: default;
-  background: linear-gradient(180deg, transparent 50%, var(--white-55) 100%);
-}
-
-.panel-in {
-  position: absolute;
-  left: clamp(16px, 2vw, 32px);
-  bottom: clamp(24px, 4vh, 40px);
+.about-mission-card {
   display: flex;
-  align-items: flex-end;
-  gap: clamp(16px, 2.2vw, 32px);
-  width: max-content;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
 }
 
-.num {
-  font-size: clamp(140px, 26vh, 260px);
-  font-weight: 700;
-  line-height: 0.76;
-  letter-spacing: -0.07em;
-  user-select: none;
+.about-mission-card:hover {
+  border-color: var(--ink-soft);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
 }
 
-.panel:nth-child(1) .num,
-.panel:nth-child(2) .num,
-.panel:nth-child(3) .num {
+.about-mission-num {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
   color: var(--ink);
+  flex-shrink: 0;
+  padding-top: 2px;
 }
 
-.step {
-  position: relative;
-  width: min(420px, 32vw);
-  padding-bottom: 6px;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.4s, transform 0.45s ease;
+.about-mission-info h3 {
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 4px;
 }
 
-.panel.is-active .step {
-  opacity: 1;
-  transform: none;
-  transition: opacity 0.6s 0.25s, transform 0.65s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.step .pill {
-  margin-bottom: 12px;
-}
-
-.step h3 {
-  font-size: clamp(20px, 1.8vw, 28px);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  margin-bottom: 10px;
-}
-
-.step p {
-  font-size: 14px;
+.about-mission-info p {
+  font-size: 12.5px;
   line-height: 1.6;
   color: var(--gray);
 }
+
+/* Right Column - Logo Visual */
+.about-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-logo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+}
+
+.about-logo-card {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #06090e;
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 28px 24px;
+  text-align: center;
+}
+
+.about-logo-img {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 18px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-logo-card:hover .about-logo-img {
+  transform: scale(1.03);
+}
+
+.about-logo-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 18px;
+}
+
+.about-logo-caption strong {
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  font-weight: 800;
+}
+
+.about-logo-caption small {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--white-78);
+  text-transform: uppercase;
+}
+
+@media (max-width: 992px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .about-visual {
+    order: -1;
+  }
+  .about-logo-frame {
+    max-width: 340px;
+  }
+}
+
 
 /* 3 & 4. Annual event frames: normal document flow, no sticky travel or image zoom. */
 .event-scene {
@@ -1805,47 +1852,7 @@ body.intro #app {
     gap: 4px;
   }
 
-  .loop {
-    height: auto;
-    min-height: 0;
-    padding: 72px 0 36px;
-  }
-  .loop-head {
-    position: relative;
-    top: auto;
-  }
-  .track {
-    position: relative;
-    inset: auto;
-    flex-direction: column;
-    margin-top: 32px;
-  }
-  .panel {
-    flex: none;
-    height: auto;
-    overflow: visible;
-    border-right: none;
-    border-top: 1px solid var(--line);
-    cursor: auto;
-  }
-  .panel-in {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    width: auto;
-    padding: 24px 16px;
-    gap: 18px;
-  }
-  .num {
-    font-size: 110px;
-  }
-  .step,
-  .panel.is-active .step {
-    opacity: 1;
-    transform: none;
-    filter: none;
-    width: auto;
-  }
+
 
   .seasons-glass {
     padding: 22px 18px;
