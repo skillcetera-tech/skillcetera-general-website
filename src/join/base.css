@@ -1,0 +1,18 @@
+/* Hallmark · scoped base: Skillcetera Join · v2.0.0 */
+/* Hallmark · critique: scope type, access and reduced-motion rules to Join while preserving native document flow. */
+html, body { overflow-x: clip; }
+html { scroll-padding-top: 100px; scrollbar-color: var(--color-muted) var(--color-paper); }
+.join-page { margin: 0; font-family: var(--font-body); font-size: var(--text-md); line-height: 1.6; font-synthesis: none; -webkit-font-smoothing: antialiased; caret-color: var(--color-focus); }
+.join-page *, .join-page *::before, .join-page *::after { box-sizing: border-box; }
+.join-page ::selection { background: var(--color-ink); color: var(--color-paper); }
+.join-page :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 5px; }
+.join-page a { text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+.join-page h1, .join-page h2, .join-page h3 { font-family: var(--font-display); font-weight: var(--display-weight); line-height: 1.08; letter-spacing: var(--tracking-display); overflow-wrap: break-word; min-width: 0; }
+.join-page p { text-wrap: pretty; }
+.join-page img { display: block; max-width: 100%; height: auto; }
+.join-page button { font: inherit; }
+.join-page [hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .join-page *, .join-page *::before, .join-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

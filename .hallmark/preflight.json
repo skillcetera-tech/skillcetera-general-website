@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "date": "2026-10-28",
+  "timezone": "Asia/Saigon",
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "page",
+  "routes": [{ "route": "/join", "file": "pages/join.html", "kind": "page" }],
+  "system": "brand",
+  "genre": "editorial",
+  "sources": [
+    { "file": "AGENTS.md", "line": 15, "finding": "White/black identity; ESC blue and TEDx red" },
+    { "file": "DESIGN_PLAN.md", "line": 7, "finding": "Large readable type, real club imagery, responsive document flow" },
+    { "file": "JOIN_DESIGN_PLAN.md", "line": 5, "finding": "Existing campaign, poster, recruitment dates, five departments and Fillout destination" },
+    { "file": "src/tokens.css", "line": 1, "finding": "Existing palette and Be Vietnam Pro face" },
+    { "file": "pages/join.html", "line": 1, "finding": "English page content and existing application wiring" },
+    { "file": "docs/content/source-baseline.md", "line": 1, "finding": "Club facts and historical 2024-2025 registration status are distinct from the current page's 2026 campaign" }
+  ],
+  "preserved": ["Existing user edits to index.html", "Original poster and logo", "Be Vietnam Pro", "All 12 unique link destinations", "All existing IDs", "Both module scripts", "Five department job descriptions", "Dates and campaign facts as found", "Fillout iframe and direct fallback"],
+  "introduced": ["Capped editorial header", "Poster-scale title", "Four-column recruitment timetable", "Inverse department index", "Scoped Join tokens", "No-JavaScript readable job descriptions", "Always-visible direct form fallback"],
+  "material": { "real": ["Club and event names", "Recruitment poster", "2026 campaign dates", "Five department JDs", "Existing form and email"], "pictures": ["public/assets/sisc-desert-storm.jpg", "public/assets/skillcetera-logo.png"], "absent": ["New documentary photography", "Testimonials", "New statistics"] },
+  "inferences": "Audience: prospective FPT University HCMC club members; action: apply; tone: editorial.",
+  "user_direction": "Proceed with white/black editorial direction, keeping the campaign poster and application content.",
+  "dirty_tree": "index.html was already modified. It is outside this redesign's write scope; build side effects were restored from exact pre-build bytes.",
+  "browser": "Existing Playwright and installed Chrome, headless. Puppeteer is absent; Hallmark's own render tier was attempted and reports not run.",
+  "review_mechanism": "in-thread, per Hallmark's Codex harness guidance; no subagents spawned"
+}

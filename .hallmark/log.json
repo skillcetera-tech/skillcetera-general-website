@@ -1,0 +1,50 @@
+[
+ {
+  "date": "2026-10-28",
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "page",
+  "shape": "Recruitment edition",
+  "theme": "brand",
+  "axes": "white/grotesk/black",
+  "hero": "Stage",
+  "nav": "capped edge-aligned bar",
+  "footer": "mast",
+  "imagery": "Original Desert Storm campaign poster and club logo",
+  "photos": [],
+  "entry": "pages/join.html",
+  "fingerprint": {
+   "opening": "poster-scale type with campaign artwork",
+   "first": "recruitment timetable",
+   "action": "hero and existing application portal",
+   "density": "inverse index",
+   "ending": "closing invitation and mast",
+   "rhythm": "white/ink/soft/white"
+  },
+  "sections": [
+   "Stage",
+   "Schedule",
+   "Inverse index",
+   "Form",
+   "Rows",
+   "Band",
+   "Mast"
+  ],
+  "signature": "Desert Storm at poster scale beside intact official artwork",
+  "waived": [
+   "22",
+   "8",
+   "39b"
+  ],
+  "prompt": "Redesign /join for prospective Skillcetera members to explore departments and apply",
+  "verification": {
+   "staticFloorFails": 0,
+   "openReflex": 0,
+   "keptLinks": "12/12",
+   "browser": "Chrome via Playwright, 8 widths",
+   "nativeHallmarkRender": "unavailable: Puppeteer absent",
+   "review": "in-thread",
+   "gap": "Application submission not tested; mobile and desktop start screens verified"
+  }
+ }
+]

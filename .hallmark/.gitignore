@@ -1,0 +1,15 @@
+before/
+hero/
+after/
+shots/
+before.json
+before.txt
+compare.html
+*.cjs
+build-*.mjs
+redesign-*.mjs
+protected-files.json
+qa-join-results.json
+original-*.html
+record-result.mjs
+fillout-mobile.json
