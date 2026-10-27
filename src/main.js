@@ -411,6 +411,13 @@ document.querySelectorAll('.project-item').forEach((itemEl) => {
     if (event.pointerType === 'mouse') activate();
   });
   itemEl.addEventListener('focusin', activate);
+  itemEl.addEventListener('click', activate);
+  itemEl.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      activate();
+    }
+  });
 });
 
 let observer;
