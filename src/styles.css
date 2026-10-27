@@ -676,14 +676,10 @@ body.intro #app {
   user-select: none;
 }
 
-.panel:nth-child(1) .num {
-  color: var(--ink);
-}
-.panel:nth-child(2) .num {
-  color: var(--blue);
-}
+.panel:nth-child(1) .num,
+.panel:nth-child(2) .num,
 .panel:nth-child(3) .num {
-  color: var(--red);
+  color: var(--ink);
 }
 
 .step {
