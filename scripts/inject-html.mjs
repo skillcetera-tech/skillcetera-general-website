@@ -87,6 +87,34 @@ export function injectContentIntoHtml(html, content) {
     );
   }
 
+  const sisc = content.annualEvents?.stepInto || {};
+
+  // 2.5 Step Into Skillcetera Section (#step-into)
+  if (sisc.pill) {
+    html = html.replace(
+      /(<section class="event-scene stats event-step-into"[^>]*>[\s\S]*?<span class="pill pill-sisc reveal">)([\s\S]*?)(<\/span>)/,
+      `$1${sisc.pill}$3`
+    );
+  }
+  if (sisc.headline) {
+    html = html.replace(
+      /(<h2 id="step-into-title"[^>]*>)([\s\S]*?)(<\/h2>)/,
+      `$1${sisc.headline}$3`
+    );
+  }
+  if (sisc.description) {
+    html = html.replace(
+      /(<section class="event-scene stats event-step-into"[^>]*>[\s\S]*?<p class="event-description reveal">)([\s\S]*?)(<\/p>)/,
+      `$1${sisc.description}$3`
+    );
+  }
+  if (sisc.image) {
+    html = html.replace(
+      /(<section class="event-scene stats event-step-into"[^>]*>[\s\S]*?<div class="tree-wrap event-photo">\s*<img src=")([^"]*)(")/,
+      `$1${sisc.image}$3`
+    );
+  }
+
   // 3. ESC Stage Section (#esc)
   if (esc.pill) {
     html = html.replace(

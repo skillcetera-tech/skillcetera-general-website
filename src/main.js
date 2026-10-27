@@ -437,7 +437,7 @@ function observeSections() {
   { rootMargin: '-15% 0px -50% 0px', threshold: [0, 0.2, 0.5] },
 );
 
-document.querySelectorAll('#about,#esc,#tedx,#projects,#connect').forEach((section) =>
+document.querySelectorAll('#about,#step-into,#esc,#tedx,#projects,#connect').forEach((section) =>
   observer.observe(section),
 );
 }

@@ -885,6 +885,58 @@ body.intro #app {
   text-shadow: 0 2px 14px var(--black-70);
 }
 
+
+/* Step Into Skillcetera Event Scene & Cards */
+.event-step-into .h2 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--white);
+}
+
+.pill-sisc {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.card-sisc {
+  background: var(--dark-card);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: 3.5px solid var(--white);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: 0 16px 36px var(--shadow-scene);
+}
+
+.btn-sisc {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+  font-weight: 600;
+}
+.btn-sisc:hover {
+  background: var(--soft);
+  color: var(--black);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.28);
+}
+
+.event-step-into .event-ghost {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.sisc-ring {
+  position: absolute;
+  right: 5%;
+  bottom: 8%;
+  width: min(320px, 35vw);
+  height: min(320px, 35vw);
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+}
+
 .event-scene .card-esc {
   background: var(--dark-card);
   color: var(--white);

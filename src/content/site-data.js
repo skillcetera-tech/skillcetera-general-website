@@ -254,6 +254,44 @@ export const MISSIONS = [
   }
 ];
 export const ANNUAL_EVENTS = {
+  "stepInto": {
+    "id": "step-into",
+    "name": "Step Into Skillcetera",
+    "fullName": "Step Into Skillcetera Annual Orientation & Onboarding",
+    "accent": "monochrome",
+    "status": "annual",
+    "latestObservedEdition": "SISC 2024–2025 / THE ODYSSEY",
+    "headline": "Begin your journey.<br><em>Define your impact.</em>",
+    "description": "The flagship annual onboarding & orientation initiative by Skillcetera — welcoming new student generations to explore club departments, cultivate language agility, and unlock practical execution skills.",
+    "pill": "ANNUAL PROJECT 01 · STEP INTO SKILLCETERA",
+    "logoTag": "ORIENTATION · ONBOARDING · COMMUNITY EMPOWERMENT",
+    "image": "/assets/553654839_1312594657543274_6065555061644359671_n-mvna2gge.webp",
+    "metrics": [
+      {
+        "label": "Annual Editions",
+        "num": 5,
+        "suf": "+",
+        "value": "5+"
+      },
+      {
+        "label": "Applicants & Attendees",
+        "num": 300,
+        "suf": "+",
+        "value": "300+"
+      },
+      {
+        "label": "Specialized Departments",
+        "num": 5,
+        "suf": "",
+        "value": "5"
+      }
+    ],
+    "editionMilestone": {
+      "label": "Latest Edition Milestone",
+      "edition": "SISC 2024–2025",
+      "theme": "THE ODYSSEY"
+    }
+  },
   "esc": {
     "id": "esc",
     "name": "ESC",
@@ -317,7 +355,7 @@ export const ANNUAL_EVENTS = {
       "externalUrl": "https://www.facebook.com/share/p/1Frf2ebFwQ/"
     },
     "sourceNote": "Official academic competition scale documented across seasons in Skillcetera club archives.",
-    "pill": "ANNUAL EVENT 01 · ENGLISH SPEAKING COMPETITION",
+    "pill": "ANNUAL PROJECT 02 · ENGLISH SPEAKING COMPETITION",
     "title": "Your voice.<br><em>Your impact.</em>",
     "logoTag": "ENGLISH · CRITICAL THINKING · CONVICTION",
     "editionMilestone": {
@@ -395,7 +433,7 @@ export const ANNUAL_EVENTS = {
     "sourceNote": "Event and media metrics are specific to TEDxFPTUniversityHCMC in club records (retrieved Oct 24, 2026). Source text notes 'four seasons' while cataloging 5 full seasons from 2021 to 2025.",
     "imagePosition": "51% 62%",
     "imageFit": "cover",
-    "pill": "ANNUAL EVENT 02 · TEDxFPTUniversityHCMC",
+    "pill": "ANNUAL PROJECT 03 · TEDxFPTUniversityHCMC",
     "title": "Ideas worth<br><em>spreading.</em>",
     "logoTag": "TIKTOK 55K+ · FACEBOOK 14K+ · IG 3.5K+"
   }
