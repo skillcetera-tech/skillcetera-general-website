@@ -358,6 +358,7 @@ body.intro #app {
   width: 28px;
   height: 28px;
   object-fit: contain;
+  border-radius: 6px;
 }
 
 .brand-dot {
@@ -1590,7 +1591,7 @@ body.intro #app {
   flex-shrink: 0;
   position: relative;
   text-decoration: none;
-  border-radius: 50%;
+  border-radius: 14px;
   transition: transform var(--motion-fast) var(--motion-ease), filter var(--motion-fast) ease;
 }
 .f-logo:hover {
@@ -1602,7 +1603,7 @@ body.intro #app {
   height: 100%;
   object-fit: contain;
   display: block;
-  border-radius: 50%;
+  border-radius: 14px;
 }
 
 .footer-brand {
