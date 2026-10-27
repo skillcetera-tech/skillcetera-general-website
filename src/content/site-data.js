@@ -223,8 +223,8 @@ export const SITE_META = {
   "heroCtaSecondaryText": "About Skillcetera",
   "heroCtaSecondaryLink": "#about",
   "heroImageCredit": "IDEAS WORTH SPREADING · KNOWLEDGE WORTH SHARING",
-  "aboutPill": "ABOUT US · THREE CORE MISSIONS",
-  "aboutTitle": "Learn. Connect.<br><em>Make an impact.</em>",
+  "aboutPill": "",
+  "aboutTitle": "About <em>Skillcetera</em>",
   "aboutLead": "Skillcetera - Skills and Languages Club is not just an academic club; it is a vibrant event-organizing hub that empowers students to thrive through the exchange of knowledge, skills, and experiences. Our vision is to create an engaging environment where creativity and collaboration flourish, allowing members to enhance their knowledge and develop essential skills in a supportive community."
 };
 export const MISSIONS = [
