@@ -37,15 +37,17 @@ export function injectContentIntoHtml(html, content) {
     );
   }
   if (meta.heroCtaPrimaryText) {
+    const arrow = meta.heroCtaPrimaryLink?.startsWith('/') ? '→' : '↘';
     html = html.replace(
-      /(<div class="hero-actions"[^>]*>[\s\S]*?<a class="btn"[^>]*href=")([^"]*)(">\s*)([\s\S]*?)(\s*<span aria-hidden="true">↘<\/span><\/a>)/,
-      `$1${meta.heroCtaPrimaryLink || '$2'}$3${meta.heroCtaPrimaryText}$5`
+      /(<div class="hero-actions"[^>]*>[\s\S]*?<a class="btn"[^>]*href=")([^"]*)(">\s*)([\s\S]*?)(\s*<span aria-hidden="true">)[^<]*(<\/span><\/a>)/,
+      `$1${meta.heroCtaPrimaryLink || '$2'}$3${meta.heroCtaPrimaryText}$5${arrow}$6`
     );
   }
   if (meta.heroCtaSecondaryText) {
+    const arrow = meta.heroCtaSecondaryLink?.startsWith('/') ? '→' : '↘';
     html = html.replace(
-      /(<div class="hero-actions"[^>]*>[\s\S]*?<a class="text-link"[^>]*href=")([^"]*)(">\s*)([\s\S]*?)(\s*<span aria-hidden="true">→<\/span><\/a>)/,
-      `$1${meta.heroCtaSecondaryLink || '$2'}$3${meta.heroCtaSecondaryText}$5`
+      /(<div class="hero-actions"[^>]*>[\s\S]*?<a class="text-link"[^>]*href=")([^"]*)(">\s*)([\s\S]*?)(\s*<span aria-hidden="true">)[^<]*(<\/span><\/a>)/,
+      `$1${meta.heroCtaSecondaryLink || '$2'}$3${meta.heroCtaSecondaryText}$5${arrow}$6`
     );
   }
   if (meta.heroImage) {

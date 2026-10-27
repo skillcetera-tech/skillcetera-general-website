@@ -19,8 +19,8 @@ export const SITE_META = {
   "recruitment": {
     "status": "open",
     "cohort": "2024–2025",
-    "badgeVi": "RECRUITMENT STATUS: APPLICATION FORM IS OPEN · CHÍNH THỨC MỞ ĐƠN ỨNG TUYỂN",
-    "noteVi": "Biểu mẫu đăng ký ứng tuyển thành viên CLB Skillcetera đã chính thức mở tại https://skillcetera.fillout.com/t/s3dAm5Lr6rus.",
+    "badge": "RECRUITMENT STATUS: APPLICATION FORM IS OFFICIALLY OPEN",
+    "note": "Skillcetera member recruitment is officially open. Explore our 5 specialized departments and submit your application at /join.",
     "departments": [
       {
         "id": "event",
@@ -218,10 +218,10 @@ export const SITE_META = {
   "heroImageFit": "cover",
   "heroPill": "SKILLS & LANGUAGES CLUB · FPTU HCMC",
   "heroTitle": "Consistency is <em>flexibility.</em>",
-  "heroCtaPrimaryText": "Explore Events",
-  "heroCtaPrimaryLink": "#esc",
-  "heroCtaSecondaryText": "About Skillcetera",
-  "heroCtaSecondaryLink": "#about",
+  "heroCtaPrimaryText": "Join Us",
+  "heroCtaPrimaryLink": "/join",
+  "heroCtaSecondaryText": "Explore Events",
+  "heroCtaSecondaryLink": "#esc",
   "heroImageCredit": "IDEAS WORTH SPREADING · KNOWLEDGE WORTH SHARING",
   "aboutPill": "",
   "aboutTitle": "About <em>Skillcetera</em>",
