@@ -123,7 +123,13 @@ body.join-page { background: var(--color-paper); color: var(--color-ink); }
 #apply .ds-section-lead { margin-top: 0; max-width: 42ch; }
 #apply .ds-section-lead a { text-decoration: underline; }
 .ds-form-frame { min-width: 0; }
+.ds-fillout-shell { position: relative; }
 .ds-fillout-embed { width: 100%; height: 500px; min-height: 70vh; border: 1px solid var(--color-rule); background: var(--color-paper); }
+.ds-form-loading { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; gap: var(--space-md); background: var(--color-paper); color: var(--color-muted); font-size: var(--text-sm); opacity: 0; visibility: hidden; transition: opacity var(--dur-short) linear, visibility var(--dur-short) linear; }
+.ds-fillout-shell.is-loading .ds-form-loading { opacity: 1; visibility: visible; }
+.ds-form-spinner { width: 22px; height: 22px; flex: 0 0 22px; border: 2px solid var(--color-rule); border-top-color: var(--color-ink); border-radius: 50%; animation: ds-form-spin 750ms linear infinite; }
+.ds-fillout-shell.is-loaded .ds-form-loading { opacity: 0; visibility: hidden; pointer-events: none; }
+@keyframes ds-form-spin { to { transform: rotate(1turn); } }
 .ds-form-fallback { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-xs) var(--space-lg); padding-top: var(--space-md); color: var(--color-muted); font-size: var(--text-sm); }
 .ds-form-fallback a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-ink); text-decoration: underline; }
 .ds-form-fallback > span { display: inline-flex; align-items: center; }
@@ -210,5 +216,6 @@ body.join-page { background: var(--color-paper); color: var(--color-ink); }
   .ds-closing-actions { align-items: flex-start; flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ds-btn-gold, .ds-btn-ghost, .ds-dept-chevron::after, .join-page .desktop-nav a::after { transition: none; }
+  .ds-btn-gold, .ds-btn-ghost, .ds-dept-chevron::after, .join-page .desktop-nav a::after, .ds-form-loading { transition: none; }
+  .ds-form-spinner { animation: none; }
 }

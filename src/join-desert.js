@@ -17,3 +17,29 @@
     });
   });
 })();
+
+(function initFilloutLoading() {
+  const shell = document.querySelector('.ds-fillout-shell');
+  const embed = shell?.querySelector('.ds-fillout-embed');
+  if (!shell || !embed || typeof MutationObserver === 'undefined') return;
+
+  shell.classList.add('is-loading');
+  shell.setAttribute('aria-busy', 'true');
+  let activeFrame = null;
+  const attachFrame = () => {
+    const frame = embed.querySelector('iframe');
+    if (!frame || frame === activeFrame) return;
+
+    activeFrame = frame;
+    frame.addEventListener('load', () => {
+      shell.classList.add('is-loaded');
+      shell.classList.remove('is-loading');
+      shell.setAttribute('aria-busy', 'false');
+      observer.disconnect();
+    }, { once: true });
+  };
+  const observer = new MutationObserver(attachFrame);
+
+  observer.observe(embed, { childList: true, subtree: true });
+  attachFrame();
+})();
