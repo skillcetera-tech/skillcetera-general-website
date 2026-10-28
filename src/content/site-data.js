@@ -260,7 +260,7 @@ export const ANNUAL_EVENTS = {
     "fullName": "Step Into Skillcetera Annual Orientation & Onboarding",
     "accent": "monochrome",
     "status": "annual",
-    "latestObservedEdition": "SISC 2024–2025 / THE ODYSSEY",
+    "latestObservedEdition": "SIS 2024–2025 / THE ODYSSEY",
     "headline": "Begin your journey.<br><em>Define your impact.</em>",
     "description": "The flagship annual onboarding & orientation initiative by Skillcetera — welcoming new student generations to explore club departments, cultivate language agility, and unlock practical execution skills.",
     "pill": "ANNUAL PROJECT 01 · STEP INTO SKILLCETERA",
@@ -288,7 +288,7 @@ export const ANNUAL_EVENTS = {
     ],
     "editionMilestone": {
       "label": "Latest Edition Milestone",
-      "edition": "SISC 2024–2025",
+      "edition": "SIS 2024–2025",
       "theme": "THE ODYSSEY"
     },
     "cta": {

@@ -942,13 +942,15 @@ body.intro #app {
   color: var(--white);
 }
 
-.pill-sisc {
+.pill-sisc,
+.pill-sis {
   color: var(--white);
   border-color: rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.08);
 }
 
-.card-sisc {
+.card-sisc,
+.card-sis {
   background: var(--dark-card);
   color: var(--white);
   border: 1px solid rgba(255, 255, 255, 0.22);
@@ -958,7 +960,8 @@ body.intro #app {
   box-shadow: 0 16px 36px var(--shadow-scene);
 }
 
-.btn-sisc {
+.btn-sisc,
+.btn-sis {
   background: #ffffff !important;
   color: #06090e !important;
   border: 1px solid #ffffff;
@@ -969,10 +972,12 @@ body.intro #app {
   justify-content: center;
   gap: 8px;
 }
-.btn-sisc span {
+.btn-sisc span,
+.btn-sis span {
   color: inherit !important;
 }
-.btn-sisc:hover {
+.btn-sisc:hover,
+.btn-sis:hover {
   background: #f0f3f8 !important;
   color: #000000 !important;
   transform: translateY(-1px);
@@ -993,7 +998,8 @@ body.intro #app {
   color: rgba(255, 255, 255, 0.85);
 }
 
-.sisc-ring {
+.sisc-ring,
+.sis-ring {
   position: absolute;
   right: 5%;
   bottom: 8%;
